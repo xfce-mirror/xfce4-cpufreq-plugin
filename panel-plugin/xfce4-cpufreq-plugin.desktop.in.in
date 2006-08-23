@@ -1,0 +1,7 @@
+[Xfce Panel]
+Type=X-XFCE-PanelPlugin
+Encoding=UTF-8
+_Name=CPU Frequency Monitor
+_Comment=Shows the cpu frequency and governours
+Icon=cpu
+X-XFCE-Exec=@PLUGIN_PATH@/xfce4-cpufreq-plugin
