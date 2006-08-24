@@ -1,3 +1,7 @@
+2006-08-24 17:45  Thomas Schreck <shrek@xfce.org>
+
+	* Fix typo
+
 2006-08-24 17:36  Thomas Schreck <shrek@xfce.org>
 
 	* Fix mem leak and bug with more cpus

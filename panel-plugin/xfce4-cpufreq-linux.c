@@ -106,7 +106,7 @@ cpufreq_cpu_parse_sysfs_init (gint cpu_number)
 	if (file)
 	{
 		cpu->scaling_driver = g_new (gchar, 15);
-		fscanf (file, "%s", cpu->scaling_driver);
+		fscanf (file, "%15s", cpu->scaling_driver);
 		fclose (file);
 	}
 	g_free (filePath);
@@ -135,7 +135,7 @@ cpufreq_cpu_parse_sysfs_init (gint cpu_number)
 	if (file)
 	{
 		cpu->cur_governor = g_new (gchar, 15);
-		fscanf (file, "%d", cpu->cur_governor);
+		fscanf (file, "%15s", cpu->cur_governor);
 		fclose (file);
 	}
 	g_free (filePath);
@@ -209,7 +209,7 @@ cpufreq_cpu_read_sysfs_current (gint cpu_number)
 	file = fopen (filePath, "r");
 	if (file)
 	{
-		fscanf (file, "%s", cpu->cur_governor);
+		fscanf (file, "%15s", cpu->cur_governor);
 		fclose (file);
 	}
 	g_free (filePath);
