@@ -47,8 +47,11 @@ cpufreq_update_label (CpuInfo *cpu)
 	label = g_strconcat (small ? "<span size=\"xx-small\">" : "<span size=\"x-small\">",
 
 		cpuFreq->options->show_label_freq ? freq : "",
+		
 		cpuFreq->options->show_label_freq && cpuFreq->options->show_label_governor ? "\n" : "",
+
 		cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
+		
 		"</span>",
 		NULL);
 
@@ -66,11 +69,13 @@ cpufreq_update_tooltip (CpuInfo *cpu)
 
 	freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
 	if (cpuFreq->options->show_label_governor && cpuFreq->options->show_label_freq)
-		tooltip_msg = g_strdup_printf (_("CPU Frequency Plugin"));
+		tooltip_msg = g_strdup_printf (_("%d cpu available"), cpuFreq->cpus->len);
 	else
 		tooltip_msg = g_strconcat (!cpuFreq->options->show_label_freq ? _("Frequency: ") : "",
 			!cpuFreq->options->show_label_freq ? freq : "",
+			
 			!cpuFreq->options->show_label_freq && !cpuFreq->options->show_label_governor ? "\n" : "",
+			
 			!cpuFreq->options->show_label_governor ? _("Governor: ") : "",
 			!cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
 			NULL);
@@ -79,46 +84,6 @@ cpufreq_update_tooltip (CpuInfo *cpu)
 
 	g_free (freq);
 	g_free (tooltip_msg);
-	return TRUE;
-}
-
-gboolean
-cpufreq_update_icon (CpuInfo *cpu)
-{
-	gchar     *cpu_icon_name;
-	guint     psize, isize;
-	GdkPixbuf *pixbuf = NULL;
-
-	if (!cpuFreq->options->show_icon)
-		return TRUE;
-
-	if (cpu->cur_freq == cpu->max_freq)
-		cpu_icon_name = g_strdup ("cpu");
-	else
-	{
-		if (cpu->cur_freq == cpu->min_freq)
-			cpu_icon_name = g_strdup ("cpu");
-		else
-			cpu_icon_name = g_strdup ("cpu");
-	}
-
-	psize = xfce_panel_plugin_get_size (cpuFreq->plugin);
-	isize = psize - (2 * BORDER) - 
-		(2 * (psize > 26 ? 2 : 0)) - 
-		(2 * MAX (cpuFreq->frame->style->xthickness, cpuFreq->frame->style->ythickness));
-
-	pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (), cpu_icon_name, isize , 0, NULL);
-
-	if (pixbuf)
-	{
-		gtk_image_set_from_pixbuf (GTK_IMAGE (cpuFreq->icon), pixbuf);
-		g_object_unref (G_OBJECT (pixbuf));
-	}
-	else
-		return FALSE;
-
-	g_free (cpu_icon_name);
-
 	return TRUE;
 }
 
@@ -133,8 +98,6 @@ cpufreq_update_plugin (void)
 			return FALSE;
 		if (cpufreq_update_tooltip (cpu) == FALSE)
 			return FALSE;
-		if (cpufreq_update_icon (cpu) == FALSE)
-			return FALSE;
 	}
 	return TRUE;
 }
@@ -143,17 +106,13 @@ gboolean
 cpufreq_restart_timeout (void)
 {
 	g_source_remove (cpuFreq->timeoutHandle);
-	cpuFreq->timeoutHandle = g_timeout_add (
-			100,
-			(GSourceFunc) cpufreq_update_cpus,
-			NULL);
+	cpuFreq->timeoutHandle = g_timeout_add (100, (GSourceFunc)cpufreq_update_cpus, NULL);
 }
 
 gboolean
 cpufreq_widgets (void)
 {
 	gint		size;
-	gchar		*tooltip_msg;
 	GtkWidget	*box;
 	GtkOrientation	orientation;
 
@@ -177,8 +136,7 @@ cpufreq_widgets (void)
 	gtk_container_set_border_width (GTK_CONTAINER (box), BORDER);
 	gtk_container_add (GTK_CONTAINER (cpuFreq->frame), box);
 
-	tooltip_msg = _("CPU Frequency Plugin");
-	gtk_tooltips_set_tip (cpuFreq->tooltip, cpuFreq->ebox, tooltip_msg, NULL);
+	gtk_tooltips_set_tip (cpuFreq->tooltip, cpuFreq->ebox, "", NULL);
 
 	if(cpuFreq->options->show_icon)
 	{
@@ -265,8 +223,6 @@ cpufreq_free (XfcePanelPlugin *plugin)
 		g_free (cpu);
 	}
 
-	gksu_context_free (cpuFreq->gksu_ctx);
-
 	gtk_tooltips_set_tip (cpuFreq->tooltip, cpuFreq->ebox, NULL, NULL);
 	g_object_unref (cpuFreq->tooltip);
 
@@ -278,8 +234,7 @@ cpufreq_free (XfcePanelPlugin *plugin)
 static gboolean
 cpufreq_set_size (XfcePanelPlugin *plugin, gint wsize)
 {
-	if (xfce_panel_plugin_get_orientation (plugin) ==
-			GTK_ORIENTATION_HORIZONTAL)
+	if (xfce_panel_plugin_get_orientation (plugin) == GTK_ORIENTATION_HORIZONTAL)
 		gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, wsize);
 	else
 		gtk_widget_set_size_request (GTK_WIDGET (plugin), wsize, -1);
@@ -288,8 +243,7 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint wsize)
 }
 
 static void
-cpufreq_orientation_changed (XfcePanelPlugin *plugin,
-			     GtkOrientation orientation)
+cpufreq_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation orientation)
 {
 	if (cpufreq_widgets () == FALSE)
 		xfce_err (_("Could not create widgets !"));

@@ -28,7 +28,7 @@ gchar*
 cpufreq_get_human_readable_freq (guint freq)
 {
 	guint div;
-	gchar *freq_unit;
+	gchar *readable_freq, *freq_unit;
 
 	if (freq > 999999)
 	{
@@ -42,9 +42,12 @@ cpufreq_get_human_readable_freq (guint freq)
 	}
 	
 	if ((freq % div) == 0 || div == 1000)
-		return g_strdup_printf ("%d %s", (freq/div), freq_unit);
+		readable_freq = g_strdup_printf ("%d %s", (freq/div), freq_unit);
 	else
-		return g_strdup_printf ("%3.2f %s", ((gfloat)freq/div), freq_unit);
+		readable_freq = g_strdup_printf ("%3.2f %s", ((gfloat)freq/div), freq_unit);
+
+	g_free (freq_unit);
+	return readable_freq;
 }
 
 guint

@@ -47,7 +47,7 @@ cpufreq_cpu_parse_sysfs_init (gint cpu_number)
 	{
 		gint i = 0;
 
-		fileContent = (gchar*)malloc (sizeof(gchar) * 255);
+		fileContent = g_new (gchar, 255);
 		fgets (fileContent, 255, file);
 		fclose (file);
 
@@ -77,7 +77,7 @@ cpufreq_cpu_parse_sysfs_init (gint cpu_number)
 	{
 		gint i = 0;
 
-		fileContent = (gchar*)malloc (sizeof(gchar) * 255);
+		fileContent = g_new (gchar, 255);
 		fgets (fileContent, 255, file);
 		fclose (file);
 
@@ -105,7 +105,7 @@ cpufreq_cpu_parse_sysfs_init (gint cpu_number)
 	file = fopen (filePath, "r");
 	if (file)
 	{
-		cpu->scaling_driver = (gchar*)malloc (sizeof (gchar) * 15);
+		cpu->scaling_driver = g_new (gchar, 15);
 		fscanf (file, "%s", cpu->scaling_driver);
 		fclose (file);
 	}
@@ -134,7 +134,7 @@ cpufreq_cpu_parse_sysfs_init (gint cpu_number)
 	file = fopen (filePath, "r");
 	if (file)
 	{
-		cpu->cur_governor = (gchar*)malloc (sizeof (gchar) * 15);
+		cpu->cur_governor = g_new (gchar, 15);
 		fscanf (file, "%d", cpu->cur_governor);
 		fclose (file);
 	}
@@ -239,7 +239,7 @@ cpufreq_cpu_read_sysfs ()
 
 	for (j = 0; j < i; j++)
 	{
-		return cpufreq_cpu_parse_sysfs_init (j);
+		cpufreq_cpu_parse_sysfs_init (j);
 	}
 
 	return TRUE;
@@ -254,8 +254,8 @@ cpufreq_cpu_set_freq (guint cpu_number, guint *freq)
 
 	// TODO check if freq is different
 	
-	cpu_freq = (gchar*)malloc (sizeof (gchar) * 30);
-	cpu_num  = (gchar*)malloc (sizeof (gchar) * 3);
+	cpu_freq = g_new (gchar, 30);
+	cpu_num  = g_new (gchar, 3);
 	sprintf (cpu_num, "%d", cpu_number);
 	sprintf (cpu_freq, "%d", freq);
 	cmd = g_strconcat ("/bin/echo ",
@@ -300,7 +300,7 @@ cpufreq_cpu_set_governor (guint cpu_number, gchar *governor)
 	if (governor == NULL) //TODO && governor in list
 		return FALSE;
 
-	cpu_num = (gchar*)malloc (sizeof (gchar) * 3);
+	cpu_num = g_new (gchar, 3);
 	sprintf (cpu_num, "%d", cpu_number);
 	cmd = g_strconcat ("/bin/echo ", 
 			governor, 

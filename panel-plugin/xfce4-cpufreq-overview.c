@@ -43,14 +43,20 @@ freq_combo_changed (GtkWidget *combo, guint cpu_number)
 	if (g_ascii_strcasecmp (cpu->cur_governor, "userspace") != 0)
 	{
 		xfce_warn ("You could only change CPU frequency, if you use the \"userspace\" governor");
+		g_free (new_freq);
 		return;
 	}
 
 	if (xfce_confirm (_("Are you sure to change the frequency !"), GTK_STOCK_YES, NULL) == FALSE)
+	{
+		g_free (new_freq);
 		return;
+	}
 
 	if (cpufreq_cpu_set_freq (cpu_number, freq) == FALSE)
 		xfce_err (_("It was not possible to change the frequency"));
+
+	g_free (new_freq);
 }
 
 static void
@@ -61,10 +67,15 @@ governor_combo_changed (GtkWidget *combo, guint cpu_number)
 	new_governor = gtk_combo_box_get_active_text (GTK_COMBO_BOX (combo));
 
 	if (xfce_confirm (_("Are you sure to change the governor !"), GTK_STOCK_YES, NULL) == FALSE)
+	{
+		g_free (new_governor);
 		return;
+	}
 
 	if (cpufreq_cpu_set_governor (cpu_number, new_governor) == FALSE)
 		xfce_err (_("It was not possible to change the governor"));
+
+	g_free (new_governor);
 }
 
 static void
