@@ -22,7 +22,7 @@
 
 typedef struct
 {
-	GtkWidget *main, *display_icon, *display_freq, *display_governor;
+	GtkWidget *display_icon, *display_freq, *display_governor;
 	GtkWidget *display_cpu, *display_frame, *monitor_timeout;
 	GtkWidget *combo_cpu, *spinner_timeout;
 } CpuFreqPluginConfigure;

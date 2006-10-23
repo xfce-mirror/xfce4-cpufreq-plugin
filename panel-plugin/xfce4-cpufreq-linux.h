@@ -23,12 +23,6 @@
 G_BEGIN_DECLS
 
 gboolean
-cpufreq_cpu_set_freq (guint cpu_number, guint *freq);
-
-gboolean
-cpufreq_cpu_set_governor (guint cpu_number, gchar *governor);
-
-gboolean
 cpufreq_update_cpus (gpointer data);
 
 gboolean

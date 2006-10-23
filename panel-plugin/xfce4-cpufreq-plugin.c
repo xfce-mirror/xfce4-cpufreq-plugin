@@ -27,9 +27,10 @@
 
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libxfcegui4.h>
-
 #include "xfce4-cpufreq-plugin.h"
+#ifdef __linux__
 #include "xfce4-cpufreq-linux.h"
+#endif /* __linux__ */
 #include "xfce4-cpufreq-configure.h"
 #include "xfce4-cpufreq-overview.h"
 #include "xfce4-cpufreq-utils.h"
@@ -45,11 +46,13 @@ cpufreq_update_label (CpuInfo *cpu)
 	
 	freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
 	label = g_strconcat (small ? "<span size=\"xx-small\">" : "<span size=\"x-small\">",
-
+		
 		cpuFreq->options->show_label_freq ? freq : "",
 		
+		cpu->cur_governor != NULL &&
 		cpuFreq->options->show_label_freq && cpuFreq->options->show_label_governor ? "\n" : "",
-
+	
+		cpu->cur_governor != NULL &&
 		cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
 		
 		"</span>",
@@ -74,9 +77,12 @@ cpufreq_update_tooltip (CpuInfo *cpu)
 		tooltip_msg = g_strconcat (!cpuFreq->options->show_label_freq ? _("Frequency: ") : "",
 			!cpuFreq->options->show_label_freq ? freq : "",
 			
+			cpu->cur_governor != NULL && 
 			!cpuFreq->options->show_label_freq && !cpuFreq->options->show_label_governor ? "\n" : "",
 			
+			cpu->cur_governor != NULL &&
 			!cpuFreq->options->show_label_governor ? _("Governor: ") : "",
+			cpu->cur_governor != NULL &&
 			!cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
 			NULL);
 
@@ -106,7 +112,10 @@ gboolean
 cpufreq_restart_timeout (void)
 {
 	g_source_remove (cpuFreq->timeoutHandle);
-	cpuFreq->timeoutHandle = g_timeout_add (100, (GSourceFunc)cpufreq_update_cpus, NULL);
+	cpuFreq->timeoutHandle = g_timeout_add (
+			cpuFreq->options->timeout,
+			(GSourceFunc)cpufreq_update_cpus,
+			NULL);
 }
 
 gboolean
@@ -122,7 +131,7 @@ cpufreq_widgets (void)
 	if (cpuFreq->ebox)
 		gtk_widget_destroy (cpuFreq->ebox);
 	cpuFreq->ebox = gtk_event_box_new ();
-	
+
 	cpuFreq->frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (cpuFreq->frame),cpuFreq->options->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
 	gtk_container_add (GTK_CONTAINER (cpuFreq->ebox), cpuFreq->frame);
@@ -211,7 +220,8 @@ cpufreq_free (XfcePanelPlugin *plugin)
 {
 	gint i;
 
-	g_source_remove (cpuFreq->timeoutHandle);
+	if (cpuFreq->timeoutHandle)
+		g_source_remove (cpuFreq->timeoutHandle);
 
 	for (i = 0; i < cpuFreq->cpus->len; i++)
 	{
@@ -225,8 +235,7 @@ cpufreq_free (XfcePanelPlugin *plugin)
 
 	gtk_tooltips_set_tip (cpuFreq->tooltip, cpuFreq->ebox, NULL, NULL);
 	g_object_unref (cpuFreq->tooltip);
-
-	gksu_context_free (cpuFreq->gksu_ctx);
+	g_ptr_array_free (cpuFreq->cpus, TRUE);
 	cpuFreq->plugin = NULL;
 	g_free (cpuFreq);
 }
@@ -257,26 +266,26 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 	cpuFreq 	  = g_new0 (CpuFreqPlugin, 1);
 	cpuFreq->options  = g_new0 (CpuFreqPluginOptions, 1);
 	cpuFreq->plugin   = plugin;
-
-	cpuFreq->gksu_ctx = gksu_context_new ();
-
 	cpuFreq->tooltip = gtk_tooltips_new ();
 	g_object_ref (cpuFreq->tooltip);
-
 	cpuFreq->cpus    = g_ptr_array_new ();
 
 	cpufreq_read_config ();
 
+#ifdef __linux__
 	if (cpufreq_linux_init () == FALSE)
-		xfce_err (_("Could not initialize linux backend !"));
+		xfce_err (_("Your system is not configured correctly to support cpu frequency scaling !"));
 
 	if (cpufreq_widgets () == FALSE)
 		xfce_err (_("Could not create widgets !"));
 
 	cpuFreq->timeoutHandle = g_timeout_add (
-			100,
+			cpuFreq->options->timeout,
 			(GSourceFunc) cpufreq_update_cpus,
 			NULL);
+#else
+	xfce_err (_("Your system is not supported yet !"));
+#endif /* __linux__ */
 
 	g_signal_connect (plugin, "free-data", G_CALLBACK (cpufreq_free),
 			  NULL);

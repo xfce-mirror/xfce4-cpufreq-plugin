@@ -21,7 +21,6 @@
 #define XFCE4_CPUFREQ_H
 
 #include <gtk/gtk.h>
-#include <gksu.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 
 typedef struct
@@ -58,7 +57,6 @@ typedef struct
 	GtkTooltips *tooltip;
 
 	CpuFreqPluginOptions  *options;
-	GksuContext	      *gksu_ctx;
 	gint 		      timeoutHandle;
 } CpuFreqPlugin;
 

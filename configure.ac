@@ -32,8 +32,6 @@ XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.6.0])
 XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.3.90])
 XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.90])
 XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.3.90])
-XDT_CHECK_PACKAGE([LIBGKSU], [libgksu1.2], [1.3.8])
-XDT_CHECK_PACKAGE([LIBGKSUUI], [libgksuui1.0], [1.0.7])
 
 AC_OUTPUT([
 Makefile

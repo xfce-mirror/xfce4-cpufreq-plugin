@@ -22,12 +22,10 @@
 #endif
 
 #include <dirent.h>
-#include <gksuui.h>
-
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-linux.h"
 
-gboolean
+static gboolean
 cpufreq_cpu_parse_sysfs_init (gint cpu_number)
 {
 	CpuInfo *cpu;
@@ -177,7 +175,7 @@ file_error:
 	return FALSE;
 }
 
-gboolean
+static gboolean
 cpufreq_cpu_read_sysfs_current (gint cpu_number)
 {
 	CpuInfo *cpu;
@@ -221,7 +219,120 @@ file_error:
 	return FALSE;
 }
 
-gboolean
+static gboolean
+cpufreq_cpu_read_procfs_cpuinfo ()
+{
+	CpuInfo	*cpu;
+	FILE	*file;
+	gchar	*freq, *filePath, *fileContent;
+
+	filePath = g_strdup ("/proc/cpuinfo");
+	if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
+	{
+		g_free (filePath);
+		return FALSE;
+	}
+	file = fopen (filePath, "r");
+	if (file)
+	{
+		fileContent = g_new (gchar,255);
+		while (fgets (fileContent, 255, file) != NULL)
+		{
+			if (g_ascii_strncasecmp (fileContent, "cpu MHz", 7) == 0)
+			{
+				cpu = g_new0 (CpuInfo, 1);
+				cpu->max_freq = 0;
+				cpu->min_freq = 0;
+				cpu->cur_governor = NULL;
+				cpu->available_freqs = NULL;
+				cpu->available_governors = NULL;
+
+				freq = g_strrstr (fileContent, ":");
+				if (freq != NULL)
+				{
+					sscanf (++freq, "%d.", &cpu->cur_freq);
+					cpu->cur_freq *= 1000;
+				}
+				else
+					break;
+
+				g_ptr_array_add (cpuFreq->cpus, cpu);
+			}
+		}
+		fclose (file);
+		g_free (fileContent);
+	}
+
+	g_free (filePath);
+	return TRUE;
+}
+
+static gboolean
+cpufreq_cpu_read_procfs ()
+{
+	CpuInfo *cpu;
+	FILE	*file;
+	gint	i;
+	gchar	*filePath, *fileContent;
+
+	filePath = g_strdup ("/proc/cpufreq");
+	if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
+	{
+		g_free (filePath);
+		return FALSE;
+	}
+	file = fopen (filePath, "r");
+	if (file)
+	{
+		fileContent = g_new (gchar, 255);
+		while (fgets (fileContent, 255, file) != NULL)
+		{
+			if (g_ascii_strncasecmp (fileContent, "CPU", 3) == 0)
+			{
+				cpu = g_new0 (CpuInfo, 1);
+				cpu->max_freq = 0;
+				cpu->min_freq = 0;
+				cpu->cur_governor = g_new (gchar, 20);
+				cpu->available_freqs = NULL;
+				cpu->available_governors = NULL;
+
+				sscanf (fileContent, 
+					"CPU %d %d kHz (%d %%) - %d kHz (%d %%) - %20s",
+					NULL, &cpu->min_freq,
+					NULL, &cpu->max_freq,
+					NULL, cpu->cur_governor);
+				cpu->min_freq *= 1000;
+				cpu->max_freq *= 1000;
+
+				g_ptr_array_add (cpuFreq->cpus, cpu);
+			}
+		}
+		fclose (file);
+		g_free (fileContent);
+	}
+	g_free (filePath);
+
+	for (i = 0; i < cpuFreq->cpus->len; i++)
+	{
+		cpu = g_ptr_array_index (cpuFreq->cpus, i);
+		filePath = g_strdup_printf ("/proc/sys/cpu/%d/speed", i);
+		if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
+		{
+			g_free (filePath);
+			return FALSE;
+		}
+		file = fopen (filePath, "r");
+		if (file)
+		{
+			fscanf (file, "%d", &cpu->cur_freq);
+			fclose (file);
+		}
+		g_free (filePath);
+	}
+	return TRUE;
+}
+
+static gboolean
 cpufreq_cpu_read_sysfs ()
 {
 	gint j, i = -2;
@@ -246,100 +357,32 @@ cpufreq_cpu_read_sysfs ()
 }
 
 gboolean
-cpufreq_cpu_set_freq (guint cpu_number, guint *freq)
-{
-	gchar     *cmd, *cpu_num, *cpu_freq;
-	GtkWidget *gksuui_dialog;
-	GError    *error = NULL;
-
-	// TODO check if freq is different
-	
-	cpu_freq = g_new (gchar, 30);
-	cpu_num  = g_new (gchar, 3);
-	sprintf (cpu_num, "%d", cpu_number);
-	sprintf (cpu_freq, "%d", freq);
-	cmd = g_strconcat ("/bin/echo ",
-			cpu_freq,
-			" > /sys/devices/system/cpu/cpu",
-			cpu_num,
-			"/cpufreq/scaling_setspeed",
-			NULL);
-
-	if (gksu_context_try_need_password (cpuFreq->gksu_ctx))
-	{
-		gksuui_dialog = gksuui_dialog_new ();
-		gksuui_dialog_set_message (GKSUUI_DIALOG (gksuui_dialog),
-				_("Please enter root password to change CPU frequency !"));
-		gtk_widget_show_all (gksuui_dialog);
-		if (gtk_dialog_run (GTK_DIALOG (gksuui_dialog)))
-			gksu_context_set_password (cpuFreq->gksu_ctx,
-					gksuui_dialog_get_password (GKSUUI_DIALOG (gksuui_dialog)));
-
-		gtk_widget_hide (gksuui_dialog);
-	}
-
-	gksu_context_set_command (cpuFreq->gksu_ctx, cmd);
-	gksu_context_run (cpuFreq->gksu_ctx, &error);
-
-	g_free (cpu_num);
-	g_free (cpu_freq);
-	g_free (cmd);
-	
-	if (error)
-		return FALSE;
-	return TRUE;
-}
-
-gboolean
-cpufreq_cpu_set_governor (guint cpu_number, gchar *governor)
-{
-	gchar	  *cmd, *cpu_num;
-	GtkWidget *gksuui_dialog;
-	GError	  *error = NULL;
-
-	if (governor == NULL) //TODO && governor in list
-		return FALSE;
-
-	cpu_num = g_new (gchar, 3);
-	sprintf (cpu_num, "%d", cpu_number);
-	cmd = g_strconcat ("/bin/echo ", 
-			governor, 
-			" > /sys/devices/system/cpu/cpu", 
-			cpu_num, 
-			"/cpufreq/scaling_governor", 
-			NULL);
-
-	if (gksu_context_try_need_password (cpuFreq->gksu_ctx))
-	{
-		gksuui_dialog = gksuui_dialog_new ();
-		gksuui_dialog_set_message (GKSUUI_DIALOG (gksuui_dialog),
-				_("Please enter root password to change CPU governor !"));
-		gtk_widget_show_all (gksuui_dialog);
-		if (gtk_dialog_run (GTK_DIALOG (gksuui_dialog)))
-			gksu_context_set_password (cpuFreq->gksu_ctx,
-				gksuui_dialog_get_password (GKSUUI_DIALOG (gksuui_dialog)));
-		
-		gtk_widget_hide (gksuui_dialog);
-	}
-
-	gksu_context_set_command (cpuFreq->gksu_ctx, cmd);
-	gksu_context_run (cpuFreq->gksu_ctx, &error);
-
-	g_free (cpu_num);
-	g_free (cmd);
-
-	if (error)
-		return FALSE;
-	return TRUE;
-}
-
-gboolean
 cpufreq_update_cpus (gpointer data)
 {
 	gint i;
 
-	for (i = 0; i < cpuFreq->cpus->len; i++)
-		cpufreq_cpu_read_sysfs_current (i);
+	if (g_file_test ("/sys/devices/system/cpu/cpu0/cpufreq", G_FILE_TEST_EXISTS))
+	{
+		for (i = 0; i < cpuFreq->cpus->len; i++)
+			cpufreq_cpu_read_sysfs_current (i);
+	}
+	else if (g_file_test ("/proc/cpufreq", G_FILE_TEST_EXISTS))
+	{
+		/* First we delete the cpus and then read the /proc/cpufreq file again */
+		for (i = 0; i < cpuFreq->cpus->len; i++)
+		{
+			CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+			g_ptr_array_remove_fast (cpuFreq->cpus, cpu);
+			g_free (cpu->cur_governor);
+			g_free (cpu);
+		}
+		cpufreq_cpu_read_procfs ();
+	}
+	else
+	{
+		/* We do not need to update, because no scaling available */
+		return FALSE;
+	}
 
 	return cpufreq_update_plugin ();
 }
@@ -351,9 +394,11 @@ cpufreq_linux_init (void)
 		return FALSE;
 
 	if (g_file_test ("/sys/devices/system/cpu/cpu0/cpufreq", G_FILE_TEST_EXISTS))
-	{
 		return cpufreq_cpu_read_sysfs ();
-	}
+	else if (g_file_test ("/proc/cpufreq", G_FILE_TEST_EXISTS))
+		return cpufreq_cpu_read_procfs ();
 	else
-		return FALSE;
+	{	xfce_warn (_("Your system does not support cpufreq.\nThe applet only shows the current cpu frequency"));
+		return cpufreq_cpu_read_procfs_cpuinfo ();
+	}
 }

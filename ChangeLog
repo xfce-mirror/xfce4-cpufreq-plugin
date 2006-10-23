@@ -1,3 +1,9 @@
+2006-10-23 10:30  Thomas Schreck <shrek@xfce.org>
+
+	* Dropped libgksu and libgksuui
+	* removed support for changing frequency and governor
+	* Linux 2.4 support
+
 2006-08-24 17:45  Thomas Schreck <shrek@xfce.org>
 
 	* Fix typo

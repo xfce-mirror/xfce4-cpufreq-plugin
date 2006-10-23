@@ -16,18 +16,16 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #define BORDER 		1
 #define TIMEOUT_MIN	0.5
 #define TIMEOUT_MAX	3
 #define TIMEOUT_STEP	0.5
 
-#include <libxfcegui4/libxfcegui4.h>
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
+#include <libxfcegui4/libxfcegui4.h>
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-configure.h"
 
@@ -94,6 +92,7 @@ void
 cpufreq_configure (XfcePanelPlugin *plugin)
 {
 	gint i;
+	gchar *cpu_name;
 	GtkWidget *dialog, *dialog_vbox, *header;
 	GtkWidget *frame, *align, *label, *vbox, *hbox;
 	GtkWidget *combo, *spinner, *button;
@@ -179,7 +178,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
 	for (i = 0; i < cpuFreq->cpus->len; ++i)
 	{
-		gchar *cpu_name = g_strdup_printf ("%d", i);
+		cpu_name = g_strdup_printf ("%d", i);
 		gtk_combo_box_append_text (GTK_COMBO_BOX (combo), cpu_name);
 		g_free (cpu_name);
 	}
