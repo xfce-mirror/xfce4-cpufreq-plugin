@@ -1,11 +1,10 @@
-# translation of sq.po to Albanian
-# Besnik Bleta <besnik@programeshqip.org>, 2007.
 # Albanian translation of xfce4-cpufreq-plugin package
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# Besnik Bleta <besnik@programeshqip.org>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: sq\n"
+"Project-Id-Version: xfce4-cpufreq-plugin 0.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-09-10 21:29+0200\n"
 "PO-Revision-Date: 2007-01-30 21:11+0200\n"
