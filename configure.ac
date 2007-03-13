@@ -24,7 +24,7 @@ AC_PROG_LIBTOOL
 AC_PROG_INTLTOOL()
 
 dnl Check for i18n support
-XDT_I18N([cs fr pl])
+XDT_I18N([cs fr pl uk])
 
 dnl configure the panel plugin
 XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.6.0])
