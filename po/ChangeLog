@@ -1,16 +1,23 @@
+2007-11-18	Maximilian Schleiss <maximilian@xfce.org>
+
+	* lv.po: Latvian translation added
+	by Rihards Priedītis <rprieditis@inbox.lv>
+
 2007-11-15	Mike Massonnet <mmassonnet@xfce.org>
 
-	* ur.po: Update translation by Muhammad Ali Makki <makki.ma@gmail.com>
+	* ur.po: Update translation
+	by Muhammad Ali Makki <makki.ma@gmail.com>
 	* pk.po, ur.po: Rename pk.po to ur.po.
 
-2007-11-03  Maximilian Schleiss <maximilian@xfce.org>
+2007-11-03	Maximilian Schleiss <maximilian@xfce.org>
 
 	* it.po:  Italian translation update
 	by Fabio Riga <usul@aruba.it>
 
 2007-10-28	Mike Massonnet <mmassonnet@xfce.org>
 
-	* pk.po: Add new translation by محمد علي المكي <makki.ma@gmail.com>
+	* pk.po: Add new translation
+	by محمد علي المكي <makki.ma@gmail.com>
 
 2007-09-04	Og Maciel <ogmaciel@gnome.org>
 
