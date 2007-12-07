@@ -1,0 +1,48 @@
+# German translations for xfce package
+# German messages for xfce.
+# Copyright (C) 2007 THE xfce'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the xfce package.
+# Fabian Nowak <timystery@arcor.de>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce 4-cpufreq-plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-09-10 21:29+0200\n"
+"PO-Revision-Date: 2007-12-06 23:04+0100\n"
+"Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:72
+#, c-format
+msgid "%d cpu available"
+msgstr "%d CPU-Leistung verfügbar"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:74
+msgid "Frequency: "
+msgstr "Frequenz:"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+msgid "Governor: "
+msgstr "Mutliplikator:"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:249
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:274
+msgid "Could not create widgets !"
+msgstr "Konnte Grafikobjekte nicht erzeugen!"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:271
+msgid "Could not initialize linux backend !"
+msgstr "Konnten Linux-Backend nicht initialisieren!"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
+msgid "CPU Frequency Monitor"
+msgstr "CPU-Frequenzüberwachung"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
+msgid "Shows the cpu frequency and governours"
+msgstr "Zeigt die CPU-Frequenz und Multiplikatoren"
