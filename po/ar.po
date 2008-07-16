@@ -40,4 +40,3 @@ msgstr ""
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
 msgstr ""
-
