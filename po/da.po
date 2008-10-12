@@ -2,17 +2,21 @@
 # Copyright (C) 2007 THE xfce4-cpufreq-plugin'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the xfce4-cpufreq-plugin package.
 # Jens Hyllegaard <jens.hyllegaard@gmail.com>, 2007.
+# Per Kongstad <p_kongstad@op.pl>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-cpufreq-plugin\n"
+"Project-Id-Version: xfce4-cpufreq-plugin 0.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-09-10 21:29+0200\n"
-"PO-Revision-Date: 2008-05-21 10:13+0100\n"
-"Last-Translator: Jens Hyllegaard <jens.hyllegaard@gmail.com>\n"
+"PO-Revision-Date: 2008-09-30 12:06+0100\n"
+"Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Danish\n"
+"X-Poedit-Country: DENMARK\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:72
 #, c-format
@@ -25,20 +29,20 @@ msgstr "Frekvens: "
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "Governor: "
-msgstr "Bestyrer:"
+msgstr "Bestyrer: "
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:249
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:274
 msgid "Could not create widgets !"
-msgstr "Kunne ikke oprette widgets!"
+msgstr "Kunne ikke oprette kontroller !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:271
 msgid "Could not initialize linux backend !"
-msgstr "Kunne ikke initialisere linux backend!"
+msgstr "Kunne ikke initialisere underliggende Linux-motor !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr "CPU-frekvens overvågning"
+msgstr "CPU-frekvensovervågning"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
