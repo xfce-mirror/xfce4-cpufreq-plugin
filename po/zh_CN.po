@@ -1,0 +1,47 @@
+# Chinese translations for xfce package.
+# Copyright (C) 2008 THE xfce'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the xfce package.
+# Hunt Xu <huntxu@live.cn>", 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce 4-cpufreq-plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-09-10 21:29+0200\n"
+"PO-Revision-Date: 2008-12-06 04:34+0800\n"
+"Last-Translator: Hunt Xu <huntxu@live.cn>\n"
+"Language-Team: Chinese (simplified)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:72
+#, c-format
+msgid "%d cpu available"
+msgstr "%d cpu 可用"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:74
+msgid "Frequency: "
+msgstr "主频："
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+msgid "Governor: "
+msgstr "调度器："
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:249
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:274
+msgid "Could not create widgets !"
+msgstr "无法创建控件！"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:271
+msgid "Could not initialize linux backend !"
+msgstr "无法初始化 Linux 后端！"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
+msgid "CPU Frequency Monitor"
+msgstr "CPU 主频监视器"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
+msgid "Shows the cpu frequency and governours"
+msgstr "显示 CPU 主频及调度器"
+
