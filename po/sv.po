@@ -1,0 +1,51 @@
+# Swedish translation for xfce4-cpufreq-plugin.
+# Copyright (C) 2008 Free Software Foundation, Inc.
+# This file is distributed under the same license as the xfce4-cpufreq-plugin package.
+# Daniel Nylander <po@danielnylander.se>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-cpufreq-plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-14 15:57+0100\n"
+"PO-Revision-Date: 2008-12-14 21:29+0100\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:75
+#, c-format
+msgid "%d cpu available"
+msgstr "%d processor tillgänglig"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:77
+msgid "Frequency: "
+msgstr "Frekvens: "
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:84
+msgid "Governor: "
+msgstr "Governor: "
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:258
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:280
+msgid "Could not create widgets !"
+msgstr "Kunde inte skapa widgetar!"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:277
+msgid "Your system is not configured correctly to support cpu frequency scaling !"
+msgstr "Ditt system är inte konfigurerat korrekt för stöd för processfrekvensskalning!"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:287
+msgid "Your system is not supported yet !"
+msgstr "Ditt system stöds ännu inte!"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
+msgid "CPU Frequency Monitor"
+msgstr "Övervakare för processorfrekvens"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
+msgid "Shows the cpu frequency and governours"
+msgstr "Visa processorfrekvens och governor"
+
