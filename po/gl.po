@@ -1,8 +1,8 @@
 # Galician translation of xfce4-cpufreq-plugin
-# Copyright (C) 2008 Leandro Regueiro
+# Copyright (C) 2008-2009 Leandro Regueiro
 # This file is distributed under the same license as the xfce package.
 #
-# Leandro Regueiro <leandro.regueiro@gmail.com>, 2008.
+# Leandro Regueiro <leandro.regueiro@gmail.com>, 2008, 2009.
 #
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
 # colaborar connosco, podes atopar máis información en <http://trasno.net>
@@ -10,9 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: xfce-i18n@xfce.org\n"
 "POT-Creation-Date: 2006-09-10 21:29+0200\n"
-"PO-Revision-Date: 2008-06-24 19:17+0100\n"
+"PO-Revision-Date: 2009-03-07 12:37+0100\n"
 "Last-Translator: Leandro Regueiro <leandro DOT regueiro AT gmail DOT com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:72
 #, c-format
 msgid "%d cpu available"
-msgstr ""
+msgstr "%d cpus dispoñibles"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:74
 msgid "Frequency: "
@@ -35,18 +35,20 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:249
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:274
+#, fuzzy
 msgid "Could not create widgets !"
-msgstr ""
+msgstr "Non se puido crear a mensaxe."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:271
 msgid "Could not initialize linux backend !"
-msgstr ""
+msgstr "Non se puido iniciar o motor linux!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
 msgstr "Monitor de Frecuencia da CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
+#, fuzzy
 msgid "Shows the cpu frequency and governours"
-msgstr ""
+msgstr "Esta utilidade mostra a frecuencia actual da CPU."
 
