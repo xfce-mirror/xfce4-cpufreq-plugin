@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-09-10 21:29+0200\n"
-"PO-Revision-Date: 2009-04-14 21:55+0100\n"
+"PO-Revision-Date: 2009-04-17 21:19+0100\n"
 "Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -47,6 +47,7 @@ msgid "CPU Frequency Monitor"
 msgstr "Monitor de Frecuencia da CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
+#, fuzzy
 msgid "Shows the cpu frequency and governours"
-msgstr ""
+msgstr "Esta utilidade mostra a frecuencia actual da CPU"
 
