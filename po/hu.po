@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-10 21:29+0200\n"
-"PO-Revision-Date: 2009-06-03 15:08+0200\n"
+"POT-Creation-Date: 2009-07-25 11:52+0200\n"
+"PO-Revision-Date: 2009-07-25 11:55+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Hungarian <gnome at gnome dot hu>\n"
 "MIME-Version: 1.0\n"
@@ -17,33 +17,37 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:72
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:75
 #, c-format
 msgid "%d cpu available"
 msgstr "%d CPU érhető el"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:74
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:77
 msgid "Frequency: "
-msgstr "Frekvencia: "
+msgstr "Órajel: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:84
 msgid "Governor: "
 msgstr "Vezérlő: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:249
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:274
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:258
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:280
 msgid "Could not create widgets !"
 msgstr "A felületi elemek nem hozhatók létre!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:271
-msgid "Could not initialize linux backend !"
-msgstr "A linuxos háttérprogram nem inicializálható!"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:277
+msgid "Your system is not configured correctly to support cpu frequency scaling !"
+msgstr "A rendszere nincs megfelelően beállítva a CPU-órajelszabályozás támogatásához"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:287
+msgid "Your system is not supported yet !"
+msgstr "A rendszere még nem támogatott"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr "CPU-frekvenciafigyelő"
+msgstr "CPU-órajelfigyelő"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
-msgstr "Megjeleníti a CPU frekvenciáját és vezérlőit"
+msgstr "Megjeleníti a CPU órajelét és vezérlőit"
 
