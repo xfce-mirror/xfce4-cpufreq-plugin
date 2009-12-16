@@ -7,39 +7,36 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-14 15:57+0100\n"
-"PO-Revision-Date: 2008-12-14 21:29+0100\n"
+"POT-Creation-Date: 2006-09-10 21:29+0200\n"
+"PO-Revision-Date: 2009-12-16 17:29+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:75
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:72
 #, c-format
 msgid "%d cpu available"
 msgstr "%d processor tillgänglig"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:77
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:74
 msgid "Frequency: "
 msgstr "Frekvens: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:84
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "Governor: "
 msgstr "Governor: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:258
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:280
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:249
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:274
 msgid "Could not create widgets !"
 msgstr "Kunde inte skapa widgetar!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:277
-msgid "Your system is not configured correctly to support cpu frequency scaling !"
-msgstr "Ditt system är inte konfigurerat korrekt för stöd för processfrekvensskalning!"
-
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:287
-msgid "Your system is not supported yet !"
-msgstr "Ditt system stöds ännu inte!"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:271
+msgid "Could not initialize linux backend !"
+msgstr "Kunde inte initiera linux-bakände !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
@@ -48,4 +45,12 @@ msgstr "Övervakare för processorfrekvens"
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
 msgstr "Visa processorfrekvens och governor"
+
+#~ msgid ""
+#~ "Your system is not configured correctly to support cpu frequency scaling !"
+#~ msgstr ""
+#~ "Ditt system är inte konfigurerat korrekt för stöd för "
+#~ "processfrekvensskalning!"
+#~ msgid "Your system is not supported yet !"
+#~ msgstr "Ditt system stöds ännu inte!"
 
