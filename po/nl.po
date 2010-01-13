@@ -1,7 +1,7 @@
 # Dutch translation of xfce4-cpufreq-plugin.
 # Copyright (C) 2007 THE xfce4-cpufreq-plugin'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the xfce4-cpufreq-plugin package.
-#
+# 
 # 
 # 
 msgid ""
@@ -19,29 +19,32 @@ msgstr ""
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:72
 #, c-format
 msgid "%d cpu available"
-msgstr "%d cpu available"
+msgstr "%d cpu beschikbaar"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:74
 msgid "Frequency: "
-msgstr "Frequency: "
+msgstr "Frequentie:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+#, fuzzy
 msgid "Governor: "
-msgstr "Governor: "
+msgstr "Gouverneur:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:249
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:274
 msgid "Could not create widgets !"
-msgstr "Could not create widgets !"
+msgstr "Kan geen widgets maken!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:271
+#, fuzzy
 msgid "Could not initialize linux backend !"
-msgstr "Could not initialise linux backend !"
+msgstr "Kan niet linux backend initialiseren !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
 msgstr "CPU Frequency Monitor"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
+#, fuzzy
 msgid "Shows the cpu frequency and governours"
-msgstr "Shows the cpu frequency and governours"
+msgstr "Toont de cpu frequentie en governours"
