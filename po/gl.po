@@ -23,7 +23,7 @@ msgstr ""
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:72
 #, c-format
 msgid "%d cpu available"
-msgstr "%d cpus dispoñibles"
+msgstr "%d CPUs dispoñibles"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:74
 msgid "Frequency: "
@@ -44,7 +44,7 @@ msgstr "Non se puido iniciar o motor linux!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr "Monitor de Frecuencia da CPU"
+msgstr "Monitor de frecuencia da CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
