@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-cpufreq-plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-09-10 21:29+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Andriy Kovtun <kovtunos@yandex.ru>\n"
+"Language-Team: Andriy Kovtun <kovtunos@yandex.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:72
+#, c-format
+msgid "%d cpu available"
+msgstr "%d CPU доступно"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:74
+msgid "Frequency: "
+msgstr "Частота:"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+msgid "Governor: "
+msgstr "Регулятор"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:249
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:274
+msgid "Could not create widgets !"
+msgstr "Ошибка создания виджета !"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:271
+msgid "Could not initialize linux backend !"
+msgstr "Ошибка инициализации буфера !"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
+msgid "CPU Frequency Monitor"
+msgstr "Монитор частоты CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
+msgid "Shows the cpu frequency and governours"
+msgstr "Показывает частоту CPU и регуляторы"
+
