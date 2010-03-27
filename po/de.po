@@ -3,7 +3,7 @@
 # Copyright (C) 2007 THE xfce'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the xfce package.
 # Fabian Nowak <timystery@arcor.de>, 2007.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce 4-cpufreq-plugin\n"
@@ -28,7 +28,7 @@ msgstr "Frequenz:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "Governor: "
-msgstr "Mutliplikator:"
+msgstr "Multiplikator:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:249
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:274
