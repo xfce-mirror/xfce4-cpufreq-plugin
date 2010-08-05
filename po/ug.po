@@ -18,32 +18,32 @@ msgstr ""
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:72
 #, c-format
 msgid "%d cpu available"
-msgstr ""
+msgstr "%d CPU بار"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:74
 msgid "Frequency: "
-msgstr "چاستۇتا: "
+msgstr "چاستوتا: "
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "Governor: "
-msgstr ""
+msgstr "Governor: "
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:249
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:274
 msgid "Could not create widgets !"
-msgstr ""
+msgstr "widgets ياسىغىلى بولمىدى !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:271
 msgid "Could not initialize linux backend !"
-msgstr ""
+msgstr "Linux backend نى دەسلەپلەشتۈرگىلى بولمىدى !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr ""
+msgstr "CPU چاستوتا كۆزەتكۈ"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
-msgstr ""
+msgstr "CPU نىڭ چاستوتىسى بىلەن governor نى كۆرسىتىدۇ"
 
 #~ msgid ""
 #~ "Your system is not configured correctly to support cpu frequency scaling !"
