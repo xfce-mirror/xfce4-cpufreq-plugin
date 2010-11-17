@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Nuno Miguel <nunis@netcabo.pt>, 2007.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin\n"
@@ -26,22 +26,21 @@ msgstr "Frequência:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "Governor: "
-msgstr "Governador:"
+msgstr "Regulador:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:249
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:274
 msgid "Could not create widgets !"
-msgstr "Impossível criar widgets !"
+msgstr "Não é possível criar \"widgets\"!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:271
 msgid "Could not initialize linux backend !"
-msgstr "Impossível iniciar linux backend !"
+msgstr "Não é possível iniciar a infraestrutura linux!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr "Monitor de Frequência de CPU"
+msgstr "Monitor de frequência do CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
-msgstr "Mostra a frequência do cpu e governadores"
-
+msgstr "Mostra a frequência do cpu e reguladores"
