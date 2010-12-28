@@ -29,6 +29,11 @@
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-configure.h"
 
+#ifndef _
+# include <libintl.h>
+# define _(String) gettext (String)
+#endif
+
 static void
 check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 {

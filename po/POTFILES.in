@@ -1,2 +1,5 @@
+panel-plugin/xfce4-cpufreq-configure.c
+panel-plugin/xfce4-cpufreq-linux.c
+panel-plugin/xfce4-cpufreq-overview.c
 panel-plugin/xfce4-cpufreq-plugin.c
 panel-plugin/xfce4-cpufreq-plugin.desktop.in.in
