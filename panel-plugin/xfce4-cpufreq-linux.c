@@ -30,6 +30,8 @@
 # define _(String) gettext (String)
 #endif
 
+#include <libxfcegui4/libxfcegui4.h>
+
 static gboolean
 cpufreq_cpu_parse_sysfs_init (gint cpu_number)
 {
