@@ -8,7 +8,7 @@ xfce4_cpufreq_plugin_CFLAGS =					\
 	@LIBXFCEGUI4_CFLAGS@					\
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"
 
-xfce4_cpufreq_plugin_LDFLAGS =					\
+xfce4_cpufreq_plugin_LDADD =					\
 	@LIBXFCE4PANEL_LIBS@					\
 	@LIBXFCE4UTIL_LIBS@					\
 	@LIBXFCEGUI4_LIBS@
