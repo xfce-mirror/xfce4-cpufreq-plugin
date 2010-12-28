@@ -25,12 +25,12 @@
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-linux.h"
 
+#include <libxfcegui4/libxfcegui4.h>
+
 #ifndef _
 # include <libintl.h>
 # define _(String) gettext (String)
 #endif
-
-#include <libxfcegui4/libxfcegui4.h>
 
 static gboolean
 cpufreq_cpu_parse_sysfs_init (gint cpu_number)
