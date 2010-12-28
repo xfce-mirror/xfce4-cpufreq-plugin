@@ -154,7 +154,7 @@ cpufreq_widgets (void)
 
 	if(cpuFreq->options->show_icon)
 	{
-		cpuFreq->icon = gtk_image_new_from_icon_name ("cpu", size);
+		cpuFreq->icon = gtk_image_new_from_icon_name ("cpu", -1);
 		gtk_box_pack_start (GTK_BOX (box), cpuFreq->icon, FALSE, FALSE, 0);
 	}
 
