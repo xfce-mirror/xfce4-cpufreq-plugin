@@ -64,7 +64,7 @@ cpufreq_cpu_parse_sysfs_init (gint cpu_number)
 		{
 			gint freq = atoi (tokens[i]);
 			cpu->available_freqs = g_list_append (
-				cpu->available_freqs, freq);
+				cpu->available_freqs, GINT_TO_POINTER(freq));
 			i++;
 		}
 		g_strfreev (tokens);

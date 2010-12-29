@@ -74,7 +74,7 @@ combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 static void
 spinner_changed (GtkWidget *spinner, CpuFreqPluginConfigure *configure)
 {
-	gdouble timeout = gtk_spin_button_get_value (spinner);
+	gdouble timeout = gtk_spin_button_get_value (GTK_SPIN_BUTTON (spinner));
 	timeout *= 100;
 	cpuFreq->options->timeout = timeout;
 	
@@ -98,7 +98,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 {
 	gint i;
 	gchar *cpu_name;
-	GtkWidget *dialog, *dialog_vbox, *header;
+	GtkWidget *dialog, *dialog_vbox;
 	GtkWidget *frame, *align, *label, *vbox, *hbox;
 	GtkWidget *combo, *spinner, *button;
 	CpuFreqPluginConfigure *configure;
@@ -147,7 +147,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
 	spinner = configure->spinner_timeout = 
 		gtk_spin_button_new_with_range (TIMEOUT_MIN, TIMEOUT_MAX, TIMEOUT_STEP);
-	gtk_spin_button_set_value (spinner, (gdouble)cpuFreq->options->timeout / 100);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinner), (gdouble)cpuFreq->options->timeout / 100);
 	gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, FALSE, 0);
 	g_signal_connect (G_OBJECT (spinner), "value-changed", G_CALLBACK (spinner_changed), configure);
 
