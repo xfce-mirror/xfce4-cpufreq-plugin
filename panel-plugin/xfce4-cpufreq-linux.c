@@ -304,10 +304,10 @@ cpufreq_cpu_read_procfs ()
 				cpu->available_governors = NULL;
 
 				sscanf (fileContent, 
-					"CPU %d %d kHz (%d %%) - %d kHz (%d %%) - %20s",
-					NULL, &cpu->min_freq,
-					NULL, &cpu->max_freq,
-					NULL, cpu->cur_governor);
+					"CPU %*d %d kHz (%*d %%) - %d kHz (%*d %%) - %20s",
+					&cpu->min_freq,
+					&cpu->max_freq,
+					cpu->cur_governor);
 				cpu->min_freq *= 1000;
 				cpu->max_freq *= 1000;
 
