@@ -44,14 +44,12 @@ gboolean
 cpufreq_update_label (CpuInfo *cpu)
 {
 	gchar *label, *freq;
-	gboolean small;
 
 	if (!cpuFreq->options->show_label_governor && !cpuFreq->options->show_label_freq)
 		return TRUE;
 	
 	freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
-	label = g_strconcat (small ? "<span size=\"xx-small\">" : "<span size=\"x-small\">",
-		
+	label = g_strconcat (
 		cpuFreq->options->show_label_freq ? freq : "",
 		
 		cpu->cur_governor != NULL &&
@@ -60,7 +58,6 @@ cpufreq_update_label (CpuInfo *cpu)
 		cpu->cur_governor != NULL &&
 		cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
 		
-		"</span>",
 		NULL);
 
 	gtk_label_set_label (GTK_LABEL(cpuFreq->label), label);

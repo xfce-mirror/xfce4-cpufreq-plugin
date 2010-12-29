@@ -38,7 +38,7 @@
 static void
 cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 {
-	gint	  i, j;
+	gint	  i = 0, j;
 	gchar	  *text;
 	GtkWidget *hbox, *dialog_vbox, *combo, *label, *icon;
 	GList 	  *list;
@@ -181,7 +181,7 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpuFreq)
 {
 	gint 	  i;
 	GtkWidget *dialog, *dialog_vbox, *window;
-	GtkWidget *header, *dialog_hbox, *separator;
+	GtkWidget *dialog_hbox, *separator;
 
 	if (ev->button != 1)
 		return FALSE;
