@@ -33,6 +33,7 @@
 #include "xfce4-cpufreq-linux.h"
 #endif /* __linux__ */
 #include "xfce4-cpufreq-overview.h"
+#include "xfce4-cpufreq-utils.h"
 
 static void
 cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)

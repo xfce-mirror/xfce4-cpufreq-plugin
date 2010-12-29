@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <stdlib.h>
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-utils.h"
 
