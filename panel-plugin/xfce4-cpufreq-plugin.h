@@ -67,10 +67,10 @@ G_BEGIN_DECLS
 gboolean
 cpufreq_update_plugin (void);
 
-gboolean
+void
 cpufreq_restart_timeout (void);
 
-gboolean
+void
 cpufreq_widgets (void);
 
 void

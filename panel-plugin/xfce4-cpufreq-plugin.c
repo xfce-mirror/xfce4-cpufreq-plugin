@@ -113,7 +113,7 @@ cpufreq_update_plugin (void)
 	return TRUE;
 }
 
-gboolean
+void
 cpufreq_restart_timeout (void)
 {
 	g_source_remove (cpuFreq->timeoutHandle);
@@ -123,7 +123,7 @@ cpufreq_restart_timeout (void)
 			NULL);
 }
 
-gboolean
+void
 cpufreq_widgets (void)
 {
 	gint		size;
@@ -259,8 +259,7 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint wsize)
 static void
 cpufreq_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation orientation)
 {
-	if (cpufreq_widgets () == FALSE)
-		xfce_err (_("Could not create widgets !"));
+	cpufreq_widgets ();
 }
 
 static void
@@ -281,8 +280,7 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 	if (cpufreq_linux_init () == FALSE)
 		xfce_err (_("Your system is not configured correctly to support cpu frequency scaling !"));
 
-	if (cpufreq_widgets () == FALSE)
-		xfce_err (_("Could not create widgets !"));
+	cpufreq_widgets ();
 
 	cpuFreq->timeoutHandle = g_timeout_add (
 			cpuFreq->options->timeout,
