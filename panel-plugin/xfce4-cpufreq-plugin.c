@@ -202,6 +202,7 @@ cpufreq_read_config (void)
 	cpuFreq->options->show_icon           = xfce_rc_read_bool_entry (rc, "show_icon",  TRUE);
 	cpuFreq->options->show_label_freq     = xfce_rc_read_bool_entry (rc, "show_label_freq", TRUE);
 	cpuFreq->options->show_label_governor =	xfce_rc_read_bool_entry (rc, "show_label_governor", TRUE);
+	cpuFreq->options->show_warning        =	xfce_rc_read_bool_entry (rc, "show_warning", TRUE);
 
 	xfce_rc_close (rc);
 }
@@ -226,6 +227,7 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
 	xfce_rc_write_bool_entry (rc, "show_icon",           cpuFreq->options->show_icon);
 	xfce_rc_write_bool_entry (rc, "show_label_freq",     cpuFreq->options->show_label_freq);
 	xfce_rc_write_bool_entry (rc, "show_label_governor", cpuFreq->options->show_label_governor);
+	xfce_rc_write_bool_entry (rc, "show_warning",        cpuFreq->options->show_warning);
 
 	xfce_rc_close (rc);
 }

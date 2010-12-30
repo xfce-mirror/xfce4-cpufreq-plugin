@@ -406,7 +406,13 @@ cpufreq_linux_init (void)
 	else if (g_file_test ("/proc/cpufreq", G_FILE_TEST_EXISTS))
 		return cpufreq_cpu_read_procfs ();
 	else
-	{	xfce_warn (_("Your system does not support cpufreq.\nThe applet only shows the current cpu frequency"));
+	{
+		if (cpuFreq->options->show_warning)
+		{
+			xfce_warn (_("Your system does not support cpufreq.\nThe applet only shows the current cpu frequency"));
+			cpuFreq->options->show_warning = FALSE;
+		}
+
 		return cpufreq_cpu_read_procfs_cpuinfo ();
 	}
 }

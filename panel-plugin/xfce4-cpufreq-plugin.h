@@ -43,6 +43,7 @@ typedef struct
 	gboolean show_icon;
 	gboolean show_label_governor;
 	gboolean show_label_freq;
+	gboolean show_warning;
 } CpuFreqPluginOptions;
 
 typedef struct
