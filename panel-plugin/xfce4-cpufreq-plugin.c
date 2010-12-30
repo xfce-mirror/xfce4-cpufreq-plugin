@@ -151,7 +151,18 @@ cpufreq_widgets (void)
 
 	if(cpuFreq->options->show_icon)
 	{
-		cpuFreq->icon = gtk_image_new_from_icon_name ("cpu", -1);
+
+		GdkPixbuf *buf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+				                                     "cpu", size - 8, 0, NULL);
+		if (buf)
+		{
+			cpuFreq->icon = gtk_image_new_from_pixbuf (buf);
+			g_object_unref (G_OBJECT (buf));
+		}
+		else
+		{
+			cpuFreq->icon = gtk_image_new_from_icon_name ("cpu", GTK_ICON_SIZE_BUTTON);
+		}
 		gtk_box_pack_start (GTK_BOX (box), cpuFreq->icon, FALSE, FALSE, 0);
 	}
 
@@ -245,10 +256,7 @@ cpufreq_free (XfcePanelPlugin *plugin)
 static gboolean
 cpufreq_set_size (XfcePanelPlugin *plugin, gint wsize)
 {
-	if (xfce_panel_plugin_get_orientation (plugin) == GTK_ORIENTATION_HORIZONTAL)
-		gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, wsize);
-	else
-		gtk_widget_set_size_request (GTK_WIDGET (plugin), wsize, -1);
+	cpufreq_widgets ();
 
 	return TRUE;
 }
