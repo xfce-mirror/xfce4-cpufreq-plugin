@@ -17,9 +17,6 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 #define BORDER 		1
-#define TIMEOUT_MIN	0.5
-#define TIMEOUT_MAX	3
-#define TIMEOUT_STEP	0.5
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -72,9 +69,7 @@ combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 static void
 spinner_changed (GtkWidget *spinner, CpuFreqPluginConfigure *configure)
 {
-	gdouble timeout = gtk_spin_button_get_value (GTK_SPIN_BUTTON (spinner));
-	timeout *= 100;
-	cpuFreq->options->timeout = timeout;
+	cpuFreq->options->timeout =gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spinner));
 	
 	cpufreq_restart_timeout ();
 }
@@ -145,7 +140,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
 	spinner = configure->spinner_timeout = 
 		gtk_spin_button_new_with_range (TIMEOUT_MIN, TIMEOUT_MAX, TIMEOUT_STEP);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinner), (gdouble)cpuFreq->options->timeout / 100);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinner), (gdouble)cpuFreq->options->timeout);
 	gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, FALSE, 0);
 	g_signal_connect (G_OBJECT (spinner), "value-changed", G_CALLBACK (spinner_changed), configure);
 

@@ -114,7 +114,7 @@ void
 cpufreq_restart_timeout (void)
 {
 	g_source_remove (cpuFreq->timeoutHandle);
-	cpuFreq->timeoutHandle = g_timeout_add (
+	cpuFreq->timeoutHandle = g_timeout_add_seconds (
 			cpuFreq->options->timeout,
 			(GSourceFunc)cpufreq_update_cpus,
 			NULL);
@@ -196,7 +196,9 @@ cpufreq_read_config (void)
 	rc = xfce_rc_simple_open (file, FALSE);
 	g_free (file);
 
-	cpuFreq->options->timeout             = xfce_rc_read_int_entry  (rc, "timeout", 100);
+	cpuFreq->options->timeout             = xfce_rc_read_int_entry  (rc, "timeout", 1);
+	if (cpuFreq->options->timeout > TIMEOUT_MAX || cpuFreq->options->timeout < TIMEOUT_MIN)
+		cpuFreq->options->timeout = TIMEOUT_MIN;
 	cpuFreq->options->show_cpu            = xfce_rc_read_int_entry  (rc, "show_cpu",  0);
 	cpuFreq->options->show_frame          = xfce_rc_read_bool_entry (rc, "show_frame",  TRUE);
 	cpuFreq->options->show_icon           = xfce_rc_read_bool_entry (rc, "show_icon",  TRUE);
@@ -291,7 +293,7 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 
 	cpufreq_widgets ();
 
-	cpuFreq->timeoutHandle = g_timeout_add (
+	cpuFreq->timeoutHandle = g_timeout_add_seconds (
 			cpuFreq->options->timeout,
 			(GSourceFunc) cpufreq_update_cpus,
 			NULL);
