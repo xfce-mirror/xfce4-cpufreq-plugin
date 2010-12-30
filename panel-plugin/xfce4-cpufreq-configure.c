@@ -54,7 +54,6 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
 	cpufreq_widgets ();
-	cpufreq_update_plugin ();
 }
 
 static void
@@ -67,7 +66,6 @@ combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 		cpuFreq->options->show_cpu = selected;
 
 		cpufreq_widgets ();
-		cpufreq_update_plugin ();
 	}
 }
 

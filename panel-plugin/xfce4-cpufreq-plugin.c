@@ -178,6 +178,8 @@ cpufreq_widgets (void)
 	gtk_widget_show_all (cpuFreq->ebox);
 	gtk_container_add (GTK_CONTAINER (cpuFreq->plugin), cpuFreq->ebox);
 	xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->ebox);
+
+	cpufreq_update_plugin ();
 }
 
 static void
