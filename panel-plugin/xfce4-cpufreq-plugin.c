@@ -74,7 +74,7 @@ cpufreq_update_tooltip (CpuInfo *cpu)
 
 	freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
 	if (cpuFreq->options->show_label_governor && cpuFreq->options->show_label_freq)
-		tooltip_msg = g_strdup_printf (_("%d cpu available"), cpuFreq->cpus->len);
+		tooltip_msg = g_strdup_printf (ngettext("%d cpu available", "%d cpus available", cpuFreq->cpus->len), cpuFreq->cpus->len);
 	else
 		tooltip_msg = g_strconcat (!cpuFreq->options->show_label_freq ? _("Frequency: ") : "",
 			!cpuFreq->options->show_label_freq ? freq : "",
