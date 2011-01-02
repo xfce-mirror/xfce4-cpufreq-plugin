@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the
 # xfce4-cpufreq-plugin package.
 # Carles Muñoz Gorriz <carlesmu@internautas.org>, 2006.
-#
-#
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-10 21:29+0200\n"
+"POT-Creation-Date: 2011-01-02 17:05+0000\n"
 "PO-Revision-Date: 2006-12-02 12:07+0100\n"
 "Last-Translator: Carles Muñoz Gorriz <carlesmu@internautas.org>\n"
 "Language-Team: Catalan <xfce-i18n@xfce.org>\n"
@@ -19,27 +19,107 @@ msgstr ""
 "Plural-Forms: Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:72
+#: ../panel-plugin/xfce4-cpufreq-configure.c:103
+msgid "Configure CPU Frequency Monitor"
+msgstr "Configura el monitor de freqüència de la CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:105
+msgid "Configure the CPU frequency plugin"
+msgstr "Configura el connector de freqüència de la CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:122
+msgid "<b>Monitor</b>"
+msgstr "<b>Monitor</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:137
+msgid "Timeout Interval:"
+msgstr "Interval d'espera:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:153
+msgid "<b>Panel</b>"
+msgstr "<b>Panell</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:170
+msgid "Display CPU:"
+msgstr "Mostra CPU:"
+
+#. check buttons for display widgets in panel
+#: ../panel-plugin/xfce4-cpufreq-configure.c:189
+msgid "Show frame"
+msgstr "Mostra marc"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:194
+msgid "Show CPU icon"
+msgstr "Mostra icona de la CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:199
+msgid "Show CPU frequency"
+msgstr "Mostra la freqüència de la CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:204
+msgid "Show CPU governor"
+msgstr "Mostra el gestor de la CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-linux.c:412
+msgid ""
+"Your system does not support cpufreq.\n"
+"The applet only shows the current cpu frequency"
+msgstr ""
+"El vostre sistema no suporta cpufreq.\n"
+"\r\n"
+"El panell només mostra la freqüència actual de la CPU."
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:64
+msgid "Scaling driver:"
+msgstr "Controlador d'escalat"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:70
+#, c-format
+msgid "No scaling driver available"
+msgstr "No hi ha un controlador d'escalat disponible"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:81
+msgid "Available frequencies:"
+msgstr "Freqüències disponibles"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:136
+msgid "Available governors:"
+msgstr "Gestors disponibles:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:159
+msgid "Current governor:"
+msgstr "Gestor actual:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:194
+msgid "CPU Information"
+msgstr "Informació de la CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:201
+msgid "An overview of all the CPUs in the system"
+msgstr "Un resum de les CPUs del sistema"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:77
 #, c-format
 msgid "%d cpu available"
-msgstr "%d de CPU disponible"
+msgid_plural "%d cpus available"
+msgstr[0] "%d CPU disponible"
+msgstr[1] "%d CPUs disponibles"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:74
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "Frequency: "
 msgstr "Freqüència:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:86
 msgid "Governor: "
 msgstr "Controlador:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:249
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:274
-msgid "Could not create widgets !"
-msgstr "No s'han pogut crear el giny del quadre"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:292
+msgid "Your system is not configured correctly to support cpu frequency scaling !"
+msgstr "El vostre sistema no està configurat per tal de suportar la modificació/escalat de la freqüència de la CPU!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:271
-msgid "Could not initialize linux backend !"
-msgstr "No s'han pogut iniciar el suport de linux"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:301
+msgid "Your system is not supported yet !"
+msgstr "El vostre sistema no està suportat encara!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
@@ -49,3 +129,8 @@ msgstr "Monitor de freqüència de la CPU"
 msgid "Shows the cpu frequency and governours"
 msgstr "Mostra la freqüència de la CPU i els seus controladors"
 
+#~ msgid "Could not create widgets !"
+#~ msgstr "No s'han pogut crear el giny del quadre"
+
+#~ msgid "Could not initialize linux backend !"
+#~ msgstr "No s'han pogut iniciar el suport de linux"
