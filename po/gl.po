@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-10 21:29+0200\n"
+"POT-Creation-Date: 2011-01-12 17:06+0000\n"
 "PO-Revision-Date: 2009-07-15 17:44+0100\n"
 "Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -20,27 +20,104 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:72
+#: ../panel-plugin/xfce4-cpufreq-configure.c:103
+msgid "Configure CPU Frequency Monitor"
+msgstr "Configurar o monitor de frecuencia da CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:105
+msgid "Configure the CPU frequency plugin"
+msgstr "Configurar o engadido de frecuencia da CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:122
+msgid "<b>Monitor</b>"
+msgstr "<b>Monitor</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:137
+msgid "Timeout Interval:"
+msgstr "Intervalo de tempo de espera:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:153
+msgid "<b>Panel</b>"
+msgstr "<b>Panel</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:170
+msgid "Display CPU:"
+msgstr ""
+
+#. check buttons for display widgets in panel
+#: ../panel-plugin/xfce4-cpufreq-configure.c:189
+msgid "Show frame"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:194
+msgid "Show CPU icon"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:199
+msgid "Show CPU frequency"
+msgstr "Mostrar a frecuencia da CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:204
+msgid "Show CPU governor"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-linux.c:412
+msgid ""
+"Your system does not support cpufreq.\n"
+"The applet only shows the current cpu frequency"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:64
+msgid "Scaling driver:"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:70
+#, c-format
+msgid "No scaling driver available"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:81
+msgid "Available frequencies:"
+msgstr "Frecuencias dispoñibles:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:136
+msgid "Available governors:"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:159
+msgid "Current governor:"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:194
+msgid "CPU Information"
+msgstr "Información da CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:201
+msgid "An overview of all the CPUs in the system"
+msgstr "Un resumo de todas as CPUs do sistema"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:77
 #, c-format
 msgid "%d cpu available"
-msgstr "%d CPUs dispoñibles"
+msgid_plural "%d cpus available"
+msgstr[0] "%d CPU dispoñible"
+msgstr[1] "%d CPUs dispoñibles"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:74
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "Frequency: "
 msgstr "Frecuencia: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:86
 msgid "Governor: "
 msgstr "Regulador:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:249
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:274
-msgid "Could not create widgets !"
-msgstr "Non se puideron crear os widgets!"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:292
+msgid "Your system is not configured correctly to support cpu frequency scaling !"
+msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:271
-msgid "Could not initialize linux backend !"
-msgstr "Non se puido iniciar o motor linux!"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:301
+msgid "Your system is not supported yet !"
+msgstr "Aínda non hai compatibilidade co seu sistema!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
@@ -49,3 +126,9 @@ msgstr "Monitor de frecuencia da CPU"
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
 msgstr "Mostra a frecuencia e os reguladores da CPU"
+
+#~ msgid "Could not create widgets !"
+#~ msgstr "Non se puideron crear os widgets!"
+
+#~ msgid "Could not initialize linux backend !"
+#~ msgstr "Non se puido iniciar o motor linux!"
