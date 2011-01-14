@@ -61,32 +61,32 @@ msgstr "Ваша система не поддерживает регулиров
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:64
 msgid "Scaling driver:"
-msgstr ""
+msgstr "Драйвер делителя частоты:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:70
 #, c-format
 msgid "No scaling driver available"
-msgstr ""
+msgstr "Нет доступного драйвера делителя частоты"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:81
 msgid "Available frequencies:"
-msgstr ""
+msgstr "Доступные частоты:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:136
 msgid "Available governors:"
-msgstr ""
+msgstr "Доступные гувернёры::"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:159
 msgid "Current governor:"
-msgstr ""
+msgstr "Текущий гувернёр:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:194
 msgid "CPU Information"
-msgstr ""
+msgstr "Информация о CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:201
 msgid "An overview of all the CPUs in the system"
-msgstr ""
+msgstr "Информация обо всех CPU в системе"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:77
 #, fuzzy, c-format
@@ -105,7 +105,7 @@ msgstr "Регулятор"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:292
 msgid "Your system is not configured correctly to support cpu frequency scaling !"
-msgstr ""
+msgstr "Ваша система не настроена для поддержки изменения частоты CPU !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:301
 msgid "Your system is not supported yet !"
