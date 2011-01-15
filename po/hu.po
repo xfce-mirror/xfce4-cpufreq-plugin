@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-10 21:29+0200\n"
+"POT-Creation-Date: 2011-01-15 11:06+0000\n"
 "PO-Revision-Date: 2009-07-25 11:55+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Hungarian <gnome at gnome dot hu>\n"
@@ -17,27 +17,106 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:72
+#: ../panel-plugin/xfce4-cpufreq-configure.c:103
+msgid "Configure CPU Frequency Monitor"
+msgstr "CPU-órajelfigyelő beállítása"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:105
+msgid "Configure the CPU frequency plugin"
+msgstr "CPU-órajelfigyelő bővítmény beállítása"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:122
+msgid "<b>Monitor</b>"
+msgstr "<b>Megfigyelés</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:137
+msgid "Timeout Interval:"
+msgstr "Időkorlát:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:153
+msgid "<b>Panel</b>"
+msgstr "<b>Panel</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:170
+msgid "Display CPU:"
+msgstr "CPU megjelenítése:"
+
+#. check buttons for display widgets in panel
+#: ../panel-plugin/xfce4-cpufreq-configure.c:189
+msgid "Show frame"
+msgstr "Keret megjelenítése"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:194
+msgid "Show CPU icon"
+msgstr "CPU-ikon megjelenítése"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:199
+msgid "Show CPU frequency"
+msgstr "CPU-frekvencia megjelenítése"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:204
+msgid "Show CPU governor"
+msgstr "CPU-irányelv megjelenítése"
+
+#: ../panel-plugin/xfce4-cpufreq-linux.c:412
+msgid ""
+"Your system does not support cpufreq.\n"
+"The applet only shows the current cpu frequency"
+msgstr ""
+"A rendszer nem támogatja az órajel módosítását.\n"
+"A bővítmény csak a jelenlegi frekvenciát jeleníti meg"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:64
+msgid "Scaling driver:"
+msgstr "Méretezési illesztőprogram:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:70
+#, c-format
+msgid "No scaling driver available"
+msgstr "Nem érhető el méretezési illesztőprogram"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:81
+msgid "Available frequencies:"
+msgstr "Elérhető frekvenciák:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:136
+msgid "Available governors:"
+msgstr "Elérhető irányelvek:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:159
+msgid "Current governor:"
+msgstr "Jelenlegi irányelv:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:194
+msgid "CPU Information"
+msgstr "CPU-információk"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:201
+msgid "An overview of all the CPUs in the system"
+msgstr "A rendszer összes CPU-jának áttekintése"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:77
 #, c-format
 msgid "%d cpu available"
-msgstr "%d CPU érhető el"
+msgid_plural "%d cpus available"
+msgstr[0] "%d CPU érhető el"
+msgstr[1] "%d CPU érhető el"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:74
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "Frequency: "
 msgstr "Órajel: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:86
 msgid "Governor: "
 msgstr "Vezérlő: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:249
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:274
-msgid "Could not create widgets !"
-msgstr "A felületi elemek nem hozhatók létre!"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:292
+msgid "Your system is not configured correctly to support cpu frequency scaling !"
+msgstr "A rendszere nincs megfelelően beállítva a CPU-órajelszabályozás támogatásához"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:271
-msgid "Could not initialize linux backend !"
-msgstr "A Linux háttérprogram nem készíthető elő!"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:301
+msgid "Your system is not supported yet !"
+msgstr "A rendszere még nem támogatott"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
@@ -47,8 +126,8 @@ msgstr "CPU-órajelfigyelő"
 msgid "Shows the cpu frequency and governours"
 msgstr "Megjeleníti a CPU órajelét és vezérlőit"
 
-#~ msgid "Your system is not configured correctly to support cpu frequency scaling !"
-#~ msgstr "A rendszere nincs megfelelően beállítva a CPU-órajelszabályozás támogatásához"
+#~ msgid "Could not create widgets !"
+#~ msgstr "A felületi elemek nem hozhatók létre!"
 
-#~ msgid "Your system is not supported yet !"
-#~ msgstr "A rendszere még nem támogatott"
+#~ msgid "Could not initialize linux backend !"
+#~ msgstr "A Linux háttérprogram nem készíthető elő!"
