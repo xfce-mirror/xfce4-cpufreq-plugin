@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-10 21:29+0200\n"
+"POT-Creation-Date: 2011-01-17 05:06+0000\n"
 "PO-Revision-Date: 2007-03-08 00:57+0200\n"
 "Last-Translator: Dmitry Nikitin <luckas_fb@mail.ru>\n"
 "Language-Team: Ukrainian <xfce-i18n@xfce.org>\n"
@@ -17,27 +17,107 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:72
-#, c-format
-msgid "%d cpu available"
-msgstr "%d процесорів доступно"
+#: ../panel-plugin/xfce4-cpufreq-configure.c:103
+msgid "Configure CPU Frequency Monitor"
+msgstr "Налаштувати спостереження за частотою CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:74
+#: ../panel-plugin/xfce4-cpufreq-configure.c:105
+msgid "Configure the CPU frequency plugin"
+msgstr "Налаштувати розширення - спостереження за частотою CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:122
+msgid "<b>Monitor</b>"
+msgstr "<b>Спостереження</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:137
+msgid "Timeout Interval:"
+msgstr "Період затримки:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:153
+msgid "<b>Panel</b>"
+msgstr "<b>Панель</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:170
+msgid "Display CPU:"
+msgstr "Показати CPU:"
+
+#. check buttons for display widgets in panel
+#: ../panel-plugin/xfce4-cpufreq-configure.c:189
+msgid "Show frame"
+msgstr "Показувати фрейм"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:194
+msgid "Show CPU icon"
+msgstr "Показати значок CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:199
+msgid "Show CPU frequency"
+msgstr "Показати частоту процесора"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:204
+msgid "Show CPU governor"
+msgstr "Показати регулятор CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-linux.c:412
+msgid ""
+"Your system does not support cpufreq.\n"
+"The applet only shows the current cpu frequency"
+msgstr ""
+"Ваша система не підтримує cpufreq.\n"
+"Цей аплет буде тільки відображати частоту процесора"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:64
+msgid "Scaling driver:"
+msgstr "Драйвер зміни:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:70
+#, c-format
+msgid "No scaling driver available"
+msgstr "Немає доступного драйвера зміни частоти"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:81
+msgid "Available frequencies:"
+msgstr "Доступні частоти:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:136
+msgid "Available governors:"
+msgstr "Доступні регулятори:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:159
+msgid "Current governor:"
+msgstr "Поточний регулятор:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:194
+msgid "CPU Information"
+msgstr "Інформація CPU"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:201
+msgid "An overview of all the CPUs in the system"
+msgstr "Огляд усіх процесорів в системі"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:77
+#, fuzzy, c-format
+msgid "%d cpu available"
+msgid_plural "%d cpus available"
+msgstr[0] "%d процесорів доступно"
+msgstr[1] "%d процесорів доступно"
+msgstr[2] "%d процесорів доступно"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "Frequency: "
 msgstr "Частота: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:86
 msgid "Governor: "
 msgstr "Можливості: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:249
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:274
-msgid "Could not create widgets !"
-msgstr "Неможливо створити віджети !"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:292
+msgid "Your system is not configured correctly to support cpu frequency scaling !"
+msgstr "Ваша система не налаштована на зміну частоти процесора !"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:271
-msgid "Could not initialize linux backend !"
-msgstr "Не вдається ініціалізувати базові функції лінукс !"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:301
+msgid "Your system is not supported yet !"
+msgstr "Ваша система ще не підтримується !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
@@ -47,8 +127,8 @@ msgstr "Спостереження за частотою процесора"
 msgid "Shows the cpu frequency and governours"
 msgstr "Показати частоту процесора та його можливості"
 
-#~ msgid "Your system is not configured correctly to support cpu frequency scaling !"
-#~ msgstr "Ваша система не налаштована на зміну частоти процесора !"
+#~ msgid "Could not create widgets !"
+#~ msgstr "Неможливо створити віджети !"
 
-#~ msgid "Your system is not supported yet !"
-#~ msgstr "Ваша система ще не підтримується !"
+#~ msgid "Could not initialize linux backend !"
+#~ msgstr "Не вдається ініціалізувати базові функції лінукс !"
