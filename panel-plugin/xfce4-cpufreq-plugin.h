@@ -54,8 +54,10 @@ typedef struct
 	GPtrArray *cpus;
 
 	/* Widgets */
-	GtkWidget   *ebox, *frame, *icon, *label;
+	GtkWidget   *ebox, *frame, *box, *icon, *label;
 	GtkTooltips *tooltip;
+
+	gint icon_size;
 
 	CpuFreqPluginOptions  *options;
 	gint 		      timeoutHandle;
@@ -70,9 +72,6 @@ cpufreq_update_plugin (void);
 
 void
 cpufreq_restart_timeout (void);
-
-void
-cpufreq_widgets (void);
 
 void
 cpufreq_write_config (XfcePanelPlugin *plugin);

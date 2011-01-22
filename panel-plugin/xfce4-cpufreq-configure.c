@@ -35,12 +35,18 @@ static void
 check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 {
 	if (button == configure->display_frame)
-		cpuFreq->options->show_frame =
-			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-	
+	{
+		cpuFreq->options->show_frame = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+		gtk_frame_set_shadow_type (GTK_FRAME (cpuFreq->frame),cpuFreq->options->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
+		return;
+	}
 	else if (button == configure->display_icon)
+	{
 		cpuFreq->options->show_icon = 
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+		cpufreq_update_icon (cpuFreq);
+		return;
+	}
 
 	else if (button == configure->display_freq)
 		cpuFreq->options->show_label_freq =
@@ -50,7 +56,8 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 		cpuFreq->options->show_label_governor =
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-	cpufreq_widgets ();
+	cpufreq_prepare_label (cpuFreq);
+	cpufreq_update_plugin ();
 }
 
 static void
@@ -61,8 +68,7 @@ combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 	if (GTK_WIDGET (combo) == configure->combo_cpu)
 	{
 		cpuFreq->options->show_cpu = selected;
-
-		cpufreq_widgets ();
+		cpufreq_update_plugin ();
 	}
 }
 

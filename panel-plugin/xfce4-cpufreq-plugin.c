@@ -18,7 +18,6 @@
  */
 
 #define SPACING           2  /* Space between the widgets */
-#define FRAME_BORDER      2  /* Space between the frame and the panel */
 #define BORDER            1  /* Space between the frame and the widgets */
 
 #ifdef HAVE_CONFIG_H
@@ -60,7 +59,15 @@ cpufreq_update_label (CpuInfo *cpu)
 		
 		NULL);
 
-	gtk_label_set_label (GTK_LABEL(cpuFreq->label), label);
+	if (strcmp(label,""))
+	{
+		gtk_label_set_label (GTK_LABEL(cpuFreq->label), label);
+		gtk_widget_show (cpuFreq->label);
+	}
+	else
+	{
+		gtk_widget_hide (cpuFreq->label);
+	}
 
 	g_free (freq);
 	g_free (label);
@@ -120,64 +127,87 @@ cpufreq_restart_timeout (void)
 			NULL);
 }
 
-void
-cpufreq_widgets (void)
+static void
+cpufreq_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation orientation, CpuFreqPlugin *cpufreq)
 {
-	gint		size;
-	GtkWidget	*box;
-	GtkOrientation	orientation;
+	gtk_orientable_set_orientation (GTK_ORIENTABLE (cpufreq->box), orientation);
+}
 
-	orientation = xfce_panel_plugin_get_orientation (cpuFreq->plugin);
-	size	    = xfce_panel_plugin_get_size (cpuFreq->plugin);
+void
+cpufreq_update_icon (CpuFreqPlugin *cpufreq)
+{
+	if (cpufreq->icon)
+	{
+		gtk_widget_destroy (cpufreq->icon);
+		cpufreq->icon = NULL;
+	}
 
-	if (cpuFreq->ebox)
-		gtk_widget_destroy (cpuFreq->ebox);
-	cpuFreq->ebox = gtk_event_box_new ();
-
-	cpuFreq->frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (cpuFreq->frame),cpuFreq->options->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
-	gtk_container_add (GTK_CONTAINER (cpuFreq->ebox), cpuFreq->frame);
-	gtk_container_set_border_width (GTK_CONTAINER (cpuFreq->frame),	size > 26 ? FRAME_BORDER : 0);
-
-	if (orientation == GTK_ORIENTATION_HORIZONTAL)
-		box = gtk_hbox_new (FALSE, SPACING);
-	else
-		box = gtk_vbox_new (FALSE, SPACING);
-
-	gtk_container_set_border_width (GTK_CONTAINER (box), BORDER);
-	gtk_container_add (GTK_CONTAINER (cpuFreq->frame), box);
-
-	gtk_tooltips_set_tip (cpuFreq->tooltip, cpuFreq->ebox, "", NULL);
-
-	if(cpuFreq->options->show_icon)
+	if(cpufreq->options->show_icon)
 	{
 
 		GdkPixbuf *buf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-				                                     "cpu", size - 8, 0, NULL);
+				                                     "cpu", cpufreq->icon_size, 0, NULL);
 		if (buf)
 		{
-			cpuFreq->icon = gtk_image_new_from_pixbuf (buf);
+			cpufreq->icon = gtk_image_new_from_pixbuf (buf);
 			g_object_unref (G_OBJECT (buf));
 		}
 		else
 		{
-			cpuFreq->icon = gtk_image_new_from_icon_name ("cpu", GTK_ICON_SIZE_BUTTON);
+			cpufreq->icon = gtk_image_new_from_icon_name ("cpu", GTK_ICON_SIZE_BUTTON);
 		}
-		gtk_box_pack_start (GTK_BOX (box), cpuFreq->icon, FALSE, FALSE, 0);
+		gtk_box_pack_start (GTK_BOX (cpufreq->box), cpufreq->icon, FALSE, FALSE, 0);
+		gtk_widget_show (cpufreq->icon);
 	}
+}
 
+void
+cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
+{
+	if (cpufreq->label)
+	{
+		gtk_widget_destroy (cpufreq->label);
+		cpufreq->label = NULL;
+	}
 	if (cpuFreq->options->show_label_freq || cpuFreq->options->show_label_governor)
 	{
-		cpuFreq->label = gtk_label_new ("");
-		gtk_box_pack_start (GTK_BOX (box), cpuFreq->label, FALSE, FALSE, 0);
-		gtk_label_set_use_markup (GTK_LABEL (cpuFreq->label), TRUE);
+		cpuFreq->label = gtk_label_new (NULL);
+		gtk_box_pack_end (GTK_BOX (cpufreq->box), cpuFreq->label, FALSE, FALSE, 0);
 	}
+}
 
-	g_signal_connect (cpuFreq->ebox, "button-press-event", G_CALLBACK (cpufreq_overview), cpuFreq);  
+static void
+cpufreq_widgets (void)
+{
+	GtkOrientation	orientation;
 
-	gtk_widget_show_all (cpuFreq->ebox);
-	gtk_container_add (GTK_CONTAINER (cpuFreq->plugin), cpuFreq->ebox);
+	orientation = xfce_panel_plugin_get_orientation (cpuFreq->plugin);
+	cpuFreq->icon_size = xfce_panel_plugin_get_size (cpuFreq->plugin) - 4;
+
+	cpuFreq->ebox = gtk_event_box_new ();
 	xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->ebox);
+	gtk_container_add (GTK_CONTAINER (cpuFreq->plugin), cpuFreq->ebox);
+
+	cpuFreq->frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (cpuFreq->frame),cpuFreq->options->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
+	gtk_container_add (GTK_CONTAINER (cpuFreq->ebox), cpuFreq->frame);
+	gtk_widget_show (cpuFreq->frame);
+
+	cpuFreq->box = gtk_hbox_new (FALSE, SPACING);
+	gtk_container_set_border_width (GTK_CONTAINER (cpuFreq->box), BORDER);
+	gtk_container_add (GTK_CONTAINER (cpuFreq->frame), cpuFreq->box);
+
+	gtk_tooltips_set_tip (cpuFreq->tooltip, cpuFreq->ebox, "", NULL);
+
+	cpufreq_update_icon (cpuFreq);
+
+	cpufreq_prepare_label (cpuFreq);
+
+	g_signal_connect (cpuFreq->ebox, "button-press-event", G_CALLBACK (cpufreq_overview), cpuFreq);
+
+	cpufreq_orientation_changed (cpuFreq->plugin, orientation, cpuFreq);
+	gtk_widget_show (cpuFreq->box);
+	gtk_widget_show (cpuFreq->ebox);
 
 	cpufreq_update_plugin ();
 }
@@ -260,17 +290,12 @@ cpufreq_free (XfcePanelPlugin *plugin)
 }
 
 static gboolean
-cpufreq_set_size (XfcePanelPlugin *plugin, gint wsize)
+cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 {
-	cpufreq_widgets ();
+	cpufreq->icon_size = size - 4;
+	cpufreq_update_icon (cpufreq);
 
 	return TRUE;
-}
-
-static void
-cpufreq_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation orientation)
-{
-	cpufreq_widgets ();
 }
 
 static void
@@ -291,6 +316,7 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 	if (cpufreq_linux_init () == FALSE)
 		xfce_err (_("Your system is not configured correctly to support cpu frequency scaling !"));
 
+	gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, -1);
 	cpufreq_widgets ();
 
 	cpuFreq->timeoutHandle = g_timeout_add_seconds (
@@ -306,9 +332,9 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 	g_signal_connect (plugin, "save", G_CALLBACK (cpufreq_write_config),
 			  NULL);
 	g_signal_connect (plugin, "size-changed",
-			  G_CALLBACK (cpufreq_set_size), NULL);
+			  G_CALLBACK (cpufreq_set_size), cpuFreq);
 	g_signal_connect (plugin, "orientation-changed",
-			  G_CALLBACK (cpufreq_orientation_changed), NULL);
+			  G_CALLBACK (cpufreq_orientation_changed), cpuFreq);
 
 	/* the configure and about menu items are hidden by default */
 	xfce_panel_plugin_menu_show_configure (plugin);
