@@ -9,7 +9,7 @@ m4_define([xfce4_cpufreq_plugin_version], [0.2])
 
 dnl Initialize autoconf
 AC_COPYRIGHT([Copyright (c) 2006 Thomas Schreck <shrek@xfce.org>
-Copyright (c) 2010 Florian Rivoal <frivoal@xfce.org>])
+Copyright (c) 2010,2011 Florian Rivoal <frivoal@xfce.org>])
 AC_INIT([xfce4-cpufreq-plugin], [xfce4_cpufreq_plugin_version()],
 	[frivoal@xfce.org])
 
