@@ -1,0 +1,18 @@
+1.0.0 (2011/01/23)
+------------------
+ * Fix support for xfce 4.8, fixing bug #6448
+ * Linux 2.4 support
+ * Translated in 33 languages
+ * Make the plugin fully translatable, fixing bug #7016
+ * Use ngettext for translatable strings with plurals
+ * Rename cpu.png to xfce4-cpufreq-plugin
+ * Adapt text to the panel's size and orientation
+ * Use g_timeout_add_seconds for less wake-ups, fixing bug #5180
+ * Warn once (and only once) about the lack of cpufreq support
+ * Fix icon size in the panel
+ * Remove the scalable icon, since it isn't real, fixing bug #2458
+ * Use the right icon for the configuration dialog, fixing bug #6448
+ * Various small bug fixes
+ * Code clean up
+ * Build fixes
+ * Update the documentation

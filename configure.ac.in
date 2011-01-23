@@ -5,7 +5,7 @@ dnl                         CPUs
 dnl
 
 dnl Version information
-m4_define([xfce4_cpufreq_plugin_version], [0.2])
+m4_define([xfce4_cpufreq_plugin_version], [1.0.0])
 
 dnl Initialize autoconf
 AC_COPYRIGHT([Copyright (c) 2006 Thomas Schreck <shrek@xfce.org>
