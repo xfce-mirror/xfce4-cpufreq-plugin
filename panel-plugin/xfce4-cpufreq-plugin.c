@@ -48,21 +48,33 @@ cpufreq_update_label (CpuInfo *cpu)
 	if (!cpuFreq->options->show_label_governor && !cpuFreq->options->show_label_freq)
 		return TRUE;
 	
+	gint size = xfce_panel_plugin_get_size (cpuFreq->plugin);
+	gboolean both = cpu->cur_governor != NULL && cpuFreq->options->show_label_freq && cpuFreq->options->show_label_governor;
+
+	gchar *txt_size = both ?
+	                       (size <= 38 ? (size <= 28 ? "<span size=\"xx-small\">" : "<span size=\"x-small\">") : "<span>") :
+			       (size <= 19 ? "<span size=\"x-small\">" : "<span>"); 
+
 	freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
-	label = g_strconcat (
+	label = g_strconcat (txt_size,
+
 		cpuFreq->options->show_label_freq ? freq : "",
 		
-		cpu->cur_governor != NULL &&
-		cpuFreq->options->show_label_freq && cpuFreq->options->show_label_governor ? "\n" : "",
+		both ? (size <= 25 ? " " : "\n") : "",
 	
 		cpu->cur_governor != NULL &&
 		cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
-		
+
+		"</span>",
 		NULL);
 
 	if (strcmp(label,""))
 	{
-		gtk_label_set_label (GTK_LABEL(cpuFreq->label), label);
+		gtk_label_set_markup (GTK_LABEL(cpuFreq->label), label);
+		if (xfce_panel_plugin_get_orientation (cpuFreq->plugin) == GTK_ORIENTATION_VERTICAL)
+			gtk_label_set_angle (GTK_LABEL(cpuFreq->label), -90);
+		else
+			gtk_label_set_angle (GTK_LABEL(cpuFreq->label), 0);
 		gtk_widget_show (cpuFreq->label);
 	}
 	else
@@ -132,6 +144,7 @@ static void
 cpufreq_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation orientation, CpuFreqPlugin *cpufreq)
 {
 	gtk_orientable_set_orientation (GTK_ORIENTABLE (cpufreq->box), orientation);
+	cpufreq_update_plugin ();
 }
 
 void
@@ -295,6 +308,7 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 {
 	cpufreq->icon_size = size - 4;
 	cpufreq_update_icon (cpufreq);
+	cpufreq_update_plugin ();
 
 	return TRUE;
 }
