@@ -53,7 +53,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 	g_free (text);
 
-	icon = gtk_image_new_from_icon_name ("cpu", GTK_ICON_SIZE_BUTTON);
+	icon = gtk_image_new_from_icon_name ("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
 	gtk_box_pack_start (GTK_BOX (dialog_vbox), icon, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (icon), 0.5, 0);
 	gtk_misc_set_padding (GTK_MISC (icon), 10, 10);
@@ -202,7 +202,7 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpuFreq)
 			_("An overview of all the CPUs in the system"));
 
 	gtk_window_set_position   (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
-	gtk_window_set_icon_name  (GTK_WINDOW (dialog), "cpu");
+	gtk_window_set_icon_name  (GTK_WINDOW (dialog), "xfce4-cpufreq-plugin");
 
 	g_object_set_data (G_OBJECT (cpuFreq->plugin), "overview", dialog);
 

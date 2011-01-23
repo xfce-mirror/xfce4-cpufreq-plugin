@@ -160,7 +160,7 @@ cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 	{
 
 		GdkPixbuf *buf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-				                                     "cpu", cpufreq->icon_size, 0, NULL);
+				                                     "xfce4-cpufreq-plugin", cpufreq->icon_size, 0, NULL);
 		if (buf)
 		{
 			cpufreq->icon = gtk_image_new_from_pixbuf (buf);
@@ -168,7 +168,7 @@ cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 		}
 		else
 		{
-			cpufreq->icon = gtk_image_new_from_icon_name ("cpu", GTK_ICON_SIZE_BUTTON);
+			cpufreq->icon = gtk_image_new_from_icon_name ("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
 		}
 		gtk_box_pack_start (GTK_BOX (cpufreq->box), cpufreq->icon, FALSE, FALSE, 0);
 		gtk_widget_show (cpufreq->icon);
