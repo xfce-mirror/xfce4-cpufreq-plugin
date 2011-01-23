@@ -17,8 +17,6 @@ reporting bugs.
 * libxfce4util 4.3.90
 * libxfcegui4 4.3.90
 * libxfce4panel 4.3.90			      
-* libgksu 1.3.8
-* libgksuui 1.0.7
 
 ** Building **
 
@@ -28,8 +26,7 @@ make install (as root)
 
 ** Usage **
 
-Using the plugin is quite simple. You select the cpu which you want to monitor in the Xfce Panel. Next thing you could change is the timeout interval how often the informations have to be updated. A good value is 1,0 which means 100 ms.
+Using the plugin is quite simple. You select the cpu which you want to monitor in the Xfce Panel. Next thing you could change is the timeout interval how often the informations have to be updated. The default value is 1,0 s.
 
 You can also specify which informations should be displayed in the panel.
 
-You can now also change the governor, when you run Linux with kernel 2.6. But it needs root permissions to do this. When you run the "userspace" governor, you are also able to change the frequency of your cpu, which also need root permissions.
