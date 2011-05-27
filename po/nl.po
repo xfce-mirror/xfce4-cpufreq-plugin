@@ -1,14 +1,14 @@
-# Dutch translation of xfce4-cpufreq-plugin.
-# Copyright (C) 2007 THE xfce4-cpufreq-plugin'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the xfce4-cpufreq-plugin package.
-# 
-# 
+# Dutch translation of the xfce4-cpufreq-plugin package.
+# Copyright (C) The Xfce development team.
+# This file is distributed under the same license as the 
+# xfce4-cpufreq-plugin package.
+# Pjotr, 2011.
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-25 04:05+0000\n"
+"POT-Creation-Date: 2011-05-27 10:05+0000\n"
 "PO-Revision-Date: 2011-05-25 11:52+0200\n"
 "Last-Translator: Pjotr\n"
 "Language-Team: Dutch\n"
@@ -115,8 +115,8 @@ msgstr "Beheermodus:"
 msgid ""
 "Your system is not configured correctly to support cpu frequency scaling !"
 msgstr ""
-"Uw systeem is niet juist geconfigureerd voor het ondersteunen van "
-"schalen van processorfrequentie !"
+"Uw systeem is niet juist geconfigureerd voor het ondersteunen van schalen "
+"van processorfrequentie !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:342
 msgid "Your system is not supported yet !"
