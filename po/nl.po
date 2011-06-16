@@ -8,13 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-27 10:05+0000\n"
-"PO-Revision-Date: 2011-05-25 11:52+0200\n"
+"POT-Creation-Date: 2011-06-16 10:05+0000\n"
+"PO-Revision-Date: 2011-06-15 11:52+0200\n"
 "Last-Translator: Pjotr\n"
-"Language-Team: Dutch\n"
+"Language-Team: Dutch (Flemish)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl (Dutch)\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:110
@@ -82,11 +83,11 @@ msgstr "Beschikbare frequenties:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:137
 msgid "Available governors:"
-msgstr "Beschikbare beheermodi:"
+msgstr "Beschikbare beheerders:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:160
 msgid "Current governor:"
-msgstr "Huidige beheermodus:"
+msgstr "Huidige beheerder:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:195
 msgid "CPU Information"
@@ -109,7 +110,7 @@ msgstr "Frequentie:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:106
 msgid "Governor: "
-msgstr "Beheermodus:"
+msgstr "Beheerder:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:332
 msgid ""
@@ -128,7 +129,7 @@ msgstr "Monitor voor Processorfrequentie"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
-msgstr "Toont de processorfrequentie en beheermodi"
+msgstr "Toont de processorfrequentie en beheerders"
 
 #~ msgid "Could not create widgets !"
 #~ msgstr "Kan geen widgets maken!"
