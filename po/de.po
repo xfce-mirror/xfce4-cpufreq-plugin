@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: xfce 4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-20 00:07+0100\n"
-"PO-Revision-Date: 2007-12-06 23:04+0100\n"
-"Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
+"PO-Revision-Date: 2011-06-19 23:37+0100\n"
+"Last-Translator: Detlef Riekenberg <wine.dev@web.de>\n"
 "Language-Team: German\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -94,7 +94,7 @@ msgstr "CPU-Information"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:195
 msgid "An overview of all the CPUs in the system"
-msgstr "iÜbersicht über alle im System vorhandenen CPUs"
+msgstr "Übersicht über alle im System vorhandenen CPUs"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:75
 #, c-format
