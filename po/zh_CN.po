@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce 4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-17 23:06+0000\n"
+"POT-Creation-Date: 2011-06-20 04:06+0000\n"
 "PO-Revision-Date: 2008-12-06 04:34+0800\n"
 "Last-Translator: Hunt Xu <huntxu@live.cn>\n"
 "Language-Team: Chinese (simplified)\n"
@@ -15,106 +15,106 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:103
+#: ../panel-plugin/xfce4-cpufreq-configure.c:110
 msgid "Configure CPU Frequency Monitor"
 msgstr "配置 CPU 主频监视器"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:105
+#: ../panel-plugin/xfce4-cpufreq-configure.c:112
 msgid "Configure the CPU frequency plugin"
 msgstr "配置 CPU 频率插件"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:122
+#: ../panel-plugin/xfce4-cpufreq-configure.c:129
 msgid "<b>Monitor</b>"
 msgstr "<b>监视器</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:137
+#: ../panel-plugin/xfce4-cpufreq-configure.c:144
 msgid "Timeout Interval:"
 msgstr "超时间隔： "
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:153
+#: ../panel-plugin/xfce4-cpufreq-configure.c:160
 msgid "<b>Panel</b>"
 msgstr "<b>面板</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:170
+#: ../panel-plugin/xfce4-cpufreq-configure.c:177
 msgid "Display CPU:"
 msgstr "显示 CPU:"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:189
+#: ../panel-plugin/xfce4-cpufreq-configure.c:196
 msgid "Show frame"
 msgstr "显示帧数"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:194
+#: ../panel-plugin/xfce4-cpufreq-configure.c:201
 msgid "Show CPU icon"
 msgstr "显示 CPU 图标"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:199
+#: ../panel-plugin/xfce4-cpufreq-configure.c:206
 msgid "Show CPU frequency"
 msgstr "显示 CPU 主频"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:204
+#: ../panel-plugin/xfce4-cpufreq-configure.c:211
 msgid "Show CPU governor"
 msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:412
+#: ../panel-plugin/xfce4-cpufreq-linux.c:413
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr ""
+msgstr "您的系统不支持 cpufreq。\\ n 该程序只能显示当前的CPU频率"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:64
+#: ../panel-plugin/xfce4-cpufreq-overview.c:65
 msgid "Scaling driver:"
 msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:70
+#: ../panel-plugin/xfce4-cpufreq-overview.c:71
 #, c-format
 msgid "No scaling driver available"
 msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:81
+#: ../panel-plugin/xfce4-cpufreq-overview.c:82
 msgid "Available frequencies:"
 msgstr "可用频率： "
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:136
+#: ../panel-plugin/xfce4-cpufreq-overview.c:137
 msgid "Available governors:"
 msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:159
+#: ../panel-plugin/xfce4-cpufreq-overview.c:160
 msgid "Current governor:"
 msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:194
+#: ../panel-plugin/xfce4-cpufreq-overview.c:195
 msgid "CPU Information"
 msgstr ""
 " \t\r\n"
 "CPU 信息"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:201
+#: ../panel-plugin/xfce4-cpufreq-overview.c:202
 msgid "An overview of all the CPUs in the system"
-msgstr ""
+msgstr "系统中所有CPU概况"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:77
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:97
 #, fuzzy, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
 msgstr[0] "%d cpu 可用"
 msgstr[1] "%d cpu 可用"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:99
 msgid "Frequency: "
 msgstr "主频："
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:86
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:106
 msgid "Governor: "
 msgstr "调度器："
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:292
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:332
 msgid "Your system is not configured correctly to support cpu frequency scaling !"
 msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:301
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:342
 msgid "Your system is not supported yet !"
-msgstr ""
+msgstr "你的系统不被支持!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
