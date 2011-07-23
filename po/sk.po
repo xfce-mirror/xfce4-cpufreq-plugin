@@ -1,0 +1,130 @@
+# Slovak translations for xfce4-cpufreq-plugin package.
+# Copyright (C) 2006 THE xfce4-cpufreq-plugin'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the xfce4-cpufreq-plugin package.
+# Tomáš Vadina <kyberdev@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-cpufreq-plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-07-23 10:06+0000\n"
+"PO-Revision-Date: 2011-07-23 13:39+0100\n"
+"Last-Translator: Tomáš Vadina <kyberdev@gmail.com>\n"
+"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"X-Poedit-Language: Slovak\n"
+"X-Poedit-Country: SLOVAKIA\n"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:110
+msgid "Configure CPU Frequency Monitor"
+msgstr "Nastavenie sledovania frekvencie procesora"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:112
+msgid "Configure the CPU frequency plugin"
+msgstr "Nastaviť zásuvný modul frekvencie procesora"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:129
+msgid "<b>Monitor</b>"
+msgstr "<b>Monitor</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:144
+msgid "Timeout Interval:"
+msgstr "Interval vypršania časového limitu:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:160
+msgid "<b>Panel</b>"
+msgstr "<b>Panel</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:177
+msgid "Display CPU:"
+msgstr "Zobraziť procesor:"
+
+#. check buttons for display widgets in panel
+#: ../panel-plugin/xfce4-cpufreq-configure.c:196
+msgid "Show frame"
+msgstr "Zobraziť rám"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:201
+msgid "Show CPU icon"
+msgstr "Zobraziť ikonu procesora"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:206
+msgid "Show CPU frequency"
+msgstr "Zobraziť frekvenciu procesora"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:211
+msgid "Show CPU governor"
+msgstr "Zobraziť správcu procesora"
+
+#: ../panel-plugin/xfce4-cpufreq-linux.c:413
+msgid ""
+"Your system does not support cpufreq.\n"
+"The applet only shows the current cpu frequency"
+msgstr ""
+"Tento systém nepodporuje cpufreq.\n"
+"Aplet bude zobrazovať iba aktuálnu frekvenciu procesora"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:65
+msgid "Scaling driver:"
+msgstr "Ovládač škálovania:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:71
+#, c-format
+msgid "No scaling driver available"
+msgstr "Nie je dostupný žiadny ovládač škálovania"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:82
+msgid "Available frequencies:"
+msgstr "Dostupné frekvencie:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:137
+msgid "Available governors:"
+msgstr "Dostupní správcovia:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:160
+msgid "Current governor:"
+msgstr "Aktuálny správca:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:195
+msgid "CPU Information"
+msgstr "Informácie o procesore"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:202
+msgid "An overview of all the CPUs in the system"
+msgstr "Prehľad o všetkých procesoroch systému"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:97
+#, c-format
+msgid "%d cpu available"
+msgid_plural "%d cpus available"
+msgstr[0] "%d dostupných procesorov"
+msgstr[1] "%d dostupný procesor"
+msgstr[2] "%d dostupné procesory"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:99
+msgid "Frequency: "
+msgstr "Frekvencia:"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:106
+msgid "Governor: "
+msgstr "Správca:"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:332
+msgid "Your system is not configured correctly to support cpu frequency scaling !"
+msgstr "Tento systém nie je správne nastavený pre podporu škálovania frekvencie procesora !"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:342
+msgid "Your system is not supported yet !"
+msgstr "Váš systém zatiaľ nie je podporovaný !"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
+msgid "CPU Frequency Monitor"
+msgstr "Sledovanie frekvencie procesora"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
+msgid "Shows the cpu frequency and governours"
+msgstr "Zobrazuje frekvenciu procesora a spravuje ju"
+
