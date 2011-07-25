@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Piarres Beobide <pi@beobide.net> ,2007.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-10 21:29+0200\n"
+"POT-Creation-Date: 2011-07-25 10:06+0000\n"
 "PO-Revision-Date: 2007-03-13 11:05+0100\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: Euskara <Librezale@librezale.org>\n"
@@ -15,27 +15,104 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:72
-#, c-format
-msgid "%d cpu available"
-msgstr "%d cpu erabilgarri"
+#: ../panel-plugin/xfce4-cpufreq-configure.c:110
+msgid "Configure CPU Frequency Monitor"
+msgstr "Konfiguratu CPU maiztasun monitorea"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:74
+#: ../panel-plugin/xfce4-cpufreq-configure.c:112
+msgid "Configure the CPU frequency plugin"
+msgstr "Konfiguratu CPU maiztasun monitorea"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:129
+msgid "<b>Monitor</b>"
+msgstr "<b>Monitorea</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:144
+msgid "Timeout Interval:"
+msgstr "Denboraz-kanpo muga::"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:160
+msgid "<b>Panel</b>"
+msgstr "<b>Paneal</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:177
+msgid "Display CPU:"
+msgstr "Bistarazi CPU:"
+
+#. check buttons for display widgets in panel
+#: ../panel-plugin/xfce4-cpufreq-configure.c:196
+msgid "Show frame"
+msgstr "Ikusi markoa"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:201
+msgid "Show CPU icon"
+msgstr "Ikusi CPU ikonoa"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:206
+msgid "Show CPU frequency"
+msgstr "Ikusi CPU maiztasuna"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:211
+msgid "Show CPU governor"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-linux.c:413
+msgid ""
+"Your system does not support cpufreq.\n"
+"The applet only shows the current cpu frequency"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:65
+msgid "Scaling driver:"
+msgstr "Eskalatze kontrolatzailea:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:71
+#, c-format
+msgid "No scaling driver available"
+msgstr "Ez dago eskalatze kontrolatzaile erabilgarririk."
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:82
+msgid "Available frequencies:"
+msgstr "Maiztasun erabilgarriak"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:137
+msgid "Available governors:"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:160
+msgid "Current governor:"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:195
+msgid "CPU Information"
+msgstr "CPU argibideak"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:202
+msgid "An overview of all the CPUs in the system"
+msgstr "Sistemako CPU guztien aurrebista"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:97
+#, fuzzy, c-format
+msgid "%d cpu available"
+msgid_plural "%d cpus available"
+msgstr[0] "%d cpu erabilgarri"
+msgstr[1] "%d cpu erabilgarri"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:99
 msgid "Frequency: "
 msgstr "Maiztasuna: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:106
 msgid "Governor: "
 msgstr "Neurgailua: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:249
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:274
-msgid "Could not create widgets !"
-msgstr "Ezin dira widget-ak sortu !"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:332
+msgid "Your system is not configured correctly to support cpu frequency scaling !"
+msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:271
-msgid "Could not initialize linux backend !"
-msgstr "Ezin da linux onarpena abiarazi !"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:342
+msgid "Your system is not supported yet !"
+msgstr "Zure sistemarako ez dago euskarririk oraindik !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
@@ -44,3 +121,9 @@ msgstr "CPU Maiztasun Monitorea"
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
 msgstr "Cpu maiztasun eta neurgailua bistarazi"
+
+#~ msgid "Could not create widgets !"
+#~ msgstr "Ezin dira widget-ak sortu !"
+
+#~ msgid "Could not initialize linux backend !"
+#~ msgstr "Ezin da linux onarpena abiarazi !"
