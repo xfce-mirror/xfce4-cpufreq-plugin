@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-16 10:05+0000\n"
-"PO-Revision-Date: 2011-06-15 11:52+0200\n"
+"POT-Creation-Date: 2011-09-09 04:06+0000\n"
+"PO-Revision-Date: 2011-09-09 11:52+0200\n"
 "Last-Translator: Pjotr\n"
 "Language-Team: Dutch (Flemish)\n"
 "MIME-Version: 1.0\n"
@@ -20,11 +20,11 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:110
 msgid "Configure CPU Frequency Monitor"
-msgstr "Monitor voor Processorfrequentie configureren"
+msgstr "Monitor voor processorfrequentie configureren"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:112
 msgid "Configure the CPU frequency plugin"
-msgstr "Plugin voor Processorfrequentie configureren"
+msgstr "Plugin voor processorfrequentie configureren"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:129
 msgid "<b>Monitor</b>"
@@ -32,7 +32,7 @@ msgstr "<b>Bewaak</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:144
 msgid "Timeout Interval:"
-msgstr "Interval voor Pauze:"
+msgstr "Interval voor pauze:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:160
 msgid "<b>Panel</b>"
@@ -40,7 +40,7 @@ msgstr "<b>Werkbalk</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:177
 msgid "Display CPU:"
-msgstr "Toon Processor:"
+msgstr "Toon processor:"
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:196
@@ -49,15 +49,15 @@ msgstr "Toon lijst"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:201
 msgid "Show CPU icon"
-msgstr "Toon Processorpictogram"
+msgstr "Toon processorpictogram"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:206
 msgid "Show CPU frequency"
-msgstr "Toon Processorfrequentie"
+msgstr "Toon processorfrequentie"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:211
 msgid "Show CPU governor"
-msgstr "Toon Processorbeheermodus"
+msgstr "Toon processorbeheermodus"
 
 #: ../panel-plugin/xfce4-cpufreq-linux.c:413
 msgid ""
@@ -125,7 +125,7 @@ msgstr "Uw systeem wordt nog niet ondersteund !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr "Monitor voor Processorfrequentie"
+msgstr "Monitor voor processorfrequentie"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
