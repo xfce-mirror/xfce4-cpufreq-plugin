@@ -2,44 +2,124 @@
 # Copyright (C) 2010 Xfce team
 # This file is distributed under the same license as the Xfce package.
 # Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-10 21:29+0200\n"
+"POT-Creation-Date: 2011-12-27 07:00+0000\n"
 "PO-Revision-Date: 2010-08-13 15:11+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
-"Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: kk\n"
 "Plural-Forms: nplurals=2; plural= (n != 1);\n"
 "X-Poedit-Language: Kazakh\n"
 "X-Poedit-Country: KAZAKHSTAN\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:72
+#: ../panel-plugin/xfce4-cpufreq-configure.c:110
+msgid "Configure CPU Frequency Monitor"
+msgstr "Процессор жиілігін бақылаушысын баптау"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:112
+msgid "Configure the CPU frequency plugin"
+msgstr "Процессор жиілігі плагинін баптау"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:129
+msgid "<b>Monitor</b>"
+msgstr "<b>Бақылау</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:144
+msgid "Timeout Interval:"
+msgstr "Уақыт аралығы:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:160
+msgid "<b>Panel</b>"
+msgstr "<b>Панель</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:177
+msgid "Display CPU:"
+msgstr "Процессорды көрсету:"
+
+#. check buttons for display widgets in panel
+#: ../panel-plugin/xfce4-cpufreq-configure.c:196
+msgid "Show frame"
+msgstr "Қоршауын көрсету"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:201
+msgid "Show CPU icon"
+msgstr "Процессор таңбашасын көрсету"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:206
+msgid "Show CPU frequency"
+msgstr "Процессор жиілігін көрсету"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:211
+msgid "Show CPU governor"
+msgstr "Процессор режимін көрсету"
+
+#: ../panel-plugin/xfce4-cpufreq-linux.c:413
+msgid ""
+"Your system does not support cpufreq.\n"
+"The applet only shows the current cpu frequency"
+msgstr ""
+"Жүйеңіз cpufreq қолдамайды.\n"
+"Апплет тек ағымдағы процессор жиілігін көрсетеді"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:65
+msgid "Scaling driver:"
+msgstr "Масштабтау драйвері:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:71
+#, c-format
+msgid "No scaling driver available"
+msgstr "Масштабтау драйвері қолжетерсіз"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:82
+msgid "Available frequencies:"
+msgstr "Қолжетерлік жиіліктер:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:137
+msgid "Available governors:"
+msgstr "Қолжетерлік режимдер:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:160
+msgid "Current governor:"
+msgstr "Ағымдағы режим:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:195
+msgid "CPU Information"
+msgstr "Процессор ақпараты"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:202
+msgid "An overview of all the CPUs in the system"
+msgstr "Жүйедегі барлық процессорды шолу"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:97
 #, c-format
 msgid "%d cpu available"
-msgstr "%d процессор бар"
+msgid_plural "%d cpus available"
+msgstr[0] "%d процессор бар"
+msgstr[1] "%d процессор бар"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:74
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:99
 msgid "Frequency: "
 msgstr "Жиілік:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:106
 msgid "Governor: "
 msgstr "Басқарушы:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:249
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:274
-msgid "Could not create widgets !"
-msgstr "Виджеттерді жасау мүмкін емес!"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:332
+msgid ""
+"Your system is not configured correctly to support cpu frequency scaling !"
+msgstr "Жүйеңіз процессор жиілігін ауыстыруды қолдауға дұрыс бапталған жоқ!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:271
-msgid "Could not initialize linux backend !"
-msgstr "Linux негізін іске қосу мүмкін емес!"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:342
+msgid "Your system is not supported yet !"
+msgstr "Сіздің жүйеңізге әлі қолдау жоқ!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
@@ -49,3 +129,8 @@ msgstr "Процессор жиілігін бақылаушы"
 msgid "Shows the cpu frequency and governours"
 msgstr "Поцессор жиілігін мен басқарушысын көрсету"
 
+#~ msgid "Could not create widgets !"
+#~ msgstr "Виджеттерді жасау мүмкін емес!"
+
+#~ msgid "Could not initialize linux backend !"
+#~ msgstr "Linux негізін іске қосу мүмкін емес!"
