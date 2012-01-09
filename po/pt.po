@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-31 11:05+0000\n"
-"PO-Revision-Date: 2010-12-31 15:18-0000\n"
+"PO-Revision-Date: 2012-01-09 11:22-0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr "Configurar monitor de frequência do CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:105
 msgid "Configure the CPU frequency plugin"
-msgstr "Configurar o \"plug-in\" de frequência do CPU"
+msgstr "Configurar \"plug-in\" de frequência do CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:122
 msgid "<b>Monitor</b>"
@@ -53,11 +53,11 @@ msgstr "Mostrar ícone"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:199
 msgid "Show CPU frequency"
-msgstr "Mostrar frequência do CPU"
+msgstr "Mostrar frequência"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:204
 msgid "Show CPU governor"
-msgstr "Mostrar regulador do CPU"
+msgstr "Mostrar regulador"
 
 #: ../panel-plugin/xfce4-cpufreq-linux.c:412
 msgid ""
@@ -65,7 +65,7 @@ msgid ""
 "The applet only shows the current cpu frequency"
 msgstr ""
 "O seu sistema não possui suporte ao cpufreq.\n"
-"O \"applet\" apenas mostra a frequência do cpu"
+"O \"applet\" só mostra a frequência atual do CPU."
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:64
 msgid "Scaling driver:"
@@ -113,7 +113,7 @@ msgstr "Regulador:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:292
 msgid "Your system is not configured correctly to support cpu frequency scaling !"
-msgstr "O seu sistema não está configurado para suportar a frequência do cpu!"
+msgstr "O seu sistema não está configurado para suportar a escala de frequência do CPU!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:301
 msgid "Your system is not supported yet !"
@@ -125,5 +125,5 @@ msgstr "Monitor de frequência do CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
-msgstr "Mostra a frequência do cpu e reguladores"
+msgstr "Mostra a frequência e os reguladores do CPU"
 
