@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce 4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-04 04:06+0000\n"
+"POT-Creation-Date: 2012-02-07 17:54+0000\n"
 "PO-Revision-Date: 2011-06-19 23:37+0100\n"
 "Last-Translator: Detlef Riekenberg <wine.dev@web.de>\n"
 "Language-Team: German\n"
@@ -97,11 +97,11 @@ msgid "An overview of all the CPUs in the system"
 msgstr "Übersicht über alle im System vorhandenen CPUs"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:97
-#, fuzzy, c-format
+#, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
-msgstr[0] "%d CPU verfügbar"
-msgstr[1] "%d CPUs verfügbar"
+msgstr[0] "%d Prozessor verfügbar"
+msgstr[1] "%d Prozessoren verfügbar"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:99
 msgid "Frequency: "
