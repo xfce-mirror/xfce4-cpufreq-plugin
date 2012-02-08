@@ -3,15 +3,15 @@
 # This file is distributed under the same license as
 # the xfce4-cpufreq-plugin package.
 # Hunt Xu <huntxu@live.cn>", 2008.
-# Chipong Luo <chipong_l@yahoo.com>, 2011.
+# Chipong Luo <chipong.luo@yahoo.com>, 2011, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-09 04:11+0000\n"
+"POT-Creation-Date: 2012-02-08 05:30+0000\n"
 "PO-Revision-Date: 2008-12-06 04:34+0800\n"
-"Last-Translator: Chipong Luo <chipong_l@yahoo.com>\n"
+"Last-Translator: Chipong Luo <chipong.luo@yahoo.com>\n"
 "Language-Team: Chinese (Simplified) <xfce-i18n@xfce.org>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -90,8 +90,7 @@ msgstr "当前调度器："
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:195
 msgid "CPU Information"
-msgstr ""
-"CPU 信息"
+msgstr "CPU 信息"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:202
 msgid "An overview of all the CPUs in the system"
