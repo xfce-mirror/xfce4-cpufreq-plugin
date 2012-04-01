@@ -47,19 +47,19 @@ msgstr "CPU 표시:"
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:196
 msgid "Show frame"
-msgstr "틀 보이기"
+msgstr "틀 보기"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:201
 msgid "Show CPU icon"
-msgstr "CPU 아이콘 보이기"
+msgstr "CPU 아이콘 보기"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:206
 msgid "Show CPU frequency"
-msgstr "CPU 주파수 보이기"
+msgstr "CPU 주파수 보기"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:211
 msgid "Show CPU governor"
-msgstr "CPU 정책 보이기"
+msgstr "CPU 정책 보기"
 
 #: ../panel-plugin/xfce4-cpufreq-linux.c:413
 msgid ""
