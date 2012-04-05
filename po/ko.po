@@ -114,7 +114,7 @@ msgstr "정책:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:332
 msgid "Your system is not configured correctly to support cpu frequency scaling !"
-msgstr "이 시스템은 CPU 주파수 스케일링을 지원하도록 올바르게 설정되어 있지 않습니다 !"
+msgstr "이 시스템은 CPU 주파수 스케일링을 지원하도록 올바르게 설정하지 않았습니다 !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:342
 msgid "Your system is not supported yet !"
