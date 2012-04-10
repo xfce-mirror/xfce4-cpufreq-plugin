@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:110
 msgid "Configure CPU Frequency Monitor"
-msgstr "CPU 주파수 감시자 설정"
+msgstr "CPU 주파수 감시기 설정"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:112
 msgid "Configure the CPU frequency plugin"
@@ -122,7 +122,7 @@ msgstr "이 시스템은 아직 지원하지 않습니다 !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr "CPU 주파수 감시자"
+msgstr "CPU 주파수 감시기"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
