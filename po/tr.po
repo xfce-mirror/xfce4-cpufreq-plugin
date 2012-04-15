@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4 cpufreq plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-23 12:27+0000\n"
+"POT-Creation-Date: 2012-04-15 17:12+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Samed Beyribey <ras0ir@eventualis.org>\n"
 "Language-Team: Xfce-TR <xfce-tr@googlegroups.com>\n"
@@ -16,20 +16,20 @@ msgstr ""
 #: ../panel-plugin/xfce4-cpufreq-configure.c:110
 #, fuzzy
 msgid "Configure CPU Frequency Monitor"
-msgstr "CPU Frekans Gözlemcisini yapılandır."
+msgstr "CPU Frekans Gözlemcisini yapılandır"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:112
 #, fuzzy
 msgid "Configure the CPU frequency plugin"
-msgstr "CPU Frekans eklentisini yapılandır."
+msgstr "CPU Frekans eklentisini yapılandır"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:129
 msgid "<b>Monitor</b>"
-msgstr ""
+msgstr "Ekran"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:144
 msgid "Timeout Interval:"
-msgstr ""
+msgstr "Duraksama Aralığı:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:160
 msgid "<b>Panel</b>"
@@ -46,18 +46,17 @@ msgid "Show frame"
 msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:201
-#, fuzzy
 msgid "Show CPU icon"
 msgstr "CPU simgesini göster"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:206
-#, fuzzy
 msgid "Show CPU frequency"
-msgstr "İşlemci Frekansını göster"
+msgstr "İşlemci frekansını göster"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:211
+#, fuzzy
 msgid "Show CPU governor"
-msgstr ""
+msgstr "CPU yöneticisini göster"
 
 #: ../panel-plugin/xfce4-cpufreq-linux.c:413
 #, fuzzy
@@ -70,13 +69,14 @@ msgstr ""
 "Bu uygulamacık sadece varsayılan işlemci frekansını gösterir."
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:65
+#, fuzzy
 msgid "Scaling driver:"
-msgstr ""
+msgstr "Ölçekleme sürücüsü:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:71
 #, c-format
 msgid "No scaling driver available"
-msgstr ""
+msgstr "Hiçbir ölçekleme sürücüsü kullanılabilir değil"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:82
 #, fuzzy
@@ -84,12 +84,14 @@ msgid "Available frequencies:"
 msgstr "Kullanılabilir frekanslar:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:137
+#, fuzzy
 msgid "Available governors:"
-msgstr ""
+msgstr "Kullanılabilir yöneticiler:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:160
+#, fuzzy
 msgid "Current governor:"
-msgstr ""
+msgstr "Şu anki yönetici:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:195
 #, fuzzy
