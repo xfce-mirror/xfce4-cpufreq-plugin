@@ -1,18 +1,21 @@
 # Polish translations for xfce4-cpufreq-plugin package.
 # Piotr Maliński <admin@rk.edu.pl>, 2006.
-# 
+# Piotr Sokół <psokol@jabster.pl>, 2012.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-cpufreq-plugin 0.2\n"
+"Project-Id-Version: xfce4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-29 10:24+0000\n"
-"PO-Revision-Date: 2006-04-08 12:19+0900\n"
-"Last-Translator: Piotr Maliński <admin@rk.edu.pl>\n"
-"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2012-04-29 13:56+0200\n"
+"Last-Translator: Piotr Sokół <psokol@jabster.pl>\n"
+"Language-Team: polski <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bits\n"
 "Language: pl\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : ((n%10>=2 && n%10<=4 && (n"
+"%100<10 || n%100>=20)) ? 1 : 2));\n"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:110
 msgid "Configure CPU Frequency Monitor"
@@ -20,7 +23,7 @@ msgstr "Monitor częstotliwości CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:112
 msgid "Configure the CPU frequency plugin"
-msgstr "Konfiguruje aplet częstotliwości CPU"
+msgstr "Konfiguruje aplet"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:129
 msgid "<b>Monitor</b>"
@@ -28,7 +31,7 @@ msgstr "<b>Monitor</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:144
 msgid "Timeout Interval:"
-msgstr ""
+msgstr "Tempo odświeżania:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:160
 msgid "<b>Panel</b>"
@@ -36,12 +39,12 @@ msgstr "<b>Panel</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:177
 msgid "Display CPU:"
-msgstr ""
+msgstr "Wyświetlany CPU:"
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:196
 msgid "Show frame"
-msgstr ""
+msgstr "_Obramowanie"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:201
 msgid "Show CPU icon"
@@ -61,7 +64,7 @@ msgid ""
 "The applet only shows the current cpu frequency"
 msgstr ""
 "System nie obsługuje cpufreg.\n"
-"Aplet wyświetla tylko bieżącą częstotliwość."
+"Aplet będzie wyświetlał tylko bieżącą częstotliwość CPU."
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:65
 msgid "Scaling driver:"
@@ -90,14 +93,15 @@ msgstr "Informacje CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:202
 msgid "An overview of all the CPUs in the system"
-msgstr ""
+msgstr "Przegląd wszystkich CPU systemu"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:97
-#, fuzzy, c-format
+#, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
-msgstr[0] "%d dostępnych procesorów"
-msgstr[1] "%d dostępnych procesorów"
+msgstr[0] "%d dostępny CPU"
+msgstr[1] "%d dostępne CPU"
+msgstr[2] "%d dostępnych CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:99
 msgid "Frequency: "
@@ -111,10 +115,12 @@ msgstr "Zarządca:"
 msgid ""
 "Your system is not configured correctly to support cpu frequency scaling !"
 msgstr ""
+"System nie jest prawidłowo skonfigurowany, aby obsługiwać skalowanie "
+"częstotliwości działania!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:342
 msgid "Your system is not supported yet !"
-msgstr ""
+msgstr "System nie jest obsługiwany!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
