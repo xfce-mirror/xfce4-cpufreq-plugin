@@ -1,4 +1,4 @@
-# Uyghur translations for xfce4-cpufreq-plugin package.
+# Uyghur translations for xfce4-cpufreq-plugin.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Gheyret T.Kenji <gheyret@gmail.com>, 2010.
@@ -12,7 +12,7 @@ msgstr ""
 "Last-Translator: Gheyret T.Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:72
@@ -31,11 +31,11 @@ msgstr "Governor: "
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:249
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:274
 msgid "Could not create widgets !"
-msgstr "widgets ياسىغىلى بولمىدى !"
+msgstr "ئەپچە ياسىغىلى بولمىدى !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:271
 msgid "Could not initialize linux backend !"
-msgstr "Linux backend نى دەسلەپلەشتۈرگىلى بولمىدى !"
+msgstr "لىنۇكىس ئارقا ئۇچىنى دەسلەپلەشتۈرگىلى بولمىدى !"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
 msgid "CPU Frequency Monitor"
@@ -44,12 +44,3 @@ msgstr "CPU چاستوتا كۆزەتكۈ"
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
 msgstr "CPU نىڭ چاستوتىسى بىلەن governor نى كۆرسىتىدۇ"
-
-#~ msgid ""
-#~ "Your system is not configured correctly to support cpu frequency scaling !"
-#~ msgstr ""
-#~ "あなたのシステムは CPU 周波数調整をサポートするための設定が正しく行われて"
-#~ "いません !"
-#~ msgid "Your system is not supported yet !"
-#~ msgstr "あなたのシステムはまだサポートされていません !"
-
