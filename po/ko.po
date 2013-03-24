@@ -1,12 +1,12 @@
 # Korean translation for the xfce4-cpufreq-plugin package.
 # Copyright (C) 2006-2012 Nick Schermer et al.
 # This file is distributed under the same license as the xfce4-cpufreq-plugin package.
-# Seong-ho Cho <darkcircle.0426@gmail.com>, 2012.
+# Seong-ho, Cho <darkcircle.0426@gmail.com>, 2012, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin.master\n"
-"Report-Msgid-Bugs-To: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge.net>\n"
+"Report-Msgid-Bugs-To: https://bugzilla.xfce.org/enter_bug.cgi?product=Xfce4-cpufreq-plugin\n"
 "POT-Creation-Date: 2012-02-27 15:54+0000\n"
 "PO-Revision-Date: 2012-02-28 05:43+0900\n"
 "Last-Translator: Seong-ho, Cho <darkcircle.0426@gmail.com>\n"
@@ -67,7 +67,7 @@ msgid ""
 "The applet only shows the current cpu frequency"
 msgstr ""
 "시스템이 cpufreq를 지원하지 않습니다.\n"
-"애플릿은 현재 CPU 주파수만 보여줄 것입니다"
+"애플릿은 현재 CPU 주파수만 보여줍니다"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:65
 msgid "Scaling driver:"
@@ -102,7 +102,7 @@ msgstr "시스템의 모든 CPU에 대한 개요"
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
-msgstr[0] "%d개의 CPU를 사용할 수 있습니다"
+msgstr[0] "CPU %d개를 사용할 수 있습니다"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:99
 msgid "Frequency: "
