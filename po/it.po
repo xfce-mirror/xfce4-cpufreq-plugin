@@ -1,119 +1,121 @@
-# Italian translations for xfce4-cpufreq-plugin package.
-# Copyright (C) 2007 THE xfce4-cpufreq-plugin'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the xfce4-cpufreq-plugin package.
-# Fabio Riga <usul@aruba.it>, 2007.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # 
+# Translators:
+# cri <cri.penta@gmail.com>, 2013
+# Fabio Riga <usul@aruba.it>, 2007
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce 4-cpufreq-plugin 0.2\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-18 17:07+0000\n"
-"PO-Revision-Date: 2010-12-30 21:05+0100\n"
-"Last-Translator: Cristian Marchi <cri.penta@gmail.com>\n"
-"Language-Team: Italian <xfce-i18n@xfce.org>\n"
+"POT-Creation-Date: 2013-07-03 20:53+0200\n"
+"PO-Revision-Date: 2013-07-11 12:13+0000\n"
+"Last-Translator: cri <cri.penta@gmail.com>\n"
+"Language-Team: Italian (http://www.transifex.com/projects/p/xfce/language/it/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:103
+#: ../panel-plugin/xfce4-cpufreq-configure.c:110
 msgid "Configure CPU Frequency Monitor"
 msgstr "Configurazione del monitor della frequenza della CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:105
+#: ../panel-plugin/xfce4-cpufreq-configure.c:112
 msgid "Configure the CPU frequency plugin"
 msgstr "Configurazione del plugin per la frequenza della CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:122
+#: ../panel-plugin/xfce4-cpufreq-configure.c:129
 msgid "<b>Monitor</b>"
 msgstr "<b>Monitor</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:137
+#: ../panel-plugin/xfce4-cpufreq-configure.c:144
 msgid "Timeout Interval:"
 msgstr "Intervallo di timeout:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:153
+#: ../panel-plugin/xfce4-cpufreq-configure.c:160
 msgid "<b>Panel</b>"
 msgstr "<b>Pannello</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:170
+#: ../panel-plugin/xfce4-cpufreq-configure.c:177
 msgid "Display CPU:"
 msgstr "Visualizza CPU:"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:189
+#: ../panel-plugin/xfce4-cpufreq-configure.c:196
 msgid "Show frame"
 msgstr "Mostra cornice"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:194
+#: ../panel-plugin/xfce4-cpufreq-configure.c:201
 msgid "Show CPU icon"
 msgstr "Mostra l'icona della CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:199
+#: ../panel-plugin/xfce4-cpufreq-configure.c:206
 msgid "Show CPU frequency"
 msgstr "Mostra la frequenza della CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:204
+#: ../panel-plugin/xfce4-cpufreq-configure.c:211
 msgid "Show CPU governor"
-msgstr "Mostra il CPU governor"
+msgstr "Mostra profilo CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:412
+#: ../panel-plugin/xfce4-cpufreq-linux.c:413
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr ""
-"Il proprio sistema non supporta cpufreq.\n"
-"L'applet mostra solamente la frequenza della CPU "
+msgstr "Il proprio sistema non supporta cpufreq.\nL'applet mostra solamente la frequenza della CPU "
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:64
+#: ../panel-plugin/xfce4-cpufreq-overview.c:65
 msgid "Scaling driver:"
 msgstr "Driver per lo scaling:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:70
+#: ../panel-plugin/xfce4-cpufreq-overview.c:71
 #, c-format
 msgid "No scaling driver available"
 msgstr "Nessun driver disponibile per lo scaling"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:81
+#: ../panel-plugin/xfce4-cpufreq-overview.c:82
 msgid "Available frequencies:"
 msgstr "Frequenze disponibili:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:136
+#: ../panel-plugin/xfce4-cpufreq-overview.c:137
 msgid "Available governors:"
-msgstr "Governor disponibili:"
+msgstr "Profili disponibili:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:159
+#: ../panel-plugin/xfce4-cpufreq-overview.c:160
 msgid "Current governor:"
-msgstr "Governor corrente:"
+msgstr "Profilo corrente:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:194
+#: ../panel-plugin/xfce4-cpufreq-overview.c:195
 msgid "CPU Information"
 msgstr "Informazioni CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:201
+#: ../panel-plugin/xfce4-cpufreq-overview.c:202
 msgid "An overview of all the CPUs in the system"
 msgstr "Una panoramica di tutte le CPU presenti nel sistema"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:77
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:97
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
 msgstr[0] "%d cpu disponibile"
 msgstr[1] "%d cpu disponibili"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:99
 msgid "Frequency: "
 msgstr "Frequenza: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:86
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:106
 msgid "Governor: "
 msgstr "Profilo: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:292
-msgid "Your system is not configured correctly to support cpu frequency scaling !"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:332
+msgid ""
+"Your system is not configured correctly to support cpu frequency scaling !"
 msgstr "Il proprio sistema non è configurato correttamente per supportare lo scaling della frequenza della CPU!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:301
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:342
 msgid "Your system is not supported yet !"
 msgstr "Il proprio sistema non è ancora supportato!"
 
@@ -124,9 +126,3 @@ msgstr "Monitor della frequenza della CPU"
 #: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
 msgid "Shows the cpu frequency and governours"
 msgstr "Mostra la frequenza e i profili della cpu"
-
-#~ msgid "Could not create widgets !"
-#~ msgstr "Impossibile creare il widgets !"
-
-#~ msgid "Could not initialize linux backend !"
-#~ msgstr "Impossibile inizializzare il backend di linux !"
