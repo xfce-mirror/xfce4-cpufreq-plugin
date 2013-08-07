@@ -71,7 +71,11 @@ cpufreq_update_label (CpuInfo *cpu)
 	if (strcmp(label,""))
 	{
 		gtk_label_set_markup (GTK_LABEL(cpuFreq->label), label);
+#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
+		if (xfce_panel_plugin_get_mode (cpuFreq->plugin) == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
+#else
 		if (xfce_panel_plugin_get_orientation (cpuFreq->plugin) == GTK_ORIENTATION_VERTICAL)
+#endif
 			gtk_label_set_angle (GTK_LABEL(cpuFreq->label), -90);
 		else
 			gtk_label_set_angle (GTK_LABEL(cpuFreq->label), 0);
@@ -142,12 +146,29 @@ cpufreq_restart_timeout (void)
 #endif
 }
 
+#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
+static void
+cpufreq_mode_changed (XfcePanelPlugin *plugin, XfcePanelPluginMode mode, CpuFreqPlugin *cpufreq)
+{
+        GtkOrientation orientation;
+
+        orientation =
+          (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) ?
+          GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
+
+	gtk_orientable_set_orientation (GTK_ORIENTABLE (cpufreq->box), orientation);
+	cpufreq_update_plugin ();
+}
+
+#else
+
 static void
 cpufreq_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation orientation, CpuFreqPlugin *cpufreq)
 {
 	gtk_orientable_set_orientation (GTK_ORIENTABLE (cpufreq->box), orientation);
 	cpufreq_update_plugin ();
 }
+#endif
 
 void
 cpufreq_update_icon (CpuFreqPlugin *cpufreq)
@@ -195,10 +216,13 @@ cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
 static void
 cpufreq_widgets (void)
 {
-	GtkOrientation	orientation;
-
-	orientation = xfce_panel_plugin_get_orientation (cpuFreq->plugin);
+#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
+	cpuFreq->icon_size = xfce_panel_plugin_get_size (cpuFreq->plugin);
+	cpuFreq->icon_size /= xfce_panel_plugin_get_nrows (cpuFreq->plugin);
+	cpuFreq->icon_size -=4;
+#else
 	cpuFreq->icon_size = xfce_panel_plugin_get_size (cpuFreq->plugin) - 4;
+#endif
 
 	cpuFreq->ebox = gtk_event_box_new ();
 	xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->ebox);
@@ -221,7 +245,13 @@ cpufreq_widgets (void)
 
 	g_signal_connect (cpuFreq->ebox, "button-press-event", G_CALLBACK (cpufreq_overview), cpuFreq);
 
-	cpufreq_orientation_changed (cpuFreq->plugin, orientation, cpuFreq);
+#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
+	cpufreq_mode_changed
+          (cpuFreq->plugin, xfce_panel_plugin_get_mode (cpuFreq->plugin), cpuFreq);
+#else
+	cpufreq_orientation_changed
+          (cpuFreq->plugin, xfce_panel_plugin_get_orientation (cpuFreq->plugin), cpuFreq);
+#endif
 	gtk_widget_show (cpuFreq->box);
 	gtk_widget_show (cpuFreq->ebox);
 
@@ -308,7 +338,12 @@ cpufreq_free (XfcePanelPlugin *plugin)
 static gboolean
 cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 {
+#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
+	cpuFreq->icon_size = size / xfce_panel_plugin_get_nrows (cpuFreq->plugin);
+	cpuFreq->icon_size -=4;
+#else
 	cpufreq->icon_size = size - 4;
+#endif
 	cpufreq_update_icon (cpufreq);
 	cpufreq_update_plugin ();
 
@@ -350,8 +385,13 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 			  NULL);
 	g_signal_connect (plugin, "size-changed",
 			  G_CALLBACK (cpufreq_set_size), cpuFreq);
+#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
+	g_signal_connect (plugin, "mode-changed",
+			  G_CALLBACK (cpufreq_mode_changed), cpuFreq);
+#else
 	g_signal_connect (plugin, "orientation-changed",
 			  G_CALLBACK (cpufreq_orientation_changed), cpuFreq);
+#endif
 
 	/* the configure and about menu items are hidden by default */
 	xfce_panel_plugin_menu_show_configure (plugin);
