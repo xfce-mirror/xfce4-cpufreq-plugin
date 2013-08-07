@@ -5,13 +5,13 @@ xfce4_cpufreq_plugin_CFLAGS =					\
 	-I$(top_srcdir)						\
 	@LIBXFCE4PANEL_CFLAGS@					\
 	@LIBXFCE4UTIL_CFLAGS@					\
-	@LIBXFCEGUI4_CFLAGS@					\
+	@LIBXFCE4UI_CFLAGS@					\
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"
 
 xfce4_cpufreq_plugin_LDADD =					\
 	@LIBXFCE4PANEL_LIBS@					\
 	@LIBXFCE4UTIL_LIBS@					\
-	@LIBXFCEGUI4_LIBS@
+	@LIBXFCE4UI_LIBS@
 
 xfce4_cpufreq_plugin_SOURCES =					\
 	xfce4-cpufreq-plugin.h					\

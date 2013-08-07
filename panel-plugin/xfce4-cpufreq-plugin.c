@@ -26,7 +26,7 @@
 #endif
 
 #include <libxfce4util/libxfce4util.h>
-#include <libxfcegui4/libxfcegui4.h>
+#include <libxfce4ui/libxfce4ui.h>
 #ifndef _
 # include <libintl.h>
 # define _(String) gettext (String)
@@ -331,7 +331,7 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 
 #ifdef __linux__
 	if (cpufreq_linux_init () == FALSE)
-		xfce_err (_("Your system is not configured correctly to support cpu frequency scaling !"));
+		xfce_dialog_show_error (NULL, NULL, _("Your system is not configured correctly to support cpu frequency scaling !"));
 
 	gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, -1);
 	cpufreq_widgets ();
@@ -341,7 +341,7 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 			(GSourceFunc) cpufreq_update_cpus,
 			NULL);
 #else
-	xfce_err (_("Your system is not supported yet !"));
+	xfce_dialog_show_error (NULL, NULL, _("Your system is not supported yet !"));
 #endif /* __linux__ */
 
 	g_signal_connect (plugin, "free-data", G_CALLBACK (cpufreq_free),

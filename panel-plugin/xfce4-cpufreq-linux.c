@@ -27,7 +27,7 @@
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-linux.h"
 
-#include <libxfcegui4/libxfcegui4.h>
+#include <libxfce4ui/libxfce4ui.h>
 
 #ifndef _
 # include <libintl.h>
@@ -410,7 +410,7 @@ cpufreq_linux_init (void)
 	{
 		if (cpuFreq->options->show_warning)
 		{
-			xfce_warn (_("Your system does not support cpufreq.\nThe applet only shows the current cpu frequency"));
+			xfce_dialog_show_warning (NULL, NULL, _("Your system does not support cpufreq.\nThe applet only shows the current cpu frequency"));
 			cpuFreq->options->show_warning = FALSE;
 		}
 
