@@ -133,11 +133,13 @@ cpufreq_update_plugin (void)
 void
 cpufreq_restart_timeout (void)
 {
+#ifdef __linux__
 	g_source_remove (cpuFreq->timeoutHandle);
 	cpuFreq->timeoutHandle = g_timeout_add_seconds (
 			cpuFreq->options->timeout,
 			(GSourceFunc)cpufreq_update_cpus,
 			NULL);
+#endif
 }
 
 static void
