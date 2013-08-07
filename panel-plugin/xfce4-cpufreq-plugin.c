@@ -122,15 +122,16 @@ cpufreq_update_tooltip (CpuInfo *cpu)
 gboolean
 cpufreq_update_plugin (void)
 {
-	gint i;
-	for (i = 0; i < cpuFreq->cpus->len; i++)
-	{
-		CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
-		if (cpufreq_update_label (cpu)   == FALSE)
-			return FALSE;
-		if (cpufreq_update_tooltip (cpu) == FALSE)
-			return FALSE;
-	}
+	CpuInfo *cpu;
+
+	g_return_val_if_fail (cpuFreq->options->show_cpu < cpuFreq->cpus->len, FALSE);
+
+	cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
+	if (cpufreq_update_label (cpu)   == FALSE)
+		return FALSE;
+	if (cpufreq_update_tooltip (cpu) == FALSE)
+		return FALSE;
+
 	return TRUE;
 }
 
