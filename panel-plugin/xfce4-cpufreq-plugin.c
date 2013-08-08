@@ -400,4 +400,4 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 			  G_CALLBACK (cpufreq_configure), NULL);
 }
 
-XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL (cpufreq_construct);
+XFCE_PANEL_PLUGIN_REGISTER (cpufreq_construct);
