@@ -226,6 +226,7 @@ cpufreq_widgets (void)
 #endif
 
 	cpuFreq->ebox = gtk_event_box_new ();
+	gtk_event_box_set_visible_window (GTK_EVENT_BOX (cpuFreq->ebox), FALSE);
 	xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->ebox);
 	gtk_container_add (GTK_CONTAINER (cpuFreq->plugin), cpuFreq->ebox);
 
