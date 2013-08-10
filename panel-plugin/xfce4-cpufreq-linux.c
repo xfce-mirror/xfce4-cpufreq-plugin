@@ -402,7 +402,8 @@ cpufreq_linux_init (void)
 	if (cpuFreq->cpus == NULL)
 		return FALSE;
 
-	if (g_file_test ("/sys/devices/system/cpu/cpu0/cpufreq", G_FILE_TEST_EXISTS))
+	if (g_file_test ("/sys/devices/system/cpu/cpu0/cpufreq", G_FILE_TEST_EXISTS) &&
+		!g_file_test ("/sys/devices/system/cpu/intel_pstate", G_FILE_TEST_EXISTS))
 		return cpufreq_cpu_read_sysfs ();
 	else if (g_file_test ("/proc/cpufreq", G_FILE_TEST_EXISTS))
 		return cpufreq_cpu_read_procfs ();
