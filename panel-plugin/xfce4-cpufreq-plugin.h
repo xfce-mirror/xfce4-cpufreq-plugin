@@ -45,11 +45,13 @@ typedef struct
 	gboolean show_label_governor;
 	gboolean show_label_freq;
 	gboolean show_warning;
+	gboolean keep_compact;
 } CpuFreqPluginOptions;
 
 typedef struct
 {
 	XfcePanelPlugin *plugin;
+	XfcePanelPluginMode panel_mode;
 
 	/* Array with all CPUs */
 	GPtrArray *cpus;

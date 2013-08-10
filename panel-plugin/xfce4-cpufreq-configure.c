@@ -57,6 +57,10 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 		cpuFreq->options->show_label_governor =
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
+	else if (button == configure->keep_compact)
+		cpuFreq->options->keep_compact =
+			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+
 	cpufreq_prepare_label (cpuFreq);
 	cpufreq_update_plugin ();
 }
@@ -193,6 +197,11 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
 
 	/* check buttons for display widgets in panel */
+	button = configure->keep_compact = gtk_check_button_new_with_mnemonic (_("_Keep compact"));
+	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->keep_compact);
+	g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
+
 	button = configure->display_frame = gtk_check_button_new_with_mnemonic (_("Show frame"));
 	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->show_frame);

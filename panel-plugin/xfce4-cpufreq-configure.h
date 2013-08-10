@@ -23,9 +23,15 @@
 
 typedef struct
 {
-	GtkWidget *display_icon, *display_freq, *display_governor;
-	GtkWidget *display_cpu, *display_frame, *monitor_timeout;
-	GtkWidget *combo_cpu, *spinner_timeout;
+	GtkWidget *display_icon;
+	GtkWidget *display_freq;
+	GtkWidget *display_governor;
+	GtkWidget *display_cpu;
+	GtkWidget *display_frame;
+	GtkWidget *monitor_timeout;
+	GtkWidget *combo_cpu;
+	GtkWidget *spinner_timeout;
+	GtkWidget *keep_compact;
 } CpuFreqPluginConfigure;
 
 G_BEGIN_DECLS

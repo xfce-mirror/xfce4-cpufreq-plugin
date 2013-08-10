@@ -71,11 +71,7 @@ cpufreq_update_label (CpuInfo *cpu)
 	if (strcmp(label,""))
 	{
 		gtk_label_set_markup (GTK_LABEL(cpuFreq->label), label);
-#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
-		if (xfce_panel_plugin_get_mode (cpuFreq->plugin) == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
-#else
-		if (xfce_panel_plugin_get_orientation (cpuFreq->plugin) == GTK_ORIENTATION_VERTICAL)
-#endif
+		if (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
 			gtk_label_set_angle (GTK_LABEL(cpuFreq->label), -90);
 		else
 			gtk_label_set_angle (GTK_LABEL(cpuFreq->label), 0);
@@ -130,12 +126,65 @@ cpufreq_update_tooltip (GtkWidget *widget,
 	return TRUE;
 }
 
+static void
+cpufreq_widgets_layout (void)
+{
+	gint pos = 1;
+	GtkOrientation orientation;
+	XfcePanelPluginMode mode;
+	gboolean small = cpuFreq->options->keep_compact;
+
+	switch (cpuFreq->panel_mode) {
+	case XFCE_PANEL_PLUGIN_MODE_HORIZONTAL:
+		orientation = small ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
+		xfce_panel_plugin_set_small (cpuFreq->plugin, small);
+		break;
+	case XFCE_PANEL_PLUGIN_MODE_VERTICAL:
+		orientation = small ? GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL;
+		xfce_panel_plugin_set_small (cpuFreq->plugin, small);
+		break;
+	case XFCE_PANEL_PLUGIN_MODE_DESKBAR:
+		orientation = small ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
+		xfce_panel_plugin_set_small (cpuFreq->plugin, FALSE);
+		break;
+	}
+	gtk_orientable_set_orientation (GTK_ORIENTABLE (cpuFreq->box), orientation);
+
+	if (cpuFreq->options->keep_compact) {
+		if (orientation == GTK_ORIENTATION_VERTICAL) {
+			gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0.5, 0);
+			gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0.5, 0);
+		} else {
+			gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0, 0.5);
+			gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0, 0.5);
+		}
+		gtk_box_set_child_packing (GTK_BOX (cpuFreq->box),
+								   cpuFreq->icon,
+								   FALSE, FALSE, 0, GTK_PACK_START);
+	} else {
+		if (orientation == GTK_ORIENTATION_VERTICAL) {
+			gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0.5, 1.0);
+			gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0.5, 0);
+		} else {
+			gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0, 0.5);
+			gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 1.0, 0.5);
+			pos = 0;
+		}
+		gtk_box_set_child_packing (GTK_BOX (cpuFreq->box),
+								   cpuFreq->icon,
+								   TRUE, TRUE, 0, GTK_PACK_START);
+	}
+	gtk_box_reorder_child (GTK_BOX (cpuFreq->box), cpuFreq->label, pos);
+}
+
 gboolean
 cpufreq_update_plugin (void)
 {
 	CpuInfo *cpu;
 
 	g_return_val_if_fail (cpuFreq->options->show_cpu < cpuFreq->cpus->len, FALSE);
+
+	cpufreq_widgets_layout ();
 
 	cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
 	if (cpufreq_update_label (cpu) == FALSE)
@@ -156,29 +205,12 @@ cpufreq_restart_timeout (void)
 #endif
 }
 
-#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
 static void
 cpufreq_mode_changed (XfcePanelPlugin *plugin, XfcePanelPluginMode mode, CpuFreqPlugin *cpufreq)
 {
-        GtkOrientation orientation;
-
-        orientation =
-          (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) ?
-          GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
-
-	gtk_orientable_set_orientation (GTK_ORIENTABLE (cpufreq->box), orientation);
+	cpuFreq->panel_mode = mode;
 	cpufreq_update_plugin ();
 }
-
-#else
-
-static void
-cpufreq_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation orientation, CpuFreqPlugin *cpufreq)
-{
-	gtk_orientable_set_orientation (GTK_ORIENTABLE (cpufreq->box), orientation);
-	cpufreq_update_plugin ();
-}
-#endif
 
 void
 cpufreq_update_icon (CpuFreqPlugin *cpufreq)
@@ -219,7 +251,7 @@ cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
 	if (cpuFreq->options->show_label_freq || cpuFreq->options->show_label_governor)
 	{
 		cpuFreq->label = gtk_label_new (NULL);
-		gtk_box_pack_end (GTK_BOX (cpufreq->box), cpuFreq->label, FALSE, FALSE, 0);
+		gtk_box_pack_start (GTK_BOX (cpufreq->box), cpuFreq->label, TRUE, TRUE, 0);
 	}
 }
 
@@ -228,13 +260,9 @@ cpufreq_widgets (void)
 {
 	CpuInfo *cpu;
 
-#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
 	cpuFreq->icon_size = xfce_panel_plugin_get_size (cpuFreq->plugin);
 	cpuFreq->icon_size /= xfce_panel_plugin_get_nrows (cpuFreq->plugin);
-	cpuFreq->icon_size -=4;
-#else
-	cpuFreq->icon_size = xfce_panel_plugin_get_size (cpuFreq->plugin) - 4;
-#endif
+	cpuFreq->icon_size -= 2;
 
 	cpuFreq->ebox = gtk_event_box_new ();
 	gtk_event_box_set_visible_window (GTK_EVENT_BOX (cpuFreq->ebox), FALSE);
@@ -263,13 +291,10 @@ cpufreq_widgets (void)
 	g_signal_connect (G_OBJECT (cpuFreq->ebox), "query-tooltip",
 					  G_CALLBACK (cpufreq_update_tooltip), cpu);
 
-#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
-	cpufreq_mode_changed
-          (cpuFreq->plugin, xfce_panel_plugin_get_mode (cpuFreq->plugin), cpuFreq);
-#else
-	cpufreq_orientation_changed
-          (cpuFreq->plugin, xfce_panel_plugin_get_orientation (cpuFreq->plugin), cpuFreq);
-#endif
+	cpufreq_mode_changed (cpuFreq->plugin,
+						  xfce_panel_plugin_get_mode (cpuFreq->plugin),
+						  cpuFreq);
+
 	gtk_widget_show (cpuFreq->box);
 	gtk_widget_show (cpuFreq->ebox);
 
@@ -299,6 +324,7 @@ cpufreq_read_config (void)
 	cpuFreq->options->show_label_freq     = xfce_rc_read_bool_entry (rc, "show_label_freq", TRUE);
 	cpuFreq->options->show_label_governor =	xfce_rc_read_bool_entry (rc, "show_label_governor", TRUE);
 	cpuFreq->options->show_warning        =	xfce_rc_read_bool_entry (rc, "show_warning", TRUE);
+	cpuFreq->options->keep_compact        =	xfce_rc_read_bool_entry (rc, "keep_compact", FALSE);
 
 	xfce_rc_close (rc);
 }
@@ -324,6 +350,7 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
 	xfce_rc_write_bool_entry (rc, "show_label_freq",     cpuFreq->options->show_label_freq);
 	xfce_rc_write_bool_entry (rc, "show_label_governor", cpuFreq->options->show_label_governor);
 	xfce_rc_write_bool_entry (rc, "show_warning",        cpuFreq->options->show_warning);
+	xfce_rc_write_bool_entry (rc, "keep_compact",        cpuFreq->options->keep_compact);
 
 	xfce_rc_close (rc);
 }
@@ -354,12 +381,9 @@ cpufreq_free (XfcePanelPlugin *plugin)
 static gboolean
 cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 {
-#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
 	cpuFreq->icon_size = size / xfce_panel_plugin_get_nrows (cpuFreq->plugin);
-	cpuFreq->icon_size -=4;
-#else
-	cpufreq->icon_size = size - 4;
-#endif
+	cpuFreq->icon_size -= 2;
+
 	cpufreq_update_icon (cpufreq);
 	cpufreq_update_plugin ();
 
@@ -399,13 +423,8 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 			  NULL);
 	g_signal_connect (plugin, "size-changed",
 			  G_CALLBACK (cpufreq_set_size), cpuFreq);
-#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
 	g_signal_connect (plugin, "mode-changed",
 			  G_CALLBACK (cpufreq_mode_changed), cpuFreq);
-#else
-	g_signal_connect (plugin, "orientation-changed",
-			  G_CALLBACK (cpufreq_orientation_changed), cpuFreq);
-#endif
 
 	/* the configure and about menu items are hidden by default */
 	xfce_panel_plugin_menu_show_configure (plugin);
