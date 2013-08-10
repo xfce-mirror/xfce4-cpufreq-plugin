@@ -56,7 +56,7 @@ typedef struct
 	GPtrArray *cpus;
 
 	/* Widgets */
-	GtkWidget   *ebox, *box, *icon, *label;
+	GtkWidget *button, *box, *icon, *label;
 
 	gint icon_size;
 

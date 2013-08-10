@@ -175,6 +175,7 @@ cpufreq_overview_response (GtkWidget *dialog, gint response, gpointer data)
 {
 	g_object_set_data (G_OBJECT (cpuFreq->plugin), "overview", NULL);
 	gtk_widget_destroy (dialog);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpuFreq->button), FALSE);
 }
 
 gboolean
@@ -189,8 +190,16 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpuFreq)
 
 	window = g_object_get_data (G_OBJECT (cpuFreq->plugin), "overview");
 
-	if (window)
+	if (window) {
+		g_object_set_data (G_OBJECT (cpuFreq->plugin), "overview", NULL);
 		gtk_widget_destroy (window);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpuFreq->button),
+									  FALSE);
+		return TRUE;
+	}
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpuFreq->button),
+								  TRUE);
 
 	dialog = xfce_titled_dialog_new_with_buttons (_("CPU Information"),
 					NULL,

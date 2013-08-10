@@ -264,25 +264,26 @@ cpufreq_widgets (void)
 	cpuFreq->icon_size /= xfce_panel_plugin_get_nrows (cpuFreq->plugin);
 	cpuFreq->icon_size -= 2;
 
-	cpuFreq->ebox = gtk_event_box_new ();
-	gtk_event_box_set_visible_window (GTK_EVENT_BOX (cpuFreq->ebox), FALSE);
-	xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->ebox);
-	gtk_container_add (GTK_CONTAINER (cpuFreq->plugin), cpuFreq->ebox);
+	/* create panel toggle button which will contain all other widgets */
+	cpuFreq->button = xfce_create_panel_toggle_button ();
+	xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->button);
+	gtk_container_add (GTK_CONTAINER (cpuFreq->plugin), cpuFreq->button);
 
 	cpuFreq->box = gtk_hbox_new (FALSE, SPACING);
 	gtk_container_set_border_width (GTK_CONTAINER (cpuFreq->box), BORDER);
-	gtk_container_add (GTK_CONTAINER (cpuFreq->ebox), cpuFreq->box);
+	gtk_container_add (GTK_CONTAINER (cpuFreq->button), cpuFreq->box);
 
 	cpufreq_update_icon (cpuFreq);
 
 	cpufreq_prepare_label (cpuFreq);
 
-	g_signal_connect (cpuFreq->ebox, "button-press-event", G_CALLBACK (cpufreq_overview), cpuFreq);
+	g_signal_connect (cpuFreq->button, "button-press-event",
+					  G_CALLBACK (cpufreq_overview), cpuFreq);
 
 	/* activate panel widget tooltip */
 	cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
-	g_object_set (G_OBJECT (cpuFreq->ebox), "has-tooltip", TRUE, NULL);
-	g_signal_connect (G_OBJECT (cpuFreq->ebox), "query-tooltip",
+	g_object_set (G_OBJECT (cpuFreq->button), "has-tooltip", TRUE, NULL);
+	g_signal_connect (G_OBJECT (cpuFreq->button), "query-tooltip",
 					  G_CALLBACK (cpufreq_update_tooltip), cpu);
 
 	cpufreq_mode_changed (cpuFreq->plugin,
@@ -290,7 +291,7 @@ cpufreq_widgets (void)
 						  cpuFreq);
 
 	gtk_widget_show (cpuFreq->box);
-	gtk_widget_show (cpuFreq->ebox);
+	gtk_widget_show (cpuFreq->button);
 
 	cpufreq_update_plugin ();
 }
