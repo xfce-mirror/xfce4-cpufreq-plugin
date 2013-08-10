@@ -91,28 +91,39 @@ cpufreq_update_label (CpuInfo *cpu)
 	return TRUE;
 }
 
-gboolean
-cpufreq_update_tooltip (CpuInfo *cpu)
+static gboolean
+cpufreq_update_tooltip (GtkWidget *widget,
+						gint x,
+						gint y,
+						gboolean keyboard_mode,
+						GtkTooltip *tooltip,
+						CpuInfo *cpu)
 {
-	gchar *tooltip_msg, *freq;
+	gchar *tooltip_msg, *freq = NULL;
 
-	freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
-	if (cpuFreq->options->show_label_governor && cpuFreq->options->show_label_freq)
-		tooltip_msg = g_strdup_printf (ngettext("%d cpu available", "%d cpus available", cpuFreq->cpus->len), cpuFreq->cpus->len);
-	else
-		tooltip_msg = g_strconcat (!cpuFreq->options->show_label_freq ? _("Frequency: ") : "",
-			!cpuFreq->options->show_label_freq ? freq : "",
-			
-			cpu->cur_governor != NULL && 
-			!cpuFreq->options->show_label_freq && !cpuFreq->options->show_label_governor ? "\n" : "",
-			
-			cpu->cur_governor != NULL &&
-			!cpuFreq->options->show_label_governor ? _("Governor: ") : "",
-			cpu->cur_governor != NULL &&
-			!cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
-			NULL);
+	if (G_UNLIKELY(cpu == NULL)) {
+		tooltip_msg = g_strdup (_("No CPU information available."));
+	} else {
+		freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
+		if (cpuFreq->options->show_label_governor && cpuFreq->options->show_label_freq)
+			tooltip_msg = g_strdup_printf (ngettext("%d cpu available", "%d cpus available", cpuFreq->cpus->len), cpuFreq->cpus->len);
+		else
+			tooltip_msg =
+				g_strconcat (!cpuFreq->options->show_label_freq ? _("Frequency: ") : "",
+							 !cpuFreq->options->show_label_freq ? freq : "",
 
-	gtk_tooltips_set_tip (cpuFreq->tooltip, cpuFreq->ebox, tooltip_msg, NULL);
+							 cpu->cur_governor != NULL &&
+							 !cpuFreq->options->show_label_freq &&
+							 !cpuFreq->options->show_label_governor ? "\n" : "",
+
+							 cpu->cur_governor != NULL &&
+							 !cpuFreq->options->show_label_governor ? _("Governor: ") : "",
+							 cpu->cur_governor != NULL &&
+							 !cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
+							 NULL);
+	}
+
+	gtk_tooltip_set_text (tooltip, tooltip_msg);
 
 	g_free (freq);
 	g_free (tooltip_msg);
@@ -127,9 +138,7 @@ cpufreq_update_plugin (void)
 	g_return_val_if_fail (cpuFreq->options->show_cpu < cpuFreq->cpus->len, FALSE);
 
 	cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
-	if (cpufreq_update_label (cpu)   == FALSE)
-		return FALSE;
-	if (cpufreq_update_tooltip (cpu) == FALSE)
+	if (cpufreq_update_label (cpu) == FALSE)
 		return FALSE;
 
 	return TRUE;
@@ -217,6 +226,8 @@ cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
 static void
 cpufreq_widgets (void)
 {
+	CpuInfo *cpu;
+
 #if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
 	cpuFreq->icon_size = xfce_panel_plugin_get_size (cpuFreq->plugin);
 	cpuFreq->icon_size /= xfce_panel_plugin_get_nrows (cpuFreq->plugin);
@@ -227,6 +238,7 @@ cpufreq_widgets (void)
 
 	cpuFreq->ebox = gtk_event_box_new ();
 	gtk_event_box_set_visible_window (GTK_EVENT_BOX (cpuFreq->ebox), FALSE);
+
 	xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->ebox);
 	gtk_container_add (GTK_CONTAINER (cpuFreq->plugin), cpuFreq->ebox);
 
@@ -239,13 +251,17 @@ cpufreq_widgets (void)
 	gtk_container_set_border_width (GTK_CONTAINER (cpuFreq->box), BORDER);
 	gtk_container_add (GTK_CONTAINER (cpuFreq->frame), cpuFreq->box);
 
-	gtk_tooltips_set_tip (cpuFreq->tooltip, cpuFreq->ebox, "", NULL);
-
 	cpufreq_update_icon (cpuFreq);
 
 	cpufreq_prepare_label (cpuFreq);
 
 	g_signal_connect (cpuFreq->ebox, "button-press-event", G_CALLBACK (cpufreq_overview), cpuFreq);
+
+	/* activate panel widget tooltip */
+	cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
+	g_object_set (G_OBJECT (cpuFreq->ebox), "has-tooltip", TRUE, NULL);
+	g_signal_connect (G_OBJECT (cpuFreq->ebox), "query-tooltip",
+					  G_CALLBACK (cpufreq_update_tooltip), cpu);
 
 #if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
 	cpufreq_mode_changed
@@ -330,8 +346,6 @@ cpufreq_free (XfcePanelPlugin *plugin)
 		g_free (cpu);
 	}
 
-	gtk_tooltips_set_tip (cpuFreq->tooltip, cpuFreq->ebox, NULL, NULL);
-	g_object_unref (cpuFreq->tooltip);
 	g_ptr_array_free (cpuFreq->cpus, TRUE);
 	cpuFreq->plugin = NULL;
 	g_free (cpuFreq);
@@ -360,8 +374,6 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 	cpuFreq 	  = g_new0 (CpuFreqPlugin, 1);
 	cpuFreq->options  = g_new0 (CpuFreqPluginOptions, 1);
 	cpuFreq->plugin   = plugin;
-	cpuFreq->tooltip = gtk_tooltips_new ();
-	g_object_ref (cpuFreq->tooltip);
 	cpuFreq->cpus    = g_ptr_array_new ();
 
 	cpufreq_read_config ();

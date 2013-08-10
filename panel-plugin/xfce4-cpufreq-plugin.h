@@ -56,7 +56,6 @@ typedef struct
 
 	/* Widgets */
 	GtkWidget   *ebox, *frame, *box, *icon, *label;
-	GtkTooltips *tooltip;
 
 	gint icon_size;
 
