@@ -40,7 +40,6 @@ typedef struct
 {
 	guint 	 timeout; 	/* time between refreash */
 	guint	 show_cpu;  	/* cpu number in panel */
-	gboolean show_frame;
 	gboolean show_icon;
 	gboolean show_label_governor;
 	gboolean show_label_freq;
@@ -57,7 +56,7 @@ typedef struct
 	GPtrArray *cpus;
 
 	/* Widgets */
-	GtkWidget   *ebox, *frame, *box, *icon, *label;
+	GtkWidget   *ebox, *box, *icon, *label;
 
 	gint icon_size;
 

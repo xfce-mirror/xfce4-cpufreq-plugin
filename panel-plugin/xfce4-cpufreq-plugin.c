@@ -266,18 +266,12 @@ cpufreq_widgets (void)
 
 	cpuFreq->ebox = gtk_event_box_new ();
 	gtk_event_box_set_visible_window (GTK_EVENT_BOX (cpuFreq->ebox), FALSE);
-
 	xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->ebox);
 	gtk_container_add (GTK_CONTAINER (cpuFreq->plugin), cpuFreq->ebox);
 
-	cpuFreq->frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (cpuFreq->frame),cpuFreq->options->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
-	gtk_container_add (GTK_CONTAINER (cpuFreq->ebox), cpuFreq->frame);
-	gtk_widget_show (cpuFreq->frame);
-
 	cpuFreq->box = gtk_hbox_new (FALSE, SPACING);
 	gtk_container_set_border_width (GTK_CONTAINER (cpuFreq->box), BORDER);
-	gtk_container_add (GTK_CONTAINER (cpuFreq->frame), cpuFreq->box);
+	gtk_container_add (GTK_CONTAINER (cpuFreq->ebox), cpuFreq->box);
 
 	cpufreq_update_icon (cpuFreq);
 
@@ -319,7 +313,6 @@ cpufreq_read_config (void)
 	if (cpuFreq->options->timeout > TIMEOUT_MAX || cpuFreq->options->timeout < TIMEOUT_MIN)
 		cpuFreq->options->timeout = TIMEOUT_MIN;
 	cpuFreq->options->show_cpu            = xfce_rc_read_int_entry  (rc, "show_cpu",  0);
-	cpuFreq->options->show_frame          = xfce_rc_read_bool_entry (rc, "show_frame",  TRUE);
 	cpuFreq->options->show_icon           = xfce_rc_read_bool_entry (rc, "show_icon",  TRUE);
 	cpuFreq->options->show_label_freq     = xfce_rc_read_bool_entry (rc, "show_label_freq", TRUE);
 	cpuFreq->options->show_label_governor =	xfce_rc_read_bool_entry (rc, "show_label_governor", TRUE);
@@ -345,7 +338,6 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
 
 	xfce_rc_write_int_entry	 (rc, "timeout",             cpuFreq->options->timeout);
 	xfce_rc_write_int_entry	 (rc, "show_cpu",            cpuFreq->options->show_cpu);
-	xfce_rc_write_bool_entry (rc, "show_frame",          cpuFreq->options->show_frame);
 	xfce_rc_write_bool_entry (rc, "show_icon",           cpuFreq->options->show_icon);
 	xfce_rc_write_bool_entry (rc, "show_label_freq",     cpuFreq->options->show_label_freq);
 	xfce_rc_write_bool_entry (rc, "show_label_governor", cpuFreq->options->show_label_governor);

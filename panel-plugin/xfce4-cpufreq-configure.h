@@ -27,7 +27,6 @@ typedef struct
 	GtkWidget *display_freq;
 	GtkWidget *display_governor;
 	GtkWidget *display_cpu;
-	GtkWidget *display_frame;
 	GtkWidget *monitor_timeout;
 	GtkWidget *combo_cpu;
 	GtkWidget *spinner_timeout;

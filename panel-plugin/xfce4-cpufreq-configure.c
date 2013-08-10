@@ -35,13 +35,7 @@
 static void
 check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 {
-	if (button == configure->display_frame)
-	{
-		cpuFreq->options->show_frame = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-		gtk_frame_set_shadow_type (GTK_FRAME (cpuFreq->frame),cpuFreq->options->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
-		return;
-	}
-	else if (button == configure->display_icon)
+	if (button == configure->display_icon)
 	{
 		cpuFreq->options->show_icon = 
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
@@ -200,11 +194,6 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	button = configure->keep_compact = gtk_check_button_new_with_mnemonic (_("_Keep compact"));
 	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->keep_compact);
-	g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
-
-	button = configure->display_frame = gtk_check_button_new_with_mnemonic (_("Show frame"));
-	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->show_frame);
 	g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
 	button = configure->display_icon = gtk_check_button_new_with_mnemonic (_("Show CPU icon"));
