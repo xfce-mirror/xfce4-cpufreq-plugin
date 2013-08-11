@@ -163,7 +163,7 @@ cpufreq_cpu_parse_sysfs_init (gint cpu_number)
 
 	/* read min cpu freq */
 	filePath = g_strdup_printf (
-		"/sys/devices/system/cpu/cpu%i/cpufreq/scaling_max_freq",
+		"/sys/devices/system/cpu/cpu%i/cpufreq/scaling_min_freq",
 		cpu_number);
 	if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
 		goto file_error;
