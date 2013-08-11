@@ -47,16 +47,19 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	dialog_vbox = gtk_vbox_new (FALSE, BORDER);
 	gtk_box_pack_start (GTK_BOX (dialog_hbox), dialog_vbox, TRUE, TRUE, 0);
 
-	text = g_strdup_printf ("<b>CPU %d</b>", cpu_number);
-	label = gtk_label_new (text);
-	gtk_box_pack_start (GTK_BOX (dialog_vbox), label, FALSE, FALSE, 0);
-	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-	g_free (text);
+	hbox = gtk_hbox_new (FALSE, BORDER);
+	gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, TRUE, TRUE, 0);
 
 	icon = gtk_image_new_from_icon_name ("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
-	gtk_box_pack_start (GTK_BOX (dialog_vbox), icon, FALSE, FALSE, 0);
-	gtk_misc_set_alignment (GTK_MISC (icon), 0.5, 0);
-	gtk_misc_set_padding (GTK_MISC (icon), 10, 10);
+	gtk_misc_set_alignment (GTK_MISC (icon), 1, 0.5);
+	gtk_misc_set_padding (GTK_MISC (icon), 5, 10);
+	gtk_box_pack_start (GTK_BOX (hbox), icon, TRUE, TRUE, 0);
+	text = g_strdup_printf ("<b>CPU %d</b>", cpu_number);
+	label = gtk_label_new (text);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+	g_free (text);
 
 	/* display driver */
 	hbox = gtk_hbox_new (FALSE, BORDER);
@@ -181,7 +184,7 @@ cpufreq_overview_response (GtkWidget *dialog, gint response, gpointer data)
 gboolean
 cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpuFreq)
 {
-	gint 	  i;
+	gint 	  i, j, step;
 	GtkWidget *dialog, *dialog_vbox, *window;
 	GtkWidget *dialog_hbox, *separator;
 
@@ -217,23 +220,42 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpuFreq)
 
 	dialog_vbox = GTK_DIALOG (dialog)->vbox;
 
-	dialog_hbox = gtk_hbox_new (FALSE, BORDER);
-	gtk_box_pack_start (GTK_BOX (dialog_vbox), dialog_hbox, FALSE, FALSE, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (dialog_hbox), BORDER);
+	/* choose how many columns and rows depending on cpu count */
+	if (cpuFreq->cpus->len < 4)
+		step = 1;
+	else if (cpuFreq->cpus->len < 9)
+		step = 2;
+	else if (cpuFreq->cpus->len % 3)
+		step = 4;
+	else
+		step = 3;
 
-	for (i = 0; i < cpuFreq->cpus->len;)
-	{
-		CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
-		cpufreq_overview_add (cpu, i, dialog_hbox);
+	for (i = 0; i < cpuFreq->cpus->len; i += step) {
+		dialog_hbox = gtk_hbox_new (FALSE, BORDER * 2);
+		gtk_box_pack_start (GTK_BOX (dialog_vbox), dialog_hbox,
+							FALSE, FALSE, BORDER * 2);
+		gtk_container_set_border_width (GTK_CONTAINER (dialog_hbox),
+										BORDER * 2);
 
-		if (++i != cpuFreq->cpus->len)
-		{
-			separator = gtk_vseparator_new ();
-			gtk_box_pack_start (GTK_BOX (dialog_hbox), separator, FALSE, FALSE, 0);
+		for (j = i; j < cpuFreq->cpus->len && j < i + step; j++) {
+			CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, j);
+			cpufreq_overview_add (cpu, j, dialog_hbox);
+
+			if (j + 1 < cpuFreq->cpus->len && j + 1 == i + step) {
+				separator = gtk_hseparator_new ();
+				gtk_box_pack_start (GTK_BOX (dialog_vbox), separator,
+									FALSE, FALSE, 0);
+			}
+
+			if (j + 1 < cpuFreq->cpus->len && j + 1 < i + step) {
+				separator = gtk_vseparator_new ();
+				gtk_box_pack_start (GTK_BOX (dialog_hbox), separator,
+									FALSE, FALSE, 0);
+			}
 		}
 	}
-
-	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (cpufreq_overview_response), NULL);
+	g_signal_connect (G_OBJECT (dialog), "response",
+					  G_CALLBACK (cpufreq_overview_response), NULL);
 
 	gtk_widget_show_all (dialog);
 
