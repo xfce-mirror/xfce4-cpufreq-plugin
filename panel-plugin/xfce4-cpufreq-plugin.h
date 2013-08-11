@@ -68,6 +68,9 @@ CpuFreqPlugin *cpuFreq;
 
 G_BEGIN_DECLS
 
+void
+cpuinfo_free (CpuInfo *cpu);
+
 gboolean
 cpufreq_update_plugin (void);
 

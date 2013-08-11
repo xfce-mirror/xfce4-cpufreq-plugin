@@ -348,6 +348,16 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
 	xfce_rc_close (rc);
 }
 
+void
+cpuinfo_free (CpuInfo *cpu)
+{
+	g_free (cpu->cur_governor);
+	g_free (cpu->scaling_driver);
+	g_list_free (cpu->available_freqs);
+	g_list_free_full (cpu->available_governors, g_free);
+	g_free (cpu);
+}
+
 static void
 cpufreq_free (XfcePanelPlugin *plugin)
 {
@@ -360,10 +370,7 @@ cpufreq_free (XfcePanelPlugin *plugin)
 	{
 		CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
 		g_ptr_array_remove_fast (cpuFreq->cpus, cpu);
-		g_free (cpu->cur_governor);
-		g_list_free (cpu->available_freqs);
-		g_list_free (cpu->available_governors);
-		g_free (cpu);
+		cpuinfo_free (cpu);
 	}
 
 	g_ptr_array_free (cpuFreq->cpus, TRUE);
