@@ -262,7 +262,6 @@ cpufreq_widgets (void)
 
 	cpuFreq->icon_size = xfce_panel_plugin_get_size (cpuFreq->plugin);
 	cpuFreq->icon_size /= xfce_panel_plugin_get_nrows (cpuFreq->plugin);
-	cpuFreq->icon_size -= 2;
 
 	/* create panel toggle button which will contain all other widgets */
 	cpuFreq->button = xfce_create_panel_toggle_button ();
@@ -384,7 +383,6 @@ static gboolean
 cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 {
 	cpuFreq->icon_size = size / xfce_panel_plugin_get_nrows (cpuFreq->plugin);
-	cpuFreq->icon_size -= 2;
 
 	cpufreq_update_icon (cpufreq);
 	cpufreq_update_plugin ();
