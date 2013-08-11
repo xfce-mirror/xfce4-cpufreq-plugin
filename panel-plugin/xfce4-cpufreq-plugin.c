@@ -366,6 +366,8 @@ cpufreq_free (XfcePanelPlugin *plugin)
 	if (cpuFreq->timeoutHandle)
 		g_source_remove (cpuFreq->timeoutHandle);
 
+	g_slice_free (IntelPState, cpuFreq->intel_pstate);
+
 	for (i = 0; i < cpuFreq->cpus->len; i++)
 	{
 		CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);

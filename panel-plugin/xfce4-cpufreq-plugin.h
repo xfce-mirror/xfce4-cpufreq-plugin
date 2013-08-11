@@ -38,8 +38,15 @@ typedef struct
 
 typedef struct
 {
-	guint 	 timeout; 	/* time between refreash */
-	guint	 show_cpu;  	/* cpu number in panel */
+	gint     min_perf_pct;
+	gint     max_perf_pct;
+	gint     no_turbo;
+} IntelPState;
+
+typedef struct
+{
+	guint 	 timeout;       /* time between refresh */
+	guint	 show_cpu;      /* cpu number in panel */
 	gboolean show_icon;
 	gboolean show_label_governor;
 	gboolean show_label_freq;
@@ -54,6 +61,9 @@ typedef struct
 
 	/* Array with all CPUs */
 	GPtrArray *cpus;
+
+	/* Intel P-State parameters */
+	IntelPState *intel_pstate;
 
 	/* Widgets */
 	GtkWidget *button, *box, *icon, *label;

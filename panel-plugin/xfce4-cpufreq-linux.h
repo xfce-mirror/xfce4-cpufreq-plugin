@@ -26,6 +26,9 @@ gboolean
 cpufreq_update_cpus (gpointer data);
 
 gboolean
+cpufreq_intel_pstate_params (void);
+
+gboolean
 cpufreq_linux_init (void);
 
 G_END_DECLS
