@@ -175,6 +175,8 @@ cpufreq_widgets_layout (void)
 								   TRUE, TRUE, 0, GTK_PACK_START);
 	}
 	gtk_box_reorder_child (GTK_BOX (cpuFreq->box), cpuFreq->label, pos);
+
+	cpuFreq->layout_changed = FALSE;
 }
 
 gboolean
@@ -184,7 +186,8 @@ cpufreq_update_plugin (void)
 
 	g_return_val_if_fail (cpuFreq->options->show_cpu < cpuFreq->cpus->len, FALSE);
 
-	cpufreq_widgets_layout ();
+	if (cpuFreq->layout_changed)
+		cpufreq_widgets_layout ();
 
 	cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
 	if (cpufreq_update_label (cpu) == FALSE)
@@ -209,6 +212,7 @@ static void
 cpufreq_mode_changed (XfcePanelPlugin *plugin, XfcePanelPluginMode mode, CpuFreqPlugin *cpufreq)
 {
 	cpuFreq->panel_mode = mode;
+	cpuFreq->layout_changed = TRUE;
 	cpufreq_update_plugin ();
 }
 
@@ -384,6 +388,7 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 {
 	cpuFreq->icon_size = size / xfce_panel_plugin_get_nrows (cpuFreq->plugin);
 
+	cpuFreq->layout_changed = TRUE;
 	cpufreq_update_icon (cpufreq);
 	cpufreq_update_plugin ();
 
@@ -401,6 +406,7 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 	cpuFreq->cpus    = g_ptr_array_new ();
 
 	cpufreq_read_config ();
+	cpuFreq->layout_changed = TRUE;
 
 #ifdef __linux__
 	if (cpufreq_linux_init () == FALSE)

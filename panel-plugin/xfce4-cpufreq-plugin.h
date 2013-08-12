@@ -67,6 +67,7 @@ typedef struct
 
 	/* Widgets */
 	GtkWidget *button, *box, *icon, *label;
+	gboolean layout_changed;
 
 	gint icon_size;
 

@@ -59,6 +59,7 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 		else
 			cpuFreq->icon_size += 4;
 		cpufreq_update_icon (cpuFreq);
+		cpuFreq->layout_changed = TRUE;
 	}
 
 	cpufreq_prepare_label (cpuFreq);
