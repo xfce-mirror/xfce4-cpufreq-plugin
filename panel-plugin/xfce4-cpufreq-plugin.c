@@ -190,6 +190,11 @@ cpufreq_widgets_layout (void)
 			if (cpuFreq->label)
 				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0, 0.5);
 		}
+		if (cpuFreq->label)
+			gtk_label_set_justify (GTK_LABEL (cpuFreq->label),
+								   resized
+								   ? GTK_JUSTIFY_CENTER : GTK_JUSTIFY_LEFT);
+
 		if (cpuFreq->icon)
 			gtk_box_set_child_packing (GTK_BOX (cpuFreq->box),
 									   cpuFreq->icon,
@@ -207,6 +212,11 @@ cpufreq_widgets_layout (void)
 				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 1.0, 0.5);
 			pos = resized ? 1 : 0;
 		}
+		if (cpuFreq->label)
+			gtk_label_set_justify (GTK_LABEL (cpuFreq->label),
+								   resized
+								   ? GTK_JUSTIFY_LEFT : GTK_JUSTIFY_CENTER);
+
 		if (cpuFreq->icon)
 			gtk_box_set_child_packing (GTK_BOX (cpuFreq->box),
 									   cpuFreq->icon,
