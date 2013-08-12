@@ -40,7 +40,6 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 		cpuFreq->options->show_icon = 
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 		cpufreq_update_icon (cpuFreq);
-		return;
 	}
 
 	else if (button == configure->display_freq)
@@ -59,10 +58,9 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 		else
 			cpuFreq->icon_size += 4;
 		cpufreq_update_icon (cpuFreq);
-		cpuFreq->layout_changed = TRUE;
 	}
 
-	cpufreq_prepare_label (cpuFreq);
+	cpuFreq->layout_changed = TRUE;
 	cpufreq_update_plugin ();
 }
 

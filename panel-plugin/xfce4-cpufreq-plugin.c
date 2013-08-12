@@ -129,10 +129,12 @@ cpufreq_update_tooltip (GtkWidget *widget,
 static void
 cpufreq_widgets_layout (void)
 {
-	gint pos = 1;
+	GtkRequisition icon_size, label_size;
 	GtkOrientation orientation;
-	XfcePanelPluginMode mode;
 	gboolean small = cpuFreq->options->keep_compact;
+	gboolean resized = FALSE;
+	gint panel_size, pos = 1;
+	gint lw = 0, lh = 0, iw = 0, ih = 0;
 
 	switch (cpuFreq->panel_mode) {
 	case XFCE_PANEL_PLUGIN_MODE_HORIZONTAL:
@@ -148,33 +150,70 @@ cpufreq_widgets_layout (void)
 		xfce_panel_plugin_set_small (cpuFreq->plugin, FALSE);
 		break;
 	}
+
+	/* check if the label fits below the icon, else put them side by side */
+	panel_size = xfce_panel_plugin_get_size(cpuFreq->plugin);
+	if (GTK_IS_WIDGET(cpuFreq->label)) {
+		gtk_widget_size_request (cpuFreq->label, &label_size);
+		lw = label_size.width;
+		lh = label_size.height;
+	}
+	if (GTK_IS_WIDGET(cpuFreq->icon)) {
+		gtk_widget_size_request (cpuFreq->icon, &icon_size);
+		iw = icon_size.width;
+		ih = icon_size.height;
+	}
+	if (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL &&
+		orientation == GTK_ORIENTATION_VERTICAL &&
+		lh + ih + BORDER * 2 >= panel_size) {
+		orientation = GTK_ORIENTATION_HORIZONTAL;
+		resized = TRUE;
+	} else if (orientation == GTK_ORIENTATION_HORIZONTAL &&
+			   lw + iw + BORDER * 2 >= panel_size &&
+			   (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR ||
+				!small)) {
+		orientation = GTK_ORIENTATION_VERTICAL;
+		resized = TRUE;
+	}
+
 	gtk_orientable_set_orientation (GTK_ORIENTABLE (cpuFreq->box), orientation);
 
-	if (cpuFreq->options->keep_compact) {
+	if (small) {
 		if (orientation == GTK_ORIENTATION_VERTICAL) {
-			gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0.5, 0);
-			gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0.5, 0);
+			if (cpuFreq->icon)
+				gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0.5, 0);
+			if (cpuFreq->label)
+				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0.5, 0);
 		} else {
-			gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0, 0.5);
-			gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0, 0.5);
+			if (cpuFreq->icon)
+				gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0, 0.5);
+			if (cpuFreq->label)
+				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0, 0.5);
 		}
-		gtk_box_set_child_packing (GTK_BOX (cpuFreq->box),
-								   cpuFreq->icon,
-								   FALSE, FALSE, 0, GTK_PACK_START);
+		if (cpuFreq->icon)
+			gtk_box_set_child_packing (GTK_BOX (cpuFreq->box),
+									   cpuFreq->icon,
+									   FALSE, FALSE, 0, GTK_PACK_START);
 	} else {
 		if (orientation == GTK_ORIENTATION_VERTICAL) {
-			gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0.5, 1.0);
-			gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0.5, 0);
+			if (cpuFreq->icon)
+				gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0.5, 1.0);
+			if (cpuFreq->label)
+				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0.5, 0);
 		} else {
-			gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0, 0.5);
-			gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 1.0, 0.5);
-			pos = 0;
+			if (cpuFreq->icon)
+				gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0, 0.5);
+			if (cpuFreq->label)
+				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 1.0, 0.5);
+			pos = resized ? 1 : 0;
 		}
-		gtk_box_set_child_packing (GTK_BOX (cpuFreq->box),
-								   cpuFreq->icon,
-								   TRUE, TRUE, 0, GTK_PACK_START);
+		if (cpuFreq->icon)
+			gtk_box_set_child_packing (GTK_BOX (cpuFreq->box),
+									   cpuFreq->icon,
+									   TRUE, TRUE, 0, GTK_PACK_START);
 	}
-	gtk_box_reorder_child (GTK_BOX (cpuFreq->box), cpuFreq->label, pos);
+	if (cpuFreq->label)
+		gtk_box_reorder_child (GTK_BOX (cpuFreq->box), cpuFreq->label, pos);
 
 	cpuFreq->layout_changed = FALSE;
 }
@@ -183,17 +222,17 @@ gboolean
 cpufreq_update_plugin (void)
 {
 	CpuInfo *cpu;
+	gboolean ret;
 
 	g_return_val_if_fail (cpuFreq->options->show_cpu < cpuFreq->cpus->len, FALSE);
+
+	cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
+	ret = cpufreq_update_label (cpu);
 
 	if (cpuFreq->layout_changed)
 		cpufreq_widgets_layout ();
 
-	cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
-	if (cpufreq_update_label (cpu) == FALSE)
-		return FALSE;
-
-	return TRUE;
+	return ret;
 }
 
 void
@@ -227,7 +266,6 @@ cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 
 	if(cpufreq->options->show_icon)
 	{
-
 		GdkPixbuf *buf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
 				                                     "xfce4-cpufreq-plugin", cpufreq->icon_size, 0, NULL);
 		if (buf)
