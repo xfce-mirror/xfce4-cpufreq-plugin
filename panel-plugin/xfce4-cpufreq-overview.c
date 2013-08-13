@@ -42,6 +42,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	gint	  i = 0, j;
 	gchar	  *text;
 	GtkWidget *hbox, *dialog_vbox, *combo, *label, *icon;
+	GtkSizeGroup *sg0, *sg1;
 	GList 	  *list;
 
 	dialog_vbox = gtk_vbox_new (FALSE, BORDER);
@@ -61,12 +62,17 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 	g_free (text);
 
+	sg0 = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+	sg1 = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+
 	/* display driver */
 	hbox = gtk_hbox_new (FALSE, BORDER);
 	gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, FALSE, FALSE, 0);
 
 	label = gtk_label_new (_("Scaling driver:"));
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_size_group_add_widget (sg0, label);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
 	if (cpu->scaling_driver != NULL)
 		text = g_strdup_printf ("<b>%s</b>", cpu->scaling_driver);
@@ -74,6 +80,8 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 		text = g_strdup_printf (_("No scaling driver available"));
 
 	label = gtk_label_new (text);
+	gtk_size_group_add_widget (sg1, label);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 	gtk_box_pack_end (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 	g_free (text);
@@ -83,11 +91,14 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, FALSE, FALSE, 0);
 
 	label = gtk_label_new (_("Available frequencies:"));
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_size_group_add_widget (sg0, label);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
 	if (cpu->available_freqs != NULL) /* Linux 2.6 with scaling support */
 	{
 		combo = gtk_combo_box_new_text ();
+		gtk_size_group_add_widget (sg1, combo);
 		gtk_box_pack_end (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
 		list = g_list_first (cpu->available_freqs);
 		j = 0;
@@ -106,6 +117,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	else if (cpu->cur_freq && cpu->min_freq && cpu->max_freq) /* Linux 2.4 with scaling support */
 	{
 		combo = gtk_combo_box_new_text ();
+		gtk_size_group_add_widget (sg1, combo);
 		gtk_box_pack_end (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
 
                 text = cpufreq_get_human_readable_freq (cpu->cur_freq);
@@ -125,6 +137,8 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 		text = cpufreq_get_human_readable_freq (cpu->cur_freq);
 		text = g_strdup_printf ("<b>%s</b> (current frequency)", text);
 		label = gtk_label_new (text);
+		gtk_size_group_add_widget (sg1, label);
+		gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 		gtk_box_pack_end (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 		gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 		g_free (text);
@@ -138,9 +152,12 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 		gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, FALSE, FALSE, 0);
 
 		label = gtk_label_new (_("Available governors:"));\
-		gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+		gtk_size_group_add_widget (sg0, label);
+		gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
 		combo = gtk_combo_box_new_text ();
+		gtk_size_group_add_widget (sg1, combo);
 		gtk_box_pack_end (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
 		list = g_list_first (cpu->available_governors);
 		j = 0;
@@ -161,16 +178,23 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 		gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, FALSE, FALSE, 0);
 
 		label = gtk_label_new (_("Current governor:"));
-		gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+		gtk_size_group_add_widget (sg0, label);
+		gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
 		text = g_strdup_printf ("<b>%s</b>", cpu->cur_governor);
 		label = gtk_label_new (text);
+		gtk_size_group_add_widget (sg1, label);
+		gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 		gtk_box_pack_end (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 		gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 		g_free (text);
 	}
 	/* If there is no scaling support, do not display governor combo */
 #endif /* __linux__ */
+
+	g_object_unref (sg0);
+	g_object_unref (sg1);
 }
 
 static void
