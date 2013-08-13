@@ -65,6 +65,74 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 }
 
 static void
+button_fontname_update(GtkWidget *button,
+					   gboolean update_plugin)
+{
+	if (cpuFreq->options->fontname == NULL) {
+		gtk_button_set_label (GTK_BUTTON (button), _("Select font..."));
+		gtk_widget_set_tooltip_text
+			(button, _("Select font family and size to use for the labels."));
+	} else {
+		gtk_button_set_label (GTK_BUTTON (button), cpuFreq->options->fontname);
+		gtk_widget_set_tooltip_text
+			(button, _("Right-click to revert to the default font."));
+	}
+	if (update_plugin) {
+		cpufreq_label_set_font ();
+		cpuFreq->layout_changed = TRUE;
+		cpufreq_update_plugin ();
+	}
+}
+
+static gboolean
+button_fontname_clicked(GtkWidget *button,
+						CpuFreqPluginConfigure *configure)
+{
+	GtkFontSelectionDialog *fsd;
+	gchar *fontname;
+	gint result;
+
+	fsd = GTK_FONT_SELECTION_DIALOG
+		(gtk_font_selection_dialog_new (_("Select font")));
+	if (cpuFreq->options->fontname)
+		gtk_font_selection_dialog_set_font_name(fsd,
+												cpuFreq->options->fontname);
+
+	result = gtk_dialog_run(GTK_DIALOG(fsd));
+	if (result == GTK_RESPONSE_OK || result == GTK_RESPONSE_ACCEPT) {
+		fontname = gtk_font_selection_dialog_get_font_name(fsd);
+		if (fontname != NULL) {
+			gtk_button_set_label(GTK_BUTTON(button), fontname);
+			g_free (cpuFreq->options->fontname);
+			cpuFreq->options->fontname = fontname;
+		}
+		button_fontname_update(button, TRUE);
+	}
+	gtk_widget_destroy(GTK_WIDGET(fsd));
+	return TRUE;
+}
+
+static gboolean
+button_fontname_pressed(GtkWidget *button,
+						GdkEventButton *event,
+						CpuFreqPluginConfigure *configure)
+{
+	if (event->type != GDK_BUTTON_PRESS)
+		return FALSE;
+
+	/* right mouse click clears the font name and resets the button */
+	if (event->button == 3 && cpuFreq->options->fontname) {
+		g_free (cpuFreq->options->fontname);
+		cpuFreq->options->fontname = NULL;
+		button_fontname_update(button, TRUE);
+		return TRUE;
+	}
+
+	/* left mouse click will be handled in a different function */
+	return FALSE;
+}
+
+static void
 combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 {
 	guint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
@@ -172,6 +240,22 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_container_add (GTK_CONTAINER (align), vbox);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
 
+	/* font settings */
+	hbox = gtk_hbox_new (FALSE, BORDER);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+	label = gtk_label_new_with_mnemonic (_("_Font:"));
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+
+	button = configure->fontname = gtk_button_new ();
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
+	gtk_box_pack_start (GTK_BOX (hbox), button, TRUE, TRUE, 0);
+	g_signal_connect (G_OBJECT (button), "clicked",
+					  G_CALLBACK (button_fontname_clicked), configure);
+	g_signal_connect (G_OBJECT (button), "button_press_event",
+					  G_CALLBACK (button_fontname_pressed), configure);
+	button_fontname_update (button, FALSE);
 
 	/* which cpu to show in panel */
 	hbox = gtk_hbox_new (FALSE, BORDER);
@@ -194,7 +278,6 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->options->show_cpu);
 	g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (combo_changed), configure);
 
-
 	/* check buttons for display widgets in panel */
 	button = configure->keep_compact = gtk_check_button_new_with_mnemonic (_("_Keep compact"));
 	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
@@ -215,7 +298,6 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->show_label_governor);
 	g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
-
 
 	g_signal_connect(G_OBJECT (dialog), "response", G_CALLBACK(cpufreq_configure_response), configure);
 
