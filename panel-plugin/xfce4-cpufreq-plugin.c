@@ -40,37 +40,47 @@
 #include "xfce4-cpufreq-overview.h"
 #include "xfce4-cpufreq-utils.h"
 
+void
+cpufreq_label_set_font (void)
+{
+	PangoFontDescription *desc = NULL;
+
+	if (G_UNLIKELY (cpuFreq->label == NULL))
+		return;
+
+	if (cpuFreq->options->fontname)
+		desc = pango_font_description_from_string (cpuFreq->options->fontname);
+
+	gtk_widget_modify_font (cpuFreq->label, desc);
+    pango_font_description_free (desc);
+}
+
 gboolean
 cpufreq_update_label (CpuInfo *cpu)
 {
 	gchar *label, *freq;
+	gint size, both;
 
-	if (!cpuFreq->options->show_label_governor && !cpuFreq->options->show_label_freq)
+	if (!cpuFreq->options->show_label_governor &&
+		!cpuFreq->options->show_label_freq)
 		return TRUE;
 	
-	gint size = xfce_panel_plugin_get_size (cpuFreq->plugin);
-	gboolean both = cpu->cur_governor != NULL && cpuFreq->options->show_label_freq && cpuFreq->options->show_label_governor;
-
-	gchar *txt_size = both ?
-	                       (size <= 38 ? (size <= 28 ? "<span size=\"xx-small\">" : "<span size=\"x-small\">") : "<span>") :
-			       (size <= 19 ? "<span size=\"x-small\">" : "<span>"); 
+	both = cpu->cur_governor != NULL &&
+		cpuFreq->options->show_label_freq &&
+		cpuFreq->options->show_label_governor;
 
 	freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
-	label = g_strconcat (txt_size,
+	label = g_strconcat
+		(cpuFreq->options->show_label_freq ? freq : "",
+		 both ? "\n" : "",
+		 cpu->cur_governor != NULL &&
+		 cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
+		 NULL);
 
-		cpuFreq->options->show_label_freq ? freq : "",
-		
-		both ? (size <= 25 ? " " : "\n") : "",
-	
-		cpu->cur_governor != NULL &&
-		cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
+	gtk_label_set_text (GTK_LABEL (cpuFreq->label), label);
 
-		"</span>",
-		NULL);
-
-	if (strcmp(label,""))
+	if (strcmp(label, ""))
 	{
-		gtk_label_set_markup (GTK_LABEL(cpuFreq->label), label);
 		if (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
 			gtk_label_set_angle (GTK_LABEL(cpuFreq->label), -90);
 		else
@@ -239,8 +249,10 @@ cpufreq_update_plugin (void)
 	cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
 	ret = cpufreq_update_label (cpu);
 
-	if (cpuFreq->layout_changed)
+	if (cpuFreq->layout_changed) {
+		cpufreq_label_set_font ();
 		cpufreq_widgets_layout ();
+	}
 
 	return ret;
 }
@@ -352,6 +364,7 @@ cpufreq_read_config (void)
 {
 	XfceRc *rc;
 	gchar  *file;
+	const gchar *value;
 
 	file = xfce_panel_plugin_save_location (cpuFreq->plugin, FALSE);
 
@@ -370,6 +383,12 @@ cpufreq_read_config (void)
 	cpuFreq->options->show_label_governor =	xfce_rc_read_bool_entry (rc, "show_label_governor", TRUE);
 	cpuFreq->options->show_warning        =	xfce_rc_read_bool_entry (rc, "show_warning", TRUE);
 	cpuFreq->options->keep_compact        =	xfce_rc_read_bool_entry (rc, "keep_compact", FALSE);
+
+	value = xfce_rc_read_entry (rc, "fontname", NULL);
+	if (value) {
+		g_free (cpuFreq->options->fontname);
+		cpuFreq->options->fontname = g_strdup (value);
+	}
 
 	xfce_rc_close (rc);
 }
@@ -395,6 +414,8 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
 	xfce_rc_write_bool_entry (rc, "show_label_governor", cpuFreq->options->show_label_governor);
 	xfce_rc_write_bool_entry (rc, "show_warning",        cpuFreq->options->show_warning);
 	xfce_rc_write_bool_entry (rc, "keep_compact",        cpuFreq->options->keep_compact);
+	if (cpuFreq->options->fontname)
+		xfce_rc_write_entry  (rc, "fontname",            cpuFreq->options->fontname);
 
 	xfce_rc_close (rc);
 }
@@ -425,8 +446,9 @@ cpufreq_free (XfcePanelPlugin *plugin)
 		g_ptr_array_remove_fast (cpuFreq->cpus, cpu);
 		cpuinfo_free (cpu);
 	}
-
 	g_ptr_array_free (cpuFreq->cpus, TRUE);
+
+	g_free (cpuFreq->options->fontname);
 	cpuFreq->plugin = NULL;
 	g_free (cpuFreq);
 }
