@@ -172,6 +172,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	GtkWidget *dialog, *dialog_vbox;
 	GtkWidget *frame, *align, *label, *vbox, *hbox;
 	GtkWidget *combo, *spinner, *button;
+	GtkSizeGroup *sg0;
 	CpuFreqPluginConfigure *configure;
 
 	configure = g_new0 (CpuFreqPluginConfigure, 1);
@@ -191,6 +192,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
 	dialog_vbox = GTK_DIALOG (dialog)->vbox;
 
+	sg0 = gtk_size_group_new(GTK_SIZE_GROUP_BOTH);
 
 	/* monitor behaviours */
 	frame = gtk_frame_new (NULL);
@@ -215,6 +217,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	label = gtk_label_new_with_mnemonic (_("_Timeout interval:"));
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_size_group_add_widget (sg0, label);
 
 	spinner = configure->spinner_timeout = 
 		gtk_spin_button_new_with_range (TIMEOUT_MIN, TIMEOUT_MAX, TIMEOUT_STEP);
@@ -248,6 +251,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	label = gtk_label_new_with_mnemonic (_("_Font:"));
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_size_group_add_widget (sg0, label);
 
 	button = configure->fontname = gtk_button_new ();
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
@@ -265,6 +269,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	label = gtk_label_new_with_mnemonic (_("_Display CPU:"));
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_size_group_add_widget (sg0, label);
 
 	combo = configure->combo_cpu = gtk_combo_box_new_text ();
 	gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, TRUE, 0);
@@ -303,5 +308,6 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
 	g_signal_connect(G_OBJECT (dialog), "response", G_CALLBACK(cpufreq_configure_response), configure);
 
+	g_object_unref (sg0);
 	gtk_widget_show_all (dialog);
 }
