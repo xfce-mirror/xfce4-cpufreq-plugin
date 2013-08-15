@@ -214,7 +214,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	hbox = gtk_hbox_new (FALSE, BORDER);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-	label = gtk_label_new_with_mnemonic (_("_Timeout interval:"));
+	label = gtk_label_new_with_mnemonic (_("_Update interval:"));
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 	gtk_size_group_add_widget (sg0, label);
