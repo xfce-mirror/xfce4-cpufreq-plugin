@@ -212,12 +212,13 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	hbox = gtk_hbox_new (FALSE, BORDER);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-	label = gtk_label_new (_("Timeout Interval:"));
+	label = gtk_label_new_with_mnemonic (_("_Timeout interval:"));
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 
 	spinner = configure->spinner_timeout = 
 		gtk_spin_button_new_with_range (TIMEOUT_MIN, TIMEOUT_MAX, TIMEOUT_STEP);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), spinner);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinner), (gdouble)cpuFreq->options->timeout);
 	gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, FALSE, 0);
 	g_signal_connect (G_OBJECT (spinner), "value-changed", G_CALLBACK (spinner_changed), configure);
@@ -261,12 +262,13 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	hbox = gtk_hbox_new (FALSE, BORDER);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-	label = gtk_label_new (_("Display CPU:"));
+	label = gtk_label_new_with_mnemonic (_("_Display CPU:"));
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 
 	combo = configure->combo_cpu = gtk_combo_box_new_text ();
 	gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, TRUE, 0);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
 
 	for (i = 0; i < cpuFreq->cpus->len; ++i)
 	{
@@ -284,17 +286,17 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->keep_compact);
 	g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
-	button = configure->display_icon = gtk_check_button_new_with_mnemonic (_("Show CPU icon"));
+	button = configure->display_icon = gtk_check_button_new_with_mnemonic (_("Show CPU _icon"));
 	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->show_icon);
 	g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
-	button = configure->display_freq = gtk_check_button_new_with_mnemonic (_("Show CPU frequency"));
+	button = configure->display_freq = gtk_check_button_new_with_mnemonic (_("Show CPU fre_quency"));
 	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->show_label_freq);
 	g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
-	button = configure->display_governor = gtk_check_button_new_with_mnemonic (_("Show CPU governor"));
+	button = configure->display_governor = gtk_check_button_new_with_mnemonic (_("Show CPU _governor"));
 	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->show_label_governor);
 	g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
