@@ -24,6 +24,10 @@
 #include <gtk/gtk.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 
+#define CPU_MIN (cpuFreq->cpus->len + 0)
+#define CPU_AVG (cpuFreq->cpus->len + 1)
+#define CPU_MAX (cpuFreq->cpus->len + 2)
+
 typedef struct
 {
 	guint  cur_freq;
@@ -62,6 +66,11 @@ typedef struct
 
 	/* Array with all CPUs */
 	GPtrArray *cpus;
+
+	/* Calculated values */
+	CpuInfo *cpu_min;
+	CpuInfo *cpu_avg;
+	CpuInfo *cpu_max;
 
 	/* Intel P-State parameters */
 	IntelPState *intel_pstate;

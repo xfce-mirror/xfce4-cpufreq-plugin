@@ -281,6 +281,9 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 		gtk_combo_box_append_text (GTK_COMBO_BOX (combo), cpu_name);
 		g_free (cpu_name);
 	}
+	gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("min"));
+	gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("avg"));
+	gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("max"));
 
 	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->options->show_cpu);
 	g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (combo_changed), configure);

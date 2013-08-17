@@ -40,6 +40,63 @@
 #include "xfce4-cpufreq-overview.h"
 #include "xfce4-cpufreq-utils.h"
 
+
+CpuInfo *
+cpufreq_cpus_calc_min (void)
+{
+	guint freq = 0;
+	gint i;
+
+	for (i = 0; i < cpuFreq->cpus->len; i++) {
+		CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+		if (freq > cpu->cur_freq || i == 0)
+			freq = cpu->cur_freq;
+	}
+
+	cpuinfo_free (cpuFreq->cpu_min);
+	cpuFreq->cpu_min = g_new0 (CpuInfo, 1);
+	cpuFreq->cpu_min->cur_freq = freq;
+	cpuFreq->cpu_min->cur_governor = g_strdup (_("current min"));
+	return cpuFreq->cpu_min;
+}
+
+CpuInfo *
+cpufreq_cpus_calc_avg (void)
+{
+	guint freq = 0;
+	gint i;
+
+	for (i = 0; i < cpuFreq->cpus->len; i++) {
+		CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+		freq += cpu->cur_freq;
+	}
+
+	freq /= cpuFreq->cpus->len;
+	cpuinfo_free (cpuFreq->cpu_avg);
+	cpuFreq->cpu_avg = g_new0 (CpuInfo, 1);
+	cpuFreq->cpu_avg->cur_freq = freq;
+	cpuFreq->cpu_avg->cur_governor = g_strdup (_("current avg"));
+	return cpuFreq->cpu_avg;
+}
+
+CpuInfo *
+cpufreq_cpus_calc_max (void)
+{
+	guint freq = 0;
+	gint i;
+
+	for (i = 0; i < cpuFreq->cpus->len; i++) {
+		CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+		if (freq < cpu->cur_freq)
+			freq = cpu->cur_freq;
+	}
+	cpuinfo_free (cpuFreq->cpu_max);
+	cpuFreq->cpu_max = g_new0 (CpuInfo, 1);
+	cpuFreq->cpu_max->cur_freq = freq;
+	cpuFreq->cpu_max->cur_governor = g_strdup (_("current max"));
+	return cpuFreq->cpu_max;
+}
+
 void
 cpufreq_label_set_font (void)
 {
@@ -238,15 +295,28 @@ cpufreq_widgets_layout (void)
 	cpuFreq->layout_changed = FALSE;
 }
 
+CpuInfo *
+cpufreq_current_cpu ()
+{
+	CpuInfo *cpu = NULL;
+	if (cpuFreq->options->show_cpu < cpuFreq->cpus->len)
+		cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
+	else if (cpuFreq->options->show_cpu == CPU_MIN)
+		cpu = cpufreq_cpus_calc_min ();
+	else if (cpuFreq->options->show_cpu == CPU_AVG)
+		cpu = cpufreq_cpus_calc_avg ();
+	else if (cpuFreq->options->show_cpu == CPU_MAX)
+		cpu = cpufreq_cpus_calc_max ();
+	return cpu;
+}
+
 gboolean
 cpufreq_update_plugin (void)
 {
 	CpuInfo *cpu;
 	gboolean ret;
 
-	g_return_val_if_fail (cpuFreq->options->show_cpu < cpuFreq->cpus->len, FALSE);
-
-	cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
+	cpu = cpufreq_current_cpu ();
 	ret = cpufreq_update_label (cpu);
 
 	if (cpuFreq->layout_changed) {
@@ -344,7 +414,7 @@ cpufreq_widgets (void)
 					  G_CALLBACK (cpufreq_overview), cpuFreq);
 
 	/* activate panel widget tooltip */
-	cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
+	cpu = cpufreq_current_cpu ();
 	g_object_set (G_OBJECT (cpuFreq->button), "has-tooltip", TRUE, NULL);
 	g_signal_connect (G_OBJECT (cpuFreq->button), "query-tooltip",
 					  G_CALLBACK (cpufreq_update_tooltip), cpu);
@@ -423,6 +493,8 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
 void
 cpuinfo_free (CpuInfo *cpu)
 {
+	if (G_UNLIKELY(cpu == NULL))
+		return;
 	g_free (cpu->cur_governor);
 	g_free (cpu->scaling_driver);
 	g_list_free (cpu->available_freqs);
