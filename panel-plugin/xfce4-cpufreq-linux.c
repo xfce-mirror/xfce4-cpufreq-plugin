@@ -34,11 +34,71 @@
 # define _(String) gettext (String)
 #endif
 
-static gboolean
+#define SYSFS_READ_STRING(file, contents, string)		\
+	if (contents = read_sysfs_file_contents (file))	{	\
+		g_free (string);								\
+		string = contents;								\
+	}
+
+#define SYSFS_READ_STRING_LIST(file, contents, list)				\
+	if (contents = read_sysfs_file_contents (file)) {				\
+		gchar **tokens = NULL;										\
+		gint i = 0;													\
+		tokens = g_strsplit (contents, " ", 0);						\
+		g_free (contents);											\
+		g_list_free_full (list, g_free);							\
+		while (tokens[i] != NULL) {									\
+			list = g_list_append (list, strdup (tokens[i]));		\
+			i++;													\
+		}															\
+		g_strfreev (tokens);										\
+	}
+
+#define SYSFS_READ_INT(file, contents, intval)			\
+	if (contents = read_sysfs_file_contents (file)) {	\
+		intval = atoi (contents);						\
+		g_free (contents);								\
+	}
+
+#define SYSFS_READ_INT_LIST(file, contents, list)					\
+	if (contents = read_sysfs_file_contents (file)) {				\
+		gchar **tokens = NULL;										\
+		gint i = 0;													\
+		tokens = g_strsplit (contents, " ", 0);						\
+		g_free (contents);											\
+		g_list_free (list);											\
+		while (tokens[i] != NULL) {									\
+			gint value = atoi (tokens[i]);							\
+			list = g_list_append (list, GINT_TO_POINTER (value));	\
+			i++;													\
+		}															\
+		g_strfreev (tokens);										\
+	}
+
+
+static inline gchar *
+read_sysfs_file_contents (const gchar *file)
+{
+	GError *error = NULL;
+	gchar *contents = NULL;
+
+	if (!g_file_test (file, G_FILE_TEST_EXISTS))
+		return NULL;
+
+	if (g_file_get_contents (file, &contents, NULL, &error)) {
+		g_strstrip (contents);
+		return contents;
+	} else {
+		g_debug ("Error reading %s: %s\n", file, error->message);
+		g_error_free (error);
+		return NULL;
+	}
+}
+
+static void
 cpufreq_cpu_parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 {
-	FILE    *file;
-	gchar   *filePath, *fileContent, **tokens;
+	gchar   *file, *contents;
 	gboolean add_cpu = FALSE;
 
 	if (cpu == NULL) {
@@ -48,198 +108,87 @@ cpufreq_cpu_parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 
 	/* read available cpu freqs */
 	if (cpuFreq->intel_pstate == NULL) {
-		filePath =
+		file =
 			g_strdup_printf ("/sys/devices/system/cpu/cpu%i/"
 							 "cpufreq/scaling_available_frequencies",
 							 cpu_number);
-		if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-			goto file_error;
-		file = fopen (filePath, "r");
-		if (file) {
-			gint i = 0;
-
-			fileContent = g_new (gchar, 255);
-			fgets (fileContent, 255, file);
-			fclose (file);
-
-			fileContent = g_strchomp (fileContent);
-			tokens = g_strsplit (fileContent, " ", 0);
-			g_free (fileContent);
-
-			while (tokens[i] != NULL) {
-				gint freq = atoi (tokens[i]);
-				cpu->available_freqs =
-					g_list_append (cpu->available_freqs,
-								   GINT_TO_POINTER(freq));
-				i++;
-			}
-			g_strfreev (tokens);
-		}
-		g_free (filePath);
+		SYSFS_READ_INT_LIST (file, contents, cpu->available_freqs);
+		g_free (file);
 	}
 
 	/* read available cpu governors */
-	filePath = g_strdup_printf (
+	file = g_strdup_printf (
 		"/sys/devices/system/cpu/cpu%i/cpufreq/scaling_available_governors",
 		cpu_number);
-	if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-		goto file_error;
-	file = fopen (filePath, "r");
-	if (file)
-	{
-		gint i = 0;
-
-		fileContent = g_new (gchar, 255);
-		fgets (fileContent, 255, file);
-		fclose (file);
-
-		fileContent = g_strchomp (fileContent);
-		tokens = g_strsplit (fileContent, " ", 0);
-		g_free (fileContent);
-
-		while (tokens[i] != NULL)
-		{
-			cpu->available_governors = g_list_append (
-					cpu->available_governors,
-					g_strdup (tokens[i]));
-			i++;
-		}
-		g_strfreev (tokens);
-	}
-	g_free (filePath);
+	SYSFS_READ_STRING_LIST (file, contents, cpu->available_governors);
+	g_free (file);
 
 	/* read cpu driver */
-	filePath = g_strdup_printf (
+	file = g_strdup_printf (
 		"/sys/devices/system/cpu/cpu%i/cpufreq/scaling_driver",
 		cpu_number);
-	if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-		goto file_error;
-	file = fopen (filePath, "r");
-	if (file)
-	{
-		g_free (cpu->scaling_driver);
-		cpu->scaling_driver = g_new (gchar, 15);
-		fscanf (file, "%15s", cpu->scaling_driver);
-		fclose (file);
-	}
-	g_free (filePath);
+	SYSFS_READ_STRING (file, contents, cpu->scaling_driver);
+	g_free (file);
 
 	/* read current cpu freq */
 	if (cpuFreq->intel_pstate == NULL) {
-		filePath =
+		file =
 			g_strdup_printf ("/sys/devices/system/cpu/cpu%i/"
 							 "cpufreq/scaling_cur_freq",
 							 cpu_number);
-		if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-			goto file_error;
-		file = fopen (filePath, "r");
-		if (file) {
-			fscanf (file, "%d", &cpu->cur_freq);
-			fclose (file);
-		}
-		g_free (filePath);
+		SYSFS_READ_INT (file, contents, cpu->cur_freq);
+		g_free (file);
 	}
 
 	/* read current cpu governor */
-	filePath = g_strdup_printf (
+	file = g_strdup_printf (
 		"/sys/devices/system/cpu/cpu%i/cpufreq/scaling_governor",
 		cpu_number);
-	if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-		goto file_error;
-	file = fopen (filePath, "r");
-	if (file)
-	{
-		g_free (cpu->cur_governor);
-		cpu->cur_governor = g_new (gchar, 15);
-		fscanf (file, "%15s", cpu->cur_governor);
-		fclose (file);
-	}
-	g_free (filePath);
+	SYSFS_READ_STRING (file, contents, cpu->cur_governor);
+	g_free (file);
 
 	/* read max cpu freq */
-	filePath = g_strdup_printf (
+	file = g_strdup_printf (
 		"/sys/devices/system/cpu/cpu%i/cpufreq/scaling_max_freq",
 		cpu_number);
-	if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-		goto file_error;
-	file = fopen (filePath, "r");
-	if (file)
-	{
-		fscanf (file, "%d", &cpu->max_freq);
-		fclose (file);
-	}
-	g_free (filePath);
+	SYSFS_READ_INT (file, contents, cpu->max_freq);
+	g_free (file);
 
 	/* read min cpu freq */
-	filePath = g_strdup_printf (
+	file = g_strdup_printf (
 		"/sys/devices/system/cpu/cpu%i/cpufreq/scaling_min_freq",
 		cpu_number);
-	if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-		goto file_error;
-	file = fopen (filePath, "r");
-	if (file)
-	{
-		fscanf (file, "%d", &cpu->min_freq);
-		fclose (file);
-	}
-	g_free (filePath);
+	SYSFS_READ_INT (file, contents, cpu->min_freq);
+	g_free (file);
 
 	if (add_cpu)
 		g_ptr_array_add (cpuFreq->cpus, cpu);
-
-	return TRUE;
-
-file_error:
-	if (add_cpu && cpu != NULL)
-		cpuinfo_free (cpu);
-	g_free (filePath);
-	return FALSE;
 }
 
-static gboolean
+static void
 cpufreq_cpu_read_sysfs_current (gint cpu_number)
 {
 	CpuInfo *cpu;
-	FILE	*file;
-	gchar	*filePath;
+	gchar	*file, *contents;
 
 	cpu = g_ptr_array_index (cpuFreq->cpus, cpu_number);
 
 	/* read current cpu freq */
 	if (cpuFreq->intel_pstate == NULL) {
-		filePath =
+		file =
 			g_strdup_printf ("/sys/devices/system/cpu/cpu%i/"
 							 "cpufreq/scaling_cur_freq",
 							 cpu_number);
-		if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-			goto file_error;
-		file = fopen (filePath, "r");
-		if (file) {
-			fscanf (file, "%d", &cpu->cur_freq);
-			fclose (file);
-		}
-		g_free (filePath);
+		SYSFS_READ_INT (file, contents, cpu->cur_freq);
+		g_free (file);
 	}
 
 	/* read current cpu governor */
-	filePath = g_strdup_printf (
-		"/sys/devices/system/cpu/cpu%i/cpufreq/scaling_governor",
-		cpu_number);
-	if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-		goto file_error;
-	file = fopen (filePath, "r");
-	if (file)
-	{
-		fscanf (file, "%15s", cpu->cur_governor);
-		fclose (file);
-	}
-	g_free (filePath);
-
-	return TRUE;
-
-file_error:
-	g_free (filePath);
-	return FALSE;
+	file = g_strdup_printf ("/sys/devices/system/cpu/cpu%i/"
+							"cpufreq/scaling_governor",
+							cpu_number);
+	SYSFS_READ_STRING (file, contents, cpu->cur_governor);
+	g_free (file);
 }
 
 static gboolean
@@ -402,53 +351,33 @@ cpufreq_cpu_read_sysfs ()
 gboolean
 cpufreq_intel_pstate_params (void)
 {
-	FILE    *file;
-	gchar   *filePath, *fileContent;
+	gchar   *file, *contents;
 	IntelPState *ips;
 
 	ips = g_slice_new0(IntelPState);
 
-	filePath =
+	if (!g_file_test ("/sys/devices/system/cpu/intel_pstate",
+					  G_FILE_TEST_EXISTS))
+		return FALSE;
+
+	file =
 		g_strdup ("/sys/devices/system/cpu/intel_pstate/min_perf_pct");
-	if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-		goto file_error;
-	file = fopen (filePath, "r");
-	if (file) {
-		fscanf (file, "%d", &ips->min_perf_pct);
-		fclose (file);
-	}
-	g_free (filePath);
+	SYSFS_READ_INT (file, contents, ips->min_perf_pct);
+	g_free (file);
 
-	filePath =
+	file =
 		g_strdup ("/sys/devices/system/cpu/intel_pstate/max_perf_pct");
-	if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-		goto file_error;
-	file = fopen (filePath, "r");
-	if (file) {
-		fscanf (file, "%d", &ips->max_perf_pct);
-		fclose (file);
-	}
-	g_free (filePath);
+	SYSFS_READ_INT (file, contents, ips->max_perf_pct);
+	g_free (file);
 
-	filePath =
+	file =
 		g_strdup ("/sys/devices/system/cpu/intel_pstate/no_turbo");
-	if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-		goto file_error;
-	file = fopen (filePath, "r");
-	if (file) {
-		fscanf (file, "%d", &ips->no_turbo);
-		fclose (file);
-	}
-	g_free (filePath);
+	SYSFS_READ_INT (file, contents, ips->no_turbo);
+	g_free (file);
 
 	g_slice_free (IntelPState, cpuFreq->intel_pstate);
 	cpuFreq->intel_pstate = ips;
 	return TRUE;
-
-file_error:
-	g_slice_free (IntelPState, ips);
-	g_free (filePath);
-	return FALSE;
 }
 
 static gboolean
