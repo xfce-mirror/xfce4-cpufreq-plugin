@@ -537,6 +537,32 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 	return TRUE;
 }
 
+cpufreq_show_about(XfcePanelPlugin *plugin,
+				   CpuFreqPlugin *cpufreq)
+{
+	GdkPixbuf *icon;
+	const gchar *auth[] = {
+		"Thomas Schreck <shrek@xfce.org>",
+		"Florian Rivoal <frivoal@xfce.org>",
+		"Harald Judt <h.judt@gmx.at>",
+		NULL };
+	icon = xfce_panel_pixbuf_from_source("xfce4-cpufreq-plugin", NULL, 48);
+	gtk_show_about_dialog
+		(NULL,
+		 "logo", icon,
+		 "license", xfce_get_license_text(XFCE_LICENSE_TEXT_GPL),
+		 "version", PACKAGE_VERSION,
+		 "program-name", PACKAGE_NAME,
+		 "comments", _("Show CPU frequencies and governor"),
+		 "website", PLUGIN_WEBSITE,
+		 "copyright", _("Copyright (c) 2003-2012\n"),
+		 "authors", auth,
+		 NULL);
+
+	if (icon)
+		g_object_unref(G_OBJECT(icon));
+}
+
 static void
 cpufreq_construct (XfcePanelPlugin *plugin)
 {
@@ -577,7 +603,10 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 	/* the configure and about menu items are hidden by default */
 	xfce_panel_plugin_menu_show_configure (plugin);
 	g_signal_connect (plugin, "configure-plugin",
-			  G_CALLBACK (cpufreq_configure), NULL);
+					  G_CALLBACK (cpufreq_configure), NULL);
+	xfce_panel_plugin_menu_show_about(plugin);
+	g_signal_connect (G_OBJECT (plugin), "about",
+					  G_CALLBACK (cpufreq_show_about), cpuFreq);
 }
 
 XFCE_PANEL_PLUGIN_REGISTER (cpufreq_construct);

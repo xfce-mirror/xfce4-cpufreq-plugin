@@ -24,6 +24,8 @@
 #include <gtk/gtk.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 
+#define PLUGIN_WEBSITE ("http://goodies.xfce.org/projects/panel-plugins/xfce4-cpufreq-plugin")
+
 #define CPU_MIN (cpuFreq->cpus->len + 0)
 #define CPU_AVG (cpuFreq->cpus->len + 1)
 #define CPU_MAX (cpuFreq->cpus->len + 2)
