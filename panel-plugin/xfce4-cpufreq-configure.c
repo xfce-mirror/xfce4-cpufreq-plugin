@@ -61,6 +61,11 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 		cpufreq_update_icon (cpuFreq);
 	}
 
+	else if (button == configure->one_line) {
+		cpuFreq->options->one_line =
+			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+	}
+
 	cpuFreq->layout_changed = TRUE;
 	cpufreq_update_plugin ();
 }
@@ -293,6 +298,11 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	button = configure->keep_compact = gtk_check_button_new_with_mnemonic (_("_Keep compact"));
 	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->keep_compact);
+	g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
+
+	button = configure->one_line = gtk_check_button_new_with_mnemonic (_("Show text in a single _line"));
+	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->one_line);
 	g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
 	button = configure->display_icon = gtk_check_button_new_with_mnemonic (_("Show CPU _icon"));

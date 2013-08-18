@@ -130,7 +130,7 @@ cpufreq_update_label (CpuInfo *cpu)
 	freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
 	label = g_strconcat
 		(cpuFreq->options->show_label_freq ? freq : "",
-		 both ? "\n" : "",
+		 both ? (cpuFreq->options->one_line ? " " : "\n") : "",
 		 cpu->cur_governor != NULL &&
 		 cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
 		 NULL);
@@ -454,6 +454,7 @@ cpufreq_read_config (void)
 	cpuFreq->options->show_label_governor =	xfce_rc_read_bool_entry (rc, "show_label_governor", TRUE);
 	cpuFreq->options->show_warning        =	xfce_rc_read_bool_entry (rc, "show_warning", TRUE);
 	cpuFreq->options->keep_compact        =	xfce_rc_read_bool_entry (rc, "keep_compact", FALSE);
+	cpuFreq->options->one_line            =	xfce_rc_read_bool_entry (rc, "one_line", FALSE);
 
 	value = xfce_rc_read_entry (rc, "fontname", NULL);
 	if (value) {
@@ -485,6 +486,7 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
 	xfce_rc_write_bool_entry (rc, "show_label_governor", cpuFreq->options->show_label_governor);
 	xfce_rc_write_bool_entry (rc, "show_warning",        cpuFreq->options->show_warning);
 	xfce_rc_write_bool_entry (rc, "keep_compact",        cpuFreq->options->keep_compact);
+	xfce_rc_write_bool_entry (rc, "one_line",            cpuFreq->options->one_line);
 	if (cpuFreq->options->fontname)
 		xfce_rc_write_entry  (rc, "fontname",            cpuFreq->options->fontname);
 

@@ -59,6 +59,7 @@ typedef struct
 	gboolean show_label_freq;
 	gboolean show_warning;
 	gboolean keep_compact;
+	gboolean one_line;
 	gchar   *fontname;
 } CpuFreqPluginOptions;
 
