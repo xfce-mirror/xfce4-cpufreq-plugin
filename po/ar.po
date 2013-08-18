@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-cpufreq-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-12 10:06+0000\n"
+"POT-Creation-Date: 2013-08-18 09:44+0200\n"
 "PO-Revision-Date: 2011-08-12 15:24-0000\n"
 "Last-Translator: كريم أولاد الشلحة <herr.linux88@gmail.com>\n"
 "Language-Team: Arabic Xfce Translation Team <herr.linux88@gmail.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,48 +14,88 @@ msgstr ""
 "X-Poedit-Country: Morocco\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:110
+#: ../panel-plugin/xfce4-cpufreq-configure.c:78
+msgid "Select font..."
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:80
+msgid "Select font family and size to use for the labels."
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:84
+msgid "Right-click to revert to the default font."
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:102
+msgid "Select font"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:188
 msgid "Configure CPU Frequency Monitor"
 msgstr "ضبط مرقاب تردد المعالج"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:112
+#: ../panel-plugin/xfce4-cpufreq-configure.c:190
 msgid "Configure the CPU frequency plugin"
 msgstr "ضبط إضافة تردد المعالج"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:129
+#: ../panel-plugin/xfce4-cpufreq-configure.c:208
 msgid "<b>Monitor</b>"
 msgstr "<b>مراقب</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:144
-msgid "Timeout Interval:"
-msgstr "مهلة الفاصل الزمني:"
+#: ../panel-plugin/xfce4-cpufreq-configure.c:223
+msgid "_Update interval:"
+msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:160
+#: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Panel</b>"
 msgstr "<b>لوحة</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:177
-msgid "Display CPU:"
+#: ../panel-plugin/xfce4-cpufreq-configure.c:257
+msgid "_Font:"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:275
+#, fuzzy
+msgid "_Display CPU:"
 msgstr "إظهار المعالج:"
 
-#. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:196
-msgid "Show frame"
-msgstr "عرض الإطار"
+#: ../panel-plugin/xfce4-cpufreq-configure.c:290
+msgid "min"
+msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:201
-msgid "Show CPU icon"
+#: ../panel-plugin/xfce4-cpufreq-configure.c:291
+msgid "avg"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:292
+msgid "max"
+msgstr ""
+
+#. check buttons for display widgets in panel
+#: ../panel-plugin/xfce4-cpufreq-configure.c:298
+msgid "_Keep compact"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:303
+msgid "Show text in a single _line"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:308
+#, fuzzy
+msgid "Show CPU _icon"
 msgstr "عرض أيقونة المعالج"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:206
-msgid "Show CPU frequency"
+#: ../panel-plugin/xfce4-cpufreq-configure.c:313
+#, fuzzy
+msgid "Show CPU fre_quency"
 msgstr "إعرض تردد المعالج"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:211
-msgid "Show CPU governor"
+#: ../panel-plugin/xfce4-cpufreq-configure.c:318
+#, fuzzy
+msgid "Show CPU _governor"
 msgstr "عرض حاكم المعالج"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:413
+#: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
@@ -62,65 +103,97 @@ msgstr ""
 "نظامك لا يدعم تردد المعالج.\n"
 "البريمج يظهر تردد المعالج الحالي فقط"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:65
+#: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
 msgstr "مشغل التحجيم:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:71
+#: ../panel-plugin/xfce4-cpufreq-overview.c:81
 #, c-format
 msgid "No scaling driver available"
 msgstr "لا يوجد مشغل تحجيم متوفر"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:82
+#: ../panel-plugin/xfce4-cpufreq-overview.c:94
 msgid "Available frequencies:"
 msgstr "الترددات المتوفرة:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:137
+#: ../panel-plugin/xfce4-cpufreq-overview.c:155
 msgid "Available governors:"
 msgstr "الحكام المتوفرون:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:160
+#: ../panel-plugin/xfce4-cpufreq-overview.c:181
 msgid "Current governor:"
 msgstr "الحاكم الحالي"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:195
+#: ../panel-plugin/xfce4-cpufreq-overview.c:232
 msgid "CPU Information"
 msgstr "معلومات المعالج"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:202
+#: ../panel-plugin/xfce4-cpufreq-overview.c:239
 msgid "An overview of all the CPUs in the system"
 msgstr "لمحة عامة لكل المعالجات في النظام"
 
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:60
+msgid "current min"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+msgid "current avg"
+msgstr ""
+
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:97
+msgid "current max"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:169
+#, fuzzy
+msgid "No CPU information available."
+msgstr "معلومات المعالج"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:173
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
 msgstr[0] "%d المعالج المتوفر"
 msgstr[1] "%d المعالجات المتوفرة"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:99
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:176
 msgid "Frequency: "
 msgstr "التردد:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:106
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:184
 msgid "Governor: "
 msgstr "الحاكم:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:332
-msgid "Your system is not configured correctly to support cpu frequency scaling !"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:559
+#: ../panel-plugin/cpufreq.desktop.in.h:2
+#, fuzzy
+msgid "Show CPU frequencies and governor"
+msgstr "تظهر تردد المعالج والحكام"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:561
+msgid "Copyright (c) 2003-2012\n"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:584
+#, fuzzy
+msgid ""
+"Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "نظامك لم يتم ضبطه بشكل الصحيح لدعم محجم تردد المعالج"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:342
-msgid "Your system is not supported yet !"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:594
+#, fuzzy
+msgid "Your system is not supported yet!"
 msgstr "نظامك لا يدعمها!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:1
+#: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
 msgstr "مرقاب تردد المعالج"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.desktop.in.in.h:2
-msgid "Shows the cpu frequency and governours"
-msgstr "تظهر تردد المعالج والحكام"
+#~ msgid "Timeout Interval:"
+#~ msgstr "مهلة الفاصل الزمني:"
+
+#~ msgid "Show frame"
+#~ msgstr "عرض الإطار"
 
 #~ msgid "Could not create widgets !"
 #~ msgstr "فشل في إنشاء الودجات !"
