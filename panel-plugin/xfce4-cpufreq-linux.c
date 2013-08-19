@@ -325,26 +325,33 @@ cpufreq_cpu_read_procfs ()
 	return TRUE;
 }
 
-static gboolean
-cpufreq_cpu_read_sysfs ()
+static inline gboolean
+cpufreq_cpu_exists (gint num)
 {
-	gint j, i = -2;
-	DIR *dir;
-	struct dirent *dir_entry;
+	const gchar *base = "/sys/devices/system/cpu";
+	gchar *file;
+	gboolean ret;
 
-	if ((dir = opendir ("/sys/devices/system/cpu")) != NULL)
-	{
-		while ((dir_entry = readdir (dir)) != NULL)
-			i++;
-	}
-	else
+	file = g_strdup_printf ("%s/cpu%d", base, num);
+	ret = g_file_test (file, G_FILE_TEST_EXISTS);
+	g_free (file);
+	return ret;
+}
+
+static gboolean
+cpufreq_cpu_read_sysfs (void)
+{
+	gchar *file;
+	gint count = 0, i = 0;
+
+	while (cpufreq_cpu_exists (count))
+		count++;
+
+	if (count == 0)
 		return FALSE;
-	closedir (dir);
 
-	for (j = 0; j < i; j++)
-	{
-		cpufreq_cpu_parse_sysfs_init (j, NULL);
-	}
+	while (i < count)
+		cpufreq_cpu_parse_sysfs_init (i++, NULL);
 
 	return TRUE;
 }
