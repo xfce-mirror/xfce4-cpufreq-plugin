@@ -1,39 +1,38 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # k3lt01 <keltoiboy@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-18 09:44+0200\n"
-"PO-Revision-Date: 2013-07-29 08:40+0000\n"
+"POT-Creation-Date: 2013-08-18 12:31+0200\n"
+"PO-Revision-Date: 2013-08-19 03:33+0000\n"
 "Last-Translator: k3lt01 <keltoiboy@gmail.com>\n"
-"Language-Team: English (Australia) (http://www.transifex.com/projects/p/xfce/"
-"language/en_AU/)\n"
-"Language: en_AU\n"
+"Language-Team: English (Australia) (http://www.transifex.com/projects/p/xfce/language/en_AU/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: en_AU\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:78
 msgid "Select font..."
-msgstr ""
+msgstr "Select font..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font family and size to use for the labels."
-msgstr ""
+msgstr "Select font family and size to use for the labels."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:84
 msgid "Right-click to revert to the default font."
-msgstr ""
+msgstr "Right-click to revert to the default font."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:102
 msgid "Select font"
-msgstr ""
+msgstr "Select font"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:188
 msgid "Configure CPU Frequency Monitor"
@@ -49,7 +48,7 @@ msgstr "<b>Monitor</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:223
 msgid "_Update interval:"
-msgstr ""
+msgstr "_Update interval:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Panel</b>"
@@ -57,56 +56,50 @@ msgstr "<b>Panel</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:257
 msgid "_Font:"
-msgstr ""
+msgstr "_Font:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:275
-#, fuzzy
 msgid "_Display CPU:"
-msgstr "Display CPU:"
+msgstr "_Display CPU:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:290
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:291
 msgid "avg"
-msgstr ""
+msgstr "avg"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:292
 msgid "max"
-msgstr ""
+msgstr "max"
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:298
 msgid "_Keep compact"
-msgstr ""
+msgstr "_Keep compact"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:303
 msgid "Show text in a single _line"
-msgstr ""
+msgstr "Show text in a single _line"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:308
-#, fuzzy
 msgid "Show CPU _icon"
-msgstr "Show CPU icon"
+msgstr "Show CPU _icon"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:313
-#, fuzzy
 msgid "Show CPU fre_quency"
-msgstr "Show CPU frequency"
+msgstr "Show CPU fre_quency"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:318
-#, fuzzy
 msgid "Show CPU _governor"
-msgstr "Show CPU governor"
+msgstr "Show CPU _governor"
 
 #: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr ""
-"Your system does not support cpufreq.\n"
-"The applet only shows the current cpu frequency"
+msgstr "Your system does not support cpufreq.\nThe applet only shows the current cpu frequency"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
@@ -139,20 +132,19 @@ msgstr "An overview of all the CPUs in the system"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:60
 msgid "current min"
-msgstr ""
+msgstr "current min"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "current avg"
-msgstr ""
+msgstr "current avg"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:97
 msgid "current max"
-msgstr ""
+msgstr "current max"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:169
-#, fuzzy
 msgid "No CPU information available."
-msgstr "CPU Information"
+msgstr "No CPU information available."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:173
 #, c-format
@@ -171,32 +163,22 @@ msgstr "Governor: "
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:559
 #: ../panel-plugin/cpufreq.desktop.in.h:2
-#, fuzzy
 msgid "Show CPU frequencies and governor"
-msgstr "Shows the cpu frequency and governours"
+msgstr "Show CPU frequencies and governor"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:561
 msgid "Copyright (c) 2003-2012\n"
-msgstr ""
+msgstr "Copyright (c) 2003-2012\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:584
-#, fuzzy
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr ""
-"Your system is not configured correctly to support cpu frequency scaling !"
+msgstr "Your system is not configured correctly to support CPU frequency scaling!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:594
-#, fuzzy
 msgid "Your system is not supported yet!"
-msgstr "Your system is not supported yet !"
+msgstr "Your system is not supported yet!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
 msgstr "CPU Frequency Monitor"
-
-#~ msgid "Timeout Interval:"
-#~ msgstr "Timeout Interval:"
-
-#~ msgid "Show frame"
-#~ msgstr "Show frame"
