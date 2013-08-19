@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-18 12:31+0200\n"
-"PO-Revision-Date: 2013-08-19 09:19+0000\n"
+"PO-Revision-Date: 2013-08-19 16:04+0000\n"
 "Last-Translator: MC <correomc2000-ing@yahoo.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/xfce/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -25,11 +25,11 @@ msgstr "Seleccione el tipo de letra..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font family and size to use for the labels."
-msgstr ""
+msgstr "Seleccione familia de fuentes y el tamaño que se utilizará para las etiquetas."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:84
 msgid "Right-click to revert to the default font."
-msgstr ""
+msgstr "Hacer click con el botón derecho para revertir al tipo de letra predeterminado."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:102
 msgid "Select font"
@@ -37,11 +37,11 @@ msgstr "Seleccione el tipo de letra"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:188
 msgid "Configure CPU Frequency Monitor"
-msgstr "Configurar monitor de frecuencia de la CPU"
+msgstr "Configurar monitor de frecuencia del procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:190
 msgid "Configure the CPU frequency plugin"
-msgstr "Configurar el complemento de frecuencia de la CPU"
+msgstr "Configurar el complemento de frecuencia de la procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:208
 msgid "<b>Monitor</b>"
@@ -49,7 +49,7 @@ msgstr "<b>Monitor</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:223
 msgid "_Update interval:"
-msgstr ""
+msgstr "Intervalo de act_ualización:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Panel</b>"
@@ -57,11 +57,11 @@ msgstr "<b>Panel</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:257
 msgid "_Font:"
-msgstr ""
+msgstr "_Tipo de Letra:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:275
 msgid "_Display CPU:"
-msgstr ""
+msgstr "_Mostrar procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:290
 msgid "min"
@@ -78,23 +78,23 @@ msgstr "max"
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:298
 msgid "_Keep compact"
-msgstr ""
+msgstr "_Mantener reducido"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:303
 msgid "Show text in a single _line"
-msgstr ""
+msgstr "Mostrar texto en una sola _línea"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:308
 msgid "Show CPU _icon"
-msgstr ""
+msgstr "Mostrar _icono del procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:313
 msgid "Show CPU fre_quency"
-msgstr ""
+msgstr "Mostrar _frecuencia del procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:318
 msgid "Show CPU _governor"
-msgstr ""
+msgstr "Mostrar _perfil del procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
@@ -125,11 +125,11 @@ msgstr "Perfil de CPU actual:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:232
 msgid "CPU Information"
-msgstr "Información de la CPU"
+msgstr "Información del procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:239
 msgid "An overview of all the CPUs in the system"
-msgstr "Un resumen de todas las CPUs en el sistema"
+msgstr "Un resumen de todas los procesadores en el sistema"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:60
 msgid "current min"
@@ -152,7 +152,7 @@ msgstr "No hay información del procesador disponible."
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
 msgstr[0] "%d de CPU disponible"
-msgstr[1] "%d de CPUs disponible"
+msgstr[1] "%d procesadores disponible"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:176
 msgid "Frequency: "
@@ -165,7 +165,7 @@ msgstr "Gobernador:"
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:559
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
-msgstr ""
+msgstr "Mostrar frecuencias y perfil del procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:561
 msgid "Copyright (c) 2003-2012\n"
@@ -182,4 +182,4 @@ msgstr "¡Su sistema aún no es soportado!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr "Monitor de frecuencia de CPU"
+msgstr "Monitor de frecuencia del procesador"
