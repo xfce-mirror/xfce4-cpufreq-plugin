@@ -120,8 +120,11 @@ cpufreq_update_label (CpuInfo *cpu)
 	gint size, both;
 
 	if (!cpuFreq->options->show_label_governor &&
-		!cpuFreq->options->show_label_freq)
+		!cpuFreq->options->show_label_freq) {
+		if (cpuFreq->label != NULL)
+			gtk_widget_hide (cpuFreq->label);
 		return TRUE;
+	}
 	
 	both = cpu->cur_governor != NULL &&
 		cpuFreq->options->show_label_freq &&
@@ -471,6 +474,9 @@ cpufreq_read_config (void)
 	cpuFreq->options->show_warning        =	xfce_rc_read_bool_entry (rc, "show_warning", TRUE);
 	cpuFreq->options->keep_compact        =	xfce_rc_read_bool_entry (rc, "keep_compact", FALSE);
 	cpuFreq->options->one_line            =	xfce_rc_read_bool_entry (rc, "one_line", FALSE);
+
+	if (!cpuFreq->options->show_label_freq && !cpuFreq->options->show_label_governor)
+		cpuFreq->options->show_icon = TRUE;
 
 	value = xfce_rc_read_entry (rc, "fontname", NULL);
 	if (value) {
