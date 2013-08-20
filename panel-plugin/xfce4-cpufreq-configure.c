@@ -54,10 +54,6 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 	else if (button == configure->keep_compact) {
 		cpuFreq->options->keep_compact =
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-		if (cpuFreq->options->keep_compact)
-			cpuFreq->icon_size -= 4;
-		else
-			cpuFreq->icon_size += 4;
 		cpufreq_update_icon (cpuFreq);
 	}
 

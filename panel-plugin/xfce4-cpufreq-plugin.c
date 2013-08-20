@@ -360,24 +360,34 @@ cpufreq_mode_changed (XfcePanelPlugin *plugin, XfcePanelPluginMode mode, CpuFreq
 void
 cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 {
-	if (cpufreq->icon)
-	{
+	if (cpufreq->icon) {
 		gtk_widget_destroy (cpufreq->icon);
 		cpufreq->icon = NULL;
 	}
 
-	if(cpufreq->options->show_icon)
-	{
-		GdkPixbuf *buf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-				                                     "xfce4-cpufreq-plugin", cpufreq->icon_size, 0, NULL);
-		if (buf)
-		{
+	if (cpufreq->options->show_icon) {
+		GdkPixbuf *buf;
+		guint nrows;
+		gint panel_size;
+
+		panel_size = xfce_panel_plugin_get_size (cpufreq->plugin);
+		nrows = xfce_panel_plugin_get_nrows (cpuFreq->plugin);
+
+		cpufreq->icon_size = panel_size / nrows;
+		if (cpufreq->options->keep_compact ||
+			(!cpufreq->options->show_label_freq &&
+			 !cpufreq->options->show_label_governor))
+			cpufreq->icon_size -= 4;
+
+		buf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+										"xfce4-cpufreq-plugin",
+										cpufreq->icon_size, 0, NULL);
+		if (buf) {
 			cpufreq->icon = gtk_image_new_from_pixbuf (buf);
 			g_object_unref (G_OBJECT (buf));
-		}
-		else
-		{
-			cpufreq->icon = gtk_image_new_from_icon_name ("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
+		} else {
+			cpufreq->icon = gtk_image_new_from_icon_name
+				("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
 		}
 		gtk_box_pack_start (GTK_BOX (cpufreq->box), cpufreq->icon, FALSE, FALSE, 0);
 		gtk_widget_show (cpufreq->icon);
