@@ -67,6 +67,8 @@ typedef struct
 {
 	XfcePanelPlugin *plugin;
 	XfcePanelPluginMode panel_mode;
+	gint panel_size;
+	guint panel_rows;
 
 	/* Array with all CPUs */
 	GPtrArray *cpus;
@@ -82,8 +84,6 @@ typedef struct
 	/* Widgets */
 	GtkWidget *button, *box, *icon, *label;
 	gboolean layout_changed;
-
-	gint icon_size;
 
 	CpuFreqPluginOptions  *options;
 	gint 		      timeoutHandle;

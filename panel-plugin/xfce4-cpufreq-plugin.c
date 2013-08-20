@@ -117,7 +117,7 @@ gboolean
 cpufreq_update_label (CpuInfo *cpu)
 {
 	gchar *label, *freq;
-	gint size, both;
+	gint both;
 
 	if (!cpuFreq->options->show_label_governor &&
 		!cpuFreq->options->show_label_freq) {
@@ -167,8 +167,7 @@ cpufreq_widgets_layout (void)
 	gboolean resized = FALSE;
 	gboolean hide_label = (!cpuFreq->options->show_label_freq &&
 						   !cpuFreq->options->show_label_governor);
-	gint panel_size, pos = 1;
-	gint lw = 0, lh = 0, iw = 0, ih = 0;
+	gint pos = 1, lw = 0, lh = 0, iw = 0, ih = 0;
 
 	small = (hide_label ? TRUE : cpuFreq->options->keep_compact);
 
@@ -192,7 +191,6 @@ cpufreq_widgets_layout (void)
 		xfce_panel_plugin_set_small (cpuFreq->plugin, TRUE);
 
 	/* check if the label fits below the icon, else put them side by side */
-	panel_size = xfce_panel_plugin_get_size(cpuFreq->plugin);
 	if (GTK_IS_WIDGET(cpuFreq->label) && ! hide_label) {
 		gtk_widget_size_request (cpuFreq->label, &label_size);
 		lw = label_size.width;
@@ -205,11 +203,11 @@ cpufreq_widgets_layout (void)
 	}
 	if (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL &&
 		orientation == GTK_ORIENTATION_VERTICAL &&
-		lh + ih + BORDER * 2 >= panel_size) {
+		lh + ih + BORDER * 2 >= cpuFreq->panel_size) {
 		orientation = GTK_ORIENTATION_HORIZONTAL;
 		resized = TRUE;
 	} else if (orientation == GTK_ORIENTATION_HORIZONTAL &&
-			   lw + iw + BORDER * 2 >= panel_size &&
+			   lw + iw + BORDER * 2 >= cpuFreq->panel_size &&
 			   (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR ||
 				!small)) {
 		orientation = GTK_ORIENTATION_VERTICAL;
@@ -364,6 +362,7 @@ static void
 cpufreq_mode_changed (XfcePanelPlugin *plugin, XfcePanelPluginMode mode, CpuFreqPlugin *cpufreq)
 {
 	cpuFreq->panel_mode = mode;
+	cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (plugin);
 	cpuFreq->layout_changed = TRUE;
 	cpufreq_update_plugin ();
 }
@@ -378,21 +377,17 @@ cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 
 	if (cpufreq->options->show_icon) {
 		GdkPixbuf *buf;
-		guint nrows;
-		gint panel_size;
+		gint icon_size;
 
-		panel_size = xfce_panel_plugin_get_size (cpufreq->plugin);
-		nrows = xfce_panel_plugin_get_nrows (cpuFreq->plugin);
-
-		cpufreq->icon_size = panel_size / nrows;
+		icon_size = cpuFreq->panel_size / cpuFreq->panel_rows;
 		if (cpufreq->options->keep_compact ||
 			(!cpufreq->options->show_label_freq &&
 			 !cpufreq->options->show_label_governor))
-			cpufreq->icon_size -= 4;
+			icon_size -= 4;
 
 		buf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
 										"xfce4-cpufreq-plugin",
-										cpufreq->icon_size, 0, NULL);
+										icon_size, 0, NULL);
 		if (buf) {
 			cpufreq->icon = gtk_image_new_from_pixbuf (buf);
 			g_object_unref (G_OBJECT (buf));
@@ -423,9 +418,6 @@ cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
 static void
 cpufreq_widgets (void)
 {
-	cpuFreq->icon_size = xfce_panel_plugin_get_size (cpuFreq->plugin);
-	cpuFreq->icon_size /= xfce_panel_plugin_get_nrows (cpuFreq->plugin);
-
 	/* create panel toggle button which will contain all other widgets */
 	cpuFreq->button = xfce_create_panel_toggle_button ();
 	xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->button);
@@ -446,10 +438,6 @@ cpufreq_widgets (void)
 	g_object_set (G_OBJECT (cpuFreq->button), "has-tooltip", TRUE, NULL);
 	g_signal_connect (G_OBJECT (cpuFreq->button), "query-tooltip",
 					  G_CALLBACK (cpufreq_update_tooltip), cpuFreq);
-
-	cpufreq_mode_changed (cpuFreq->plugin,
-						  xfce_panel_plugin_get_mode (cpuFreq->plugin),
-						  cpuFreq);
 
 	gtk_widget_show (cpuFreq->box);
 	gtk_widget_show (cpuFreq->button);
@@ -561,8 +549,8 @@ cpufreq_free (XfcePanelPlugin *plugin)
 static gboolean
 cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 {
-	cpuFreq->icon_size = size / xfce_panel_plugin_get_nrows (cpuFreq->plugin);
-
+	cpuFreq->panel_size = size;
+	cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (plugin);
 	cpuFreq->layout_changed = TRUE;
 	cpufreq_update_icon (cpufreq);
 	cpufreq_update_plugin ();
@@ -604,6 +592,9 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 	cpuFreq 	  = g_new0 (CpuFreqPlugin, 1);
 	cpuFreq->options  = g_new0 (CpuFreqPluginOptions, 1);
 	cpuFreq->plugin   = plugin;
+	cpuFreq->panel_mode = xfce_panel_plugin_get_mode (cpuFreq->plugin);
+	cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (cpuFreq->plugin);
+	cpuFreq->panel_size = xfce_panel_plugin_get_size (cpuFreq->plugin);
 	cpuFreq->cpus    = g_ptr_array_new ();
 
 	cpufreq_read_config ();
