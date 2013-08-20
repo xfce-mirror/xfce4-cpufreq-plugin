@@ -165,8 +165,12 @@ cpufreq_widgets_layout (void)
 	GtkOrientation orientation;
 	gboolean small = cpuFreq->options->keep_compact;
 	gboolean resized = FALSE;
+	gboolean hide_label = (!cpuFreq->options->show_label_freq &&
+						   !cpuFreq->options->show_label_governor);
 	gint panel_size, pos = 1;
 	gint lw = 0, lh = 0, iw = 0, ih = 0;
+
+	small = (hide_label ? TRUE : cpuFreq->options->keep_compact);
 
 	switch (cpuFreq->panel_mode) {
 	case XFCE_PANEL_PLUGIN_MODE_HORIZONTAL:
@@ -183,9 +187,13 @@ cpufreq_widgets_layout (void)
 		break;
 	}
 
+	/* always set plugin small state when only icon is shown */
+	if (hide_label)
+		xfce_panel_plugin_set_small (cpuFreq->plugin, TRUE);
+
 	/* check if the label fits below the icon, else put them side by side */
 	panel_size = xfce_panel_plugin_get_size(cpuFreq->plugin);
-	if (GTK_IS_WIDGET(cpuFreq->label)) {
+	if (GTK_IS_WIDGET(cpuFreq->label) && ! hide_label) {
 		gtk_widget_size_request (cpuFreq->label, &label_size);
 		lw = label_size.width;
 		lh = label_size.height;
