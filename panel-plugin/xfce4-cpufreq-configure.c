@@ -37,11 +37,8 @@ static void
 check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 {
 	if (button == configure->display_icon)
-	{
 		cpuFreq->options->show_icon = 
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-		cpufreq_update_icon (cpuFreq);
-	}
 
 	else if (button == configure->display_freq)
 		cpuFreq->options->show_label_freq =
@@ -51,11 +48,9 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 		cpuFreq->options->show_label_governor =
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-	else if (button == configure->keep_compact) {
+	else if (button == configure->keep_compact)
 		cpuFreq->options->keep_compact =
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-		cpufreq_update_icon (cpuFreq);
-	}
 
 	else if (button == configure->one_line)
 		cpuFreq->options->one_line =
@@ -70,6 +65,7 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 	} else
 		gtk_widget_set_sensitive (configure->display_icon, TRUE);
 
+	cpufreq_update_icon (cpuFreq);
 	cpuFreq->layout_changed = TRUE;
 	cpufreq_update_plugin ();
 }
