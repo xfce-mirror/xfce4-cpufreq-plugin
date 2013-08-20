@@ -155,45 +155,6 @@ cpufreq_update_label (CpuInfo *cpu)
 	return TRUE;
 }
 
-static gboolean
-cpufreq_update_tooltip (GtkWidget *widget,
-						gint x,
-						gint y,
-						gboolean keyboard_mode,
-						GtkTooltip *tooltip,
-						CpuInfo *cpu)
-{
-	gchar *tooltip_msg, *freq = NULL;
-
-	if (G_UNLIKELY(cpu == NULL)) {
-		tooltip_msg = g_strdup (_("No CPU information available."));
-	} else {
-		freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
-		if (cpuFreq->options->show_label_governor && cpuFreq->options->show_label_freq)
-			tooltip_msg = g_strdup_printf (ngettext("%d cpu available", "%d cpus available", cpuFreq->cpus->len), cpuFreq->cpus->len);
-		else
-			tooltip_msg =
-				g_strconcat (!cpuFreq->options->show_label_freq ? _("Frequency: ") : "",
-							 !cpuFreq->options->show_label_freq ? freq : "",
-
-							 cpu->cur_governor != NULL &&
-							 !cpuFreq->options->show_label_freq &&
-							 !cpuFreq->options->show_label_governor ? "\n" : "",
-
-							 cpu->cur_governor != NULL &&
-							 !cpuFreq->options->show_label_governor ? _("Governor: ") : "",
-							 cpu->cur_governor != NULL &&
-							 !cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
-							 NULL);
-	}
-
-	gtk_tooltip_set_text (tooltip, tooltip_msg);
-
-	g_free (freq);
-	g_free (tooltip_msg);
-	return TRUE;
-}
-
 static void
 cpufreq_widgets_layout (void)
 {
@@ -328,6 +289,54 @@ cpufreq_update_plugin (void)
 	return ret;
 }
 
+static gboolean
+cpufreq_update_tooltip (GtkWidget *widget,
+						gint x,
+						gint y,
+						gboolean keyboard_mode,
+						GtkTooltip *tooltip,
+						CpuFreqPlugin *cpufreq)
+{
+	CpuInfo *cpu;
+	gchar *tooltip_msg, *freq = NULL;
+
+	cpu = cpufreq_current_cpu ();
+
+	if (G_UNLIKELY(cpu == NULL)) {
+		tooltip_msg = g_strdup (_("No CPU information available."));
+	} else {
+		freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
+		if (cpuFreq->options->show_label_governor &&
+			cpuFreq->options->show_label_freq)
+			tooltip_msg =
+				g_strdup_printf (ngettext ("%d cpu available",
+										   "%d cpus available",
+										   cpuFreq->cpus->len),
+								 cpuFreq->cpus->len);
+		else
+			tooltip_msg =
+				g_strconcat
+				(!cpuFreq->options->show_label_freq ? _("Frequency: ") : "",
+				 !cpuFreq->options->show_label_freq ? freq : "",
+
+				 cpu->cur_governor != NULL &&
+				 !cpuFreq->options->show_label_freq &&
+				 !cpuFreq->options->show_label_governor ? "\n" : "",
+
+				 cpu->cur_governor != NULL &&
+				 !cpuFreq->options->show_label_governor ? _("Governor: ") : "",
+				 cpu->cur_governor != NULL &&
+				 !cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
+				 NULL);
+	}
+
+	gtk_tooltip_set_text (tooltip, tooltip_msg);
+
+	g_free (freq);
+	g_free (tooltip_msg);
+	return TRUE;
+}
+
 void
 cpufreq_restart_timeout (void)
 {
@@ -393,8 +402,6 @@ cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
 static void
 cpufreq_widgets (void)
 {
-	CpuInfo *cpu;
-
 	cpuFreq->icon_size = xfce_panel_plugin_get_size (cpuFreq->plugin);
 	cpuFreq->icon_size /= xfce_panel_plugin_get_nrows (cpuFreq->plugin);
 
@@ -415,10 +422,9 @@ cpufreq_widgets (void)
 					  G_CALLBACK (cpufreq_overview), cpuFreq);
 
 	/* activate panel widget tooltip */
-	cpu = cpufreq_current_cpu ();
 	g_object_set (G_OBJECT (cpuFreq->button), "has-tooltip", TRUE, NULL);
 	g_signal_connect (G_OBJECT (cpuFreq->button), "query-tooltip",
-					  G_CALLBACK (cpufreq_update_tooltip), cpu);
+					  G_CALLBACK (cpufreq_update_tooltip), cpuFreq);
 
 	cpufreq_mode_changed (cpuFreq->plugin,
 						  xfce_panel_plugin_get_mode (cpuFreq->plugin),
