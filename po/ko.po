@@ -1,41 +1,39 @@
-# Korean translation for the xfce4-cpufreq-plugin package.
-# Copyright (C) 2006-2012 Nick Schermer et al.
-# This file is distributed under the same license as the xfce4-cpufreq-plugin package.
-# Seong-ho, Cho <darkcircle.0426@gmail.com>, 2012, 2013.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Darkcircle <darkcircle.0426@gmail.com>, 2013
+# Darkcircle <darkcircle.0426@gmail.com>, 2012-2013
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-cpufreq-plugin.master\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-18 09:44+0200\n"
-"PO-Revision-Date: 2012-02-28 05:43+0900\n"
-"Last-Translator: Seong-ho, Cho <darkcircle.0426@gmail.com>\n"
-"Language-Team: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge."
-"net>\n"
-"Language: ko\n"
+"POT-Creation-Date: 2013-08-18 12:31+0200\n"
+"PO-Revision-Date: 2013-08-21 06:00+0000\n"
+"Last-Translator: Darkcircle <darkcircle.0426@gmail.com>\n"
+"Language-Team: Korean (http://www.transifex.com/projects/p/xfce/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Poedit-Language: Korean\n"
-"X-Poedit-Country: KOREA, REPUBLIC OF\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:78
 msgid "Select font..."
-msgstr ""
+msgstr "글꼴을 선택하십시오..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font family and size to use for the labels."
-msgstr ""
+msgstr "레이블에 사용할 글꼴 모음과 크기를 선택하십시오."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:84
 msgid "Right-click to revert to the default font."
-msgstr ""
+msgstr "기본 글꼴로 되돌리려면 마우스 오른쪽 단추를 누르십시오."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:102
 msgid "Select font"
-msgstr ""
+msgstr "글꼴 선택"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:188
 msgid "Configure CPU Frequency Monitor"
@@ -51,7 +49,7 @@ msgstr "<b>모니터</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:223
 msgid "_Update interval:"
-msgstr ""
+msgstr "업데이트 주기(_U):"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Panel</b>"
@@ -59,56 +57,50 @@ msgstr "<b>패널</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:257
 msgid "_Font:"
-msgstr ""
+msgstr "글꼴(_F):"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:275
-#, fuzzy
 msgid "_Display CPU:"
-msgstr "CPU 표시:"
+msgstr "CPU 표시(_D):"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:290
 msgid "min"
-msgstr ""
+msgstr "최소"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:291
 msgid "avg"
-msgstr ""
+msgstr "평균"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:292
 msgid "max"
-msgstr ""
+msgstr "최대"
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:298
 msgid "_Keep compact"
-msgstr ""
+msgstr "최소화 유지(_K)"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:303
 msgid "Show text in a single _line"
-msgstr ""
+msgstr "단일 행에 텍스트 표시(_L)"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:308
-#, fuzzy
 msgid "Show CPU _icon"
-msgstr "CPU 아이콘 보기"
+msgstr "CPU 아이콘 표시(_I)"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:313
-#, fuzzy
 msgid "Show CPU fre_quency"
-msgstr "CPU 주파수 보기"
+msgstr "CPU 주파수 표시(_Q)"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:318
-#, fuzzy
 msgid "Show CPU _governor"
-msgstr "CPU 정책 보기"
+msgstr "CPU 정책 표시(_G)"
 
 #: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr ""
-"시스템이 cpufreq를 지원하지 않습니다.\n"
-"애플릿은 현재 CPU 주파수만 보여줍니다"
+msgstr "시스템이 cpufreq를 지원하지 않습니다.\n애플릿은 현재 CPU 주파수만 보여줍니다"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
@@ -141,20 +133,19 @@ msgstr "시스템의 모든 CPU에 대한 개요"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:60
 msgid "current min"
-msgstr ""
+msgstr "현재 최소"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "current avg"
-msgstr ""
+msgstr "현재 평균"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:97
 msgid "current max"
-msgstr ""
+msgstr "현재 최대"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:169
-#, fuzzy
 msgid "No CPU information available."
-msgstr "CPU 정보"
+msgstr "CPU 정보가 없습니다."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:173
 #, c-format
@@ -172,32 +163,22 @@ msgstr "정책:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:559
 #: ../panel-plugin/cpufreq.desktop.in.h:2
-#, fuzzy
 msgid "Show CPU frequencies and governor"
-msgstr "CPU 주파수와 정책 보기"
+msgstr "CPU 주파수와 정책을 보여줍니다"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:561
 msgid "Copyright (c) 2003-2012\n"
-msgstr ""
+msgstr "Copyright (c) 2003-2012\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:584
-#, fuzzy
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr ""
-"이 시스템은 CPU 주파수 스케일링을 지원하도록 올바르게 설정하지 않았습니다 !"
+msgstr "CPU 주파수 조절을 지원하기 위한 시스템 설정이 올바르지 않습니다!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:594
-#, fuzzy
 msgid "Your system is not supported yet!"
-msgstr "이 시스템은 아직 지원하지 않습니다 !"
+msgstr "아직 이 시스템을 지원하지 않습니다!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
 msgstr "CPU 주파수 감시기"
-
-#~ msgid "Timeout Interval:"
-#~ msgstr "시간 초과 간격:"
-
-#~ msgid "Show frame"
-#~ msgstr "틀 보기"
