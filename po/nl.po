@@ -1,38 +1,38 @@
-# Dutch translation of the xfce4-cpufreq-plugin package.
-# Copyright (C) The Xfce development team.
-# This file is distributed under the same license as the 
-# xfce4-cpufreq-plugin package.
-# Pjotr <pjotrvertaalt@gmail.com> , 2011 - 2013.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Pjotr123 <pjotrvertaalt@gmail.com>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-cpufreq-plugin\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-18 09:44+0200\n"
-"PO-Revision-Date: 2011-09-09 11:52+0200\n"
-"Last-Translator: Pjotr pjotrvertaalt@gmail.com\n"
-"Language-Team: Dutch (Flemish)\n"
-"Language: nl (Dutch)\n"
+"POT-Creation-Date: 2013-08-18 12:31+0200\n"
+"PO-Revision-Date: 2013-08-22 09:44+0000\n"
+"Last-Translator: Pjotr123 <pjotrvertaalt@gmail.com>\n"
+"Language-Team: Dutch (http://www.transifex.com/projects/p/xfce/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:78
 msgid "Select font..."
-msgstr ""
+msgstr "Kies lettertype..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font family and size to use for the labels."
-msgstr ""
+msgstr "Kies lettertypefamilie en -grootte om te gebruiken voor de etiketten."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:84
 msgid "Right-click to revert to the default font."
-msgstr ""
+msgstr "Rechtsklik om terug te zetten op het standaardlettertype."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:102
 msgid "Select font"
-msgstr ""
+msgstr "Kies lettertype"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:188
 msgid "Configure CPU Frequency Monitor"
@@ -48,7 +48,7 @@ msgstr "<b>Bewaak</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:223
 msgid "_Update interval:"
-msgstr ""
+msgstr "Tussenpoze voor bijwerken:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Panel</b>"
@@ -56,57 +56,50 @@ msgstr "<b>Werkbalk</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:257
 msgid "_Font:"
-msgstr ""
+msgstr "Lettertype:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:275
-#, fuzzy
 msgid "_Display CPU:"
-msgstr "Toon processor:"
+msgstr "Toon CPU:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:290
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:291
 msgid "avg"
-msgstr ""
+msgstr "gem"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:292
 msgid "max"
-msgstr ""
+msgstr "max"
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:298
 msgid "_Keep compact"
-msgstr ""
+msgstr "Houd compact"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:303
 msgid "Show text in a single _line"
-msgstr ""
+msgstr "Toon tekst in een enkele regel"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:308
-#, fuzzy
 msgid "Show CPU _icon"
-msgstr "Toon processorpictogram"
+msgstr "Toon CPU-pictogram"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:313
-#, fuzzy
 msgid "Show CPU fre_quency"
-msgstr "Toon processorfrequentie"
+msgstr "Toon CPU-frequentie"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:318
-#, fuzzy
 msgid "Show CPU _governor"
-msgstr "Toon processorbeheermodus"
+msgstr "Toon CPU-beheerder"
 
 #: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr ""
-"Uw systeem ondersteunt cpufreq niet.\n"
-"Het programma toont alleen de huidige processor-\n"
-"frequentie."
+msgstr "Uw systeem ondersteunt cpufreq niet.\nHet programma toont alleen de huidige processor-\nfrequentie."
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
@@ -139,20 +132,19 @@ msgstr "Een overzicht van alle processoren in het systeem"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:60
 msgid "current min"
-msgstr ""
+msgstr "huidige min"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "current avg"
-msgstr ""
+msgstr "huidige gem"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:97
 msgid "current max"
-msgstr ""
+msgstr "huidige max"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:169
-#, fuzzy
 msgid "No CPU information available."
-msgstr "Processorinformatie"
+msgstr "Geen CPU-informatie beschikbaar"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:173
 #, c-format
@@ -171,39 +163,22 @@ msgstr "Beheerder:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:559
 #: ../panel-plugin/cpufreq.desktop.in.h:2
-#, fuzzy
 msgid "Show CPU frequencies and governor"
-msgstr "Toont de processorfrequentie en beheerders"
+msgstr "Toon CPU-frequenties en beheerder"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:561
 msgid "Copyright (c) 2003-2012\n"
-msgstr ""
+msgstr "Auteursrecht (c) 2003-2012\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:584
-#, fuzzy
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr ""
-"Uw systeem is niet juist geconfigureerd voor het ondersteunen van schalen "
-"van processorfrequentie!"
+msgstr "Uw systeem is niet juist ingesteld om het schalen van CPU-frequenties te ondersteunen."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:594
-#, fuzzy
 msgid "Your system is not supported yet!"
-msgstr "Uw systeem wordt nog niet ondersteund!"
+msgstr "Uw systeem wordt nog niet ondersteund."
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
 msgstr "Monitor voor processorfrequentie"
-
-#~ msgid "Timeout Interval:"
-#~ msgstr "Interval voor pauze:"
-
-#~ msgid "Show frame"
-#~ msgstr "Toon lijst"
-
-#~ msgid "Could not create widgets !"
-#~ msgstr "Kon geen widgets maken!"
-
-#~ msgid "Could not initialize linux backend !"
-#~ msgstr "Kon Linuxdienst niet initialiseren!"
