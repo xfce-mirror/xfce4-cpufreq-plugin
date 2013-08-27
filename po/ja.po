@@ -1,38 +1,38 @@
-# Japanese translations for xfce4-cpufreq-plugin package.
-# Copyright (C) 2008-2012 xfce4-cpufreq-plugin'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
 # Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2008
-# Masato Hashimoto <cabezon.hashimoto@gmail.com>, 2011-2012.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-cpufreq-plugin\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-18 09:44+0200\n"
-"PO-Revision-Date: 2012-04-20 21:43+0900\n"
-"Last-Translator: Masato Hashimoto <cabezon.hashimoto@gmail.com>\n"
-"Language-Team: Japanese <LL@li.org>\n"
-"Language: ja\n"
+"POT-Creation-Date: 2013-08-18 12:31+0200\n"
+"PO-Revision-Date: 2013-08-27 12:02+0000\n"
+"Last-Translator: Masato HASHIMOTO <cabezon.hashimoto@gmail.com>\n"
+"Language-Team: Japanese <xfce-users-jp@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:78
 msgid "Select font..."
-msgstr ""
+msgstr "フォントの選択..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font family and size to use for the labels."
-msgstr ""
+msgstr "ラベルに使用するフォントファミリとサイズを選択します。"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:84
 msgid "Right-click to revert to the default font."
-msgstr ""
+msgstr "右クリックでデフォルトフォントに戻します。"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:102
 msgid "Select font"
-msgstr ""
+msgstr "フォントの選択"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:188
 msgid "Configure CPU Frequency Monitor"
@@ -48,7 +48,7 @@ msgstr "<b>モニター</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:223
 msgid "_Update interval:"
-msgstr ""
+msgstr "更新間隔(_U):"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Panel</b>"
@@ -56,56 +56,50 @@ msgstr "<b>パネル</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:257
 msgid "_Font:"
-msgstr ""
+msgstr "フォント(_F):"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:275
-#, fuzzy
 msgid "_Display CPU:"
-msgstr "表示するCPU:"
+msgstr "表示する CPU(_D):"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:290
 msgid "min"
-msgstr ""
+msgstr "最低"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:291
 msgid "avg"
-msgstr ""
+msgstr "平均"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:292
 msgid "max"
-msgstr ""
+msgstr "最高"
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:298
 msgid "_Keep compact"
-msgstr ""
+msgstr "コンパクトに表示する(_K)"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:303
 msgid "Show text in a single _line"
-msgstr ""
+msgstr "テキストを 1 行で表示する(_L)"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:308
-#, fuzzy
 msgid "Show CPU _icon"
-msgstr "CPU アイコンを表示する"
+msgstr "CPU アイコンを表示する(_I)"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:313
-#, fuzzy
 msgid "Show CPU fre_quency"
-msgstr "CPU 周波数を表示する"
+msgstr "CPU 周波数を表示する(_Q)"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:318
-#, fuzzy
 msgid "Show CPU _governor"
-msgstr "CPU ガバナーを表示する"
+msgstr "CPU ガバナーを表示する(_G)"
 
 #: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr ""
-"このシステムでは cpufreq がサポートされていません｡\n"
-"このアプレットは現在の CPU 周波数の表示のみ行います｡"
+msgstr "このシステムでは cpufreq がサポートされていません｡\nこのアプレットは現在の CPU 周波数の表示のみ行います｡"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
@@ -138,20 +132,19 @@ msgstr "このシステムにあるすべての CPU の概要"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:60
 msgid "current min"
-msgstr ""
+msgstr "現在の最低"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "current avg"
-msgstr ""
+msgstr "現在の平均"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:97
 msgid "current max"
-msgstr ""
+msgstr "現在の最高"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:169
-#, fuzzy
 msgid "No CPU information available."
-msgstr "CPU 情報"
+msgstr "CPU 情報が利用できません。"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:173
 #, c-format
@@ -169,39 +162,22 @@ msgstr "ガバナー:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:559
 #: ../panel-plugin/cpufreq.desktop.in.h:2
-#, fuzzy
 msgid "Show CPU frequencies and governor"
 msgstr "CPU 周波数とガバナーを表示します"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:561
 msgid "Copyright (c) 2003-2012\n"
-msgstr ""
+msgstr "Copyright (c) 2003-2012\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:584
-#, fuzzy
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr ""
-"あなたのシステムは CPU 周波数調整をサポートするための設定が正しく行われていま"
-"せん !"
+msgstr "このシステムは CPU 周波数調整をサポートするための設定が正しく行われていません!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:594
-#, fuzzy
 msgid "Your system is not supported yet!"
-msgstr "あなたのシステムはまだサポートされていません !"
+msgstr "このシステムはまだサポートされていません!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
 msgstr "CPU 周波数モニター"
-
-#~ msgid "Timeout Interval:"
-#~ msgstr "更新間隔:"
-
-#~ msgid "Show frame"
-#~ msgstr "フレームを表示する"
-
-#~ msgid "Could not create widgets !"
-#~ msgstr "ウィジェットが作成できませんでした !"
-
-#~ msgid "Could not initialize linux backend !"
-#~ msgstr "Linux バックエンドを初期化できませんでした !"
