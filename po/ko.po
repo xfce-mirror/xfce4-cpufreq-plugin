@@ -167,8 +167,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "CPU 주파수와 정책을 보여줍니다"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:561
-msgid "Copyright (c) 2003-2012\n"
-msgstr "Copyright (c) 2003-2012\n"
+msgid "Copyright (c) 2003-2013\n"
+msgstr "Copyright (c) 2003-2013\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:584
 msgid ""

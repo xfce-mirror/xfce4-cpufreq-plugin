@@ -171,7 +171,7 @@ msgid "Show CPU frequencies and governor"
 msgstr "تظهر تردد المعالج والحكام"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:561
-msgid "Copyright (c) 2003-2012\n"
+msgid "Copyright (c) 2003-2013\n"
 msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:584

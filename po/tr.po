@@ -167,8 +167,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "İşlemci frekansını ve işlemci yöneticisini göster"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:561
-msgid "Copyright (c) 2003-2012\n"
-msgstr "Telif hakkı (c) 2003-2012\n\n"
+msgid "Copyright (c) 2003-2013\n"
+msgstr "Telif hakkı (c) 2003-2013\n\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:584
 msgid ""

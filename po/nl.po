@@ -167,8 +167,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "Toon CPU-frequenties en beheerder"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:561
-msgid "Copyright (c) 2003-2012\n"
-msgstr "Auteursrecht (c) 2003-2012\n"
+msgid "Copyright (c) 2003-2013\n"
+msgstr "Auteursrecht (c) 2003-2013\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:584
 msgid ""

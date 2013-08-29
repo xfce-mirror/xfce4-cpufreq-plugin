@@ -168,8 +168,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "Mostrar frequências e governador da CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:561
-msgid "Copyright (c) 2003-2012\n"
-msgstr "Copyright (c) 2003-2012\n"
+msgid "Copyright (c) 2003-2013\n"
+msgstr "Copyright (c) 2003-2013\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:584
 msgid ""

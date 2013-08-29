@@ -169,8 +169,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "Приказуј управљача и учесталости процесора"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:561
-msgid "Copyright (c) 2003-2012\n"
-msgstr "Права умножавања (c) 2003-2012\n"
+msgid "Copyright (c) 2003-2013\n"
+msgstr "Права умножавања (c) 2003-2013\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:584
 msgid ""
