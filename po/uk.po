@@ -1,27 +1,27 @@
-# Translation of xfce4-cpufreq-plugin to Ukrainian
-# Copyright (C) 2007 Dmitry Nikitin
-# This file is distributed under the same license as the xfce4-cpufreq-plugin package.
-#
-# Dmitry Nikitin <luckas_fb@mail.ru>, 2007.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Dmitry Nikitin <luckas_fb@mail.ru>, 2007
+# Yarema aka Knedlyk <yupadmin@gmail.com>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-cpufreq-plugin\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-18 09:44+0200\n"
-"PO-Revision-Date: 2007-03-08 00:57+0200\n"
-"Last-Translator: Dmitry Nikitin <luckas_fb@mail.ru>\n"
-"Language-Team: Ukrainian <xfce-i18n@xfce.org>\n"
-"Language: uk\n"
+"POT-Creation-Date: 2013-08-30 00:31+0200\n"
+"PO-Revision-Date: 2013-09-01 20:04+0000\n"
+"Last-Translator: Yarema aka Knedlyk <yupadmin@gmail.com>\n"
+"Language-Team: Ukrainian (http://www.transifex.com/projects/p/xfce/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: KBabel 1.11.4\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:78
 msgid "Select font..."
-msgstr ""
+msgstr "Вибір шрифту..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font family and size to use for the labels."
@@ -57,12 +57,11 @@ msgstr "<b>Панель</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:257
 msgid "_Font:"
-msgstr ""
+msgstr "_Шрифт:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:275
-#, fuzzy
 msgid "_Display CPU:"
-msgstr "Показати CPU:"
+msgstr "_Показати CPU:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:290
 msgid "min"
@@ -86,27 +85,22 @@ msgid "Show text in a single _line"
 msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:308
-#, fuzzy
 msgid "Show CPU _icon"
-msgstr "Показати значок CPU"
+msgstr "Показати _іконку CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:313
-#, fuzzy
+#: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Show CPU fre_quency"
-msgstr "Показати частоту процесора"
+msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:318
-#, fuzzy
+#: ../panel-plugin/xfce4-cpufreq-configure.c:320
 msgid "Show CPU _governor"
-msgstr "Показати регулятор CPU"
+msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:465
+#: ../panel-plugin/xfce4-cpufreq-linux.c:485
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr ""
-"Ваша система не підтримує cpufreq.\n"
-"Цей аплет буде тільки відображати частоту процесора"
+msgstr "Ваша система не підтримує cpufreq.\nЦей аплет буде тільки відображати частоту процесора"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
@@ -149,12 +143,11 @@ msgstr ""
 msgid "current max"
 msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:169
-#, fuzzy
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:315
 msgid "No CPU information available."
-msgstr "Інформація CPU"
+msgstr "Інформація про CPU недоступна."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:173
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:321
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
@@ -162,47 +155,32 @@ msgstr[0] "%d процесор доступний"
 msgstr[1] "%d процесорів доступно"
 msgstr[2] "%d процесорів доступно"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:176
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:328
 msgid "Frequency: "
 msgstr "Частота: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:184
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:336
 msgid "Governor: "
 msgstr "Можливості: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:559
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:577
 #: ../panel-plugin/cpufreq.desktop.in.h:2
-#, fuzzy
 msgid "Show CPU frequencies and governor"
-msgstr "Показати частоту процесора та його можливості"
-
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:561
-msgid "Copyright (c) 2003-2013\n"
 msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:584
-#, fuzzy
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:579
+msgid "Copyright (c) 2003-2013\n"
+msgstr "Всі права застережено (c) 2003-2013\n"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:605
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr "Ваша система не налаштована на зміну частоти процесора !"
+msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:594
-#, fuzzy
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:615
 msgid "Your system is not supported yet!"
-msgstr "Ваша система ще не підтримується !"
+msgstr ""
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
 msgstr "Спостереження за частотою процесора"
-
-#~ msgid "Timeout Interval:"
-#~ msgstr "Період затримки:"
-
-#~ msgid "Show frame"
-#~ msgstr "Показувати фрейм"
-
-#~ msgid "Could not create widgets !"
-#~ msgstr "Неможливо створити віджети !"
-
-#~ msgid "Could not initialize linux backend !"
-#~ msgstr "Не вдається ініціалізувати базові функції лінукс !"
