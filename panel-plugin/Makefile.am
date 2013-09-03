@@ -28,7 +28,7 @@ libcpufreq_la_SOURCES =						\
 	xfce4-cpufreq-utils.h					\
 	xfce4-cpufreq-utils.c
 
-libcpugraph_la_LDFLAGS = \
+libcpufreq_la_LDFLAGS = \
 	-avoid-version \
 	-module \
 	-no-undefined \
