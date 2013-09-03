@@ -1,4 +1,24 @@
-1.0.0 (2011/01/23)
+1.1.0 (2013-09-03)
+------------------
+ * Support the Intel performance state driver
+ * Improve config dialog and make it use shortcut keys
+ * Add a proper "About" dialog
+ * Add min, avg and max frequencies in cpu selection
+ * Add support for selecting a custom font
+ * Support showing icon only (bug #7474)
+ * Improve overview window size and layout
+ * Remove code for showing the frame
+ * Rewrite layout code using >=xfce4-panel-4.9 features
+ * Remove code for deprecated APIs and <xfce4-panel-4.9
+ * Build plugin as a module
+ * Fix showing frequency of wrong CPU core (bug #7179)
+ * Fix reading min frequency from cpufreq sysfs
+ * Support panel 4.9 features (deskbar mode) (bug #8396)
+ * Port plugin to libxfce4ui (bug #8051)
+ * Code clean up and refactoring
+ * Updates and fixes for build system files
+
+1.0.0 (2011-01-23)
 ------------------
  * Fix support for xfce 4.8, fixing bug #6448
  * Linux 2.4 support

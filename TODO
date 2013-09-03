@@ -1,0 +1,9 @@
+Here is a collection of ideas and tasks for future releases.
+
+* Add support for changing frequencies and governors. This can be done
+  using polkit and requires redesigning and rewriting UI code. Better
+  than changing frequencies nowadays would be to allow setting certain
+  governor parameters.
+
+* Add support for upower events (AC <-> battery). Maybe make it
+  possible to define profiles for different power states.
