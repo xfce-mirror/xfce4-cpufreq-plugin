@@ -558,6 +558,7 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 	return TRUE;
 }
 
+static void
 cpufreq_show_about(XfcePanelPlugin *plugin,
 				   CpuFreqPlugin *cpufreq)
 {
