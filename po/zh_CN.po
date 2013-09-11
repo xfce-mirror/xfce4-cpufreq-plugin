@@ -1,0 +1,188 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Chipong Luo <chipong_l at yahoo.com>, 2011
+# Hunt Xu <huntxu at live.cn>", 2008
+# 玉堂白鹤 <yjwork@qq.com>, 2013
+# 潇波 周 <zhouxiaobo.500@gmail.com>, 2013
+# 潇波 周 <zhouxiaobo.500@gmail.com>, 2013
+# 玉堂白鹤 <yjwork@qq.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: Xfce Panel Plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-30 00:31+0200\n"
+"PO-Revision-Date: 2013-09-11 06:14+0000\n"
+"Last-Translator: 玉堂白鹤 <yjwork@qq.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/xfce/language/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:78
+msgid "Select font..."
+msgstr "选择字体..."
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:80
+msgid "Select font family and size to use for the labels."
+msgstr "选择标签使用的字体和大小。"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:84
+msgid "Right-click to revert to the default font."
+msgstr "点击右键恢复默认字体。"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:102
+msgid "Select font"
+msgstr "选择字体"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:188
+msgid "Configure CPU Frequency Monitor"
+msgstr "配置 CPU 频率监视器"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:190
+msgid "Configure the CPU frequency plugin"
+msgstr "配置 CPU 频率插件"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:208
+msgid "<b>Monitor</b>"
+msgstr "<b>监视器</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:223
+msgid "_Update interval:"
+msgstr "更新间隔(_U)："
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:241
+msgid "<b>Panel</b>"
+msgstr "<b>面板</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:257
+msgid "_Font:"
+msgstr "字体(_F):"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:275
+msgid "_Display CPU:"
+msgstr "显示 CPU (_D)："
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:290
+msgid "min"
+msgstr "最小值"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:291
+msgid "avg"
+msgstr "平均值"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:292
+msgid "max"
+msgstr "最大值"
+
+#. check buttons for display widgets in panel
+#: ../panel-plugin/xfce4-cpufreq-configure.c:298
+msgid "_Keep compact"
+msgstr "保持紧凑(_K)"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:303
+msgid "Show text in a single _line"
+msgstr "显示单行文字(_L)"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:308
+msgid "Show CPU _icon"
+msgstr "显示 CPU 图标(_I)"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:315
+msgid "Show CPU fre_quency"
+msgstr "显示 CPU 频率(_Q)"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:320
+msgid "Show CPU _governor"
+msgstr "显示 CPU 调度器(_G)"
+
+#: ../panel-plugin/xfce4-cpufreq-linux.c:485
+msgid ""
+"Your system does not support cpufreq.\n"
+"The applet only shows the current cpu frequency"
+msgstr "您的系统不支持 cpufreq。\n此程序只显示当前CPU频率。"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:73
+msgid "Scaling driver:"
+msgstr "调频驱动："
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:81
+#, c-format
+msgid "No scaling driver available"
+msgstr "无可用的调频驱动"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:94
+msgid "Available frequencies:"
+msgstr "可用频率:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:155
+msgid "Available governors:"
+msgstr "可用调频器："
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:181
+msgid "Current governor:"
+msgstr "当前调频器："
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:232
+msgid "CPU Information"
+msgstr "CPU 信息"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:239
+msgid "An overview of all the CPUs in the system"
+msgstr "系统中所有 CPU 概览"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:60
+msgid "current min"
+msgstr "当前最小值"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+msgid "current avg"
+msgstr "当前平均值"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:97
+msgid "current max"
+msgstr "当前最大值"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:315
+msgid "No CPU information available."
+msgstr "无可用的CPU信息。"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:321
+#, c-format
+msgid "%d cpu available"
+msgid_plural "%d cpus available"
+msgstr[0] "%d 个 cpu 可用 "
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:328
+msgid "Frequency: "
+msgstr "频率："
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:336
+msgid "Governor: "
+msgstr "调频器："
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:577
+#: ../panel-plugin/cpufreq.desktop.in.h:2
+msgid "Show CPU frequencies and governor"
+msgstr "显示 CPU 主频及调频器"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:579
+msgid "Copyright (c) 2003-2013\n"
+msgstr "版权所有 (c) 2003-2013\n"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:605
+msgid ""
+"Your system is not configured correctly to support CPU frequency scaling!"
+msgstr "您的系统尚未正确配置以支持 CPU 频率调节！"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:615
+msgid "Your system is not supported yet!"
+msgstr "暂不支持您的系统！"
+
+#: ../panel-plugin/cpufreq.desktop.in.h:1
+msgid "CPU Frequency Monitor"
+msgstr "CPU 频率监视器"
