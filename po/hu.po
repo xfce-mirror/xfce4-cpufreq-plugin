@@ -1,38 +1,39 @@
-# Hungarian translation of xfce4-cpufreq-plugin
-# Copyright (C) 2009, Free Software Foundation, Inc.
-# This file is distributed under the same license as the xfce4-cpufreq-plugin package.
-#
-# Gabor Kelemen <kelemeng at gnome dot hu>, 2009.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Nucleo <nucleo@indamail.hu>, 2013
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2009
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-cpufreq-plugin\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-18 09:44+0200\n"
-"PO-Revision-Date: 2009-07-25 11:55+0200\n"
-"Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
-"Language-Team: Hungarian <gnome at gnome dot hu>\n"
-"Language: \n"
+"POT-Creation-Date: 2013-08-30 00:31+0200\n"
+"PO-Revision-Date: 2013-09-15 01:28+0000\n"
+"Last-Translator: Nucleo <nucleo@indamail.hu>\n"
+"Language-Team: Hungarian (http://www.transifex.com/projects/p/xfce/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:78
 msgid "Select font..."
-msgstr ""
+msgstr "Betűkészlet kiválasztása..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font family and size to use for the labels."
-msgstr ""
+msgstr "Betűkészlet és méret kiválasztása a címkékhez."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:84
 msgid "Right-click to revert to the default font."
-msgstr ""
+msgstr "Jobb-klikk az alapértelmezett betűkészlet visszaállításához."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:102
 msgid "Select font"
-msgstr ""
+msgstr "Betűkészlet kiválasztása"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:188
 msgid "Configure CPU Frequency Monitor"
@@ -48,7 +49,7 @@ msgstr "<b>Megfigyelés</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:223
 msgid "_Update interval:"
-msgstr ""
+msgstr "_Frissítés gyakorisága:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Panel</b>"
@@ -56,56 +57,50 @@ msgstr "<b>Panel</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:257
 msgid "_Font:"
-msgstr ""
+msgstr "_Betűkészlet:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:275
-#, fuzzy
 msgid "_Display CPU:"
-msgstr "CPU megjelenítése:"
+msgstr "_CPU megjelenítése:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:290
 msgid "min"
-msgstr ""
+msgstr "min."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:291
 msgid "avg"
-msgstr ""
+msgstr "átlag"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:292
 msgid "max"
-msgstr ""
+msgstr "max."
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:298
 msgid "_Keep compact"
-msgstr ""
+msgstr "_Kompakt mód tartása"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:303
 msgid "Show text in a single _line"
-msgstr ""
+msgstr "Szöveg megje_lenítése egy sorban"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:308
-#, fuzzy
 msgid "Show CPU _icon"
-msgstr "CPU-ikon megjelenítése"
+msgstr "CPU _ikon megjelenítése"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:313
-#, fuzzy
+#: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Show CPU fre_quency"
-msgstr "CPU-frekvencia megjelenítése"
+msgstr "CPU frek_vencia megjelenítése"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:318
-#, fuzzy
+#: ../panel-plugin/xfce4-cpufreq-configure.c:320
 msgid "Show CPU _governor"
-msgstr "CPU-irányelv megjelenítése"
+msgstr "CPU ve_zérlő megjelenítése"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:465
+#: ../panel-plugin/xfce4-cpufreq-linux.c:485
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr ""
-"A rendszer nem támogatja az órajel módosítását.\n"
-"A bővítmény csak a jelenlegi frekvenciát jeleníti meg"
+msgstr "A rendszer nem támogatja az órajel módosítását.\nA bővítmény csak a jelenlegi frekvenciát jeleníti meg"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
@@ -138,70 +133,53 @@ msgstr "A rendszer összes CPU-jának áttekintése"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:60
 msgid "current min"
-msgstr ""
+msgstr "jelenlegi min."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "current avg"
-msgstr ""
+msgstr "jelenlegi átlag"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:97
 msgid "current max"
-msgstr ""
+msgstr "jelenlegi max."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:169
-#, fuzzy
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:315
 msgid "No CPU information available."
-msgstr "CPU-információk"
+msgstr "Nincs elérhető CPU információ."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:173
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:321
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
 msgstr[0] "%d CPU érhető el"
 msgstr[1] "%d CPU érhető el"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:176
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:328
 msgid "Frequency: "
 msgstr "Órajel: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:184
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:336
 msgid "Governor: "
 msgstr "Vezérlő: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:559
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:577
 #: ../panel-plugin/cpufreq.desktop.in.h:2
-#, fuzzy
 msgid "Show CPU frequencies and governor"
-msgstr "Megjeleníti a CPU órajelét és vezérlőit"
+msgstr "CPU frekvenciák és vezérlő megjelenítése"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:561
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:579
 msgid "Copyright (c) 2003-2013\n"
-msgstr ""
+msgstr "Copyright (c) 2003-2013\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:584
-#, fuzzy
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:605
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr ""
-"A rendszere nincs megfelelően beállítva a CPU-órajelszabályozás támogatásához"
+msgstr "A rendszere nincs megfelelően beállítva a CPU-órajelszabályozás támogatásához!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:594
-#, fuzzy
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:615
 msgid "Your system is not supported yet!"
-msgstr "A rendszere még nem támogatott"
+msgstr "A rendszere még nem támogatott!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
 msgstr "CPU-órajelfigyelő"
-
-#~ msgid "Timeout Interval:"
-#~ msgstr "Időkorlát:"
-
-#~ msgid "Show frame"
-#~ msgstr "Keret megjelenítése"
-
-#~ msgid "Could not create widgets !"
-#~ msgstr "A felületi elemek nem hozhatók létre!"
-
-#~ msgid "Could not initialize linux backend !"
-#~ msgstr "A Linux háttérprogram nem készíthető elő!"
