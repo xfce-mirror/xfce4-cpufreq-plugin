@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-30 00:31+0200\n"
-"PO-Revision-Date: 2013-11-18 17:31+0000\n"
+"PO-Revision-Date: 2013-11-18 17:34+0000\n"
 "Last-Translator: cedeel <chris@cedeel.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/xfce/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -25,11 +25,11 @@ msgstr "Vælg skrifttype..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font family and size to use for the labels."
-msgstr ""
+msgstr "Vælg skriftfamilie og -størrelse til brug i beskeder."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:84
 msgid "Right-click to revert to the default font."
-msgstr ""
+msgstr "Højreklik for at vende tilbage til standardskriften."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:102
 msgid "Select font"
@@ -145,7 +145,7 @@ msgstr "nuværende maks."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:315
 msgid "No CPU information available."
-msgstr ""
+msgstr "Ingen CPU-information tilgængelig."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:321
 #, c-format
@@ -165,20 +165,20 @@ msgstr "Bestyrer: "
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:577
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
-msgstr ""
+msgstr "Vis CPU-frekvenser og bestyrer"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:579
 msgid "Copyright (c) 2003-2013\n"
-msgstr ""
+msgstr "Copyright (c) 2003-2013\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:605
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr ""
+msgstr "Dit system er ikke korrekt indstillet til at understøtte CPU-frekvens skalering!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:615
 msgid "Your system is not supported yet!"
-msgstr ""
+msgstr "Dit system er ikke understøttet endnu!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
