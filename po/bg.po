@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-30 00:31+0200\n"
-"PO-Revision-Date: 2014-01-11 15:01+0000\n"
+"PO-Revision-Date: 2014-01-12 08:53+0000\n"
 "Last-Translator: lyubomirv\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/xfce/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +60,7 @@ msgstr "_Шрифт:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:275
 msgid "_Display CPU:"
-msgstr ""
+msgstr "_Показване на ЦП:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:290
 msgid "min"
@@ -93,7 +93,7 @@ msgstr "Показване на _честота на ЦП"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:320
 msgid "Show CPU _governor"
-msgstr ""
+msgstr "Показване на _регулатор на ЦП"
 
 #: ../panel-plugin/xfce4-cpufreq-linux.c:485
 msgid ""
@@ -116,11 +116,11 @@ msgstr "Налични честоти:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:155
 msgid "Available governors:"
-msgstr ""
+msgstr "Налични регулатори:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:181
 msgid "Current governor:"
-msgstr ""
+msgstr "Текущ регулатор:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:232
 msgid "CPU Information"
@@ -159,12 +159,12 @@ msgstr "Честота:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:336
 msgid "Governor: "
-msgstr ""
+msgstr "Регулатор:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:577
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
-msgstr ""
+msgstr "Показване на честотите и регулаторите на ЦП"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:579
 msgid "Copyright (c) 2003-2013\n"
