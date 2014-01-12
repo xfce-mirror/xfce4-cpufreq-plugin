@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-30 00:31+0200\n"
-"PO-Revision-Date: 2014-01-12 08:53+0000\n"
+"PO-Revision-Date: 2014-01-12 16:09+0000\n"
 "Last-Translator: lyubomirv\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/xfce/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -36,15 +36,15 @@ msgstr "Изберете шрифт"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:188
 msgid "Configure CPU Frequency Monitor"
-msgstr ""
+msgstr "Настройка на наблюдателя на честотата на ЦП"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:190
 msgid "Configure the CPU frequency plugin"
-msgstr ""
+msgstr "Настройка на плъгина за честота на ЦП"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:208
 msgid "<b>Monitor</b>"
-msgstr ""
+msgstr "<b>Наблюдател</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:223
 msgid "_Update interval:"
@@ -52,7 +52,7 @@ msgstr "Интервал на _обновяване:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Panel</b>"
-msgstr ""
+msgstr "<b>Панел</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:257
 msgid "_Font:"
@@ -77,7 +77,7 @@ msgstr "максимум"
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:298
 msgid "_Keep compact"
-msgstr ""
+msgstr "_Поддържай в компактен вид"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:303
 msgid "Show text in a single _line"
@@ -99,16 +99,16 @@ msgstr "Показване на _регулатор на ЦП"
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr ""
+msgstr "Системата Ви не поддържа cpufreq\nПриставката показва само текущата честота на ЦП"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
-msgstr ""
+msgstr "Драйвер за скалиране:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:81
 #, c-format
 msgid "No scaling driver available"
-msgstr ""
+msgstr "Няма наличен драйвър за скалиране"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:94
 msgid "Available frequencies:"
@@ -173,7 +173,7 @@ msgstr "Авторски права (c) 2003-2013\n"
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:605
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr ""
+msgstr "Вашата системе не е настроена правилно, за да поддържа скалиране на честотата на ЦП!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:615
 msgid "Your system is not supported yet!"
@@ -181,4 +181,4 @@ msgstr "Вашата система все още не се поддържа!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr ""
+msgstr "Наблюдател на честотата на ЦП"
