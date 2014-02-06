@@ -1,0 +1,184 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2014
+# theppitak <theppitak@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Xfce Panel Plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-30 00:31+0200\n"
+"PO-Revision-Date: 2014-02-06 15:10+0000\n"
+"Last-Translator: theppitak <theppitak@gmail.com>\n"
+"Language-Team: Thai (http://www.transifex.com/projects/p/xfce/language/th/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:78
+msgid "Select font..."
+msgstr "เลือกแบบอักษร..."
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:80
+msgid "Select font family and size to use for the labels."
+msgstr "เลือกแบบอักษรและขนาดที่จะใช้กับฉลากต่างๆ"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:84
+msgid "Right-click to revert to the default font."
+msgstr "คลิกขวาเพื่อคืนกลับเป็นแบบอักษรปริยาย"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:102
+msgid "Select font"
+msgstr "เลือกแบบอักษร"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:188
+msgid "Configure CPU Frequency Monitor"
+msgstr "ตั้งค่าปลั๊กอินเฝ้าสังเกตความถี่ซีพียู"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:190
+msgid "Configure the CPU frequency plugin"
+msgstr "ตั้งค่าปลั๊กอินความถี่ซีพียู"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:208
+msgid "<b>Monitor</b>"
+msgstr "<b>การเฝ้าสังเกต</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:223
+msgid "_Update interval:"
+msgstr "ช่วงเวลา_ปรับข้อมูล:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:241
+msgid "<b>Panel</b>"
+msgstr "<b>พาเนล</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:257
+msgid "_Font:"
+msgstr "แบบ_อักษร:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:275
+msgid "_Display CPU:"
+msgstr "แ_สดงซีพียู:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:290
+msgid "min"
+msgstr "ต่ำสุด"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:291
+msgid "avg"
+msgstr "เฉลี่ย"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:292
+msgid "max"
+msgstr "สูงสุด"
+
+#. check buttons for display widgets in panel
+#: ../panel-plugin/xfce4-cpufreq-configure.c:298
+msgid "_Keep compact"
+msgstr "ขนาด_กะทัดรัด"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:303
+msgid "Show text in a single _line"
+msgstr "แสดงข้อความใน_บรรทัดเดียว"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:308
+msgid "Show CPU _icon"
+msgstr "แสดงไอ_คอนซีพียู"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:315
+msgid "Show CPU fre_quency"
+msgstr "แสดงความ_ถี่ซีพียู"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:320
+msgid "Show CPU _governor"
+msgstr "แสดงวิธีควบคุ_มความถี่"
+
+#: ../panel-plugin/xfce4-cpufreq-linux.c:485
+msgid ""
+"Your system does not support cpufreq.\n"
+"The applet only shows the current cpu frequency"
+msgstr "ระบบของคุณไม่รองรับ cpufreq\nแอพเพล็ตจะแสดงเฉพาะความถี่ปัจจุบันของซีพียูเท่านั้น"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:73
+msgid "Scaling driver:"
+msgstr "ตัวขับการปรับขนาด:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:81
+#, c-format
+msgid "No scaling driver available"
+msgstr "ไม่มีตัวขับการปรับขนาด"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:94
+msgid "Available frequencies:"
+msgstr "ความถี่ที่ใช้ได้:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:155
+msgid "Available governors:"
+msgstr "วิธีควบคุมความถี่ที่ใช้ได้:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:181
+msgid "Current governor:"
+msgstr "วิธีควบคุมความถี่ปัจจุบัน:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:232
+msgid "CPU Information"
+msgstr "ข้อมูลซีพียู"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:239
+msgid "An overview of all the CPUs in the system"
+msgstr "ภาพรวมของซีพียูทั้งหมดในระบบ"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:60
+msgid "current min"
+msgstr "ต่ำสุดปัจจุบัน"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+msgid "current avg"
+msgstr "เฉลี่ยปัจจุบัน"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:97
+msgid "current max"
+msgstr "สูงสุดปัจจุบัน"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:315
+msgid "No CPU information available."
+msgstr "ไม่มีข้อมูลซีพียู"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:321
+#, c-format
+msgid "%d cpu available"
+msgid_plural "%d cpus available"
+msgstr[0] "มี %d ซีพียู"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:328
+msgid "Frequency: "
+msgstr "ความถี่: "
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:336
+msgid "Governor: "
+msgstr "วิธีควบคุมความถี่: "
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:577
+#: ../panel-plugin/cpufreq.desktop.in.h:2
+msgid "Show CPU frequencies and governor"
+msgstr "แสดงความถี่ซีพียูและวิธีควบคุมความถี่"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:579
+msgid "Copyright (c) 2003-2013\n"
+msgstr "Copyright (c) 2003-2013\n"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:605
+msgid ""
+"Your system is not configured correctly to support CPU frequency scaling!"
+msgstr "ระบบของคุณยังไม่ได้ตั้งค่าอย่างถูกต้องให้รองรับการปรับความถี่ซีพียู!"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:615
+msgid "Your system is not supported yet!"
+msgstr "ยังไม่รองรับระบบของคุณ!"
+
+#: ../panel-plugin/cpufreq.desktop.in.h:1
+msgid "CPU Frequency Monitor"
+msgstr "เฝ้าสังเกตความถี่ซีพียู"
