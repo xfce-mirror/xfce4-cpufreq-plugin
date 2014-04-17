@@ -1,188 +1,184 @@
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Tornes Llume <l.lumex03.tornes@gmail.com>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce 4-cpufreq-complementu\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-18 09:44+0200\n"
-"PO-Revision-Date: 2009-07-13 19:55+0100\n"
-"Last-Translator: Marcos Antonio Alvarez Costales <marcoscostales@gmail.com>\n"
-"Language-Team: Asturian <alministradores@softastur.org>\n"
-"Language: ast\n"
+"POT-Creation-Date: 2013-08-30 00:31+0200\n"
+"PO-Revision-Date: 2014-04-17 16:13+0000\n"
+"Last-Translator: Tornes Llume <l.lumex03.tornes@gmail.com>\n"
+"Language-Team: Asturian (http://www.transifex.com/projects/p/xfce/language/ast/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ast\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:78
 msgid "Select font..."
-msgstr ""
+msgstr "Esbillar fonte..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font family and size to use for the labels."
-msgstr ""
+msgstr "Esbilla la familia de la fonte y el tamañu pa usar nes etiquetes."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:84
 msgid "Right-click to revert to the default font."
-msgstr ""
+msgstr "Clic drechu col mur pa reafitar la fonte."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:102
 msgid "Select font"
-msgstr ""
+msgstr "Esbillar fonte"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:188
-#, fuzzy
 msgid "Configure CPU Frequency Monitor"
-msgstr "Monitor de frecuencia de CPU"
+msgstr "Configurar el monitor de frecuencia de la CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:190
 msgid "Configure the CPU frequency plugin"
-msgstr ""
+msgstr "Configurar el complementu de frecuencia de la CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:208
 msgid "<b>Monitor</b>"
-msgstr ""
+msgstr "<b>Monitor</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:223
 msgid "_Update interval:"
-msgstr ""
+msgstr "_Intervalu d'anovamientu:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Panel</b>"
-msgstr ""
+msgstr "<b>Panel</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:257
 msgid "_Font:"
-msgstr ""
+msgstr "_Fonte:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:275
 msgid "_Display CPU:"
-msgstr ""
+msgstr "A_mosar CPU:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:290
 msgid "min"
-msgstr ""
+msgstr "mín"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:291
 msgid "avg"
-msgstr ""
+msgstr "pro"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:292
 msgid "max"
-msgstr ""
+msgstr "máx"
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:298
 msgid "_Keep compact"
-msgstr ""
+msgstr "_Caltener compautu"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:303
 msgid "Show text in a single _line"
-msgstr ""
+msgstr "Amosar testu namái nuna llinia"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:308
 msgid "Show CPU _icon"
-msgstr ""
+msgstr "Amosar _iconu de la CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:313
-#, fuzzy
+#: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Show CPU fre_quency"
-msgstr "Monitor de frecuencia de CPU"
+msgstr "Amosar frec_uencia de la CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:318
+#: ../panel-plugin/xfce4-cpufreq-configure.c:320
 msgid "Show CPU _governor"
-msgstr ""
+msgstr "Amosar _governador de la CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:465
+#: ../panel-plugin/xfce4-cpufreq-linux.c:485
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr ""
+msgstr "El to sistema nun sofita cpufreq.\nL'applet amuesa namái la frecuencia de la CPU d'anguaño"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
-msgstr ""
+msgstr "Controlador d'escaláu:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:81
 #, c-format
 msgid "No scaling driver available"
-msgstr ""
+msgstr "Nun hai controlador d'escaláu disponible"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:94
 msgid "Available frequencies:"
-msgstr ""
+msgstr "Frecuencies disponibles:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:155
 msgid "Available governors:"
-msgstr ""
+msgstr "Governadores disponibles:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:181
 msgid "Current governor:"
-msgstr ""
+msgstr "Governador d'anguaño:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:232
 msgid "CPU Information"
-msgstr ""
+msgstr "Información de la CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:239
 msgid "An overview of all the CPUs in the system"
-msgstr ""
+msgstr "Una vista previa de toles CPUs nel to sistema"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:60
 msgid "current min"
-msgstr ""
+msgstr "mín anguaño"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "current avg"
-msgstr ""
+msgstr "pro anguaño"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:97
 msgid "current max"
-msgstr ""
+msgstr "máx anguaño"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:169
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:315
 msgid "No CPU information available."
-msgstr ""
+msgstr "Nun hai información de la CPU disponible."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:173
-#, fuzzy, c-format
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:321
+#, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
-msgstr[0] "%d de CPU disponible"
-msgstr[1] "%d de CPU disponible"
+msgstr[0] "%d CPU disponible"
+msgstr[1] "%d CPUs disponible"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:176
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:328
 msgid "Frequency: "
 msgstr "Frecuencia:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:184
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:336
 msgid "Governor: "
 msgstr "Gobernador:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:559
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:577
 #: ../panel-plugin/cpufreq.desktop.in.h:2
-#, fuzzy
 msgid "Show CPU frequencies and governor"
-msgstr "Amuesa la frecuencia de CPU y los gobernadores"
+msgstr "Amosar frecuencies y governador de la CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:561
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:579
 msgid "Copyright (c) 2003-2013\n"
-msgstr ""
+msgstr "Copyright (c) 2003-2013\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:584
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:605
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr ""
+msgstr "¡El to sistema nun ta configuráu correutamente pa sofitar l'escaláu de frecuencia de la CPU!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:594
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:615
 msgid "Your system is not supported yet!"
-msgstr ""
+msgstr "¡El to sistema entá nun ta sofitáu!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
 msgstr "Monitor de frecuencia de CPU"
-
-#~ msgid "Could not create widgets !"
-#~ msgstr "¡Nun pudieron criase los elementos gráficos!"
-
-#~ msgid "Could not initialize linux backend !"
-#~ msgstr "¡Nun pudo entamase'l motor de Linux!"
