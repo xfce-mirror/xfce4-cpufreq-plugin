@@ -5,14 +5,15 @@
 # Translators:
 # jc1 <jc1.quebecos@gmail.com>, 2013
 # jc <jc>, 2013
+# Yannick Le Guen <leguen.yannick@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-18 12:31+0200\n"
-"PO-Revision-Date: 2013-08-18 17:36+0000\n"
-"Last-Translator: jc1 <jc1.quebecos@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/xfce/language/fr/)\n"
+"POT-Creation-Date: 2013-08-30 00:31+0200\n"
+"PO-Revision-Date: 2014-06-22 09:05+0000\n"
+"Last-Translator: Yannick Le Guen <leguen.yannick@gmail.com>\n"
+"Language-Team: French (http://www.transifex.com/projects/p/xfce-panel-plugins/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -78,7 +79,7 @@ msgstr "max"
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:298
 msgid "_Keep compact"
-msgstr "Garder le compact"
+msgstr "_Garder compact"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:303
 msgid "Show text in a single _line"
@@ -88,15 +89,15 @@ msgstr "Afficher le texte en une seule _ligne"
 msgid "Show CPU _icon"
 msgstr "Afficher l'_icône du processeur"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:313
+#: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Show CPU fre_quency"
 msgstr "Afficher la fré_quence du processeur"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:318
+#: ../panel-plugin/xfce4-cpufreq-configure.c:320
 msgid "Show CPU _governor"
-msgstr "Afficher le _gouverneur du processeur"
+msgstr "Afficher le _profil du processeur"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:465
+#: ../panel-plugin/xfce4-cpufreq-linux.c:485
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
@@ -125,7 +126,7 @@ msgstr "Profil actuel :"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:232
 msgid "CPU Information"
-msgstr "Information sur le processeur"
+msgstr "Informations sur le processeur"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:239
 msgid "An overview of all the CPUs in the system"
@@ -143,42 +144,42 @@ msgstr "moy actuelle"
 msgid "current max"
 msgstr "max actuel"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:169
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:315
 msgid "No CPU information available."
 msgstr "Aucune information disponible sur le processeur."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:173
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:321
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
 msgstr[0] "%d processeur disponible"
 msgstr[1] "%d processeurs disponibles"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:176
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:328
 msgid "Frequency: "
 msgstr "Fréquence :"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:184
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:336
 msgid "Governor: "
 msgstr "Profil :"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:559
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:577
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
-msgstr "Afficher les fréquences du processeur et du gouverneur"
+msgstr "Afficher les fréquences et le profil du processeur"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:561
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:579
 msgid "Copyright (c) 2003-2013\n"
 msgstr "Copyright (c) 2003-2013\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:584
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:605
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr "Votre système n'est pas configuré correctement pour soutenir l'ajustement de fréquence du processeur !"
+msgstr "Votre système n'est pas configuré correctement pour prendre en charge l'ajustement de fréquence du processeur !"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:594
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:615
 msgid "Your system is not supported yet!"
-msgstr "Votre système n'est pas encore supporté !"
+msgstr "Votre système n'est pas encore pris en charge !"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
