@@ -116,6 +116,7 @@ cpufreq_label_set_font (void)
 gboolean
 cpufreq_update_label (CpuInfo *cpu)
 {
+	GtkRequisition label_size;
 	gchar *label, *freq;
 	gint both;
 
@@ -147,6 +148,22 @@ cpufreq_update_label (CpuInfo *cpu)
 		else
 			gtk_label_set_angle (GTK_LABEL(cpuFreq->label), 0);
 		gtk_widget_show (cpuFreq->label);
+
+		/* Set label width to max width if smaller to avoid panel
+		   resizing/jumping (see bug #10385). */
+		gtk_widget_size_request (cpuFreq->label, &label_size);
+		if (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
+			if (label_size.height < cpuFreq->label_max_width)
+				gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label),
+											 -1, cpuFreq->label_max_width);
+			else
+				cpuFreq->label_max_width = label_size.height;
+		else
+			if (label_size.width < cpuFreq->label_max_width)
+				gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label),
+											 cpuFreq->label_max_width, -1);
+			else
+				cpuFreq->label_max_width = label_size.width;
 	}
 	else
 	{
@@ -168,6 +185,10 @@ cpufreq_widgets_layout (void)
 	gboolean hide_label = (!cpuFreq->options->show_label_freq &&
 						   !cpuFreq->options->show_label_governor);
 	gint pos = 1, lw = 0, lh = 0, iw = 0, ih = 0;
+
+	/* reset label max width on layout changes */
+	cpuFreq->label_max_width = -1;
+	gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label), -1, -1);
 
 	small = (hide_label ? TRUE : cpuFreq->options->keep_compact);
 
@@ -201,6 +222,7 @@ cpufreq_widgets_layout (void)
 		iw = icon_size.width;
 		ih = icon_size.height;
 	}
+
 	if (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL &&
 		orientation == GTK_ORIENTATION_VERTICAL &&
 		lh + ih + BORDER * 2 >= cpuFreq->panel_size) {
@@ -551,6 +573,7 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 {
 	cpuFreq->panel_size = size;
 	cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (plugin);
+	cpuFreq->label_max_width = -1;
 	cpuFreq->layout_changed = TRUE;
 	cpufreq_update_icon (cpufreq);
 	cpufreq_update_plugin ();
@@ -596,6 +619,7 @@ cpufreq_construct (XfcePanelPlugin *plugin)
 	cpuFreq->panel_mode = xfce_panel_plugin_get_mode (cpuFreq->plugin);
 	cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (cpuFreq->plugin);
 	cpuFreq->panel_size = xfce_panel_plugin_get_size (cpuFreq->plugin);
+	cpuFreq->label_max_width = -1;
 	cpuFreq->cpus    = g_ptr_array_new ();
 
 	cpufreq_read_config ();

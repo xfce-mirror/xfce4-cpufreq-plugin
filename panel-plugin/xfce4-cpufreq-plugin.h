@@ -84,6 +84,7 @@ typedef struct
 	/* Widgets */
 	GtkWidget *button, *box, *icon, *label;
 	gboolean layout_changed;
+	gint label_max_width;
 
 	CpuFreqPluginOptions  *options;
 	gint 		      timeoutHandle;
