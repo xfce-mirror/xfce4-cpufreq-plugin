@@ -190,6 +190,7 @@ cpufreq_widgets_layout (void)
 	cpuFreq->label_max_width = -1;
 	gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label), -1, -1);
 
+	/* keep plugin small if label is hidden or user requested compact size */
 	small = (hide_label ? TRUE : cpuFreq->options->keep_compact);
 
 	switch (cpuFreq->panel_mode) {
@@ -203,13 +204,9 @@ cpufreq_widgets_layout (void)
 		break;
 	case XFCE_PANEL_PLUGIN_MODE_DESKBAR:
 		orientation = small ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
-		xfce_panel_plugin_set_small (cpuFreq->plugin, FALSE);
+		xfce_panel_plugin_set_small (cpuFreq->plugin, hide_label ? TRUE : FALSE);
 		break;
 	}
-
-	/* always set plugin small state when only icon is shown */
-	if (hide_label)
-		xfce_panel_plugin_set_small (cpuFreq->plugin, TRUE);
 
 	/* check if the label fits below the icon, else put them side by side */
 	if (GTK_IS_WIDGET(cpuFreq->label) && ! hide_label) {
