@@ -449,7 +449,7 @@ cpufreq_update_cpus (gpointer data)
 		return FALSE;
 	}
 
-	return cpufreq_update_plugin ();
+	return cpufreq_update_plugin (FALSE);
 }
 
 gboolean

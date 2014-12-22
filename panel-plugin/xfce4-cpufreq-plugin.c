@@ -156,14 +156,20 @@ cpufreq_update_label (CpuInfo *cpu)
 			if (label_size.height < cpuFreq->label_max_width)
 				gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label),
 											 -1, cpuFreq->label_max_width);
-			else
+			else {
+				if (label_size.height > cpuFreq->label_max_width)
+					cpuFreq->layout_changed = TRUE;
 				cpuFreq->label_max_width = label_size.height;
+			}
 		else
 			if (label_size.width < cpuFreq->label_max_width)
 				gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label),
 											 cpuFreq->label_max_width, -1);
-			else
-				cpuFreq->label_max_width = label_size.width;
+			else {
+				if (label_size.width > cpuFreq->label_max_width)
+					cpuFreq->label_max_width = label_size.width;
+				cpuFreq->layout_changed = TRUE;
+			}
 	}
 	else
 	{
@@ -185,10 +191,6 @@ cpufreq_widgets_layout (void)
 	gboolean hide_label = (!cpuFreq->options->show_label_freq &&
 						   !cpuFreq->options->show_label_governor);
 	gint pos = 1, lw = 0, lh = 0, iw = 0, ih = 0;
-
-	/* reset label max width on layout changes */
-	cpuFreq->label_max_width = -1;
-	gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label), -1, -1);
 
 	/* keep plugin small if label is hidden or user requested compact size */
 	small = (hide_label ? TRUE : cpuFreq->options->keep_compact);
@@ -301,12 +303,19 @@ cpufreq_current_cpu ()
 }
 
 gboolean
-cpufreq_update_plugin (void)
+cpufreq_update_plugin (gboolean reset_label_size)
 {
 	CpuInfo *cpu;
 	gboolean ret;
 
 	cpu = cpufreq_current_cpu ();
+
+	if (reset_label_size) {
+		cpuFreq->label_max_width = -1;
+		gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label), -1, -1);
+		cpuFreq->layout_changed = TRUE;
+	}
+
 	ret = cpufreq_update_label (cpu);
 
 	if (cpuFreq->layout_changed) {
@@ -382,8 +391,7 @@ cpufreq_mode_changed (XfcePanelPlugin *plugin, XfcePanelPluginMode mode, CpuFreq
 {
 	cpuFreq->panel_mode = mode;
 	cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (plugin);
-	cpuFreq->layout_changed = TRUE;
-	cpufreq_update_plugin ();
+	cpufreq_update_plugin (TRUE);
 }
 
 void
@@ -461,7 +469,7 @@ cpufreq_widgets (void)
 	gtk_widget_show (cpuFreq->box);
 	gtk_widget_show (cpuFreq->button);
 
-	cpufreq_update_plugin ();
+	cpufreq_update_plugin (TRUE);
 }
 
 static void
@@ -570,10 +578,9 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 {
 	cpuFreq->panel_size = size;
 	cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (plugin);
-	cpuFreq->label_max_width = -1;
-	cpuFreq->layout_changed = TRUE;
+
 	cpufreq_update_icon (cpufreq);
-	cpufreq_update_plugin ();
+	cpufreq_update_plugin (TRUE);
 
 	return TRUE;
 }

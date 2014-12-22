@@ -66,8 +66,7 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 		gtk_widget_set_sensitive (configure->display_icon, TRUE);
 
 	cpufreq_update_icon (cpuFreq);
-	cpuFreq->layout_changed = TRUE;
-	cpufreq_update_plugin ();
+	cpufreq_update_plugin (TRUE);
 }
 
 static void
@@ -83,11 +82,8 @@ button_fontname_update(GtkWidget *button,
 		gtk_widget_set_tooltip_text
 			(button, _("Right-click to revert to the default font."));
 	}
-	if (update_plugin) {
-		cpufreq_label_set_font ();
-		cpuFreq->layout_changed = TRUE;
-		cpufreq_update_plugin ();
-	}
+	if (update_plugin)
+		cpufreq_update_plugin (TRUE);
 }
 
 static gboolean
@@ -146,7 +142,7 @@ combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 	if (GTK_WIDGET (combo) == configure->combo_cpu)
 	{
 		cpuFreq->options->show_cpu = selected;
-		cpufreq_update_plugin ();
+		cpufreq_update_plugin (TRUE);
 	}
 }
 

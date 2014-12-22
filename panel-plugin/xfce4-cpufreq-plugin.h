@@ -101,7 +101,7 @@ void
 cpufreq_label_set_font (void);
 
 gboolean
-cpufreq_update_plugin (void);
+cpufreq_update_plugin (gboolean reset_label_size);
 
 void
 cpufreq_restart_timeout (void);
