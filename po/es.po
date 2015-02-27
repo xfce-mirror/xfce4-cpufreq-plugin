@@ -4,7 +4,8 @@
 # 
 # Translators:
 #  <abel.martin.ruiz@gmail.com>, 2009
-# Adolfo Jayme Barrientos <fito@libreoffice.org>, 2014
+# Adolfo Jayme Barrientos, 2014
+# Adolfo Jayme Barrientos, 2014
 # mc <correomc2000-ing@yahoo.es>, 2013
 # Pablo Roberto Francisco Lezaeta Reyes <prflr88@gmail.com>, 2013-2014
 msgid ""
@@ -12,8 +13,8 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-30 00:31+0200\n"
-"PO-Revision-Date: 2014-12-25 23:37+0000\n"
-"Last-Translator: Pablo Roberto Francisco Lezaeta Reyes <prflr88@gmail.com>\n"
+"PO-Revision-Date: 2015-02-27 11:56+0000\n"
+"Last-Translator: Manolo Díaz <diaz.manolo@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/xfce-panel-plugins/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +24,7 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:78
 msgid "Select font..."
-msgstr "Seleccione el tipo de letra..."
+msgstr "Seleccione el tipo de letra…"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font family and size to use for the labels."
@@ -102,7 +103,7 @@ msgstr "Mostrar _perfil del procesador"
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr "Su sistema no soporta escalado de frecuencia.\nSolamente se muestra la actual frecuencia de la CPU."
+msgstr "Su sistema no ofrece escalado de frecuencia.\nSolamente se muestra la actual frecuencia de la CPU."
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
@@ -131,7 +132,7 @@ msgstr "Información del procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:239
 msgid "An overview of all the CPUs in the system"
-msgstr "Un resumen de todas los procesadores en el sistema"
+msgstr "Un resumen de todos los procesadores en el sistema"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:60
 msgid "current min"
@@ -176,11 +177,11 @@ msgstr "Derechos de autor (c) 2003-2013\n"
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:605
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr "¡Su sistema no está configurado correctamente para soportar ajuste de frecuencia del procesador!"
+msgstr "¡Su sistema no está configurado correctamente para ofrecer ajuste de frecuencia del procesador!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:615
 msgid "Your system is not supported yet!"
-msgstr "¡Su sistema aún no está soportado!"
+msgstr "¡Su sistema no es aún compatible!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
