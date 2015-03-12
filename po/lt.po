@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-30 00:31+0200\n"
-"PO-Revision-Date: 2015-03-11 21:38+0000\n"
+"PO-Revision-Date: 2015-03-12 22:09+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/xfce-panel-plugins/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -94,7 +94,7 @@ msgstr "Rodyti CPU daž_nį"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:320
 msgid "Show CPU _governor"
-msgstr ""
+msgstr "Rodyti CPU _reguliatorių"
 
 #: ../panel-plugin/xfce4-cpufreq-linux.c:485
 msgid ""
@@ -145,15 +145,15 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:315
 msgid "No CPU information available."
-msgstr ""
+msgstr "CPU informacija neprieinama."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:321
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
-msgstr[0] "%d cpu prieinamas"
-msgstr[1] "%d cpu prieinami"
-msgstr[2] "%d cpu prieinama"
+msgstr[0] "Prieinamas %d cpu"
+msgstr[1] "Prieinami %d cpu"
+msgstr[2] "Prieinama %d cpu"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:328
 msgid "Frequency: "
@@ -166,7 +166,7 @@ msgstr "Reguliatorius:"
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:577
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
-msgstr ""
+msgstr "Rodyti CPU dažnius ir reguliatorių"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:579
 msgid "Copyright (c) 2003-2013\n"
