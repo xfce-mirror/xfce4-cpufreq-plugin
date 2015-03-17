@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-30 00:31+0200\n"
-"PO-Revision-Date: 2015-03-12 22:09+0000\n"
+"PO-Revision-Date: 2015-03-17 12:59+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/xfce-panel-plugins/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -25,11 +25,11 @@ msgstr "Pasirinkti šriftą..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font family and size to use for the labels."
-msgstr ""
+msgstr "Pasirinkite etiketėms naudojamą, šriftą ir jo dydį."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:84
 msgid "Right-click to revert to the default font."
-msgstr ""
+msgstr "Spustelėkite dešinįjį pelės mygtuką, kad atkurti numatytąjį šriftą."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:102
 msgid "Select font"
@@ -78,7 +78,7 @@ msgstr "maks"
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:298
 msgid "_Keep compact"
-msgstr ""
+msgstr "Išlai_kyti kompaktiškai"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:303
 msgid "Show text in a single _line"
@@ -133,15 +133,15 @@ msgstr "Visų sistemos CPU peržiūra"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:60
 msgid "current min"
-msgstr ""
+msgstr "dabartinė min"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:79
 msgid "current avg"
-msgstr ""
+msgstr "dabartinė vidut."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:97
 msgid "current max"
-msgstr ""
+msgstr "dabartinė maks"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:315
 msgid "No CPU information available."
@@ -175,11 +175,11 @@ msgstr "Autorinės Teisės (c) 2003-2013\n"
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:605
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr ""
+msgstr "Jūsų sistema nėra teisingai sukonfigūruota CPU mastelio keitimo palaikymui!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:615
 msgid "Your system is not supported yet!"
-msgstr ""
+msgstr "Jūsų sistema dar nėra palaikoma!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
