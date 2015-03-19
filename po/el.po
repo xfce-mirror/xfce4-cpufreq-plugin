@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-30 00:31+0200\n"
-"PO-Revision-Date: 2015-03-19 00:21+0000\n"
+"PO-Revision-Date: 2015-03-19 08:58+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/xfce-panel-plugins/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -61,19 +61,19 @@ msgstr "_Γραμματοσειρά:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:275
 msgid "_Display CPU:"
-msgstr ""
+msgstr "_Εμφάνιση CPU:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:290
 msgid "min"
-msgstr ""
+msgstr "ελάχιστο"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:291
 msgid "avg"
-msgstr ""
+msgstr "μέσος όρος"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:292
 msgid "max"
-msgstr ""
+msgstr "μέγιστο"
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:298
@@ -86,7 +86,7 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:308
 msgid "Show CPU _icon"
-msgstr ""
+msgstr "Εμφάνιση _εικονιδίου CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Show CPU fre_quency"
