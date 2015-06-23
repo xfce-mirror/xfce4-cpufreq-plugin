@@ -1,3 +1,9 @@
+1.1.2 (2015-06-23)
+------------------
+- Fix IT_PROG_INTLTOOL warning
+- Translation updates: Basque, Bulgarian, Greek, Lithuanian, Slovak,
+  Spanish, Swedish
+
 1.1.1 (2014-12-23)
 ------------------
  * Fix panel resizing caused by freq format function (bug #10385)
