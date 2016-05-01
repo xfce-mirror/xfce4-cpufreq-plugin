@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-30 00:31+0200\n"
-"PO-Revision-Date: 2016-05-01 15:03+0000\n"
+"PO-Revision-Date: 2016-05-01 18:43+0000\n"
 "Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce-panel-plugins/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Seleccioneu el tipus de lletra..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font family and size to use for the labels."
-msgstr "Seleccioneu la família i la mida de la lletra per usar a les etiquetes."
+msgstr "Seleccioneu la família i la mida del tipus de lletra a utilitzar per a les etiquetes."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:84
 msgid "Right-click to revert to the default font."
@@ -54,7 +54,7 @@ msgstr "Interval d'act_ualització:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Panel</b>"
-msgstr "<b>Panell</b>"
+msgstr "<b>Plafó</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:257
 msgid "_Font:"
@@ -101,7 +101,7 @@ msgstr "Mostra el gestor de la CPU"
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr "El vostre sistema no suporta cpufreq.\n\r\nEl panell només mostra la freqüència actual de la CPU."
+msgstr "El vostre sistema no és compatible amb cpufreq.\n\nEl quadre només mostra la freqüència actual de la CPU."
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
