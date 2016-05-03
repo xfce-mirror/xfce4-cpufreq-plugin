@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-30 00:31+0200\n"
-"PO-Revision-Date: 2016-05-01 18:43+0000\n"
+"PO-Revision-Date: 2016-05-03 08:50+0000\n"
 "Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce-panel-plugins/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -87,7 +87,7 @@ msgstr "Mostra el text en una sola _línia"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:308
 msgid "Show CPU _icon"
-msgstr "Mostra la _icona de CPU"
+msgstr "Mostra la _icona de la CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Show CPU fre_quency"
@@ -101,7 +101,7 @@ msgstr "Mostra el gestor de la CPU"
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr "El vostre sistema no és compatible amb cpufreq.\n\nEl quadre només mostra la freqüència actual de la CPU."
+msgstr "El vostre sistema no és compatible amb cpufreq.\nLa miniaplicació únicament mostra la freqüència actual de la CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
