@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-30 00:31+0200\n"
-"PO-Revision-Date: 2016-05-03 16:30+0000\n"
+"PO-Revision-Date: 2016-05-03 16:49+0000\n"
 "Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce-panel-plugins/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -38,11 +38,11 @@ msgstr "Seleccioneu del tipus de lletra"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:188
 msgid "Configure CPU Frequency Monitor"
-msgstr "Configura el monitor de freqüència de la CPU"
+msgstr "Configureu el monitor de freqüència de la CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:190
 msgid "Configure the CPU frequency plugin"
-msgstr "Configura el connector de freqüència de la CPU"
+msgstr "Configureu el connector de freqüència de la CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:208
 msgid "<b>Monitor</b>"
@@ -110,7 +110,7 @@ msgstr "Controlador d'escalat:"
 #: ../panel-plugin/xfce4-cpufreq-overview.c:81
 #, c-format
 msgid "No scaling driver available"
-msgstr "No hi ha un controlador d'escalat disponible"
+msgstr "No hi ha disponible cap controlador d'escalat"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:94
 msgid "Available frequencies:"
