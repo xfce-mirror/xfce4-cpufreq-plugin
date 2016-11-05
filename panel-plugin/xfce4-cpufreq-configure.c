@@ -195,7 +195,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
 	g_object_set_data (G_OBJECT (cpuFreq->plugin), "configure", dialog);
 
-	dialog_vbox = GTK_DIALOG (dialog)->vbox;
+	dialog_vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 
 	sg0 = gtk_size_group_new(GTK_SIZE_GROUP_BOTH);
 

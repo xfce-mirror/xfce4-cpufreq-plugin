@@ -256,7 +256,7 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpuFreq)
 
 	g_object_set_data (G_OBJECT (cpuFreq->plugin), "overview", dialog);
 
-	dialog_vbox = GTK_DIALOG (dialog)->vbox;
+	dialog_vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 
 	/* choose how many columns and rows depending on cpu count */
 	if (cpuFreq->cpus->len < 4)
