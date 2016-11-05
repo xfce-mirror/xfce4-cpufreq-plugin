@@ -467,10 +467,23 @@ cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
 static void
 cpufreq_widgets (void)
 {
+	gchar *css;
+	GtkCssProvider *provider;
+
 	/* create panel toggle button which will contain all other widgets */
-	cpuFreq->button = xfce_create_panel_toggle_button ();
+	cpuFreq->button = xfce_panel_create_toggle_button ();
 	xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->button);
 	gtk_container_add (GTK_CONTAINER (cpuFreq->plugin), cpuFreq->button);
+
+	css = g_strdup_printf("button { padding: 0px; }");
+
+	provider = gtk_css_provider_new ();
+	gtk_css_provider_load_from_data (provider, css, -1, NULL);
+	gtk_style_context_add_provider (
+			GTK_STYLE_CONTEXT (gtk_widget_get_style_context (GTK_WIDGET (cpuFreq->button))),
+			GTK_STYLE_PROVIDER(provider),
+			GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+	g_free(css);
 
 	cpuFreq->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, SPACING);
 	gtk_container_set_border_width (GTK_CONTAINER (cpuFreq->box), BORDER);
@@ -488,8 +501,7 @@ cpufreq_widgets (void)
 	g_signal_connect (G_OBJECT (cpuFreq->button), "query-tooltip",
 					  G_CALLBACK (cpufreq_update_tooltip), cpuFreq);
 
-	gtk_widget_show (cpuFreq->box);
-	gtk_widget_show (cpuFreq->button);
+	gtk_widget_show_all (cpuFreq->button);
 
 	cpufreq_update_plugin (TRUE);
 }
