@@ -243,10 +243,9 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpuFreq)
 								  TRUE);
 
 	dialog = xfce_titled_dialog_new_with_buttons (_("CPU Information"),
-					NULL,
-					GTK_DIALOG_NO_SEPARATOR,
-					GTK_STOCK_CLOSE,
-					GTK_RESPONSE_OK,
+			GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (cpuFreq->plugin))),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			"gtk-close", GTK_RESPONSE_OK,
 					NULL);
 	xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog),
 			_("An overview of all the CPUs in the system"));
