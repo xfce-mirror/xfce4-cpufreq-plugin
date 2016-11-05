@@ -34,10 +34,13 @@
 #endif
 
 static void
+check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure);
+
+static void
 check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
 {
 	if (button == configure->display_icon)
-		cpuFreq->options->show_icon = 
+		cpuFreq->options->show_icon =
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
 	else if (button == configure->display_freq)
@@ -90,19 +93,19 @@ static gboolean
 button_fontname_clicked(GtkWidget *button,
 						CpuFreqPluginConfigure *configure)
 {
-	GtkFontSelectionDialog *fsd;
+	GtkWidget *fc;
 	gchar *fontname;
 	gint result;
 
-	fsd = GTK_FONT_SELECTION_DIALOG
-		(gtk_font_selection_dialog_new (_("Select font")));
-	if (cpuFreq->options->fontname)
-		gtk_font_selection_dialog_set_font_name(fsd,
-												cpuFreq->options->fontname);
+	fc = gtk_font_chooser_dialog_new (_("Select font"),
+				GTK_WINDOW(gtk_widget_get_toplevel(button)));
 
-	result = gtk_dialog_run(GTK_DIALOG(fsd));
+	if (cpuFreq->options->fontname)
+		gtk_font_chooser_set_font (GTK_FONT_CHOOSER (fc), cpuFreq->options->fontname);
+
+	result = gtk_dialog_run(GTK_DIALOG(fc));
 	if (result == GTK_RESPONSE_OK || result == GTK_RESPONSE_ACCEPT) {
-		fontname = gtk_font_selection_dialog_get_font_name(fsd);
+		fontname = gtk_font_chooser_get_font (GTK_FONT_CHOOSER (fc));
 		if (fontname != NULL) {
 			gtk_button_set_label(GTK_BUTTON(button), fontname);
 			g_free (cpuFreq->options->fontname);
@@ -110,7 +113,7 @@ button_fontname_clicked(GtkWidget *button,
 		}
 		button_fontname_update(button, TRUE);
 	}
-	gtk_widget_destroy(GTK_WIDGET(fsd));
+	gtk_widget_destroy(GTK_WIDGET(fc));
 	return TRUE;
 }
 
@@ -150,7 +153,7 @@ static void
 spinner_changed (GtkWidget *spinner, CpuFreqPluginConfigure *configure)
 {
 	cpuFreq->options->timeout =gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spinner));
-	
+
 	cpufreq_restart_timeout ();
 }
 
