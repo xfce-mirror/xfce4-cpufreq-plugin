@@ -628,6 +628,7 @@ cpufreq_show_about(XfcePanelPlugin *plugin,
 		"Thomas Schreck <shrek@xfce.org>",
 		"Florian Rivoal <frivoal@xfce.org>",
 		"Harald Judt <h.judt@gmx.at>",
+		"André Miranda <andre42m@gmail.com>",
 		NULL };
 	icon = xfce_panel_pixbuf_from_source("xfce4-cpufreq-plugin", NULL, 48);
 	gtk_show_about_dialog
@@ -638,7 +639,7 @@ cpufreq_show_about(XfcePanelPlugin *plugin,
 		 "program-name", PACKAGE_NAME,
 		 "comments", _("Show CPU frequencies and governor"),
 		 "website", PLUGIN_WEBSITE,
-		 "copyright", _("Copyright (c) 2003-2013\n"),
+		 "copyright", _("Copyright (c) 2003-2016\n"),
 		 "authors", auth,
 		 NULL);
 
