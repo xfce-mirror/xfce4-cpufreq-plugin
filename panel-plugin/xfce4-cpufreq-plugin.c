@@ -422,7 +422,7 @@ cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 	}
 
 	if (cpufreq->options->show_icon) {
-		GdkPixbuf *buf;
+		GdkPixbuf *buf, *scaled;
 		gint icon_size;
 
 		icon_size = cpuFreq->panel_size / cpuFreq->panel_rows;
@@ -434,9 +434,12 @@ cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 		buf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
 										"xfce4-cpufreq-plugin",
 										icon_size, 0, NULL);
+
 		if (buf) {
-			cpufreq->icon = gtk_image_new_from_pixbuf (buf);
+			scaled = gdk_pixbuf_scale_simple (buf, icon_size, icon_size, GDK_INTERP_BILINEAR);
+			cpufreq->icon = gtk_image_new_from_pixbuf (scaled);
 			g_object_unref (G_OBJECT (buf));
+			g_object_unref (G_OBJECT (scaled));
 		} else {
 			cpufreq->icon = gtk_image_new_from_icon_name
 				("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
