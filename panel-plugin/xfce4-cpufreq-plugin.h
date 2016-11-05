@@ -109,6 +109,9 @@ cpufreq_restart_timeout (void);
 void
 cpufreq_write_config (XfcePanelPlugin *plugin);
 
+void
+cpufreq_update_icon (CpuFreqPlugin *cpufreq);
+
 G_END_DECLS
 
 #endif /* XFCE4_CPU_FREQ_H */
