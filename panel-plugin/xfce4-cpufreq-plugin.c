@@ -239,14 +239,14 @@ cpufreq_widgets_layout (void)
 	if (small) {
 		if (orientation == GTK_ORIENTATION_VERTICAL) {
 			if (cpuFreq->icon)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0.5, 0);
+				gtk_widget_set_halign (cpuFreq->icon, GTK_ALIGN_CENTER);
 			if (cpuFreq->label)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0.5, 0);
+				gtk_widget_set_halign (cpuFreq->label, GTK_ALIGN_CENTER);
 		} else {
 			if (cpuFreq->icon)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0, 0.5);
+				gtk_widget_set_valign (cpuFreq->icon, GTK_ALIGN_CENTER);
 			if (cpuFreq->label)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0, 0.5);
+				gtk_widget_set_valign (cpuFreq->label, GTK_ALIGN_CENTER);
 		}
 		if (cpuFreq->label)
 			gtk_label_set_justify (GTK_LABEL (cpuFreq->label),
@@ -260,14 +260,16 @@ cpufreq_widgets_layout (void)
 	} else {
 		if (orientation == GTK_ORIENTATION_VERTICAL) {
 			if (cpuFreq->icon)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0.5, 1.0);
+				gtk_widget_set_halign (cpuFreq->icon, GTK_ALIGN_CENTER);
+				gtk_widget_set_valign (cpuFreq->icon, GTK_ALIGN_END);
 			if (cpuFreq->label)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0.5, 0);
+				gtk_widget_set_halign (cpuFreq->label, GTK_ALIGN_CENTER);
 		} else {
 			if (cpuFreq->icon)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0, 0.5);
+				gtk_widget_set_valign (cpuFreq->icon, GTK_ALIGN_CENTER);
 			if (cpuFreq->label)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 1.0, 0.5);
+				gtk_widget_set_halign (cpuFreq->label, GTK_ALIGN_END);
+				gtk_widget_set_valign (cpuFreq->label, GTK_ALIGN_CENTER);
 			pos = resized ? 1 : 0;
 		}
 		if (cpuFreq->label)

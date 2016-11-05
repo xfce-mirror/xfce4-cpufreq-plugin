@@ -53,12 +53,14 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, TRUE, TRUE, 0);
 
 	icon = gtk_image_new_from_icon_name ("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
-	gtk_misc_set_alignment (GTK_MISC (icon), 1, 0.5);
 	gtk_misc_set_padding (GTK_MISC (icon), 5, 10);
+	gtk_widget_set_halign (icon, GTK_ALIGN_END);
+	gtk_widget_set_valign (icon, GTK_ALIGN_CENTER);
 	gtk_box_pack_start (GTK_BOX (hbox), icon, TRUE, TRUE, 0);
 	text = g_strdup_printf ("<b>CPU %d</b>", cpu_number);
 	label = gtk_label_new (text);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+	gtk_label_set_xalign (GTK_LABEL (label), 0);
 	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 	g_free (text);
@@ -72,7 +74,8 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 
 	label = gtk_label_new (_("Scaling driver:"));
 	gtk_size_group_add_widget (sg0, label);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+	gtk_label_set_xalign (GTK_LABEL (label), 0);
 	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
 	if (cpu->scaling_driver != NULL)
@@ -82,7 +85,8 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 
 	label = gtk_label_new (text);
 	gtk_size_group_add_widget (sg1, label);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+	gtk_label_set_xalign (GTK_LABEL (label), 0);
 	gtk_box_pack_end (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 	g_free (text);
@@ -93,7 +97,8 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 
 	label = gtk_label_new (_("Available frequencies:"));
 	gtk_size_group_add_widget (sg0, label);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+	gtk_label_set_xalign (GTK_LABEL (label), 0);
 	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
 	if (cpu->available_freqs != NULL) /* Linux 2.6 with scaling support */
@@ -139,7 +144,8 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 		text = g_strdup_printf ("<b>%s</b> (current frequency)", text);
 		label = gtk_label_new (text);
 		gtk_size_group_add_widget (sg1, label);
-		gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+		gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+		gtk_label_set_xalign (GTK_LABEL (label), 0);
 		gtk_box_pack_end (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 		gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 		g_free (text);
@@ -152,9 +158,10 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 		hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
 		gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, FALSE, FALSE, 0);
 
-		label = gtk_label_new (_("Available governors:"));\
+		label = gtk_label_new (_("Available governors:"));
 		gtk_size_group_add_widget (sg0, label);
-		gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+		gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+		gtk_label_set_xalign (GTK_LABEL (label), 0);
 		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
 		combo = gtk_combo_box_new_text ();
@@ -180,13 +187,15 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 
 		label = gtk_label_new (_("Current governor:"));
 		gtk_size_group_add_widget (sg0, label);
-		gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+		gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+		gtk_label_set_xalign (GTK_LABEL (label), 0);
 		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
 		text = g_strdup_printf ("<b>%s</b>", cpu->cur_governor);
 		label = gtk_label_new (text);
 		gtk_size_group_add_widget (sg1, label);
-		gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+		gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+		gtk_label_set_xalign (GTK_LABEL (label), 0);
 		gtk_box_pack_end (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 		gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 		g_free (text);

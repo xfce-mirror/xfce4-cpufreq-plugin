@@ -208,7 +208,12 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_frame_set_label_widget (GTK_FRAME (frame), label);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 
-	align = gtk_alignment_new (0.5, 0.5, 1, 1);
+	align = gtk_box_new (GTK_ORIENTATION_VERTICAL, 1);
+	gtk_widget_set_halign(align, GTK_ALIGN_START);
+	gtk_widget_set_valign(align, GTK_ALIGN_CENTER);
+	gtk_widget_set_hexpand(align, TRUE);
+	gtk_widget_set_vexpand(align, TRUE);
+
 	gtk_container_add (GTK_CONTAINER (frame), align);
 	gtk_alignment_set_padding (GTK_ALIGNMENT (align), 0, 0, BORDER*3, 0);
 
@@ -221,7 +226,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
 	label = gtk_label_new_with_mnemonic (_("_Update interval:"));
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
 	gtk_size_group_add_widget (sg0, label);
 
 	spinner = configure->spinner_timeout =
@@ -241,7 +246,11 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_frame_set_label_widget (GTK_FRAME (frame), label);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 
-	align = gtk_alignment_new (0.5, 0.5, 1, 1);
+	align = gtk_box_new (GTK_ORIENTATION_VERTICAL, 1);
+	gtk_widget_set_halign(align, GTK_ALIGN_FILL);
+	gtk_widget_set_valign(align, GTK_ALIGN_CENTER);
+	gtk_widget_set_hexpand(align, TRUE);
+	gtk_widget_set_vexpand(align, TRUE);
 	gtk_container_add (GTK_CONTAINER (frame), align);
 	gtk_alignment_set_padding (GTK_ALIGNMENT (align), 0, 0, BORDER * 3, 0);
 
@@ -255,7 +264,8 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
 	label = gtk_label_new_with_mnemonic (_("_Font:"));
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+	gtk_label_set_xalign (GTK_LABEL (label), 0);
 	gtk_size_group_add_widget (sg0, label);
 
 	button = configure->fontname = gtk_button_new ();
@@ -273,7 +283,8 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
 	label = gtk_label_new_with_mnemonic (_("_Display CPU:"));
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+	gtk_label_set_xalign (GTK_LABEL (label), 0);
 	gtk_size_group_add_widget (sg0, label);
 
 	combo = configure->combo_cpu = gtk_combo_box_new_text ();
