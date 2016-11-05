@@ -125,7 +125,7 @@ cpufreq_update_label (CpuInfo *cpu)
 			gtk_widget_hide (cpuFreq->label);
 		return TRUE;
 	}
-	
+
 	both = cpu->cur_governor != NULL &&
 		cpuFreq->options->show_label_freq &&
 		cpuFreq->options->show_label_governor;
@@ -150,7 +150,7 @@ cpufreq_update_label (CpuInfo *cpu)
 
 		/* Set label width to max width if smaller to avoid panel
 		   resizing/jumping (see bug #10385). */
-		gtk_widget_size_request (cpuFreq->label, &label_size);
+		gtk_widget_get_preferred_size (cpuFreq->label, NULL, &label_size);
 		if (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
 			if (label_size.height < cpuFreq->label_max_width)
 				gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label),
@@ -211,12 +211,12 @@ cpufreq_widgets_layout (void)
 
 	/* check if the label fits below the icon, else put them side by side */
 	if (GTK_IS_WIDGET(cpuFreq->label) && ! hide_label) {
-		gtk_widget_size_request (cpuFreq->label, &label_size);
+		gtk_widget_get_preferred_size (cpuFreq->label, NULL, &label_size);
 		lw = label_size.width;
 		lh = label_size.height;
 	}
 	if (GTK_IS_WIDGET(cpuFreq->icon)) {
-		gtk_widget_size_request (cpuFreq->icon, &icon_size);
+		gtk_widget_get_preferred_size (cpuFreq->icon, NULL, &icon_size);
 		iw = icon_size.width;
 		ih = icon_size.height;
 	}
