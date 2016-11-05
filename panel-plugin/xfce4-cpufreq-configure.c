@@ -294,19 +294,19 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_label_set_xalign (GTK_LABEL (label), 0);
 	gtk_size_group_add_widget (sg0, label);
 
-	combo = configure->combo_cpu = gtk_combo_box_new_text ();
+	combo = configure->combo_cpu = gtk_combo_box_text_new ();
 	gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, TRUE, 0);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
 
 	for (i = 0; i < cpuFreq->cpus->len; ++i)
 	{
 		cpu_name = g_strdup_printf ("%d", i);
-		gtk_combo_box_append_text (GTK_COMBO_BOX (combo), cpu_name);
+		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), cpu_name);
 		g_free (cpu_name);
 	}
-	gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("min"));
-	gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("avg"));
-	gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("max"));
+	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("min"));
+	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("avg"));
+	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("max"));
 
 	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->options->show_cpu);
 	g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (combo_changed), configure);

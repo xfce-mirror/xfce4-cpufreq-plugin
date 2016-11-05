@@ -107,7 +107,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 
 	if (cpu->available_freqs != NULL) /* Linux 2.6 with scaling support */
 	{
-		combo = gtk_combo_box_new_text ();
+		combo = gtk_combo_box_text_new ();
 		gtk_size_group_add_widget (sg1, combo);
 		gtk_box_pack_end (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
 		list = g_list_first (cpu->available_freqs);
@@ -117,7 +117,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 			text = cpufreq_get_human_readable_freq (GPOINTER_TO_INT (list->data));
 			if (GPOINTER_TO_INT (list->data) == cpu->cur_freq)
 				i = j;
-			gtk_combo_box_append_text (GTK_COMBO_BOX (combo), text);
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), text);
 			g_free (text);
 			list = g_list_next (list);
 			j++;
@@ -126,18 +126,18 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	}
 	else if (cpu->cur_freq && cpu->min_freq && cpu->max_freq) /* Linux 2.4 with scaling support */
 	{
-		combo = gtk_combo_box_new_text ();
+		combo = gtk_combo_box_text_new ();
 		gtk_size_group_add_widget (sg1, combo);
 		gtk_box_pack_end (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
 
                 text = cpufreq_get_human_readable_freq (cpu->cur_freq);
-                gtk_combo_box_append_text (GTK_COMBO_BOX (combo), text);
+                gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), text);
                 g_free (text);
 		text = cpufreq_get_human_readable_freq (cpu->max_freq);
-                gtk_combo_box_append_text (GTK_COMBO_BOX (combo), text);
+                gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), text);
                 g_free (text);
 		text = cpufreq_get_human_readable_freq (cpu->min_freq);
-                gtk_combo_box_append_text (GTK_COMBO_BOX (combo), text);
+                gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), text);
                 g_free (text);
 
                 gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
@@ -168,14 +168,14 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 		gtk_label_set_xalign (GTK_LABEL (label), 0);
 		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
-		combo = gtk_combo_box_new_text ();
+		combo = gtk_combo_box_text_new ();
 		gtk_size_group_add_widget (sg1, combo);
 		gtk_box_pack_end (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
 		list = g_list_first (cpu->available_governors);
 		j = 0;
 		while (list)
 		{
-			gtk_combo_box_append_text (GTK_COMBO_BOX (combo), list->data);
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), list->data);
 			if (g_ascii_strcasecmp (list->data, cpu->cur_governor) == 0)
 				i = j;
 			list = g_list_next (list);
