@@ -280,13 +280,13 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpuFreq)
 			cpufreq_overview_add (cpu, j, dialog_hbox);
 
 			if (j + 1 < cpuFreq->cpus->len && j + 1 == i + step) {
-				separator = gtk_hseparator_new ();
+				separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
 				gtk_box_pack_start (GTK_BOX (dialog_vbox), separator,
 									FALSE, FALSE, 0);
 			}
 
 			if (j + 1 < cpuFreq->cpus->len && j + 1 < i + step) {
-				separator = gtk_vseparator_new ();
+				separator = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
 				gtk_box_pack_start (GTK_BOX (dialog_hbox), separator,
 									FALSE, FALSE, 0);
 			}
