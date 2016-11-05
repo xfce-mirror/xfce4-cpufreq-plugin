@@ -215,7 +215,10 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_widget_set_vexpand(align, TRUE);
 
 	gtk_container_add (GTK_CONTAINER (frame), align);
-	gtk_alignment_set_padding (GTK_ALIGNMENT (align), 0, 0, BORDER*3, 0);
+	gtk_widget_set_margin_top (align, 0);
+	gtk_widget_set_margin_bottom (align, 0);
+	gtk_widget_set_margin_start (align, BORDER * 3);
+	gtk_widget_set_margin_end (align, 0);
 
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER);
 	gtk_container_add (GTK_CONTAINER (align), vbox);
@@ -251,8 +254,12 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_widget_set_valign(align, GTK_ALIGN_CENTER);
 	gtk_widget_set_hexpand(align, TRUE);
 	gtk_widget_set_vexpand(align, TRUE);
+
 	gtk_container_add (GTK_CONTAINER (frame), align);
-	gtk_alignment_set_padding (GTK_ALIGNMENT (align), 0, 0, BORDER * 3, 0);
+	gtk_widget_set_margin_top (align, 0);
+	gtk_widget_set_margin_bottom (align, 0);
+	gtk_widget_set_margin_start (align, BORDER * 3);
+	gtk_widget_set_margin_end (align, 0);
 
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER);
 	gtk_container_add (GTK_CONTAINER (align), vbox);

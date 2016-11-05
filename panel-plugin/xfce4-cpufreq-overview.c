@@ -53,9 +53,13 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, TRUE, TRUE, 0);
 
 	icon = gtk_image_new_from_icon_name ("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
-	gtk_misc_set_padding (GTK_MISC (icon), 5, 10);
 	gtk_widget_set_halign (icon, GTK_ALIGN_END);
 	gtk_widget_set_valign (icon, GTK_ALIGN_CENTER);
+	gtk_widget_set_margin_top (icon, 10);
+	gtk_widget_set_margin_bottom (icon, 10);
+	gtk_widget_set_margin_start (icon, 5);
+	gtk_widget_set_margin_end (icon, 5);
+
 	gtk_box_pack_start (GTK_BOX (hbox), icon, TRUE, TRUE, 0);
 	text = g_strdup_printf ("<b>CPU %d</b>", cpu_number);
 	label = gtk_label_new (text);
