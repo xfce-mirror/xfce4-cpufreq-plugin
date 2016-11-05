@@ -46,10 +46,10 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	GtkSizeGroup *sg0, *sg1;
 	GList 	  *list;
 
-	dialog_vbox = gtk_vbox_new (FALSE, BORDER);
+	dialog_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER);
 	gtk_box_pack_start (GTK_BOX (dialog_hbox), dialog_vbox, TRUE, TRUE, 0);
 
-	hbox = gtk_hbox_new (FALSE, BORDER);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
 	gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, TRUE, TRUE, 0);
 
 	icon = gtk_image_new_from_icon_name ("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
@@ -67,7 +67,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	sg1 = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
 	/* display driver */
-	hbox = gtk_hbox_new (FALSE, BORDER);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
 	gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, FALSE, FALSE, 0);
 
 	label = gtk_label_new (_("Scaling driver:"));
@@ -88,7 +88,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	g_free (text);
 
 	/* display list of available freqs */
-	hbox = gtk_hbox_new (FALSE, BORDER);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
 	gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, FALSE, FALSE, 0);
 
 	label = gtk_label_new (_("Available frequencies:"));
@@ -149,7 +149,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	/* display list of available governors */
 	if (cpu->available_governors != NULL) /* Linux 2.6 and cpu scaling support */
 	{
-		hbox = gtk_hbox_new (FALSE, BORDER);
+		hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
 		gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, FALSE, FALSE, 0);
 
 		label = gtk_label_new (_("Available governors:"));\
@@ -175,7 +175,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 	}
 	else if (cpu->cur_governor != NULL) /* Linux 2.4 and cpu scaling support */
 	{
-		hbox = gtk_hbox_new (FALSE, BORDER);
+		hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
 		gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, FALSE, FALSE, 0);
 
 		label = gtk_label_new (_("Current governor:"));
@@ -256,7 +256,7 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpuFreq)
 		step = 3;
 
 	for (i = 0; i < cpuFreq->cpus->len; i += step) {
-		dialog_hbox = gtk_hbox_new (FALSE, BORDER * 2);
+		dialog_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER * 2);
 		gtk_box_pack_start (GTK_BOX (dialog_vbox), dialog_hbox,
 							FALSE, FALSE, BORDER * 2);
 		gtk_container_set_border_width (GTK_CONTAINER (dialog_hbox),

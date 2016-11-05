@@ -449,7 +449,7 @@ cpufreq_widgets (void)
 	xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->button);
 	gtk_container_add (GTK_CONTAINER (cpuFreq->plugin), cpuFreq->button);
 
-	cpuFreq->box = gtk_hbox_new (FALSE, SPACING);
+	cpuFreq->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, SPACING);
 	gtk_container_set_border_width (GTK_CONTAINER (cpuFreq->box), BORDER);
 	gtk_container_add (GTK_CONTAINER (cpuFreq->button), cpuFreq->box);
 

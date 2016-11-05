@@ -203,7 +203,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	frame = gtk_frame_new (NULL);
 	gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, FALSE, TRUE, 0);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
-	
+
 	label = gtk_label_new (_("<b>Monitor</b>"));
 	gtk_frame_set_label_widget (GTK_FRAME (frame), label);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
@@ -212,11 +212,11 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_container_add (GTK_CONTAINER (frame), align);
 	gtk_alignment_set_padding (GTK_ALIGNMENT (align), 0, 0, BORDER*3, 0);
 
-	vbox = gtk_vbox_new (FALSE, BORDER);
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER);
 	gtk_container_add (GTK_CONTAINER (align), vbox);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
-	
-	hbox = gtk_hbox_new (FALSE, BORDER);
+
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic (_("_Update interval:"));
@@ -224,7 +224,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 	gtk_size_group_add_widget (sg0, label);
 
-	spinner = configure->spinner_timeout = 
+	spinner = configure->spinner_timeout =
 		gtk_spin_button_new_with_range (TIMEOUT_MIN, TIMEOUT_MAX, TIMEOUT_STEP);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), spinner);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinner), (gdouble)cpuFreq->options->timeout);
@@ -245,12 +245,12 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_container_add (GTK_CONTAINER (frame), align);
 	gtk_alignment_set_padding (GTK_ALIGNMENT (align), 0, 0, BORDER * 3, 0);
 
-	vbox = gtk_vbox_new (FALSE, BORDER);
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER);
 	gtk_container_add (GTK_CONTAINER (align), vbox);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
 
 	/* font settings */
-	hbox = gtk_hbox_new (FALSE, BORDER);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic (_("_Font:"));
@@ -268,7 +268,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	button_fontname_update (button, FALSE);
 
 	/* which cpu to show in panel */
-	hbox = gtk_hbox_new (FALSE, BORDER);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic (_("_Display CPU:"));
