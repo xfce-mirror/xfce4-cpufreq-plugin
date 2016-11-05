@@ -100,16 +100,34 @@ cpufreq_cpus_calc_max (void)
 void
 cpufreq_label_set_font (void)
 {
-	PangoFontDescription *desc = NULL;
+	gchar *css;
+	GtkCssProvider *provider;
+	PangoFontDescription *font;
 
 	if (G_UNLIKELY (cpuFreq->label == NULL))
 		return;
 
 	if (cpuFreq->options->fontname)
-		desc = pango_font_description_from_string (cpuFreq->options->fontname);
+	{
+		font = pango_font_description_from_string(cpuFreq->options->fontname);
 
-	gtk_widget_modify_font (cpuFreq->label, desc);
-    pango_font_description_free (desc);
+		css = g_strdup_printf("label { font-family: %s; font-size: %dpx; font-style: %s; font-weight: %s }",
+			pango_font_description_get_family (font),
+			pango_font_description_get_size (font) / PANGO_SCALE,
+			(pango_font_description_get_style(font) == PANGO_STYLE_ITALIC ||
+			pango_font_description_get_style(font) == PANGO_STYLE_OBLIQUE) ? "italic" : "normal",
+			(pango_font_description_get_weight(font) >= PANGO_WEIGHT_BOLD) ? "bold" : "normal");
+		pango_font_description_free (font);
+
+		provider = gtk_css_provider_new ();
+
+		gtk_css_provider_load_from_data (provider, css, -1, NULL);
+		gtk_style_context_add_provider (
+			GTK_STYLE_CONTEXT (gtk_widget_get_style_context (GTK_WIDGET (cpuFreq->label))),
+			GTK_STYLE_PROVIDER(provider),
+			GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+		g_free(css);
+	}
 }
 
 gboolean
