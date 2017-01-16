@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-30 00:31+0200\n"
-"PO-Revision-Date: 2017-01-14 14:25+0000\n"
+"PO-Revision-Date: 2017-01-16 13:09+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce-panel-plugins/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -105,12 +105,12 @@ msgstr "Dit system understøtter ikke cpufreq.\nMiniprogrammet viser kun den nuv
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:73
 msgid "Scaling driver:"
-msgstr "Skaléringsprogram:"
+msgstr "Skaleringsprogram:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:81
 #, c-format
 msgid "No scaling driver available"
-msgstr "Inget skaléringsprogram tilgængeligt"
+msgstr "Intet skaleringsprogram tilgængeligt"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:94
 msgid "Available frequencies:"
