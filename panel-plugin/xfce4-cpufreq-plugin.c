@@ -26,7 +26,6 @@
 #include <config.h>
 #endif
 
-#include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #ifndef _
 # include <libintl.h>
@@ -101,16 +100,34 @@ cpufreq_cpus_calc_max (void)
 void
 cpufreq_label_set_font (void)
 {
-	PangoFontDescription *desc = NULL;
+	gchar *css;
+	GtkCssProvider *provider;
+	PangoFontDescription *font;
 
 	if (G_UNLIKELY (cpuFreq->label == NULL))
 		return;
 
 	if (cpuFreq->options->fontname)
-		desc = pango_font_description_from_string (cpuFreq->options->fontname);
+	{
+		font = pango_font_description_from_string(cpuFreq->options->fontname);
 
-	gtk_widget_modify_font (cpuFreq->label, desc);
-    pango_font_description_free (desc);
+		css = g_strdup_printf("label { font-family: %s; font-size: %dpx; font-style: %s; font-weight: %s }",
+			pango_font_description_get_family (font),
+			pango_font_description_get_size (font) / PANGO_SCALE,
+			(pango_font_description_get_style(font) == PANGO_STYLE_ITALIC ||
+			pango_font_description_get_style(font) == PANGO_STYLE_OBLIQUE) ? "italic" : "normal",
+			(pango_font_description_get_weight(font) >= PANGO_WEIGHT_BOLD) ? "bold" : "normal");
+		pango_font_description_free (font);
+
+		provider = gtk_css_provider_new ();
+
+		gtk_css_provider_load_from_data (provider, css, -1, NULL);
+		gtk_style_context_add_provider (
+			GTK_STYLE_CONTEXT (gtk_widget_get_style_context (GTK_WIDGET (cpuFreq->label))),
+			GTK_STYLE_PROVIDER(provider),
+			GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+		g_free(css);
+	}
 }
 
 gboolean
@@ -126,7 +143,7 @@ cpufreq_update_label (CpuInfo *cpu)
 			gtk_widget_hide (cpuFreq->label);
 		return TRUE;
 	}
-	
+
 	both = cpu->cur_governor != NULL &&
 		cpuFreq->options->show_label_freq &&
 		cpuFreq->options->show_label_governor;
@@ -151,7 +168,7 @@ cpufreq_update_label (CpuInfo *cpu)
 
 		/* Set label width to max width if smaller to avoid panel
 		   resizing/jumping (see bug #10385). */
-		gtk_widget_size_request (cpuFreq->label, &label_size);
+		gtk_widget_get_preferred_size (cpuFreq->label, NULL, &label_size);
 		if (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
 			if (label_size.height < cpuFreq->label_max_width)
 				gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label),
@@ -212,12 +229,12 @@ cpufreq_widgets_layout (void)
 
 	/* check if the label fits below the icon, else put them side by side */
 	if (GTK_IS_WIDGET(cpuFreq->label) && ! hide_label) {
-		gtk_widget_size_request (cpuFreq->label, &label_size);
+		gtk_widget_get_preferred_size (cpuFreq->label, NULL, &label_size);
 		lw = label_size.width;
 		lh = label_size.height;
 	}
 	if (GTK_IS_WIDGET(cpuFreq->icon)) {
-		gtk_widget_size_request (cpuFreq->icon, &icon_size);
+		gtk_widget_get_preferred_size (cpuFreq->icon, NULL, &icon_size);
 		iw = icon_size.width;
 		ih = icon_size.height;
 	}
@@ -240,14 +257,14 @@ cpufreq_widgets_layout (void)
 	if (small) {
 		if (orientation == GTK_ORIENTATION_VERTICAL) {
 			if (cpuFreq->icon)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0.5, 0);
+				gtk_widget_set_halign (cpuFreq->icon, GTK_ALIGN_CENTER);
 			if (cpuFreq->label)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0.5, 0);
+				gtk_widget_set_halign (cpuFreq->label, GTK_ALIGN_CENTER);
 		} else {
 			if (cpuFreq->icon)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0, 0.5);
+				gtk_widget_set_valign (cpuFreq->icon, GTK_ALIGN_CENTER);
 			if (cpuFreq->label)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0, 0.5);
+				gtk_widget_set_valign (cpuFreq->label, GTK_ALIGN_CENTER);
 		}
 		if (cpuFreq->label)
 			gtk_label_set_justify (GTK_LABEL (cpuFreq->label),
@@ -260,17 +277,24 @@ cpufreq_widgets_layout (void)
 									   FALSE, FALSE, 0, GTK_PACK_START);
 	} else {
 		if (orientation == GTK_ORIENTATION_VERTICAL) {
-			if (cpuFreq->icon)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0.5, 1.0);
+			if (cpuFreq->icon) {
+				gtk_widget_set_halign (cpuFreq->icon, GTK_ALIGN_CENTER);
+				gtk_widget_set_valign (cpuFreq->icon, GTK_ALIGN_END);
+			}
+
 			if (cpuFreq->label)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 0.5, 0);
+				gtk_widget_set_halign (cpuFreq->label, GTK_ALIGN_CENTER);
 		} else {
 			if (cpuFreq->icon)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->icon), 0, 0.5);
-			if (cpuFreq->label)
-				gtk_misc_set_alignment (GTK_MISC (cpuFreq->label), 1.0, 0.5);
+				gtk_widget_set_valign (cpuFreq->icon, GTK_ALIGN_CENTER);
+
+			if (cpuFreq->label) {
+				gtk_widget_set_halign (cpuFreq->label, GTK_ALIGN_END);
+				gtk_widget_set_valign (cpuFreq->label, GTK_ALIGN_CENTER);
+			}
 			pos = resized ? 1 : 0;
 		}
+
 		if (cpuFreq->label)
 			gtk_label_set_justify (GTK_LABEL (cpuFreq->label),
 								   resized
@@ -403,7 +427,7 @@ cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 	}
 
 	if (cpufreq->options->show_icon) {
-		GdkPixbuf *buf;
+		GdkPixbuf *buf, *scaled;
 		gint icon_size;
 
 		icon_size = cpuFreq->panel_size / cpuFreq->panel_rows;
@@ -415,9 +439,12 @@ cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 		buf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
 										"xfce4-cpufreq-plugin",
 										icon_size, 0, NULL);
+
 		if (buf) {
-			cpufreq->icon = gtk_image_new_from_pixbuf (buf);
+			scaled = gdk_pixbuf_scale_simple (buf, icon_size, icon_size, GDK_INTERP_BILINEAR);
+			cpufreq->icon = gtk_image_new_from_pixbuf (scaled);
 			g_object_unref (G_OBJECT (buf));
+			g_object_unref (G_OBJECT (scaled));
 		} else {
 			cpufreq->icon = gtk_image_new_from_icon_name
 				("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
@@ -445,12 +472,25 @@ cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
 static void
 cpufreq_widgets (void)
 {
+	gchar *css;
+	GtkCssProvider *provider;
+
 	/* create panel toggle button which will contain all other widgets */
-	cpuFreq->button = xfce_create_panel_toggle_button ();
+	cpuFreq->button = xfce_panel_create_toggle_button ();
 	xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->button);
 	gtk_container_add (GTK_CONTAINER (cpuFreq->plugin), cpuFreq->button);
 
-	cpuFreq->box = gtk_hbox_new (FALSE, SPACING);
+	css = g_strdup_printf("button { padding: 0px; }");
+
+	provider = gtk_css_provider_new ();
+	gtk_css_provider_load_from_data (provider, css, -1, NULL);
+	gtk_style_context_add_provider (
+			GTK_STYLE_CONTEXT (gtk_widget_get_style_context (GTK_WIDGET (cpuFreq->button))),
+			GTK_STYLE_PROVIDER(provider),
+			GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+	g_free(css);
+
+	cpuFreq->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, SPACING);
 	gtk_container_set_border_width (GTK_CONTAINER (cpuFreq->box), BORDER);
 	gtk_container_add (GTK_CONTAINER (cpuFreq->button), cpuFreq->box);
 
@@ -466,8 +506,7 @@ cpufreq_widgets (void)
 	g_signal_connect (G_OBJECT (cpuFreq->button), "query-tooltip",
 					  G_CALLBACK (cpufreq_update_tooltip), cpuFreq);
 
-	gtk_widget_show (cpuFreq->box);
-	gtk_widget_show (cpuFreq->button);
+	gtk_widget_show_all (cpuFreq->button);
 
 	cpufreq_update_plugin (TRUE);
 }
@@ -594,6 +633,7 @@ cpufreq_show_about(XfcePanelPlugin *plugin,
 		"Thomas Schreck <shrek@xfce.org>",
 		"Florian Rivoal <frivoal@xfce.org>",
 		"Harald Judt <h.judt@gmx.at>",
+		"André Miranda <andre42m@gmail.com>",
 		NULL };
 	icon = xfce_panel_pixbuf_from_source("xfce4-cpufreq-plugin", NULL, 48);
 	gtk_show_about_dialog
@@ -604,7 +644,7 @@ cpufreq_show_about(XfcePanelPlugin *plugin,
 		 "program-name", PACKAGE_NAME,
 		 "comments", _("Show CPU frequencies and governor"),
 		 "website", PLUGIN_WEBSITE,
-		 "copyright", _("Copyright (c) 2003-2013\n"),
+		 "copyright", _("Copyright (c) 2003-2016\n"),
 		 "authors", auth,
 		 NULL);
 

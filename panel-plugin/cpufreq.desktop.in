@@ -5,3 +5,4 @@ _Comment=Show CPU frequencies and governor
 Icon=xfce4-cpufreq-plugin
 X-XFCE-Internal=FALSE
 X-XFCE-Module=cpufreq
+X-XFCE-API=2.0
