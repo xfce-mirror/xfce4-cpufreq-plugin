@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-07 00:31+0200\n"
-"PO-Revision-Date: 2017-05-12 01:53+0000\n"
+"POT-Creation-Date: 2017-05-17 06:31+0200\n"
+"PO-Revision-Date: 2017-05-22 04:33+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/xfce/xfce-panel-plugins/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -171,8 +171,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "显示 CPU 主频及调频器"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:647
-msgid "Copyright (c) 2003-2016\n"
-msgstr "版权所有 (c) 2003-2016\n"
+msgid "Copyright (c) 2003-2017\n"
+msgstr "版权所有 (c) 2003-2017\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:674
 msgid ""
