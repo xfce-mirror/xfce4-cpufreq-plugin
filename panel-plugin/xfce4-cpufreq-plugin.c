@@ -100,7 +100,7 @@ cpufreq_cpus_calc_max (void)
 void
 cpufreq_label_set_font (void)
 {
-	gchar *css;
+	gchar *css = NULL, *css_font = NULL, *css_color = NULL;
 	GtkCssProvider *provider;
 	PangoFontDescription *font;
 
@@ -111,23 +111,39 @@ cpufreq_label_set_font (void)
 	{
 		font = pango_font_description_from_string(cpuFreq->options->fontname);
 
-		css = g_strdup_printf("label { font-family: %s; font-size: %dpx; font-style: %s; font-weight: %s }",
+		css_font = g_strdup_printf("font-family: %s; font-size: %dpx; font-style: %s; font-weight: %s;",
 			pango_font_description_get_family (font),
 			pango_font_description_get_size (font) / PANGO_SCALE,
-			(pango_font_description_get_style(font) == PANGO_STYLE_ITALIC ||
-			pango_font_description_get_style(font) == PANGO_STYLE_OBLIQUE) ? "italic" : "normal",
-			(pango_font_description_get_weight(font) >= PANGO_WEIGHT_BOLD) ? "bold" : "normal");
+			(pango_font_description_get_style (font) == PANGO_STYLE_ITALIC ||
+			pango_font_description_get_style (font) == PANGO_STYLE_OBLIQUE) ? "italic" : "normal",
+			(pango_font_description_get_weight (font) >= PANGO_WEIGHT_BOLD) ? "bold" : "normal");
 		pango_font_description_free (font);
+	}
 
+	if (cpuFreq->options->fontcolor)
+		css_color = g_strdup_printf ("color: %s;", cpuFreq->options->fontcolor);
+
+	if (css_font && css_color)
+		css = g_strdup_printf ("label { %s %s }", css_font, css_color);
+	else if (css_font)
+		css = g_strdup_printf ("label { %s }", css_font);
+	else if (css_color)
+		css = g_strdup_printf ("label { %s }", css_color);
+
+	if (css)
+	{
 		provider = gtk_css_provider_new ();
 
 		gtk_css_provider_load_from_data (provider, css, -1, NULL);
 		gtk_style_context_add_provider (
 			GTK_STYLE_CONTEXT (gtk_widget_get_style_context (GTK_WIDGET (cpuFreq->label))),
-			GTK_STYLE_PROVIDER(provider),
+			GTK_STYLE_PROVIDER (provider),
 			GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-		g_free(css);
 	}
+
+	g_free (css);
+	g_free (css_font);
+	g_free (css_color);
 }
 
 gboolean
@@ -546,6 +562,12 @@ cpufreq_read_config (void)
 		cpuFreq->options->fontname = g_strdup (value);
 	}
 
+	value = xfce_rc_read_entry (rc, "fontcolor", NULL);
+	if (value) {
+		g_free (cpuFreq->options->fontcolor);
+		cpuFreq->options->fontcolor = g_strdup (value);
+	}
+
 	xfce_rc_close (rc);
 }
 
@@ -573,6 +595,8 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
 	xfce_rc_write_bool_entry (rc, "one_line",            cpuFreq->options->one_line);
 	if (cpuFreq->options->fontname)
 		xfce_rc_write_entry  (rc, "fontname",            cpuFreq->options->fontname);
+	if (cpuFreq->options->fontcolor)
+		xfce_rc_write_entry  (rc, "fontcolor",           cpuFreq->options->fontcolor);
 
 	xfce_rc_close (rc);
 }

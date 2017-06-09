@@ -61,6 +61,7 @@ typedef struct
 	gboolean keep_compact;
 	gboolean one_line;
 	gchar   *fontname;
+	gchar   *fontcolor;
 } CpuFreqPluginOptions;
 
 typedef struct

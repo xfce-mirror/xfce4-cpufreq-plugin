@@ -138,6 +138,17 @@ button_fontname_pressed(GtkWidget *button,
 }
 
 static void
+button_fontcolor_clicked (GtkWidget *button, void *data)
+{
+	GdkRGBA *color = g_new0 (GdkRGBA, 1);
+
+	gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (button), color);
+	cpuFreq->options->fontcolor = gdk_rgba_to_string (color);
+	g_free (color);
+	cpufreq_update_plugin (TRUE);
+}
+
+static void
 combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 {
 	guint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
@@ -179,6 +190,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	GtkWidget *combo, *spinner, *button;
 	GtkSizeGroup *sg0;
 	CpuFreqPluginConfigure *configure;
+	GdkRGBA *color;
 
 	configure = g_new0 (CpuFreqPluginConfigure, 1);
 
@@ -286,6 +298,26 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	g_signal_connect (G_OBJECT (button), "button_press_event",
 					  G_CALLBACK (button_fontname_pressed), configure);
 	button_fontname_update (button, FALSE);
+
+	/* font color */
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+	label = gtk_label_new_with_mnemonic (_("_Font color:"));
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+	gtk_label_set_xalign (GTK_LABEL (label), 0);
+	gtk_size_group_add_widget (sg0, label);
+
+	color = g_new0 (GdkRGBA, 1);
+	gdk_rgba_parse (color, cpuFreq->options->fontcolor ? cpuFreq->options->fontcolor : "#000000");
+
+	button = configure->fontcolor = gtk_color_button_new_with_rgba (color);
+	gtk_color_button_set_title (GTK_COLOR_BUTTON (button), _("Select font color"));
+	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, TRUE, 0);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
+	g_signal_connect (button, "color-set", G_CALLBACK (button_fontcolor_clicked), NULL);
+	g_free (color);
 
 	/* which cpu to show in panel */
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);

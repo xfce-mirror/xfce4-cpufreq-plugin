@@ -34,6 +34,7 @@ typedef struct
 	GtkWidget *keep_compact;
 	GtkWidget *one_line;
 	GtkWidget *fontname;
+	GtkWidget *fontcolor;
 } CpuFreqPluginConfigure;
 
 G_BEGIN_DECLS
