@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-17 06:31+0200\n"
-"PO-Revision-Date: 2017-05-26 14:27+0000\n"
+"POT-Creation-Date: 2017-06-09 06:31+0200\n"
+"PO-Revision-Date: 2017-06-12 01:08+0000\n"
 "Last-Translator: André Miranda <andre42m@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/xfce/xfce-panel-plugins/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -36,64 +36,72 @@ msgstr "Clique com botão direito para reverter para a fonte padrão."
 msgid "Select font"
 msgstr "Selecionar fonte"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:187
+#: ../panel-plugin/xfce4-cpufreq-configure.c:199
 msgid "Configure CPU Frequency Monitor"
 msgstr "Configurar Monitor de Frequência da CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:192
+#: ../panel-plugin/xfce4-cpufreq-configure.c:204
 msgid "Configure the CPU frequency plugin"
 msgstr "Configurar plugin de frequência da CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:210
+#: ../panel-plugin/xfce4-cpufreq-configure.c:222
 msgid "<b>Monitor</b>"
 msgstr "<b>Monitor</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:233
+#: ../panel-plugin/xfce4-cpufreq-configure.c:245
 msgid "_Update interval:"
 msgstr "Intervalo de at_ualização:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:251
+#: ../panel-plugin/xfce4-cpufreq-configure.c:263
 msgid "<b>Panel</b>"
 msgstr "<b>Painel</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:275
+#: ../panel-plugin/xfce4-cpufreq-configure.c:287
 msgid "_Font:"
 msgstr "_Fonte:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:294
+#: ../panel-plugin/xfce4-cpufreq-configure.c:306
+msgid "_Font color:"
+msgstr "Cor da _fonte:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:316
+msgid "Select font color"
+msgstr "Selecione a cor da fonte"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:326
 msgid "_Display CPU:"
 msgstr "_Exibir CPU:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:310
+#: ../panel-plugin/xfce4-cpufreq-configure.c:342
 msgid "min"
 msgstr "min"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:311
+#: ../panel-plugin/xfce4-cpufreq-configure.c:343
 msgid "avg"
 msgstr "média"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:312
+#: ../panel-plugin/xfce4-cpufreq-configure.c:344
 msgid "max"
 msgstr "máx"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:318
+#: ../panel-plugin/xfce4-cpufreq-configure.c:350
 msgid "_Keep compact"
 msgstr "_Manter compacto"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:323
+#: ../panel-plugin/xfce4-cpufreq-configure.c:355
 msgid "Show text in a single _line"
 msgstr "Mostrar texto em uma única _linha"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:328
+#: ../panel-plugin/xfce4-cpufreq-configure.c:360
 msgid "Show CPU _icon"
 msgstr "Mostrar í_cone da CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:335
+#: ../panel-plugin/xfce4-cpufreq-configure.c:367
 msgid "Show CPU fre_quency"
 msgstr "Mostrar frequência da CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:340
+#: ../panel-plugin/xfce4-cpufreq-configure.c:372
 msgid "Show CPU _governor"
 msgstr "Mostrar _governador da CPU"
 
@@ -144,40 +152,40 @@ msgstr "média atual"
 msgid "current max"
 msgstr "máx. atual"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:367
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:383
 msgid "No CPU information available."
 msgstr "Nenhuma informação disponível sobre CPU."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:373
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:389
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
 msgstr[0] "%d cpu disponível"
 msgstr[1] "%d cpus disponível"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:380
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:396
 msgid "Frequency: "
 msgstr "Frequência: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:388
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:404
 msgid "Governor: "
 msgstr "Governador: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:645
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:669
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "Mostrar frequências e governador da CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:647
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:671
 msgid "Copyright (c) 2003-2017\n"
 msgstr "Copyright (c) 2003-2017\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:674
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:698
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Seu sistema não está configurado corretamente para ter suporte a escala de frequência de CPU!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:684
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:708
 msgid "Your system is not supported yet!"
 msgstr "Não há suporte ao seu sistema ainda!"
 
