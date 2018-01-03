@@ -132,14 +132,11 @@ cpufreq_cpu_parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 	g_free (file);
 
 	/* read current cpu freq */
-	if (cpuFreq->intel_pstate == NULL) {
-		file =
-			g_strdup_printf ("/sys/devices/system/cpu/cpu%i/"
-							 "cpufreq/scaling_cur_freq",
-							 cpu_number);
-		SYSFS_READ_INT (file, contents, cpu->cur_freq);
-		g_free (file);
-	}
+        file = g_strdup_printf ("/sys/devices/system/cpu/cpu%i/"
+                                "cpufreq/scaling_cur_freq",
+                                cpu_number);
+        SYSFS_READ_INT (file, contents, cpu->cur_freq);
+        g_free (file);
 
 	/* read current cpu governor */
 	file = g_strdup_printf (
@@ -175,14 +172,11 @@ cpufreq_cpu_read_sysfs_current (gint cpu_number)
 	cpu = g_ptr_array_index (cpuFreq->cpus, cpu_number);
 
 	/* read current cpu freq */
-	if (cpuFreq->intel_pstate == NULL) {
-		file =
-			g_strdup_printf ("/sys/devices/system/cpu/cpu%i/"
-							 "cpufreq/scaling_cur_freq",
-							 cpu_number);
-		SYSFS_READ_INT (file, contents, cpu->cur_freq);
-		g_free (file);
-	}
+        file = g_strdup_printf ("/sys/devices/system/cpu/cpu%i/"
+                                "cpufreq/scaling_cur_freq",
+                                cpu_number);
+        SYSFS_READ_INT (file, contents, cpu->cur_freq);
+        g_free (file);
 
 	/* read current cpu governor */
 	file = g_strdup_printf ("/sys/devices/system/cpu/cpu%i/"
@@ -397,18 +391,12 @@ cpufreq_cpu_intel_pstate_read ()
 	/* gather intel pstate parameters */
 	if (!cpufreq_intel_pstate_params ())
 		return FALSE;
-
-	/* Read /proc/cpuinfo, that's where intel pstate stores
-	   the "current frequencies" that are readable by
-	   unprivileged users. */
-	if (!cpufreq_cpu_read_procfs_cpuinfo ())
-		return FALSE;
-
-	/* now read the remaining cpufreq info for each cpu from sysfs */
-	for (i = 0; i < cpuFreq->cpus->len; i++) {
-		cpu = g_ptr_array_index (cpuFreq->cpus, i);
-		cpufreq_cpu_parse_sysfs_init (i, cpu);
-	}
+        /* now read the number of cpus and the remaining cpufreq info
+           for each of them from sysfs */
+        if (!cpufreq_cpu_read_sysfs ())
+          {
+            return FALSE;
+          }
 	return TRUE;
 }
 
@@ -417,17 +405,8 @@ cpufreq_update_cpus (gpointer data)
 {
 	gint i;
 
-	if (g_file_test ("/sys/devices/system/cpu/intel_pstate", G_FILE_TEST_EXISTS))
-	{
-		/* read current cpu frequencies from /proc/cpuinfo */
-		cpufreq_cpu_read_procfs_cpuinfo ();
-
-		/* read current scaling governor from sysfs */
-		for (i = 0; i < cpuFreq->cpus->len; i++)
-			cpufreq_cpu_read_sysfs_current (i);
-	}
-	else if (g_file_test ("/sys/devices/system/cpu/cpu0/cpufreq",
-						  G_FILE_TEST_EXISTS))
+	if (g_file_test ("/sys/devices/system/cpu/cpu0/cpufreq",
+                         G_FILE_TEST_EXISTS))
 	{
 		for (i = 0; i < cpuFreq->cpus->len; i++)
 			cpufreq_cpu_read_sysfs_current (i);
