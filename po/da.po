@@ -6,13 +6,13 @@
 # Chris Darnell <chris@cedeel.com>, 2013
 # Jens Hyllegaard <jens.hyllegaard@gmail.com>, 2007
 # scootergrisen, 2017
-# scootergrisen, 2017
+# scootergrisen, 2017-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-09 06:31+0200\n"
-"PO-Revision-Date: 2017-11-27 21:36+0000\n"
+"PO-Revision-Date: 2018-03-04 23:18+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce-panel-plugins/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -161,8 +161,8 @@ msgstr "Ingen CPU-information tilgængelig."
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
-msgstr[0] "%d cpu tilrådighed"
-msgstr[1] "%d cpu'er tilrådighed"
+msgstr[0] "%d cpu til rådighed"
+msgstr[1] "%d cpu'er til rådighed"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:396
 msgid "Frequency: "
