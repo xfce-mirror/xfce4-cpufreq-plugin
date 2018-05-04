@@ -437,7 +437,10 @@ cpufreq_linux_init (void)
 	if (cpuFreq->cpus == NULL)
 		return FALSE;
 
-	if (g_file_test ("/sys/devices/system/cpu/intel_pstate", G_FILE_TEST_EXISTS)) {
+	if (g_file_test ("/sys/devices/system/cpu/cpu0/cpufreq", G_FILE_TEST_EXISTS))
+		return cpufreq_cpu_read_sysfs ();
+	else if (g_file_test ("/sys/devices/system/cpu/intel_pstate", G_FILE_TEST_EXISTS))
+	{
 		gboolean ret = cpufreq_cpu_intel_pstate_read ();
 
 		/* Tools like i7z show the current real frequency using the
@@ -452,9 +455,7 @@ cpufreq_linux_init (void)
 			cpuFreq->options->show_warning = FALSE;
 		}
 		return ret;
-	} else if (g_file_test ("/sys/devices/system/cpu/cpu0/cpufreq",
-						  G_FILE_TEST_EXISTS))
-		return cpufreq_cpu_read_sysfs ();
+	}
 	else if (g_file_test ("/proc/cpufreq", G_FILE_TEST_EXISTS))
 		return cpufreq_cpu_read_procfs ();
 	else
