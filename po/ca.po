@@ -5,14 +5,14 @@
 # Translators:
 # Carles Muñoz Gorriz <carlesmu@internautas.org>, 2006
 # Davidmp <medipas@gmail.com>, 2016
-# Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016-2017
+# Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016-2018
 # Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-09 06:31+0200\n"
-"PO-Revision-Date: 2017-09-19 18:06+0000\n"
+"POT-Creation-Date: 2018-05-18 06:32+0200\n"
+"PO-Revision-Date: 2018-05-18 16:44+0000\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce-panel-plugins/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgstr "Seleccioneu la lletra"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:199
 msgid "Configure CPU Frequency Monitor"
-msgstr "Configureu el monitor de freqüència de la CPU"
+msgstr "Configura el monitor de freqüència de la CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:204
 msgid "Configure the CPU frequency plugin"
@@ -106,11 +106,11 @@ msgstr "Mostra la fre_qüència de la CPU"
 msgid "Show CPU _governor"
 msgstr "Mostra el _gestor de la CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:485
+#: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr "El vostre sistema no és compatible amb cpufreq.\nLa miniaplicació únicament mostra la freqüència actual de la CPU"
+msgstr "El vostre sistema no és compatible amb cpufreq.\nLa miniaplicació mostra tan sols la freqüència actual de la CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:79
 msgid "Scaling driver:"
@@ -155,7 +155,7 @@ msgstr "Màx. actual"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:383
 msgid "No CPU information available."
-msgstr "No hi ha informació de la CPU disponible."
+msgstr "No hi ha cap informació disponible de la CPU."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:389
 #, c-format
@@ -170,16 +170,16 @@ msgstr "Freqüència:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:404
 msgid "Governor: "
-msgstr "Controlador:"
+msgstr "Gestor:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:669
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
-msgstr "Mostra la freqüència de la CPU i els controladors"
+msgstr "Mostra les freqüències i el gestor de la CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:671
-msgid "Copyright (c) 2003-2017\n"
-msgstr "Drets d'autor (c) 2003-2017\n"
+msgid "Copyright (c) 2003-2018\n"
+msgstr "Drets d'autor (c) 2003-2018\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:698
 msgid ""
