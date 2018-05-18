@@ -1,3 +1,15 @@
+1.2.0 (2018-05-17)
+------------------
+ * Prefer sysfs to Intel pstate in cpufreq_linux_init (Bug #13835)
+ * Add option to configure text color (Bug #13565)
+ * Translation updates:
+   Arabic, Asturian, Basque, Belarusian, Bulgarian, Catalan, Chinese (China),
+   Chinese (Taiwan), Croatian, Czech, Danish, Dutch, English (Australia),
+   English (United Kingdom), French, German, Greek, Hebrew, Hungarian,
+   Icelandic, Indonesian, Italian, Japanese, Korean, Lithuanian, Malay,
+   Norwegian Bokmål, Occitan, Polish, Portuguese, Portuguese (Brazil), Russian,
+   Serbian, Slovak, Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur
+
 1.1.90 (2017-05-16)
 ------------------
  * Port to GTK+3
