@@ -3,8 +3,8 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# m4sk1n <m4sk1n@vivaldi.net>, 2017
-# No Ne, 2017
+# Marcin Mikołajczak <me@m4sk.in>, 2017
+# No Ne, 2017-2018
 # Piotr Maliński <admin@rk.edu.pl>, 2006
 # Piotr Sokół <psokol.l10n@gmail.com>, 2012-2013
 # Piotr Strębski <strebski@gmail.com>, 2017
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-09 06:31+0200\n"
-"PO-Revision-Date: 2017-09-23 19:02+0000\n"
+"POT-Creation-Date: 2018-05-18 06:32+0200\n"
+"PO-Revision-Date: 2018-05-18 14:53+0000\n"
 "Last-Translator: No Ne\n"
 "Language-Team: Polish (http://www.transifex.com/xfce/xfce-panel-plugins/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,7 @@ msgstr "_Częstotliwość CPU"
 msgid "Show CPU _governor"
 msgstr "_Zarządca CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:485
+#: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
@@ -182,8 +182,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "Wyświetlanie częstotliwości CPU i zarządcy"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:671
-msgid "Copyright (c) 2003-2017\n"
-msgstr "Prawa autorskie (C) 2003-2017\n"
+msgid "Copyright (c) 2003-2018\n"
+msgstr "Prawa autorskie (c) 2003-2018\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:698
 msgid ""
