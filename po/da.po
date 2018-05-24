@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-09 06:31+0200\n"
-"PO-Revision-Date: 2018-03-04 23:18+0000\n"
+"POT-Creation-Date: 2018-05-18 06:32+0200\n"
+"PO-Revision-Date: 2018-05-24 13:54+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce-panel-plugins/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgstr "Vis CPU-fre_kvens"
 msgid "Show CPU _governor"
 msgstr "Vis CPU-_bestyrer"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:485
+#: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
@@ -178,8 +178,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "Vis CPU-frekvenser og bestyrer"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:671
-msgid "Copyright (c) 2003-2017\n"
-msgstr "Ophavsret (c) 2003-2017\n"
+msgid "Copyright (c) 2003-2018\n"
+msgstr "Ophavsret (c) 2003-2018\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:698
 msgid ""
