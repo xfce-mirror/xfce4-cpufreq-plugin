@@ -4,14 +4,14 @@
 # 
 # Translators:
 # Саша Петровић <salepetronije@gmail.com>, 2012-2013
-# Саша Петровић <salepetronije@gmail.com>, 2013
+# Саша Петровић <salepetronije@gmail.com>, 2013,2018
 # Саша Петровић <salepetronije@gmail.com>, 2013,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-09 06:31+0200\n"
-"PO-Revision-Date: 2017-12-23 20:29+0000\n"
+"POT-Creation-Date: 2018-05-18 06:32+0200\n"
+"PO-Revision-Date: 2018-05-27 17:23+0000\n"
 "Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/xfce/xfce-panel-plugins/language/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -105,7 +105,7 @@ msgstr "Приказуј _учесталост"
 msgid "Show CPU _governor"
 msgstr "Приказуј _смернице управљача процесора"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:485
+#: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
@@ -178,8 +178,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "Приказуј управљача и учесталости процесора"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:671
-msgid "Copyright (c) 2003-2017\n"
-msgstr "Права умножавања(c) 2003-2017\n"
+msgid "Copyright (c) 2003-2018\n"
+msgstr "Права умножавања (c) 2003-2018\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:698
 msgid ""
