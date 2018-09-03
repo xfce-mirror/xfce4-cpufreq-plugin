@@ -18,7 +18,6 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#define BORDER 		1
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -211,6 +210,8 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	g_object_set_data (G_OBJECT (cpuFreq->plugin), "configure", dialog);
 
 	dialog_vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox), 12);
+	gtk_box_set_spacing (GTK_BOX (dialog_vbox), 18);
 
 	sg0 = gtk_size_group_new(GTK_SIZE_GROUP_BOTH);
 
@@ -223,24 +224,18 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_frame_set_label_widget (GTK_FRAME (frame), label);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 
-	align = gtk_box_new (GTK_ORIENTATION_VERTICAL, 1);
+	align = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	gtk_widget_set_halign(align, GTK_ALIGN_START);
 	gtk_widget_set_valign(align, GTK_ALIGN_CENTER);
 	gtk_widget_set_hexpand(align, TRUE);
 	gtk_widget_set_vexpand(align, TRUE);
 
 	gtk_container_add (GTK_CONTAINER (frame), align);
-	gtk_widget_set_margin_top (align, 0);
-	gtk_widget_set_margin_bottom (align, 0);
-	gtk_widget_set_margin_start (align, BORDER * 3);
-	gtk_widget_set_margin_end (align, 0);
+	gtk_widget_set_margin_top (align, 6);
+	gtk_widget_set_margin_start (align, 12);
 
-	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER);
-	gtk_container_add (GTK_CONTAINER (align), vbox);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
-
-	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+	gtk_container_add (GTK_CONTAINER (align), hbox);
 
 	label = gtk_label_new_with_mnemonic (_("_Update interval:"));
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
@@ -254,7 +249,6 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, FALSE, 0);
 	g_signal_connect (G_OBJECT (spinner), "value-changed", G_CALLBACK (spinner_changed), configure);
 
-
 	/* panel behaviours */
 	frame = gtk_frame_new (NULL);
 	gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, FALSE, TRUE, 0);
@@ -264,24 +258,21 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	gtk_frame_set_label_widget (GTK_FRAME (frame), label);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 
-	align = gtk_box_new (GTK_ORIENTATION_VERTICAL, 1);
+	align = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	gtk_widget_set_halign(align, GTK_ALIGN_FILL);
 	gtk_widget_set_valign(align, GTK_ALIGN_CENTER);
 	gtk_widget_set_hexpand(align, TRUE);
 	gtk_widget_set_vexpand(align, TRUE);
 
 	gtk_container_add (GTK_CONTAINER (frame), align);
-	gtk_widget_set_margin_top (align, 0);
-	gtk_widget_set_margin_bottom (align, 0);
-	gtk_widget_set_margin_start (align, BORDER * 3);
-	gtk_widget_set_margin_end (align, 0);
+	gtk_widget_set_margin_top (align, 6);
+	gtk_widget_set_margin_start (align, 12);
 
-	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER);
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 	gtk_container_add (GTK_CONTAINER (align), vbox);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
 
 	/* font settings */
-	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic (_("_Font:"));
@@ -300,7 +291,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	button_fontname_update (button, FALSE);
 
 	/* font color */
-	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic (_("_Font color:"));
@@ -320,7 +311,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 	g_free (color);
 
 	/* which cpu to show in panel */
-	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic (_("_Display CPU:"));
