@@ -1,0 +1,242 @@
+/*  xfce4-cpu-freq-plugin - panel plugin for cpu informations
+ *
+ *  Copyright (c) 2018 Andre Miranda <andreldm@xfce.org>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Library General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "xfce4-cpufreq-plugin.h"
+#include "xfce4-cpufreq-linux-sysfs.h"
+
+#ifndef _
+# include <libintl.h>
+# define _(String) gettext (String)
+#endif
+
+#define SYSFS_BASE  "/sys/devices/system/cpu"
+
+static void cpufreq_sysfs_read_int_list (gchar *file, gchar *contents, GList **list);
+
+static void cpufreq_sysfs_read_string (gchar *file, gchar *contents, gchar **string);
+
+static void cpufreq_sysfs_read_string_list (gchar *file, gchar *contents, GList **list);
+
+static void parse_sysfs_init (gint cpu_number, CpuInfo *cpu);
+
+static inline gchar* read_file_contents (const gchar *file);
+
+static inline gboolean cpufreq_cpu_exists (gint num);
+
+
+
+gboolean
+cpufreq_sysfs_is_available ()
+{
+  return g_file_test (SYSFS_BASE"/cpu0/cpufreq", G_FILE_TEST_EXISTS);
+}
+
+void
+cpufreq_sysfs_read_current (gint cpu_number)
+{
+  CpuInfo *cpu;
+  gchar	*file, *contents;
+
+  cpu = g_ptr_array_index (cpuFreq->cpus, cpu_number);
+
+  /* read current cpu freq */
+  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
+  cpufreq_sysfs_read_int (file, contents, &cpu->cur_freq);
+  g_free (file);
+
+  /* read current cpu governor */
+  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_governor", cpu_number);
+  cpufreq_sysfs_read_string (file, contents, &cpu->cur_governor);
+  g_free (file);
+}
+
+
+
+gboolean
+cpufreq_sysfs_read (void)
+{
+  gint count = 0, i = 0;
+  gchar *file;
+
+  while (cpufreq_cpu_exists (count))
+    count++;
+
+  if (count == 0)
+    return FALSE;
+
+  while (i < count)
+    parse_sysfs_init (i++, NULL);
+
+  return TRUE;
+}
+
+
+
+void
+cpufreq_sysfs_read_int (gchar *file, gchar *contents, gint *intval)
+{
+  if (contents = read_file_contents (file)) {
+    (*intval) = atoi (contents);
+    g_free (contents);
+  }
+}
+
+
+
+static void
+cpufreq_sysfs_read_int_list (gchar *file, gchar *contents, GList **list)
+{
+  if (contents = read_file_contents (file)) {
+    gchar **tokens = NULL;
+    gint i = 0;
+    tokens = g_strsplit (contents, " ", 0);
+    g_free (contents);
+    g_list_free (*list);
+    while (tokens[i] != NULL) {
+      gint value = atoi (tokens[i]);
+      *list = g_list_append (*list, GINT_TO_POINTER (value));
+      i++;
+    }
+    g_strfreev (tokens);
+  }
+}
+
+
+static void
+cpufreq_sysfs_read_string (gchar *file,gchar *contents, gchar **string)
+{
+  if (contents = read_file_contents (file)) {
+    g_free (*string);
+    *string = contents;
+  }
+}
+
+
+
+static void
+cpufreq_sysfs_read_string_list (gchar *file, gchar *contents, GList **list)
+{
+  if (contents = read_file_contents (file)) {
+    gchar **tokens = NULL;
+    gint i = 0;
+    tokens = g_strsplit (contents, " ", 0);
+    g_free (contents);
+    g_list_free_full (*list, g_free);
+    while (tokens[i] != NULL) {
+      *list = g_list_append (*list, strdup (tokens[i]));
+      i++;
+    }
+    g_strfreev (tokens);
+  }
+}
+
+
+
+static void
+parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
+{
+  gchar *file, *contents;
+  gboolean add_cpu = FALSE;
+
+  if (cpu == NULL) {
+    cpu = g_new0 (CpuInfo, 1);
+    add_cpu = TRUE;
+  }
+
+  /* read available cpu freqs */
+  if (cpuFreq->intel_pstate == NULL) {
+    file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_available_frequencies", cpu_number);
+    cpufreq_sysfs_read_int_list (file, contents, &cpu->available_freqs);
+    g_free (file);
+  }
+
+  /* read available cpu governors */
+  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_available_governors", cpu_number);
+  cpufreq_sysfs_read_string_list (file, contents, &cpu->available_governors);
+  g_free (file);
+
+  /* read cpu driver */
+  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_driver", cpu_number);
+  cpufreq_sysfs_read_string (file, contents, &cpu->scaling_driver);
+  g_free (file);
+
+  /* read current cpu freq */
+  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
+  cpufreq_sysfs_read_int (file, contents, &cpu->cur_freq);
+  g_free (file);
+
+  /* read current cpu governor */
+  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_governor", cpu_number);
+  cpufreq_sysfs_read_string (file, contents, &cpu->cur_governor);
+  g_free (file);
+
+  /* read max cpu freq */
+  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_max_freq", cpu_number);
+  cpufreq_sysfs_read_int (file, contents, &cpu->max_freq);
+  g_free (file);
+
+  /* read min cpu freq */
+  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_min_freq", cpu_number);
+  cpufreq_sysfs_read_int (file, contents, &cpu->min_freq);
+  g_free (file);
+
+  if (add_cpu)
+    g_ptr_array_add (cpuFreq->cpus, cpu);
+}
+
+
+
+static inline gchar*
+read_file_contents (const gchar *file)
+{
+  GError *error = NULL;
+  gchar *contents = NULL;
+
+  if (!g_file_test (file, G_FILE_TEST_EXISTS))
+    return NULL;
+
+  if (g_file_get_contents (file, &contents, NULL, &error)) {
+    g_strstrip (contents);
+    return contents;
+  }
+
+  g_debug ("Error reading %s: %s\n", file, error->message);
+  g_error_free (error);
+  return NULL;
+}
+
+
+
+static inline gboolean
+cpufreq_cpu_exists (gint num)
+{
+  gchar *file;
+  gboolean ret;
+
+  file = g_strdup_printf ("%s/cpu%d", SYSFS_BASE, num);
+  ret = g_file_test (file, G_FILE_TEST_EXISTS);
+
+  g_free (file);
+
+  return ret;
+}
