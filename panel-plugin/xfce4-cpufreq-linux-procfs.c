@@ -29,7 +29,7 @@
 
 
 gboolean
-cpufreq_procfs_is_available ()
+cpufreq_procfs_is_available (void)
 {
   return g_file_test (PROCFS_BASE, G_FILE_TEST_EXISTS);
 }
@@ -37,12 +37,12 @@ cpufreq_procfs_is_available ()
 
 
 gboolean
-cpufreq_procfs_read_cpuinfo ()
+cpufreq_procfs_read_cpuinfo (void)
 {
   CpuInfo *cpu;
   FILE *file;
   gchar *freq, *filePath, *fileContent;
-  gint i = 0;
+  guint i = 0;
   gboolean add_cpu;
 
   filePath = g_strdup ("/proc/cpuinfo");
@@ -109,11 +109,10 @@ cpufreq_procfs_read_cpuinfo ()
 
 
 gboolean
-cpufreq_procfs_read ()
+cpufreq_procfs_read (void)
 {
   CpuInfo *cpu;
   FILE *file;
-  gint i;
   gchar *filePath, *fileContent;
 
   filePath = g_strdup (PROCFS_BASE);
@@ -157,7 +156,7 @@ cpufreq_procfs_read ()
 
   g_free (filePath);
 
-  for (i = 0; i < cpuFreq->cpus->len; i++)
+  for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
     cpu = g_ptr_array_index (cpuFreq->cpus, i);
     filePath = g_strdup_printf ("/proc/sys/cpu/%d/speed", i);

@@ -200,7 +200,6 @@ cpufreq_configure_response (GtkWidget *dialog, int response, CpuFreqPluginConfig
 void
 cpufreq_configure (XfcePanelPlugin *plugin)
 {
-  gint i;
   gchar *cpu_name;
   GtkWidget *dialog, *dialog_vbox;
   GtkWidget *frame, *align, *label, *vbox, *hbox;
@@ -342,7 +341,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, TRUE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
 
-  for (i = 0; i < cpuFreq->cpus->len; ++i)
+  for (guint i = 0; i < cpuFreq->cpus->len; ++i)
   {
     cpu_name = g_strdup_printf ("%d", i);
     gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), cpu_name);

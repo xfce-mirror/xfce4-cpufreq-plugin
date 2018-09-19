@@ -39,75 +39,6 @@
 
 
 
-CpuInfo *
-cpufreq_cpus_calc_min (void)
-{
-  guint freq = 0;
-  gint i;
-
-  for (i = 0; i < cpuFreq->cpus->len; i++)
-  {
-    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
-
-    if (freq > cpu->cur_freq || i == 0)
-      freq = cpu->cur_freq;
-  }
-
-  cpuinfo_free (cpuFreq->cpu_min);
-  cpuFreq->cpu_min = g_new0 (CpuInfo, 1);
-  cpuFreq->cpu_min->cur_freq = freq;
-  cpuFreq->cpu_min->cur_governor = g_strdup (_("current min"));
-
-  return cpuFreq->cpu_min;
-}
-
-
-
-CpuInfo *
-cpufreq_cpus_calc_avg (void)
-{
-  guint freq = 0;
-  gint i;
-
-  for (i = 0; i < cpuFreq->cpus->len; i++)
-  {
-    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
-    freq += cpu->cur_freq;
-  }
-
-  freq /= cpuFreq->cpus->len;
-  cpuinfo_free (cpuFreq->cpu_avg);
-  cpuFreq->cpu_avg = g_new0 (CpuInfo, 1);
-  cpuFreq->cpu_avg->cur_freq = freq;
-  cpuFreq->cpu_avg->cur_governor = g_strdup (_("current avg"));
-
-  return cpuFreq->cpu_avg;
-}
-
-
-
-CpuInfo *
-cpufreq_cpus_calc_max (void)
-{
-  guint freq = 0;
-  gint i;
-
-  for (i = 0; i < cpuFreq->cpus->len; i++)
-  {
-    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
-
-    if (freq < cpu->cur_freq)
-      freq = cpu->cur_freq;
-  }
-
-  cpuinfo_free (cpuFreq->cpu_max);
-  cpuFreq->cpu_max = g_new0 (CpuInfo, 1);
-  cpuFreq->cpu_max->cur_freq = freq;
-  cpuFreq->cpu_max->cur_governor = g_strdup (_("current max"));
-
-  return cpuFreq->cpu_max;
-}
-
 void
 cpufreq_label_set_font (void)
 {
@@ -159,7 +90,75 @@ cpufreq_label_set_font (void)
 
 
 
-gboolean
+static CpuInfo *
+cpufreq_cpus_calc_min (void)
+{
+  guint freq = 0;
+
+  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  {
+    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+
+    if (freq > cpu->cur_freq || i == 0)
+      freq = cpu->cur_freq;
+  }
+
+  cpuinfo_free (cpuFreq->cpu_min);
+  cpuFreq->cpu_min = g_new0 (CpuInfo, 1);
+  cpuFreq->cpu_min->cur_freq = freq;
+  cpuFreq->cpu_min->cur_governor = g_strdup (_("current min"));
+
+  return cpuFreq->cpu_min;
+}
+
+
+
+static CpuInfo *
+cpufreq_cpus_calc_avg (void)
+{
+  guint freq = 0;
+
+  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  {
+    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+    freq += cpu->cur_freq;
+  }
+
+  freq /= cpuFreq->cpus->len;
+  cpuinfo_free (cpuFreq->cpu_avg);
+  cpuFreq->cpu_avg = g_new0 (CpuInfo, 1);
+  cpuFreq->cpu_avg->cur_freq = freq;
+  cpuFreq->cpu_avg->cur_governor = g_strdup (_("current avg"));
+
+  return cpuFreq->cpu_avg;
+}
+
+
+
+static CpuInfo *
+cpufreq_cpus_calc_max (void)
+{
+  guint freq = 0;
+
+  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  {
+    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+
+    if (freq < cpu->cur_freq)
+      freq = cpu->cur_freq;
+  }
+
+  cpuinfo_free (cpuFreq->cpu_max);
+  cpuFreq->cpu_max = g_new0 (CpuInfo, 1);
+  cpuFreq->cpu_max->cur_freq = freq;
+  cpuFreq->cpu_max->cur_governor = g_strdup (_("current max"));
+
+  return cpuFreq->cpu_max;
+}
+
+
+
+static gboolean
 cpufreq_update_label (CpuInfo *cpu)
 {
   GtkRequisition label_size;
@@ -245,7 +244,7 @@ static void
 cpufreq_widgets_layout (void)
 {
   GtkRequisition icon_size, label_size;
-  GtkOrientation orientation;
+  GtkOrientation orientation = GTK_ORIENTATION_HORIZONTAL;
   gboolean small = cpuFreq->options->keep_compact;
   gboolean resized = FALSE;
   gboolean hide_label = (!cpuFreq->options->show_label_freq &&
@@ -370,8 +369,8 @@ cpufreq_widgets_layout (void)
 
 
 
-CpuInfo *
-cpufreq_current_cpu ()
+static CpuInfo *
+cpufreq_current_cpu (void)
 {
   CpuInfo *cpu = NULL;
 
@@ -532,7 +531,7 @@ cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 
 
 
-void
+static void
 cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
 {
   if (cpufreq->label)
@@ -693,14 +692,12 @@ cpuinfo_free (CpuInfo *cpu)
 static void
 cpufreq_free (XfcePanelPlugin *plugin)
 {
-  gint i;
-
   if (cpuFreq->timeoutHandle)
     g_source_remove (cpuFreq->timeoutHandle);
 
   g_slice_free (IntelPState, cpuFreq->intel_pstate);
 
-  for (i = 0; i < cpuFreq->cpus->len; i++)
+  for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
     CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
     g_ptr_array_remove_fast (cpuFreq->cpus, cpu);

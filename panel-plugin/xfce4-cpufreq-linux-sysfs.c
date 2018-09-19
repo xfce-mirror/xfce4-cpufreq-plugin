@@ -26,11 +26,11 @@
 
 #define SYSFS_BASE  "/sys/devices/system/cpu"
 
-static void cpufreq_sysfs_read_int_list (gchar *file, gchar *contents, GList **list);
+static void cpufreq_sysfs_read_int_list (gchar *file, GList **list);
 
-static void cpufreq_sysfs_read_string (gchar *file, gchar *contents, gchar **string);
+static void cpufreq_sysfs_read_string (gchar *file, gchar **string);
 
-static void cpufreq_sysfs_read_string_list (gchar *file, gchar *contents, GList **list);
+static void cpufreq_sysfs_read_string_list (gchar *file, GList **list);
 
 static void parse_sysfs_init (gint cpu_number, CpuInfo *cpu);
 
@@ -41,27 +41,29 @@ static inline gboolean cpufreq_cpu_exists (gint num);
 
 
 gboolean
-cpufreq_sysfs_is_available ()
+cpufreq_sysfs_is_available (void)
 {
   return g_file_test (SYSFS_BASE"/cpu0/cpufreq", G_FILE_TEST_EXISTS);
 }
+
+
 
 void
 cpufreq_sysfs_read_current (gint cpu_number)
 {
   CpuInfo *cpu;
-  gchar	*file, *contents;
+  gchar	*file;
 
   cpu = g_ptr_array_index (cpuFreq->cpus, cpu_number);
 
   /* read current cpu freq */
   file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
-  cpufreq_sysfs_read_int (file, contents, &cpu->cur_freq);
+  cpufreq_sysfs_read_int (file, &cpu->cur_freq);
   g_free (file);
 
   /* read current cpu governor */
   file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_governor", cpu_number);
-  cpufreq_sysfs_read_string (file, contents, &cpu->cur_governor);
+  cpufreq_sysfs_read_string (file, &cpu->cur_governor);
   g_free (file);
 }
 
@@ -71,7 +73,6 @@ gboolean
 cpufreq_sysfs_read (void)
 {
   gint count = 0, i = 0;
-  gchar *file;
 
   while (cpufreq_cpu_exists (count))
     count++;
@@ -88,9 +89,11 @@ cpufreq_sysfs_read (void)
 
 
 void
-cpufreq_sysfs_read_int (gchar *file, gchar *contents, gint *intval)
+cpufreq_sysfs_read_int (gchar *file, guint *intval)
 {
-  if (contents = read_file_contents (file)) {
+  gchar *contents = read_file_contents (file);
+
+  if (contents) {
     (*intval) = atoi (contents);
     g_free (contents);
   }
@@ -99,9 +102,11 @@ cpufreq_sysfs_read_int (gchar *file, gchar *contents, gint *intval)
 
 
 static void
-cpufreq_sysfs_read_int_list (gchar *file, gchar *contents, GList **list)
+cpufreq_sysfs_read_int_list (gchar *file, GList **list)
 {
-  if (contents = read_file_contents (file)) {
+  gchar *contents = read_file_contents (file);
+
+  if (contents) {
     gchar **tokens = NULL;
     gint i = 0;
     tokens = g_strsplit (contents, " ", 0);
@@ -118,9 +123,11 @@ cpufreq_sysfs_read_int_list (gchar *file, gchar *contents, GList **list)
 
 
 static void
-cpufreq_sysfs_read_string (gchar *file,gchar *contents, gchar **string)
+cpufreq_sysfs_read_string (gchar *file, gchar **string)
 {
-  if (contents = read_file_contents (file)) {
+  gchar *contents = read_file_contents (file);
+
+  if (contents) {
     g_free (*string);
     *string = contents;
   }
@@ -129,9 +136,11 @@ cpufreq_sysfs_read_string (gchar *file,gchar *contents, gchar **string)
 
 
 static void
-cpufreq_sysfs_read_string_list (gchar *file, gchar *contents, GList **list)
+cpufreq_sysfs_read_string_list (gchar *file, GList **list)
 {
-  if (contents = read_file_contents (file)) {
+  gchar *contents = read_file_contents (file);
+
+  if (contents) {
     gchar **tokens = NULL;
     gint i = 0;
     tokens = g_strsplit (contents, " ", 0);
@@ -150,7 +159,7 @@ cpufreq_sysfs_read_string_list (gchar *file, gchar *contents, GList **list)
 static void
 parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 {
-  gchar *file, *contents;
+  gchar *file;
   gboolean add_cpu = FALSE;
 
   if (cpu == NULL) {
@@ -161,38 +170,38 @@ parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
   /* read available cpu freqs */
   if (cpuFreq->intel_pstate == NULL) {
     file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_available_frequencies", cpu_number);
-    cpufreq_sysfs_read_int_list (file, contents, &cpu->available_freqs);
+    cpufreq_sysfs_read_int_list (file, &cpu->available_freqs);
     g_free (file);
   }
 
   /* read available cpu governors */
   file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_available_governors", cpu_number);
-  cpufreq_sysfs_read_string_list (file, contents, &cpu->available_governors);
+  cpufreq_sysfs_read_string_list (file, &cpu->available_governors);
   g_free (file);
 
   /* read cpu driver */
   file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_driver", cpu_number);
-  cpufreq_sysfs_read_string (file, contents, &cpu->scaling_driver);
+  cpufreq_sysfs_read_string (file, &cpu->scaling_driver);
   g_free (file);
 
   /* read current cpu freq */
   file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
-  cpufreq_sysfs_read_int (file, contents, &cpu->cur_freq);
+  cpufreq_sysfs_read_int (file, &cpu->cur_freq);
   g_free (file);
 
   /* read current cpu governor */
   file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_governor", cpu_number);
-  cpufreq_sysfs_read_string (file, contents, &cpu->cur_governor);
+  cpufreq_sysfs_read_string (file, &cpu->cur_governor);
   g_free (file);
 
   /* read max cpu freq */
   file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_max_freq", cpu_number);
-  cpufreq_sysfs_read_int (file, contents, &cpu->max_freq);
+  cpufreq_sysfs_read_int (file, &cpu->max_freq);
   g_free (file);
 
   /* read min cpu freq */
   file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_min_freq", cpu_number);
-  cpufreq_sysfs_read_int (file, contents, &cpu->min_freq);
+  cpufreq_sysfs_read_int (file, &cpu->min_freq);
   g_free (file);
 
   if (add_cpu)

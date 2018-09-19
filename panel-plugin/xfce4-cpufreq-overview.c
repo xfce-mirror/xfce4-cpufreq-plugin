@@ -113,9 +113,9 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
     j = 0;
     while (list)
     {
-      text = cpufreq_get_human_readable_freq (GPOINTER_TO_INT (list->data));
+      text = cpufreq_get_human_readable_freq (GPOINTER_TO_UINT (list->data));
 
-      if (GPOINTER_TO_INT (list->data) == cpu->cur_freq)
+      if (GPOINTER_TO_UINT (list->data) == cpu->cur_freq)
         i = j;
 
       gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), text);
@@ -230,28 +230,28 @@ cpufreq_overview_response (GtkWidget *dialog, gint response, gpointer data)
 
 
 gboolean
-cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpuFreq)
+cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
 {
-  gint i, j, step;
+  gint step;
   GtkWidget *dialog, *dialog_vbox, *window;
   GtkWidget *dialog_hbox, *separator;
 
   if (ev->button != 1)
     return FALSE;
 
-  window = g_object_get_data (G_OBJECT (cpuFreq->plugin), "overview");
+  window = g_object_get_data (G_OBJECT (cpufreq->plugin), "overview");
 
   if (window) {
-    g_object_set_data (G_OBJECT (cpuFreq->plugin), "overview", NULL);
+    g_object_set_data (G_OBJECT (cpufreq->plugin), "overview", NULL);
     gtk_widget_destroy (window);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpuFreq->button), FALSE);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpufreq->button), FALSE);
     return TRUE;
   }
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpuFreq->button), TRUE);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpufreq->button), TRUE);
 
   dialog = xfce_titled_dialog_new_with_buttons (_("CPU Information"),
-    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (cpuFreq->plugin))),
+    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (cpufreq->plugin))),
     GTK_DIALOG_DESTROY_WITH_PARENT, "gtk-close", GTK_RESPONSE_OK, NULL);
 
   xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog),
@@ -260,35 +260,35 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpuFreq)
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-cpufreq-plugin");
 
-  g_object_set_data (G_OBJECT (cpuFreq->plugin), "overview", dialog);
+  g_object_set_data (G_OBJECT (cpufreq->plugin), "overview", dialog);
 
   dialog_vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 
   /* choose how many columns and rows depending on cpu count */
-  if (cpuFreq->cpus->len < 4)
+  if (cpufreq->cpus->len < 4)
     step = 1;
-  else if (cpuFreq->cpus->len < 9)
+  else if (cpufreq->cpus->len < 9)
     step = 2;
-  else if (cpuFreq->cpus->len % 3)
+  else if (cpufreq->cpus->len % 3)
     step = 4;
   else
     step = 3;
 
-  for (i = 0; i < cpuFreq->cpus->len; i += step) {
+  for (guint i = 0; i < cpufreq->cpus->len; i += step) {
     dialog_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER * 2);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), dialog_hbox, FALSE, FALSE, BORDER * 2);
     gtk_container_set_border_width (GTK_CONTAINER (dialog_hbox), BORDER * 2);
 
-    for (j = i; j < cpuFreq->cpus->len && j < i + step; j++) {
-      CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, j);
+    for (guint j = i; j < cpufreq->cpus->len && j < i + step; j++) {
+      CpuInfo *cpu = g_ptr_array_index (cpufreq->cpus, j);
       cpufreq_overview_add (cpu, j, dialog_hbox);
 
-      if (j + 1 < cpuFreq->cpus->len && j + 1 == i + step) {
+      if (j + 1 < cpufreq->cpus->len && j + 1 == i + step) {
         separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
         gtk_box_pack_start (GTK_BOX (dialog_vbox), separator, FALSE, FALSE, 0);
       }
 
-      if (j + 1 < cpuFreq->cpus->len && j + 1 < i + step) {
+      if (j + 1 < cpufreq->cpus->len && j + 1 < i + step) {
         separator = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
         gtk_box_pack_start (GTK_BOX (dialog_hbox), separator, FALSE, FALSE, 0);
       }

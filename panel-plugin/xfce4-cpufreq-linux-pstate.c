@@ -29,8 +29,10 @@
 
 static gboolean read_params ();
 
+
+
 gboolean
-cpufreq_pstate_is_available ()
+cpufreq_pstate_is_available (void)
 {
   return g_file_test (PSTATE_BASE, G_FILE_TEST_EXISTS);
 }
@@ -40,9 +42,6 @@ cpufreq_pstate_is_available ()
 gboolean
 cpufreq_pstate_read (void)
 {
-  CpuInfo *cpu;
-  gint i;
-
   /* gather intel pstate parameters */
   if (!read_params ())
     return FALSE;
@@ -58,9 +57,9 @@ cpufreq_pstate_read (void)
 
 
 static gboolean
-read_params ()
+read_params (void)
 {
-  gchar *file, *contents;
+  gchar *file;
   IntelPState *ips;
 
   ips = g_slice_new0(IntelPState);
@@ -69,15 +68,15 @@ read_params ()
     return FALSE;
 
   file = g_strdup (PSTATE_BASE "/min_perf_pct");
-  cpufreq_sysfs_read_int (file, contents, &ips->min_perf_pct);
+  cpufreq_sysfs_read_int (file, &ips->min_perf_pct);
   g_free (file);
 
   file = g_strdup (PSTATE_BASE "/max_perf_pct");
-  cpufreq_sysfs_read_int (file, contents, &ips->max_perf_pct);
+  cpufreq_sysfs_read_int (file, &ips->max_perf_pct);
   g_free (file);
 
   file = g_strdup (PSTATE_BASE "/no_turbo");
-  cpufreq_sysfs_read_int (file, contents, &ips->no_turbo);
+  cpufreq_sysfs_read_int (file, &ips->no_turbo);
   g_free (file);
 
   g_slice_free (IntelPState, cpuFreq->intel_pstate);

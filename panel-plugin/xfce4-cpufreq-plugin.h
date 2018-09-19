@@ -45,9 +45,9 @@ typedef struct
 
 typedef struct
 {
-  gint min_perf_pct;
-  gint max_perf_pct;
-  gint no_turbo;
+  guint min_perf_pct;
+  guint max_perf_pct;
+  guint no_turbo;
 } IntelPState;
 
 typedef struct
@@ -69,7 +69,7 @@ typedef struct
   XfcePanelPlugin *plugin;
   XfcePanelPluginMode panel_mode;
   gint panel_size;
-  guint panel_rows;
+  gint panel_rows;
 
   /* Array with all CPUs */
   GPtrArray *cpus;

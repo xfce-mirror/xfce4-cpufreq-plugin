@@ -82,17 +82,15 @@ cpufreq_linux_init (void)
 gboolean
 cpufreq_update_cpus (gpointer data)
 {
-  gint i;
-
   if (cpufreq_sysfs_is_available ())
   {
-    for (i = 0; i < cpuFreq->cpus->len; i++)
+    for (guint i = 0; i < cpuFreq->cpus->len; i++)
       cpufreq_sysfs_read_current (i);
   }
   else if (cpufreq_procfs_is_available ())
   {
     /* First we delete the cpus and then read the /proc/cpufreq file again */
-    for (i = 0; i < cpuFreq->cpus->len; i++)
+    for (guint i = 0; i < cpuFreq->cpus->len; i++)
     {
       CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
       g_ptr_array_remove_fast (cpuFreq->cpus, cpu);
