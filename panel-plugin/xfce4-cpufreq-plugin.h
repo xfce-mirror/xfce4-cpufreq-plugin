@@ -33,62 +33,62 @@
 
 typedef struct
 {
-	guint  cur_freq;
-	guint  max_freq;
-	guint  min_freq;
-	gchar  *cur_governor;
-	gchar  *scaling_driver;
+  guint  cur_freq;
+  guint  max_freq;
+  guint  min_freq;
+  gchar  *cur_governor;
+  gchar  *scaling_driver;
 
-	GList* available_freqs;
-	GList* available_governors;
+  GList* available_freqs;
+  GList* available_governors;
 } CpuInfo;
 
 typedef struct
 {
-	gint     min_perf_pct;
-	gint     max_perf_pct;
-	gint     no_turbo;
+  gint min_perf_pct;
+  gint max_perf_pct;
+  gint no_turbo;
 } IntelPState;
 
 typedef struct
 {
-	guint 	 timeout;       /* time between refresh */
-	guint	 show_cpu;      /* cpu number in panel */
-	gboolean show_icon;
-	gboolean show_label_governor;
-	gboolean show_label_freq;
-	gboolean show_warning;
-	gboolean keep_compact;
-	gboolean one_line;
-	gchar   *fontname;
-	gchar   *fontcolor;
+  guint    timeout;       /* time between refresh */
+  guint    show_cpu;      /* cpu number in panel */
+  gboolean show_icon;
+  gboolean show_label_governor;
+  gboolean show_label_freq;
+  gboolean show_warning;
+  gboolean keep_compact;
+  gboolean one_line;
+  gchar   *fontname;
+  gchar   *fontcolor;
 } CpuFreqPluginOptions;
 
 typedef struct
 {
-	XfcePanelPlugin *plugin;
-	XfcePanelPluginMode panel_mode;
-	gint panel_size;
-	guint panel_rows;
+  XfcePanelPlugin *plugin;
+  XfcePanelPluginMode panel_mode;
+  gint panel_size;
+  guint panel_rows;
 
-	/* Array with all CPUs */
-	GPtrArray *cpus;
+  /* Array with all CPUs */
+  GPtrArray *cpus;
 
-	/* Calculated values */
-	CpuInfo *cpu_min;
-	CpuInfo *cpu_avg;
-	CpuInfo *cpu_max;
+  /* Calculated values */
+  CpuInfo *cpu_min;
+  CpuInfo *cpu_avg;
+  CpuInfo *cpu_max;
 
-	/* Intel P-State parameters */
-	IntelPState *intel_pstate;
+  /* Intel P-State parameters */
+  IntelPState *intel_pstate;
 
-	/* Widgets */
-	GtkWidget *button, *box, *icon, *label;
-	gboolean layout_changed;
-	gint label_max_width;
+  /* Widgets */
+  GtkWidget *button, *box, *icon, *label;
+  gboolean layout_changed;
+  gint label_max_width;
 
-	CpuFreqPluginOptions  *options;
-	gint 		      timeoutHandle;
+  CpuFreqPluginOptions *options;
+  gint timeoutHandle;
 } CpuFreqPlugin;
 
 CpuFreqPlugin *cpuFreq;

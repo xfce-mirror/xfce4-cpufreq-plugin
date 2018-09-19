@@ -24,17 +24,17 @@
 
 typedef struct
 {
-	GtkWidget *display_icon;
-	GtkWidget *display_freq;
-	GtkWidget *display_governor;
-	GtkWidget *display_cpu;
-	GtkWidget *monitor_timeout;
-	GtkWidget *combo_cpu;
-	GtkWidget *spinner_timeout;
-	GtkWidget *keep_compact;
-	GtkWidget *one_line;
-	GtkWidget *fontname;
-	GtkWidget *fontcolor;
+  GtkWidget *display_icon;
+  GtkWidget *display_freq;
+  GtkWidget *display_governor;
+  GtkWidget *display_cpu;
+  GtkWidget *monitor_timeout;
+  GtkWidget *combo_cpu;
+  GtkWidget *spinner_timeout;
+  GtkWidget *keep_compact;
+  GtkWidget *one_line;
+  GtkWidget *fontname;
+  GtkWidget *fontcolor;
 } CpuFreqPluginConfigure;
 
 G_BEGIN_DECLS

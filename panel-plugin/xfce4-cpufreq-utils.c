@@ -26,45 +26,51 @@
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-utils.h"
 
+
+
 gchar*
 cpufreq_get_human_readable_freq (guint freq)
 {
-	guint div;
-	gchar *readable_freq, *freq_unit;
+  guint div;
+  gchar *readable_freq, *freq_unit;
 
-	if (freq > 999999)
-	{
-		div 	  = (1000 * 1000);
-		freq_unit = g_strdup ("GHz");
-	}
-	else
-	{
-		div	  = 1000;
-		freq_unit = g_strdup ("MHz");
-	}
-	
-	if ((freq % div) == 0 || div == 1000)
-		readable_freq = g_strdup_printf ("%d %s", (freq/div), freq_unit);
-	else
-		readable_freq = g_strdup_printf ("%3.2f %s", ((gfloat)freq/div), freq_unit);
+  if (freq > 999999)
+  {
+    div = (1000 * 1000);
+    freq_unit = g_strdup ("GHz");
+  }
+  else
+  {
+    div = 1000;
+    freq_unit = g_strdup ("MHz");
+  }
+  
+  if ((freq % div) == 0 || div == 1000)
+    readable_freq = g_strdup_printf ("%d %s", (freq/div), freq_unit);
+  else
+    readable_freq = g_strdup_printf ("%3.2f %s", ((gfloat)freq/div), freq_unit);
 
-	g_free (freq_unit);
-	return readable_freq;
+  g_free (freq_unit);
+
+  return readable_freq;
 }
+
+
 
 guint
 cpufreq_get_normal_freq (const gchar *freq)
 {
-	guint result;
-	gchar **tokens;
+  guint result;
+  gchar **tokens;
 
-	tokens = g_strsplit (freq, " ", 0);
+  tokens = g_strsplit (freq, " ", 0);
 
-	if (g_ascii_strcasecmp (tokens[1], "GHz") == 0)
-		result = (guint)(atof (tokens[0]) * 1000 * 1000);
-	else
-		result = (guint)(atof (tokens[0]) * 1000);
+  if (g_ascii_strcasecmp (tokens[1], "GHz") == 0)
+    result = (guint) (atof (tokens[0]) * 1000 * 1000);
+  else
+    result = (guint) (atof (tokens[0]) * 1000);
 
-	g_strfreev (tokens);
-	return result;
+  g_strfreev (tokens);
+
+  return result;
 }
