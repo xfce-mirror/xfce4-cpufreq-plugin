@@ -25,11 +25,6 @@
 #include "xfce4-cpufreq-linux-pstate.h"
 #include "xfce4-cpufreq-linux-sysfs.h"
 
-#ifndef _
-# include <libintl.h>
-# define _(String) gettext (String)
-#endif
-
 #define PSTATE_BASE "/sys/devices/system/cpu/intel_pstate"
 
 static gboolean read_params ();

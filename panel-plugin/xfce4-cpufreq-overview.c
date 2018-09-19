@@ -25,17 +25,14 @@
 #endif
 
 #include <libxfce4ui/libxfce4ui.h>
-#ifndef _
-# include <libintl.h>
-# define _(String) gettext (String)
-#endif
 
 #include "xfce4-cpufreq-plugin.h"
+#include "xfce4-cpufreq-overview.h"
+#include "xfce4-cpufreq-utils.h"
+
 #ifdef __linux__
 #include "xfce4-cpufreq-linux.h"
 #endif /* __linux__ */
-#include "xfce4-cpufreq-overview.h"
-#include "xfce4-cpufreq-utils.h"
 
 
 

@@ -24,11 +24,6 @@
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-linux-sysfs.h"
 
-#ifndef _
-# include <libintl.h>
-# define _(String) gettext (String)
-#endif
-
 #define SYSFS_BASE  "/sys/devices/system/cpu"
 
 static void cpufreq_sysfs_read_int_list (gchar *file, gchar *contents, GList **list);
