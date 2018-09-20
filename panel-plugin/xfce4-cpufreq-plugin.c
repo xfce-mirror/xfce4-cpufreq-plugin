@@ -613,7 +613,7 @@ cpufreq_read_config (void)
   gchar  *file;
   const gchar *value;
 
-  file = xfce_panel_plugin_save_location (cpuFreq->plugin, FALSE);
+  file = xfce_panel_plugin_lookup_rc_file (cpuFreq->plugin);
 
   if (G_UNLIKELY (!file))
     return;
