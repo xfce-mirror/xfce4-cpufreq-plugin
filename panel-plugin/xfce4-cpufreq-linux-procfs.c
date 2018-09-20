@@ -75,6 +75,7 @@ cpufreq_procfs_read_cpuinfo (void)
           cpu->cur_governor = NULL;
           cpu->available_freqs = NULL;
           cpu->available_governors = NULL;
+          cpu->online = TRUE;
           add_cpu = TRUE;
         }
 
@@ -137,6 +138,7 @@ cpufreq_procfs_read (void)
         cpu->cur_governor = g_new (gchar, 20);
         cpu->available_freqs = NULL;
         cpu->available_governors = NULL;
+        cpu->online = TRUE;
 
         sscanf (fileContent,
                 "CPU %*d %d kHz (%*d %%) - %d kHz (%*d %%) - %20s",

@@ -65,6 +65,18 @@ cpufreq_sysfs_read_current (gint cpu_number)
   file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_governor", cpu_number);
   cpufreq_sysfs_read_string (file, &cpu->cur_governor);
   g_free (file);
+
+  /* read whether the cpu is online, skip first */
+  if (cpu_number != 0)
+  {
+    guint online;
+
+    file = g_strdup_printf (SYSFS_BASE"/cpu%i/online", cpu_number);
+    cpufreq_sysfs_read_int (file, &online);
+    g_free (file);
+
+    cpu->online = online != 0;
+  }
 }
 
 
@@ -164,6 +176,7 @@ parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 
   if (cpu == NULL) {
     cpu = g_new0 (CpuInfo, 1);
+    cpu->online = TRUE;
     add_cpu = TRUE;
   }
 

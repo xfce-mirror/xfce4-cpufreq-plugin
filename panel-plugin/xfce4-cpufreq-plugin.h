@@ -41,6 +41,8 @@ typedef struct
 
   GList* available_freqs;
   GList* available_governors;
+
+  gboolean online;
 } CpuInfo;
 
 typedef struct

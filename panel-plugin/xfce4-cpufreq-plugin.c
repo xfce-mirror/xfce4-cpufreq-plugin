@@ -99,6 +99,9 @@ cpufreq_cpus_calc_min (void)
   {
     CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
 
+    if (!cpu->online)
+      continue;
+
     if (freq > cpu->cur_freq || i == 0)
       freq = cpu->cur_freq;
   }
@@ -116,15 +119,22 @@ cpufreq_cpus_calc_min (void)
 static CpuInfo *
 cpufreq_cpus_calc_avg (void)
 {
-  guint freq = 0;
+  guint freq = 0, count = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
     CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+
+    if (!cpu->online)
+      continue;
+
     freq += cpu->cur_freq;
+    count++;
   }
 
-  freq /= cpuFreq->cpus->len;
+  if (count > 0)
+    freq /= count;
+
   cpuinfo_free (cpuFreq->cpu_avg);
   cpuFreq->cpu_avg = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_avg->cur_freq = freq;
@@ -143,6 +153,9 @@ cpufreq_cpus_calc_max (void)
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
     CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+
+    if (!cpu->online)
+      continue;
 
     if (freq < cpu->cur_freq)
       freq = cpu->cur_freq;

@@ -46,6 +46,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
   GList *list;
 
   dialog_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER);
+  gtk_widget_set_sensitive (dialog_vbox, cpu->online);
   gtk_box_pack_start (GTK_BOX (dialog_hbox), dialog_vbox, TRUE, TRUE, 0);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
