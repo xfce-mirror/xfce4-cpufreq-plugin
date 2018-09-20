@@ -616,6 +616,9 @@ cpufreq_read_config (void)
   file = xfce_panel_plugin_lookup_rc_file (cpuFreq->plugin);
 
   if (G_UNLIKELY (!file))
+    file = xfce_panel_plugin_save_location (cpuFreq->plugin, FALSE);
+
+  if (G_UNLIKELY (!file))
     return;
 
   rc = xfce_rc_simple_open (file, FALSE);
