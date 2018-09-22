@@ -1,3 +1,14 @@
+1.2.1 (2018-09-22)
+------------------
+ * Improved spacing in dialogs (Bug #14661)
+ * Check if each cpu is online (Bug #14641)
+ * Use xfce_panel_plugin_lookup_rc_file (Bug #11823)
+ * Translation updates: Belarusian, Catalan, Chinese (China), Chinese (Taiwan),
+   Croatian, Czech, Danish, Dutch, English (Australia), French, Galician,
+   German, Greek, Hebrew, Italian, Japanese, Korean, Lithuanian, Malay, Polish,
+   Portuguese, Portuguese (Brazil), Russian, Serbian, Swedish, Thai, Turkish,
+   Ukrainian
+
 1.2.0 (2018-05-17)
 ------------------
  * Prefer sysfs to Intel pstate in cpufreq_linux_init (Bug #13835)
