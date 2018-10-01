@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-18 06:32+0200\n"
-"PO-Revision-Date: 2018-05-18 19:19+0000\n"
+"PO-Revision-Date: 2018-09-30 18:35+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/xfce/xfce-panel-plugins/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -37,11 +37,11 @@ msgstr "Pasirinkite šriftą"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:199
 msgid "Configure CPU Frequency Monitor"
-msgstr "CPU dažnio prižiūryklė"
+msgstr "CPU dažnių prižiūryklė"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:204
 msgid "Configure the CPU frequency plugin"
-msgstr "Konfigūruoti CPU dažnio įskiepį"
+msgstr "Konfigūruoti CPU dažnių įskiepį"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:222
 msgid "<b>Monitor</b>"
@@ -188,8 +188,8 @@ msgstr "Jūsų sistema nėra teisingai sukonfigūruota CPU mastelio keitimo pala
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:708
 msgid "Your system is not supported yet!"
-msgstr "Jūsų sistema dar nėra palaikoma!"
+msgstr "Jūsų sistema kol kas nėra palaikoma!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr "CPU dažnio prižiūryklė"
+msgstr "CPU dažnių prižiūryklė"
