@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-09 06:31+0200\n"
-"PO-Revision-Date: 2018-04-29 09:50+0000\n"
+"POT-Creation-Date: 2018-05-18 06:32+0200\n"
+"PO-Revision-Date: 2018-12-01 09:33+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/xfce/xfce-panel-plugins/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -105,7 +105,7 @@ msgstr "CPU frek_vencia megjelenítése"
 msgid "Show CPU _governor"
 msgstr "CPU ve_zérlő megjelenítése"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:485
+#: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
@@ -177,8 +177,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "CPU frekvenciák és vezérlő megjelenítése"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:671
-msgid "Copyright (c) 2003-2017\n"
-msgstr "Copyright (c) 2003-2017\n"
+msgid "Copyright (c) 2003-2018\n"
+msgstr "Copyright (c) 2003-2018\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:698
 msgid ""
