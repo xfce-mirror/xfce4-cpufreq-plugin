@@ -4,21 +4,22 @@
 # 
 # Translators:
 # Dušan Kazik <prescott66@gmail.com>, 2017
+# Jose Riha <jose1711@gmail.com>, 2019
 # Slavko <linux@slavino.sk>, 2015
 # Tomáš Vadina <inactive+kyberdev@transifex.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-09 06:31+0200\n"
-"PO-Revision-Date: 2017-09-19 18:06+0000\n"
-"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
+"POT-Creation-Date: 2018-05-18 06:32+0200\n"
+"PO-Revision-Date: 2019-01-15 20:07+0000\n"
+"Last-Translator: Jose Riha <jose1711@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/xfce/xfce-panel-plugins/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sk\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:80
 msgid "Select font..."
@@ -105,7 +106,7 @@ msgstr "Zobraziť fre_kvenciu CPU"
 msgid "Show CPU _governor"
 msgstr "Zobraziť _správcu CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:485
+#: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
@@ -163,6 +164,7 @@ msgid_plural "%d cpus available"
 msgstr[0] "%d dostupných procesorov"
 msgstr[1] "%d dostupný procesor"
 msgstr[2] "%d dostupné procesory"
+msgstr[3] "%d dostupné procesory"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:396
 msgid "Frequency: "
@@ -178,8 +180,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "Zobraziť frekvenciu a správcu CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:671
-msgid "Copyright (c) 2003-2017\n"
-msgstr "Autorské práva (c) 2003-2017\n"
+msgid "Copyright (c) 2003-2018\n"
+msgstr "Copyright (c) 2003-2018\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:698
 msgid ""
