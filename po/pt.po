@@ -5,14 +5,14 @@
 # Translators:
 # José Vieira <jvieira33@sapo.pt>, 2017
 # Nuno Miguel <nunis@netcabo.pt>, 2007
-# Nuno Miguel <nunomgue@gmail.com>, 2013,2018
+# Nuno Miguel <nunomgue@gmail.com>, 2013,2018-2019
 # Sérgio Marques <smarquespt@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-18 06:32+0200\n"
-"PO-Revision-Date: 2018-09-02 11:28+0000\n"
+"PO-Revision-Date: 2019-02-10 12:26+0000\n"
 "Last-Translator: Nuno Miguel <nunomgue@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/xfce/xfce-panel-plugins/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgstr "Configurar monitor de frequência do CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:204
 msgid "Configure the CPU frequency plugin"
-msgstr "Configurar \"plug-in\" de frequência do CPU"
+msgstr "Configurar plugin de frequência do CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:222
 msgid "<b>Monitor</b>"
@@ -110,7 +110,7 @@ msgstr "Mostrar re_gulador de CPU"
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr "O seu sistema não possui suporte ao cpufreq.\nO \"applet\" só mostra a frequência atual do CPU"
+msgstr "O seu sistema não possui suporte ao cpufreq.\nO applet só mostra a frequência atual do CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:79
 msgid "Scaling driver:"
