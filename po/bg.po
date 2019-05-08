@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Kiril Kirilov <cybercop_montana@abv.bg>, 2017
+# Kiril Kirilov <cybercop_montana@abv.bg>, 2017-2018
 # Любомир Василев, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-09 06:31+0200\n"
-"PO-Revision-Date: 2017-09-19 18:06+0000\n"
+"POT-Creation-Date: 2018-05-18 06:32+0200\n"
+"PO-Revision-Date: 2018-05-18 06:29+0000\n"
 "Last-Translator: Kiril Kirilov <cybercop_montana@abv.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/xfce/xfce-panel-plugins/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr "Натиснете с десен бутон, за да върнете к
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:100
 msgid "Select font"
-msgstr "Изберете шрифт"
+msgstr "Избор на шрифт"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:199
 msgid "Configure CPU Frequency Monitor"
@@ -104,7 +104,7 @@ msgstr "Показване на _честота на ЦП"
 msgid "Show CPU _governor"
 msgstr "Показване на _регулатор на ЦП"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:485
+#: ../panel-plugin/xfce4-cpufreq-linux.c:465
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
@@ -176,8 +176,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "Показване на честотите и регулаторите на ЦП"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:671
-msgid "Copyright (c) 2003-2017\n"
-msgstr "Авторски права (c) 2003-2017\n"
+msgid "Copyright (c) 2003-2018\n"
+msgstr "Авторски права (c) 2003-2018\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:698
 msgid ""
