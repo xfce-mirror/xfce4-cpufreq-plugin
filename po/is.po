@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Sveinn í Felli <sv1@fellsnet.is>, 2013-2014
+# Sveinn í Felli <sv1@fellsnet.is>, 2013-2016,2018-2019
 # Sveinn í Felli <sveinki@nett.is>, 2013,2015-2016
 # Sveinn í Felli <sveinki@nett.is>, 2013,2015-2016, 2018
 msgid ""
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-18 06:32+0200\n"
-"PO-Revision-Date: 2018-11-05 18:24+0000\n"
+"PO-Revision-Date: 2019-05-10 11:26+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic (http://www.transifex.com/xfce/xfce-panel-plugins/language/is/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Veldu letur..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:82
 msgid "Select font family and size to use for the labels."
-msgstr "Veldu hér hvaða leturstærð þú vilt nota á merkingar."
+msgstr "Veldu hér hvaða leturstærð þú vilt nota á skýringar."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:86
 msgid "Right-click to revert to the default font."
@@ -38,7 +38,7 @@ msgstr "Veldu letur"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:199
 msgid "Configure CPU Frequency Monitor"
-msgstr "Stillingar á Örgjörvatíðnivakt"
+msgstr "Stilla örgjörvatíðnivöktun"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:204
 msgid "Configure the CPU frequency plugin"
