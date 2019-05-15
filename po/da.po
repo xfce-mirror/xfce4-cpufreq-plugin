@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-18 06:32+0200\n"
-"PO-Revision-Date: 2019-05-04 17:20+0000\n"
+"PO-Revision-Date: 2019-05-15 18:04+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce-panel-plugins/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -110,7 +110,7 @@ msgstr "Vis CPU-_bestyrer"
 msgid ""
 "Your system does not support cpufreq.\n"
 "The applet only shows the current cpu frequency"
-msgstr "Dit system understøtter ikke cpufreq.\nMiniprogrammet viser kun den nuværende CPU-frekvens"
+msgstr "Dit system understøtter ikke cpufreq.\nAppletten viser kun den nuværende CPU-frekvens"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:79
 msgid "Scaling driver:"
@@ -188,7 +188,7 @@ msgstr "Dit system er ikke konfigureret korrekt til at understøtte skalering af
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:708
 msgid "Your system is not supported yet!"
-msgstr "Dit system er ikke understøttet endnu!"
+msgstr "Dit system understøttes ikke endnu!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
