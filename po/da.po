@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-18 06:32+0200\n"
-"PO-Revision-Date: 2019-05-17 11:50+0000\n"
+"PO-Revision-Date: 2019-05-27 11:02+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce-panel-plugins/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -139,7 +139,7 @@ msgstr "CPU-information"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:251
 msgid "An overview of all the CPUs in the system"
-msgstr "En oversigt over alle CPU'er i systemet"
+msgstr "Et overblik over alle CPU'er i systemet"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:59
 msgid "current min"
