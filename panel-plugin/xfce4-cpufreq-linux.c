@@ -70,7 +70,7 @@ cpufreq_linux_init (void)
   if (cpuFreq->options->show_warning)
   {
     xfce_dialog_show_warning (NULL, NULL,
-      _("Your system does not support cpufreq.\nThe applet only shows the current cpu frequency"));
+      _("Your system does not support cpufreq.\nThe plugin only shows the current cpu frequency"));
     cpuFreq->options->show_warning = FALSE;
   }
 
