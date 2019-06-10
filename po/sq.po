@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-09 18:31+0200\n"
-"PO-Revision-Date: 2019-06-10 07:31+0000\n"
+"PO-Revision-Date: 2019-06-10 11:07+0000\n"
 "Last-Translator: Besnik <besnik@programeshqip.org>\n"
 "Language-Team: Albanian (http://www.transifex.com/xfce/xfce-panel-plugins/language/sq/)\n"
 "MIME-Version: 1.0\n"
@@ -94,11 +94,11 @@ msgstr "Shfaq tekst në një _rresht të vetëm"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:369
 msgid "Show CPU _icon"
-msgstr ""
+msgstr "Shfaq _ikonë CPU-je"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:376
 msgid "Show CPU fre_quency"
-msgstr ""
+msgstr "Shfaq _frekuencë CPU-je"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:381
 msgid "Show CPU _governor"
@@ -108,7 +108,7 @@ msgstr ""
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
-msgstr ""
+msgstr "Sistemi juaj nuk e mbulon cpufreq.\nShtojca shfaq vetëm frekuencën e tanishme të CPU-së"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:79
 msgid "Scaling driver:"
@@ -121,7 +121,7 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:102
 msgid "Available frequencies:"
-msgstr ""
+msgstr "Frekuenca të passhme:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:169
 msgid "Available governors:"
@@ -133,27 +133,27 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:254
 msgid "CPU Information"
-msgstr ""
+msgstr "Të dhëna CPU-je"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:259
 msgid "An overview of all the CPUs in the system"
-msgstr ""
+msgstr "Një përmbledhje e krejt CCPU-ve në sistem"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:112
 msgid "current min"
-msgstr ""
+msgstr "min. i tanishëm"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:141
 msgid "current avg"
-msgstr ""
+msgstr "mes. e tanishme"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:167
 msgid "current max"
-msgstr ""
+msgstr "maks. i tanishëm"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:445
 msgid "No CPU information available."
-msgstr ""
+msgstr "S’ka të dhëna CPU-je të gatshme"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:451
 #, c-format
@@ -186,7 +186,7 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:801
 msgid "Your system is not supported yet!"
-msgstr ""
+msgstr "Sistemi juaj nuk mbulohet ende!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
