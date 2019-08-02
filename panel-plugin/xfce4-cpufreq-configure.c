@@ -212,9 +212,11 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
   xfce_panel_plugin_block_menu (cpuFreq->plugin);
 
-  dialog = xfce_titled_dialog_new_with_buttons (_("Configure CPU Frequency Monitor"),
+  dialog = xfce_titled_dialog_new_with_mixed_buttons (_("Configure CPU Frequency Monitor"),
     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
-    GTK_DIALOG_DESTROY_WITH_PARENT, "gtk-close", GTK_RESPONSE_OK, NULL);
+    GTK_DIALOG_DESTROY_WITH_PARENT,
+    "window-close", _("_Close"), GTK_RESPONSE_OK,
+    NULL);
 
   xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog), _("Configure the CPU frequency plugin"));
 

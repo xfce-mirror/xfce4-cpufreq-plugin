@@ -251,9 +251,11 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpufreq->button), TRUE);
 
-  dialog = xfce_titled_dialog_new_with_buttons (_("CPU Information"),
+  dialog = xfce_titled_dialog_new_with_mixed_buttons (_("CPU Information"),
     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (cpufreq->plugin))),
-    GTK_DIALOG_DESTROY_WITH_PARENT, "gtk-close", GTK_RESPONSE_OK, NULL);
+    GTK_DIALOG_DESTROY_WITH_PARENT,
+    "window-close", _("_Close"), GTK_RESPONSE_OK,
+    NULL);
 
   xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog),
     _("An overview of all the CPUs in the system"));
