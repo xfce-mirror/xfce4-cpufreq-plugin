@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-09 18:31+0200\n"
-"PO-Revision-Date: 2019-06-10 07:04+0000\n"
-"Last-Translator: Edin Veskovic <edin.lockedin@gmail.com>\n"
+"POT-Creation-Date: 2019-08-02 06:32+0200\n"
+"PO-Revision-Date: 2019-09-27 05:05+0000\n"
+"Last-Translator: Ivica  Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/xfce/xfce-panel-plugins/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,68 +42,73 @@ msgstr "Odaberite font"
 msgid "Configure CPU Frequency Monitor"
 msgstr "Konfiguriraj monitor frekvencije procesora"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:219
+#: ../panel-plugin/xfce4-cpufreq-configure.c:218
+#: ../panel-plugin/xfce4-cpufreq-overview.c:257
+msgid "_Close"
+msgstr "_Zatvori"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:221
 msgid "Configure the CPU frequency plugin"
 msgstr "Konfiguriraj priključak frekvencije procesora"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:239
+#: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Monitor</b>"
 msgstr "<b>Monitor</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:256
+#: ../panel-plugin/xfce4-cpufreq-configure.c:258
 msgid "_Update interval:"
 msgstr "_Vrijeme osvježavanja:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:274
+#: ../panel-plugin/xfce4-cpufreq-configure.c:276
 msgid "<b>Panel</b>"
 msgstr "<b>Ploča</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:295
+#: ../panel-plugin/xfce4-cpufreq-configure.c:297
 msgid "_Font:"
 msgstr "_Font:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:314
+#: ../panel-plugin/xfce4-cpufreq-configure.c:316
 msgid "_Font color:"
 msgstr "_Boja fonta: "
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:324
+#: ../panel-plugin/xfce4-cpufreq-configure.c:326
 msgid "Select font color"
 msgstr "Odaberite boju fonta"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:334
+#: ../panel-plugin/xfce4-cpufreq-configure.c:336
 msgid "_Display CPU:"
 msgstr "_Prikaži procesor:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:351
+#: ../panel-plugin/xfce4-cpufreq-configure.c:353
 msgid "min"
 msgstr "minimum"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:352
+#: ../panel-plugin/xfce4-cpufreq-configure.c:354
 msgid "avg"
 msgstr "prosjek"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:353
+#: ../panel-plugin/xfce4-cpufreq-configure.c:355
 msgid "max"
 msgstr "maksimum"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:359
+#: ../panel-plugin/xfce4-cpufreq-configure.c:361
 msgid "_Keep compact"
 msgstr "_Drži kompaktno"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:364
+#: ../panel-plugin/xfce4-cpufreq-configure.c:366
 msgid "Show text in a single _line"
 msgstr "Prikaži tekst u jednoj _liniji"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:369
+#: ../panel-plugin/xfce4-cpufreq-configure.c:371
 msgid "Show CPU _icon"
 msgstr "Prikaži ikonu _procesora"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:376
+#: ../panel-plugin/xfce4-cpufreq-configure.c:378
 msgid "Show CPU fre_quency"
 msgstr "Prikaži frekvenciju pro_cesora"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:381
+#: ../panel-plugin/xfce4-cpufreq-configure.c:383
 msgid "Show CPU _governor"
 msgstr "Prikaži način upravljanja _procesorom"
 
@@ -138,7 +143,7 @@ msgstr "Trenutni način upravljanja:"
 msgid "CPU Information"
 msgstr "Informacije o procesoru"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:259
+#: ../panel-plugin/xfce4-cpufreq-overview.c:261
 msgid "An overview of all the CPUs in the system"
 msgstr "Pregled svih procesora u sustavu"
 
