@@ -23,7 +23,7 @@
 #define XFCE4_CPUFREQ_H
 
 #include <gtk/gtk.h>
-#include <libxfce4panel/xfce-panel-plugin.h>
+#include <libxfce4panel/libxfce4panel.h>
 
 #define PLUGIN_WEBSITE ("http://goodies.xfce.org/projects/panel-plugins/xfce4-cpufreq-plugin")
 
