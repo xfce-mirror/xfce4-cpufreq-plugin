@@ -1,7 +1,7 @@
 XFCE4-CPUFREQ-PLUGIN
 ==========================================================================
 You can always find up-to-date information at the plugin homepage:
-http://goodies.xfce.org/projects/panel-plugins/xfce4-cpufreq-plugin
+https://goodies.xfce.org/projects/panel-plugins/xfce4-cpufreq-plugin
 
 
 CONTENTS
@@ -63,7 +63,7 @@ EASY BUILD INSTRUCTIONS
 If you're interesting in building the plugin yourself, these
 instructions provided here will work for most users. If not, please
 look at the INSTALL file or ask at a forum for your linux distribution
-or try the methods explained on http://www.xfce.org/community. Make
+or try the methods explained on https://www.xfce.org/community. Make
 sure you have installed the needed dependencies (see previous section
 BUILD REQUIREMENTS AND DEPENDENCIES).
 
@@ -82,7 +82,7 @@ GNU automake installed!):
 1a) ./autogen.sh --prefix=/usr
 
 Otherwise, if you've downloaded the tarball from e.g.
-http://archive.xfce.org/, issue the following command:
+https://archive.xfce.org/, issue the following command:
 
 1b) ./configure --prefix=/usr
 

@@ -17,7 +17,7 @@ AC_COPYRIGHT([Copyright (c) 2006 Thomas Schreck <shrek@xfce.org>
               Copyright (c) 2010-2011 Florian Rivoal <frivoal@xfce.org>
               Copyright (c) 2013-2015 Harald Judt <h.judt@gmx.at>
               Copyright (c) 2016-2018 Andre Miranda <andreldm@xfce.org>])
-AC_INIT([xfce4-cpufreq-plugin], [cpufreq_version()], [http://bugzilla.xfce.org], [xfce4-cpufreq-plugin])
+AC_INIT([xfce4-cpufreq-plugin], [cpufreq_version()], [https://bugzilla.xfce.org], [xfce4-cpufreq-plugin])
 AC_PREREQ([2.60])
 
 dnl Initialize automake
