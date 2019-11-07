@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-02 06:32+0200\n"
-"PO-Revision-Date: 2019-11-06 13:17+0000\n"
+"PO-Revision-Date: 2019-11-07 20:47+0000\n"
 "Last-Translator: Arnold Marko <arnold.marko@gmail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/xfce/xfce-panel-plugins/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr "Izberi pisavo"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:215
 msgid "Configure CPU Frequency Monitor"
-msgstr "Nastavi nadzornika frekvence procesorja"
+msgstr "Nastavi prikazovalnik frekvence procesorja"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:218
 #: ../panel-plugin/xfce4-cpufreq-overview.c:257
@@ -49,7 +49,7 @@ msgstr "Konfiguriranje vtičnika frekvence procesorja"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Monitor</b>"
-msgstr "<b>Nadzornik</b>"
+msgstr "<b>Prikazovalnik</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:258
 msgid "_Update interval:"
@@ -112,74 +112,74 @@ msgstr "Prikaži upravitelja procesorja"
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
-msgstr ""
+msgstr "Vaš sistem ne podpira cpufreq.\nVtičnik prikazuje le trenutno frekvenco procesorja"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:79
 msgid "Scaling driver:"
-msgstr ""
+msgstr "Gonilnik za skaliranje:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:88
 #, c-format
 msgid "No scaling driver available"
-msgstr ""
+msgstr "Ni gonilnika za skaliranje"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:102
 msgid "Available frequencies:"
-msgstr ""
+msgstr "Frekvence, ki so na voljo:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:169
 msgid "Available governors:"
-msgstr ""
+msgstr "Sheme, ki so na voljo:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:199
 msgid "Current governor:"
-msgstr ""
+msgstr "Trenutna shema:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:254
 msgid "CPU Information"
-msgstr ""
+msgstr "Informacije o procesorju"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:261
 msgid "An overview of all the CPUs in the system"
-msgstr ""
+msgstr "Pregled vseh procesorjev, ki so v sistemu"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:112
 msgid "current min"
-msgstr ""
+msgstr "trenutni min."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:141
 msgid "current avg"
-msgstr ""
+msgstr "trenutno povp."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:167
 msgid "current max"
-msgstr ""
+msgstr "trenutni maks."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:445
 msgid "No CPU information available."
-msgstr ""
+msgstr "Ni podatkov o procesorju."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:451
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Na voljo je %d procesor"
+msgstr[1] "Na voljo sta %d procesorja"
+msgstr[2] "Na voljo so %d procesorji"
+msgstr[3] "Na voljo je %d procesorjev"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:456
 msgid "Frequency: "
-msgstr ""
+msgstr "Frekvenca:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:464
 msgid "Governor: "
-msgstr ""
+msgstr "Shema:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:763
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
-msgstr ""
+msgstr "Prikaži frekvenco procesorja in shemo"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:765
 msgid "Copyright (c) 2003-2018\n"
@@ -188,12 +188,12 @@ msgstr "Copyright (c) 2003-2018\n"
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:793
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr ""
+msgstr "Vaš sistem ni pravilno nastavljen, da bi podpiral skaliranje frekvence procesorja!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:801
 msgid "Your system is not supported yet!"
-msgstr ""
+msgstr "Vaš sistem še ni podprt!"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr ""
+msgstr "Prikazovalnik frekvence procesorja"
