@@ -1,0 +1,198 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Ammuu5, 2017-2018
+# Jiri Grönroos <jiri.gronroos@iki.fi>, 2019-2020
+msgid ""
+msgstr ""
+"Project-Id-Version: Xfce Panel Plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-02 06:32+0200\n"
+"PO-Revision-Date: 2020-06-10 20:45+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"Language-Team: Finnish (http://www.transifex.com/xfce/xfce-panel-plugins/language/fi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:78
+msgid "Select font..."
+msgstr "Valitse fontti..."
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:79
+msgid "Select font family and size to use for the labels."
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:84
+msgid "Right-click to revert to the default font."
+msgstr "Napsautus oikealla palauttaa oletusfontin."
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:100
+msgid "Select font"
+msgstr "Valitse fontti"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:215
+msgid "Configure CPU Frequency Monitor"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:218
+#: ../panel-plugin/xfce4-cpufreq-overview.c:257
+msgid "_Close"
+msgstr "_Sulje"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:221
+msgid "Configure the CPU frequency plugin"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:241
+msgid "<b>Monitor</b>"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:258
+msgid "_Update interval:"
+msgstr "_Päivitysväli:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:276
+msgid "<b>Panel</b>"
+msgstr "<b>paneeli</b>"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:297
+msgid "_Font:"
+msgstr "_Fontti:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:316
+msgid "_Font color:"
+msgstr "Fontin _väri:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:326
+msgid "Select font color"
+msgstr "Valitse fontin väri"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:336
+msgid "_Display CPU:"
+msgstr "_Näytä suoritin:"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:353
+msgid "min"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:354
+msgid "avg"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:355
+msgid "max"
+msgstr ""
+
+#. check buttons for display widgets in panel
+#: ../panel-plugin/xfce4-cpufreq-configure.c:361
+msgid "_Keep compact"
+msgstr "_Pidä tiiviinä"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:366
+msgid "Show text in a single _line"
+msgstr "Näytä teksti _yhdellä rivillä"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:371
+msgid "Show CPU _icon"
+msgstr "Näytä suoritin_kuvake"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:378
+msgid "Show CPU fre_quency"
+msgstr "Näytä suoritin_taajuus"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:383
+msgid "Show CPU _governor"
+msgstr "Näytä suoritin_hallitsin"
+
+#: ../panel-plugin/xfce4-cpufreq-linux.c:73
+msgid ""
+"Your system does not support cpufreq.\n"
+"The plugin only shows the current cpu frequency"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:79
+msgid "Scaling driver:"
+msgstr "Skaalausajuri:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:88
+#, c-format
+msgid "No scaling driver available"
+msgstr "Skaalausajuria ei ole saatavilla"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:102
+msgid "Available frequencies:"
+msgstr "Saatavilla olevat taajuudet:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:169
+msgid "Available governors:"
+msgstr "Saatavilla olevat hallitsimet:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:199
+msgid "Current governor:"
+msgstr "Nykyinen hallitsin:"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:254
+msgid "CPU Information"
+msgstr "Suoritintiedot"
+
+#: ../panel-plugin/xfce4-cpufreq-overview.c:261
+msgid "An overview of all the CPUs in the system"
+msgstr "Yhteenveto kaikista järjestelmän suorittimista"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:112
+msgid "current min"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:141
+msgid "current avg"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:167
+msgid "current max"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:445
+msgid "No CPU information available."
+msgstr "Suoritintietoja ei ole saatavilla."
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:451
+#, c-format
+msgid "%d cpu available"
+msgid_plural "%d cpus available"
+msgstr[0] "%d suoritin käytettävissä"
+msgstr[1] "%d suoritinta käytettävissä"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:456
+msgid "Frequency: "
+msgstr "Taajuus:"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:464
+msgid "Governor: "
+msgstr "Hallitsin:"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:763
+#: ../panel-plugin/cpufreq.desktop.in.h:2
+msgid "Show CPU frequencies and governor"
+msgstr "Näytä suoritintaajuudet ja -hallitsimet"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:765
+msgid "Copyright (c) 2003-2018\n"
+msgstr "Tekijänoikeus (c) 2003-2018\n"
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:793
+msgid ""
+"Your system is not configured correctly to support CPU frequency scaling!"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:801
+msgid "Your system is not supported yet!"
+msgstr "Järjestelmäsi ei ole vielä tuettu!"
+
+#: ../panel-plugin/cpufreq.desktop.in.h:1
+msgid "CPU Frequency Monitor"
+msgstr ""
