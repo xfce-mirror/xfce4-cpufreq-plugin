@@ -93,7 +93,7 @@ typedef struct
   gint timeoutHandle;
 } CpuFreqPlugin;
 
-CpuFreqPlugin *cpuFreq;
+extern CpuFreqPlugin *cpuFreq;
 
 G_BEGIN_DECLS
 
