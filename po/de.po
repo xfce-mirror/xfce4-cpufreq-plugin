@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-02 06:32+0200\n"
-"PO-Revision-Date: 2019-08-02 04:32+0000\n"
-"Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
+"POT-Creation-Date: 2020-10-15 12:48+0200\n"
+"PO-Revision-Date: 2020-10-15 10:48+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
 "Language-Team: German (http://www.transifex.com/xfce/xfce-panel-plugins/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -184,8 +184,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "CPU-Frequenzen und Regler anzeigen"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:765
-msgid "Copyright (c) 2003-2018\n"
-msgstr "Urheberrecht (c) 2003-2018\n"
+msgid "Copyright (c) 2003-2020\n"
+msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:793
 msgid ""
