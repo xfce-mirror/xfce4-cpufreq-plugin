@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Daniel Muñiz Fontoira <dani@damufo.com>, 2018-2019
+# Daniel Muñiz Fontoira <dani@damufo.com>, 2018-2020
 # Leandro Regueiro <leandro.regueiro@gmail.com>, 2008-2009
 # Xosé, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-02 06:32+0200\n"
-"PO-Revision-Date: 2019-08-21 14:24+0000\n"
+"POT-Creation-Date: 2020-10-15 12:48+0200\n"
+"PO-Revision-Date: 2020-10-16 10:43+0000\n"
 "Last-Translator: Daniel Muñiz Fontoira <dani@damufo.com>\n"
 "Language-Team: Galician (http://www.transifex.com/xfce/xfce-panel-plugins/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -182,8 +182,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "Amosar as frecuencias e perfís do procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:765
-msgid "Copyright (c) 2003-2018\n"
-msgstr "Copyright (c) 2003-2018\n"
+msgid "Copyright (c) 2003-2020\n"
+msgstr "Copyright (c) 2003-2020\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:793
 msgid ""
