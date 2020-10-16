@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Real School <translator_students@realschool.am>, 2019
+# Arman Harutyunyan <arman.harut468@gmail.com>, 2020
+# Real School <localization@ehayq.am>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-02 06:32+0200\n"
-"PO-Revision-Date: 2019-08-02 04:32+0000\n"
-"Last-Translator: Real School <translator_students@realschool.am>\n"
+"POT-Creation-Date: 2020-10-15 12:48+0200\n"
+"PO-Revision-Date: 2020-10-15 10:48+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
 "Language-Team: Armenian (Armenia) (http://www.transifex.com/xfce/xfce-panel-plugins/language/hy_AM/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +37,7 @@ msgstr "Ընտրել տառատեսակ"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:215
 msgid "Configure CPU Frequency Monitor"
-msgstr "Կազմաձեւել ԿՄՍ հաճախականութեան ցուցադրիչը"
+msgstr "Կազմաձեւել ԿՄՍ յաճախականութեան ցուցադրիչը"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:218
 #: ../panel-plugin/xfce4-cpufreq-overview.c:257
@@ -45,7 +46,7 @@ msgstr "_Փակել"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:221
 msgid "Configure the CPU frequency plugin"
-msgstr "Կազմաձեւել ԿՄՍ հաճախականութեան ներդրաւնը"
+msgstr "Կազմաձեւել ԿՄՍ յաճախականութեան ներդրաւնը"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:241
 msgid "<b>Monitor</b>"
@@ -102,7 +103,7 @@ msgstr "Ցուցադրել ԿՄՍ _պատկերակ"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:378
 msgid "Show CPU fre_quency"
-msgstr "Ցուցադրել ԿՄՍ հաճ_ախականութիւն"
+msgstr "Ցուցադրել ԿՄՍ յաճ_ախականութիւն"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:383
 msgid "Show CPU _governor"
@@ -125,7 +126,7 @@ msgstr "Սանդղաւորման սարքավար հասանելի չէ"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:102
 msgid "Available frequencies:"
-msgstr "Հասանելի հաճախականութիւններ․"
+msgstr "Հասանելի յաճախականութիւններ․"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:169
 msgid "Available governors:"
@@ -177,16 +178,16 @@ msgstr "Կառավարիչ․"
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:763
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
-msgstr "Ցուցադրել ԿՄՍ հաճախականութիւններ եւ կառավարիչ"
+msgstr "Ցուցադրել ԿՄՍ յաճախականութիւններ եւ կառավարչին"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:765
-msgid "Copyright (c) 2003-2018\n"
-msgstr "Հեղինակային իրաւունք (c) 2003-2018\n"
+msgid "Copyright (c) 2003-2020\n"
+msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:793
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr "Ձեր համակարգը ճիշտ կազմաձեւուած չէ ԿՄՍ֊ի հաճախականութիւնը սանդղելու համար։"
+msgstr "Ձեր համակարգը ճիշտ կազմաձեւուած չէ ԿՄՍ֊ի յաճախականութիւնը սանդղելու համար։"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:801
 msgid "Your system is not supported yet!"
@@ -194,4 +195,4 @@ msgstr "Ձեր համակարգը ապահովուած չէ։"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr "ԿՄՍ հախաճականութեան ցուցադրիչ"
+msgstr "ԿՄՍ յախաճականութեան ցուցադրիչ"
