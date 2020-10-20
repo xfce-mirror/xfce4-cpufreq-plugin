@@ -53,7 +53,7 @@ cpufreq_label_set_font (void)
   {
     font = pango_font_description_from_string(cpuFreq->options->fontname);
 
-    css_font = g_strdup_printf("font-family: %s; font-size: %dpx; font-style: %s; font-weight: %s;",
+    css_font = g_strdup_printf("font-family: %s; font-size: %dpt; font-style: %s; font-weight: %s;",
       pango_font_description_get_family (font),
       pango_font_description_get_size (font) / PANGO_SCALE,
       (pango_font_description_get_style (font) == PANGO_STYLE_ITALIC ||
