@@ -90,9 +90,40 @@ cpufreq_label_set_font (void)
 
 
 
+/*
+ * Returns a valid string if all CPUs have the same governor,
+ * otherwise returns NULL.
+ */
+static const gchar*
+cpufreq_cpus_single_governor ()
+{
+  const gchar *governor = NULL;
+
+  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  {
+    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+
+    if (!cpu->online)
+      continue;
+
+    if (!cpu->cur_governor || cpu->cur_governor[0] == '\0')
+      return NULL;
+
+    if (!governor)
+      governor = cpu->cur_governor;
+    else if (strcmp (governor, cpu->cur_governor) != 0)
+      return NULL;
+  }
+
+  return governor;
+}
+
+
+
 static CpuInfo *
 cpufreq_cpus_calc_min (void)
 {
+  const gchar *const governor = cpufreq_cpus_single_governor ();
   guint freq = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
@@ -109,7 +140,7 @@ cpufreq_cpus_calc_min (void)
   cpuinfo_free (cpuFreq->cpu_min);
   cpuFreq->cpu_min = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_min->cur_freq = freq;
-  cpuFreq->cpu_min->cur_governor = g_strdup (_("current min"));
+  cpuFreq->cpu_min->cur_governor = g_strdup (governor ? governor : _("current min"));
 
   return cpuFreq->cpu_min;
 }
@@ -119,6 +150,7 @@ cpufreq_cpus_calc_min (void)
 static CpuInfo *
 cpufreq_cpus_calc_avg (void)
 {
+  const gchar *const governor = cpufreq_cpus_single_governor ();
   guint freq = 0, count = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
@@ -138,7 +170,7 @@ cpufreq_cpus_calc_avg (void)
   cpuinfo_free (cpuFreq->cpu_avg);
   cpuFreq->cpu_avg = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_avg->cur_freq = freq;
-  cpuFreq->cpu_avg->cur_governor = g_strdup (_("current avg"));
+  cpuFreq->cpu_avg->cur_governor = g_strdup (governor ? governor : _("current avg"));
 
   return cpuFreq->cpu_avg;
 }
@@ -148,6 +180,7 @@ cpufreq_cpus_calc_avg (void)
 static CpuInfo *
 cpufreq_cpus_calc_max (void)
 {
+  const gchar *const governor = cpufreq_cpus_single_governor ();
   guint freq = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
@@ -164,7 +197,7 @@ cpufreq_cpus_calc_max (void)
   cpuinfo_free (cpuFreq->cpu_max);
   cpuFreq->cpu_max = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_max->cur_freq = freq;
-  cpuFreq->cpu_max->cur_governor = g_strdup (_("current max"));
+  cpuFreq->cpu_max->cur_governor = g_strdup (governor ? governor : _("current max"));
 
   return cpuFreq->cpu_max;
 }
