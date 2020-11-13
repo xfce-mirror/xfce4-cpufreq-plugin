@@ -167,7 +167,16 @@ combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 
   if (GTK_WIDGET (combo) == configure->combo_cpu)
   {
-    cpuFreq->options->show_cpu = selected;
+    guint num_cpus = cpuFreq->cpus->len;
+    if (selected < num_cpus)
+      cpuFreq->options->show_cpu = selected;
+    else if (selected == num_cpus + 0)
+      cpuFreq->options->show_cpu = CPU_MIN;
+    else if (selected == num_cpus + 1)
+      cpuFreq->options->show_cpu = CPU_AVG;
+    else if (selected == num_cpus + 2)
+      cpuFreq->options->show_cpu = CPU_MAX;
+
     cpufreq_update_plugin (TRUE);
   }
 }
@@ -354,7 +363,27 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("avg"));
   gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("max"));
 
-  gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->options->show_cpu);
+retry:
+  switch (cpuFreq->options->show_cpu)
+  {
+  case CPU_MIN:
+    gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 0);
+    break;
+  case CPU_AVG:
+    gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 1);
+    break;
+  case CPU_MAX:
+    gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 2);
+    break;
+  default:
+    if (cpuFreq->options->show_cpu >= 0 && cpuFreq->options->show_cpu < (gint) cpuFreq->cpus->len)
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->options->show_cpu);
+    else
+    {
+      cpuFreq->options->show_cpu = CPU_DEFAULT;
+      goto retry;
+    }
+  }
   g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (combo_changed), configure);
 
   /* check buttons for display widgets in panel */
