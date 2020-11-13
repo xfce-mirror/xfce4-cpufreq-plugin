@@ -57,7 +57,7 @@ cpufreq_linux_init (void)
        value. Besides, it's not very likely the user wants to
        follow values for 4 or 8 cores per second. */
     if (ret && cpuFreq->options->show_warning) {
-      cpuFreq->options->show_cpu = CPU_MAX;
+      cpuFreq->options->show_cpu = CPU_DEFAULT;
       cpuFreq->options->show_warning = FALSE;
     }
 

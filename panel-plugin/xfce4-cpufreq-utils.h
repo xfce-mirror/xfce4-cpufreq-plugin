@@ -28,6 +28,9 @@ cpufreq_get_human_readable_freq (guint freq);
 guint
 cpufreq_get_normal_freq (const gchar *freq);
 
+void
+cpufreq_warn_reset ();
+
 G_END_DECLS
 
 #endif /* XFCE4_CPUFREQ_UTILS_H */

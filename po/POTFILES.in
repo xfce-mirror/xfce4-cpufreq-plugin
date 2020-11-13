@@ -5,4 +5,5 @@ panel-plugin/xfce4-cpufreq-linux-sysfs.c
 panel-plugin/xfce4-cpufreq-linux.c
 panel-plugin/xfce4-cpufreq-overview.c
 panel-plugin/xfce4-cpufreq-plugin.c
+panel-plugin/xfce4-cpufreq-utils.c
 panel-plugin/cpufreq.desktop.in
