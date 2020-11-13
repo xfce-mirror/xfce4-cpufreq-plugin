@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <libxfce4ui/libxfce4ui.h>
 #include <stdlib.h>
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-utils.h"
@@ -73,4 +74,13 @@ cpufreq_get_normal_freq (const gchar *freq)
   g_strfreev (tokens);
 
   return result;
+}
+
+
+
+void
+cpufreq_warn_reset ()
+{
+  xfce_dialog_show_warning (NULL, NULL,
+    _("The CPU displayed by the XFCE cpufreq plugin has been reset to a default value"));
 }
