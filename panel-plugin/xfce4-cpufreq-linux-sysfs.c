@@ -52,28 +52,25 @@ void
 cpufreq_sysfs_read_current (gint cpu_number)
 {
   CpuInfo *cpu;
-  gchar	*file;
+  gchar file[128];
 
   cpu = g_ptr_array_index (cpuFreq->cpus, cpu_number);
 
   /* read current cpu freq */
-  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
+  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
   cpufreq_sysfs_read_int (file, &cpu->cur_freq);
-  g_free (file);
 
   /* read current cpu governor */
-  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_governor", cpu_number);
+  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_governor", cpu_number);
   cpufreq_sysfs_read_string (file, &cpu->cur_governor);
-  g_free (file);
 
   /* read whether the cpu is online, skip first */
   if (cpu_number != 0)
   {
     guint online;
 
-    file = g_strdup_printf (SYSFS_BASE"/cpu%i/online", cpu_number);
+    g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/online", cpu_number);
     cpufreq_sysfs_read_int (file, &online);
-    g_free (file);
 
     cpu->online = online != 0;
   }
@@ -171,7 +168,7 @@ cpufreq_sysfs_read_string_list (gchar *file, GList **list)
 static void
 parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 {
-  gchar *file;
+  gchar file[128];
   gboolean add_cpu = FALSE;
 
   if (cpu == NULL) {
@@ -182,40 +179,33 @@ parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 
   /* read available cpu freqs */
   if (cpuFreq->intel_pstate == NULL) {
-    file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_available_frequencies", cpu_number);
+    g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_available_frequencies", cpu_number);
     cpufreq_sysfs_read_int_list (file, &cpu->available_freqs);
-    g_free (file);
   }
 
   /* read available cpu governors */
-  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_available_governors", cpu_number);
+  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_available_governors", cpu_number);
   cpufreq_sysfs_read_string_list (file, &cpu->available_governors);
-  g_free (file);
 
   /* read cpu driver */
-  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_driver", cpu_number);
+  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_driver", cpu_number);
   cpufreq_sysfs_read_string (file, &cpu->scaling_driver);
-  g_free (file);
 
   /* read current cpu freq */
-  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
+  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
   cpufreq_sysfs_read_int (file, &cpu->cur_freq);
-  g_free (file);
 
   /* read current cpu governor */
-  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_governor", cpu_number);
+  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_governor", cpu_number);
   cpufreq_sysfs_read_string (file, &cpu->cur_governor);
-  g_free (file);
 
   /* read max cpu freq */
-  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_max_freq", cpu_number);
+  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_max_freq", cpu_number);
   cpufreq_sysfs_read_int (file, &cpu->max_freq);
-  g_free (file);
 
   /* read min cpu freq */
-  file = g_strdup_printf (SYSFS_BASE"/cpu%i/cpufreq/scaling_min_freq", cpu_number);
+  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_min_freq", cpu_number);
   cpufreq_sysfs_read_int (file, &cpu->min_freq);
-  g_free (file);
 
   if (add_cpu)
     g_ptr_array_add (cpuFreq->cpus, cpu);
@@ -247,13 +237,8 @@ read_file_contents (const gchar *file)
 static inline gboolean
 cpufreq_cpu_exists (gint num)
 {
-  gchar *file;
-  gboolean ret;
+  gchar file[128];
 
-  file = g_strdup_printf ("%s/cpu%d", SYSFS_BASE, num);
-  ret = g_file_test (file, G_FILE_TEST_EXISTS);
-
-  g_free (file);
-
-  return ret;
+  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%d", num);
+  return g_file_test (file, G_FILE_TEST_EXISTS);
 }
