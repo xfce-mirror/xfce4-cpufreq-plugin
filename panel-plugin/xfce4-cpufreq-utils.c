@@ -32,25 +32,27 @@ gchar*
 cpufreq_get_human_readable_freq (guint freq)
 {
   guint div;
-  gchar *readable_freq, *freq_unit;
+  const gchar *freq_unit;
+  gchar *readable_freq;
 
   if (freq > 999999)
   {
-    div = (1000 * 1000);
-    freq_unit = g_strdup ("GHz");
+    div = 1000 * 1000;
+    freq_unit = "GHz";
   }
   else
   {
     div = 1000;
-    freq_unit = g_strdup ("MHz");
+    freq_unit = "MHz";
   }
   
-  if ((freq % div) == 0 || div == 1000)
-    readable_freq = g_strdup_printf ("%d %s", (freq/div), freq_unit);
+  if (div == 1000)
+  {
+    guint rounded_freq = (freq + div/2) / div;
+    readable_freq = g_strdup_printf ("%u %s", rounded_freq, freq_unit);
+  }
   else
-    readable_freq = g_strdup_printf ("%3.2f %s", ((gfloat)freq/div), freq_unit);
-
-  g_free (freq_unit);
+    readable_freq = g_strdup_printf ("%3.2f %s", (gfloat) freq / div, freq_unit);
 
   return readable_freq;
 }
