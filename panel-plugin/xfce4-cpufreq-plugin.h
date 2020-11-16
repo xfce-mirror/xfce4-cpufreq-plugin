@@ -27,9 +27,10 @@
 
 #define PLUGIN_WEBSITE ("https://docs.xfce.org/panel-plugins/xfce4-cpufreq-plugin")
 
-#define CPU_MIN (cpuFreq->cpus->len + 0)
-#define CPU_AVG (cpuFreq->cpus->len + 1)
-#define CPU_MAX (cpuFreq->cpus->len + 2)
+#define CPU_MIN (-1)
+#define CPU_AVG (-2)
+#define CPU_MAX (-3)
+#define CPU_DEFAULT CPU_MAX
 
 typedef struct
 {
@@ -55,7 +56,7 @@ typedef struct
 typedef struct
 {
   guint    timeout;       /* time between refresh */
-  guint    show_cpu;      /* cpu number in panel */
+  gint     show_cpu;      /* cpu number in panel, or CPU_MIN/AVG/MAX */
   gboolean show_icon;
   gboolean show_label_governor;
   gboolean show_label_freq;

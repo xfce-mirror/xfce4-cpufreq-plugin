@@ -420,14 +420,34 @@ cpufreq_current_cpu (void)
 {
   CpuInfo *cpu = NULL;
 
-  if (cpuFreq->options->show_cpu < cpuFreq->cpus->len)
-    cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
-  else if (cpuFreq->options->show_cpu == CPU_MIN)
+  if (G_UNLIKELY (cpuFreq->options->show_cpu >= (gint) cpuFreq->cpus->len))
+  {
+    /* Covered use cases:
+     * - The user upgraded the cpufreq plugin to a newer version
+     * - The user changed the number of CPU cores or SMT (hyper-threading) in the BIOS
+     * - The user moved HDD/SSD to a different machine
+     * - The user downgraded the CPU in the machine
+     */
+    cpuFreq->options->show_cpu = CPU_DEFAULT;
+    cpufreq_write_config (cpuFreq->plugin);
+    cpufreq_warn_reset ();
+  }
+
+  switch (cpuFreq->options->show_cpu)
+  {
+  case CPU_MIN:
     cpu = cpufreq_cpus_calc_min ();
-  else if (cpuFreq->options->show_cpu == CPU_AVG)
+    break;
+  case CPU_AVG:
     cpu = cpufreq_cpus_calc_avg ();
-  else if (cpuFreq->options->show_cpu == CPU_MAX)
+    break;
+  case CPU_MAX:
     cpu = cpufreq_cpus_calc_max ();
+    break;
+  default:
+    if (cpuFreq->options->show_cpu >= 0 && cpuFreq->options->show_cpu < (gint) cpuFreq->cpus->len)
+      cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
+  }
 
   return cpu;
 }
@@ -441,6 +461,8 @@ cpufreq_update_plugin (gboolean reset_label_size)
   gboolean ret;
 
   cpu = cpufreq_current_cpu ();
+  if (!cpu)
+      return FALSE;
 
   if (reset_label_size)
   {
@@ -660,13 +682,13 @@ cpufreq_read_config (void)
   cpuFreq->options->timeout             = xfce_rc_read_int_entry  (rc, "timeout", 1);
   if (cpuFreq->options->timeout > TIMEOUT_MAX || cpuFreq->options->timeout < TIMEOUT_MIN)
     cpuFreq->options->timeout = TIMEOUT_MIN;
-  cpuFreq->options->show_cpu            = xfce_rc_read_int_entry  (rc, "show_cpu",  0);
-  cpuFreq->options->show_icon           = xfce_rc_read_bool_entry (rc, "show_icon",  TRUE);
+  cpuFreq->options->show_cpu            = xfce_rc_read_int_entry  (rc, "show_cpu", CPU_DEFAULT);
+  cpuFreq->options->show_icon           = xfce_rc_read_bool_entry (rc, "show_icon", TRUE);
   cpuFreq->options->show_label_freq     = xfce_rc_read_bool_entry (rc, "show_label_freq", TRUE);
-  cpuFreq->options->show_label_governor =	xfce_rc_read_bool_entry (rc, "show_label_governor", TRUE);
-  cpuFreq->options->show_warning        =	xfce_rc_read_bool_entry (rc, "show_warning", TRUE);
-  cpuFreq->options->keep_compact        =	xfce_rc_read_bool_entry (rc, "keep_compact", FALSE);
-  cpuFreq->options->one_line            =	xfce_rc_read_bool_entry (rc, "one_line", FALSE);
+  cpuFreq->options->show_label_governor = xfce_rc_read_bool_entry (rc, "show_label_governor", TRUE);
+  cpuFreq->options->show_warning        = xfce_rc_read_bool_entry (rc, "show_warning", TRUE);
+  cpuFreq->options->keep_compact        = xfce_rc_read_bool_entry (rc, "keep_compact", FALSE);
+  cpuFreq->options->one_line            = xfce_rc_read_bool_entry (rc, "one_line", FALSE);
 
   if (!cpuFreq->options->show_label_freq && !cpuFreq->options->show_label_governor)
     cpuFreq->options->show_icon = TRUE;
@@ -704,8 +726,8 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
   rc = xfce_rc_simple_open (file, FALSE);
   g_free(file);
 
-  xfce_rc_write_int_entry	 (rc, "timeout",             cpuFreq->options->timeout);
-  xfce_rc_write_int_entry	 (rc, "show_cpu",            cpuFreq->options->show_cpu);
+  xfce_rc_write_int_entry  (rc, "timeout",             cpuFreq->options->timeout);
+  xfce_rc_write_int_entry  (rc, "show_cpu",            cpuFreq->options->show_cpu);
   xfce_rc_write_bool_entry (rc, "show_icon",           cpuFreq->options->show_icon);
   xfce_rc_write_bool_entry (rc, "show_label_freq",     cpuFreq->options->show_label_freq);
   xfce_rc_write_bool_entry (rc, "show_label_governor", cpuFreq->options->show_label_governor);
