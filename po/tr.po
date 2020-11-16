@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-15 12:48+0200\n"
-"PO-Revision-Date: 2020-10-18 11:28+0000\n"
+"PO-Revision-Date: 2020-11-16 02:18+0000\n"
 "Last-Translator: Emin Tufan <etcetin@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/xfce/xfce-panel-plugins/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -28,11 +28,11 @@ msgstr "Yazı tipi seç..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:79
 msgid "Select font family and size to use for the labels."
-msgstr "Etiketler için kullanılacak yazı tipi ailesi ve boyutu seçin."
+msgstr "Etiketler için kullanılacak yazı tipi ailesi ve boyutu seç."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:84
 msgid "Right-click to revert to the default font."
-msgstr "Öntanımlı yazı tipine geri dönmek için sağ tıklatın."
+msgstr "Öntanımlı yazı tipine geri dönmek için sağ tıklat."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:100
 msgid "Select font"
@@ -73,7 +73,7 @@ msgstr "_Yazı tipi rengi:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:326
 msgid "Select font color"
-msgstr "Yazı tipi rengini seçin"
+msgstr "Yazı tipi rengini seç"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:336
 msgid "_Display CPU:"
@@ -98,7 +98,7 @@ msgstr "_Kısa tut"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:366
 msgid "Show text in a single _line"
-msgstr "Metni tek bir _satırda göster"
+msgstr "Metni tek _satırda göster"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:371
 msgid "Show CPU _icon"
