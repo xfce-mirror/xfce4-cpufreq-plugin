@@ -34,7 +34,7 @@
 
 typedef struct
 {
-  guint  cur_freq;
+  guint  cur_freq;  /* frequency in kHz */
   guint  max_freq;
   guint  min_freq;
   gchar  *cur_governor;
