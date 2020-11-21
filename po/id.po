@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-15 12:48+0200\n"
-"PO-Revision-Date: 2020-10-31 07:35+0000\n"
+"POT-Creation-Date: 2020-11-17 12:52+0100\n"
+"PO-Revision-Date: 2020-11-21 05:38+0000\n"
 "Last-Translator: Triyan W. Nugroho <triyan.wn@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/xfce/xfce-panel-plugins/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -35,77 +35,77 @@ msgstr "Klik kanan untuk mengembalikan fonta standar."
 msgid "Select font"
 msgstr "Pilih fonta"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:215
+#: ../panel-plugin/xfce4-cpufreq-configure.c:224
 msgid "Configure CPU Frequency Monitor"
 msgstr "Atur Monitor Frekuensi CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:218
+#: ../panel-plugin/xfce4-cpufreq-configure.c:227
 #: ../panel-plugin/xfce4-cpufreq-overview.c:257
 msgid "_Close"
 msgstr "_Tutup"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:221
+#: ../panel-plugin/xfce4-cpufreq-configure.c:230
 msgid "Configure the CPU frequency plugin"
 msgstr "Atur plugin frekuensi CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:241
+#: ../panel-plugin/xfce4-cpufreq-configure.c:250
 msgid "<b>Monitor</b>"
 msgstr "<b>Monitor</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:258
+#: ../panel-plugin/xfce4-cpufreq-configure.c:267
 msgid "_Update interval:"
 msgstr "_Interval pemutakhiran:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:276
+#: ../panel-plugin/xfce4-cpufreq-configure.c:285
 msgid "<b>Panel</b>"
 msgstr "<b>Panel</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:297
+#: ../panel-plugin/xfce4-cpufreq-configure.c:306
 msgid "_Font:"
 msgstr "_Fonta:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:316
+#: ../panel-plugin/xfce4-cpufreq-configure.c:325
 msgid "_Font color:"
 msgstr "Warna _fonta:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:326
+#: ../panel-plugin/xfce4-cpufreq-configure.c:335
 msgid "Select font color"
 msgstr "Pilih warna fonta"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:336
+#: ../panel-plugin/xfce4-cpufreq-configure.c:345
 msgid "_Display CPU:"
 msgstr "_Tampilkan CPU:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:353
+#: ../panel-plugin/xfce4-cpufreq-configure.c:362
 msgid "min"
 msgstr "min"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:354
+#: ../panel-plugin/xfce4-cpufreq-configure.c:363
 msgid "avg"
 msgstr "med"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:355
+#: ../panel-plugin/xfce4-cpufreq-configure.c:364
 msgid "max"
 msgstr "maks"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:361
+#: ../panel-plugin/xfce4-cpufreq-configure.c:390
 msgid "_Keep compact"
 msgstr "_Tetap ringkas"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:366
+#: ../panel-plugin/xfce4-cpufreq-configure.c:395
 msgid "Show text in a single _line"
 msgstr "Tampilkan teks dalam satu _baris"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:371
+#: ../panel-plugin/xfce4-cpufreq-configure.c:400
 msgid "Show CPU _icon"
 msgstr "Tampilkan _ikon CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:378
+#: ../panel-plugin/xfce4-cpufreq-configure.c:407
 msgid "Show CPU fre_quency"
 msgstr "Tampilkan fre_kuensi CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:383
+#: ../panel-plugin/xfce4-cpufreq-configure.c:412
 msgid "Show CPU _governor"
 msgstr "Tampilkan _pemerintah CPU"
 
@@ -144,53 +144,59 @@ msgstr "Informasi CPU"
 msgid "An overview of all the CPUs in the system"
 msgstr "Ringkasan semua CPU di dalam sistem"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:112
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:143
 msgid "current min"
 msgstr "arus min"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:141
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:173
 msgid "current avg"
 msgstr "arus med"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:167
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:200
 msgid "current max"
 msgstr "arus maks"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:445
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:500
 msgid "No CPU information available."
 msgstr "Tak ada informasi CPU tersedia."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:451
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:506
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
 msgstr[0] "%d cpu tersedia"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:456
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:511
 msgid "Frequency: "
 msgstr "Frekuensi: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:464
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:519
 msgid "Governor: "
 msgstr "Profil: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:763
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:818
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "Tampilkan frekuensi dan pemerintah CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:765
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:820
 msgid "Copyright (c) 2003-2020\n"
 msgstr "Hak Cipta (c) 2003-2020\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:793
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:848
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Sistem anda tidak diatur dengan benar untuk mendukung skala frekuensi CPU!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:801
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:856
 msgid "Your system is not supported yet!"
 msgstr "Sistem anda belum didukung!"
+
+#: ../panel-plugin/xfce4-cpufreq-utils.c:87
+msgid ""
+"The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
+"value"
+msgstr "CPU yang ditampilkan oleh plugin cpufreq XFCE telah disetel ulang ke nilai baku"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
