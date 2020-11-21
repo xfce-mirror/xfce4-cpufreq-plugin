@@ -87,6 +87,7 @@ typedef struct
 
   /* Widgets */
   GtkWidget *button, *box, *icon, *label;
+  GtkCssProvider *label_css_provider;
   gboolean layout_changed;
   gint label_max_width;
 
@@ -100,9 +101,6 @@ G_BEGIN_DECLS
 
 void
 cpuinfo_free (CpuInfo *cpu);
-
-void
-cpufreq_label_set_font (void);
 
 gboolean
 cpufreq_update_plugin (gboolean reset_label_size);
