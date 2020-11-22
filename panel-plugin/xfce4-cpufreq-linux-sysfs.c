@@ -20,6 +20,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+#include <stdlib.h>
+#include <string.h>
 
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-linux-sysfs.h"
