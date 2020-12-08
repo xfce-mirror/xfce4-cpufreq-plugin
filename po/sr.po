@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-15 12:48+0200\n"
-"PO-Revision-Date: 2020-10-15 10:48+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"POT-Creation-Date: 2020-11-17 12:52+0100\n"
+"PO-Revision-Date: 2020-12-08 19:25+0000\n"
+"Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/xfce/xfce-panel-plugins/language/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:78
 msgid "Select font..."
-msgstr "Изаберите словни лик..."
+msgstr "Изаберите словолик..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:79
 msgid "Select font family and size to use for the labels."
@@ -36,77 +36,77 @@ msgstr "Десни клик враћа на подразумевани слов�
 msgid "Select font"
 msgstr "Изаберите словни лик"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:215
+#: ../panel-plugin/xfce4-cpufreq-configure.c:224
 msgid "Configure CPU Frequency Monitor"
 msgstr "Подесите праћење учесталости процесора"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:218
+#: ../panel-plugin/xfce4-cpufreq-configure.c:227
 #: ../panel-plugin/xfce4-cpufreq-overview.c:257
 msgid "_Close"
 msgstr "_Затвори"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:221
+#: ../panel-plugin/xfce4-cpufreq-configure.c:230
 msgid "Configure the CPU frequency plugin"
 msgstr "Подесите прикључак учесталости процесора"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:241
+#: ../panel-plugin/xfce4-cpufreq-configure.c:250
 msgid "<b>Monitor</b>"
 msgstr "<b>Праћење</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:258
+#: ../panel-plugin/xfce4-cpufreq-configure.c:267
 msgid "_Update interval:"
 msgstr "Учесталост освежавања:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:276
+#: ../panel-plugin/xfce4-cpufreq-configure.c:285
 msgid "<b>Panel</b>"
 msgstr "<b>Полица</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:297
+#: ../panel-plugin/xfce4-cpufreq-configure.c:306
 msgid "_Font:"
 msgstr "_Словни лик:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:316
+#: ../panel-plugin/xfce4-cpufreq-configure.c:325
 msgid "_Font color:"
 msgstr "Боја _словолика:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:326
+#: ../panel-plugin/xfce4-cpufreq-configure.c:335
 msgid "Select font color"
 msgstr "Изаберите боју словолика"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:336
+#: ../panel-plugin/xfce4-cpufreq-configure.c:345
 msgid "_Display CPU:"
 msgstr "_Приказ процесора:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:353
+#: ../panel-plugin/xfce4-cpufreq-configure.c:362
 msgid "min"
 msgstr "најмање"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:354
+#: ../panel-plugin/xfce4-cpufreq-configure.c:363
 msgid "avg"
 msgstr "просек"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:355
+#: ../panel-plugin/xfce4-cpufreq-configure.c:364
 msgid "max"
 msgstr "највише"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:361
+#: ../panel-plugin/xfce4-cpufreq-configure.c:390
 msgid "_Keep compact"
 msgstr "_Збијено"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:366
+#: ../panel-plugin/xfce4-cpufreq-configure.c:395
 msgid "Show text in a single _line"
 msgstr "Приказуј писмо у једној _линији"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:371
+#: ../panel-plugin/xfce4-cpufreq-configure.c:400
 msgid "Show CPU _icon"
 msgstr "Приказуј _сличицу процесора"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:378
+#: ../panel-plugin/xfce4-cpufreq-configure.c:407
 msgid "Show CPU fre_quency"
 msgstr "Приказуј _учесталост"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:383
+#: ../panel-plugin/xfce4-cpufreq-configure.c:412
 msgid "Show CPU _governor"
 msgstr "Приказуј _смернице управљача процесора"
 
@@ -145,23 +145,23 @@ msgstr "О процесору"
 msgid "An overview of all the CPUs in the system"
 msgstr "Преглед свих процесора на систему"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:112
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:143
 msgid "current min"
 msgstr "тренутно најмање"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:141
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:173
 msgid "current avg"
 msgstr "тренутни просек"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:167
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:200
 msgid "current max"
 msgstr "тренутно највише"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:445
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:500
 msgid "No CPU information available."
 msgstr "Нису доступни подаци о процесору."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:451
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:506
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
@@ -169,31 +169,37 @@ msgstr[0] "Доступан је %d процесор"
 msgstr[1] "Доступна су %d процесора"
 msgstr[2] "Доступно је %d процесора"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:456
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:511
 msgid "Frequency: "
 msgstr "Учесталост: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:464
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:519
 msgid "Governor: "
 msgstr "Управљач: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:763
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:818
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "Приказуј управљача и учесталости процесора"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:765
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:820
 msgid "Copyright (c) 2003-2020\n"
-msgstr ""
+msgstr "Права умножавања (c) 2003-2020\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:793
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:848
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Овај систем није подешен правилно за мењање учесталости процесора!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:801
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:856
 msgid "Your system is not supported yet!"
 msgstr "Овај систем још увек није подржан!"
+
+#: ../panel-plugin/xfce4-cpufreq-utils.c:87
+msgid ""
+"The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
+"value"
+msgstr "ЦПУ приказан прикључком учесталости процесора је враћен на подразумевану вредност"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
