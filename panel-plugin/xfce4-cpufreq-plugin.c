@@ -547,7 +547,7 @@ cpufreq_restart_timeout (void)
 #ifdef __linux__
   g_source_remove (cpuFreq->timeoutHandle);
   cpuFreq->timeoutHandle = g_timeout_add_seconds (
-    cpuFreq->options->timeout, (GSourceFunc)cpufreq_update_cpus, NULL);
+    cpuFreq->options->timeout, cpufreq_update_cpus, NULL);
 #endif
 }
 
@@ -868,7 +868,7 @@ cpufreq_construct (XfcePanelPlugin *plugin)
   cpufreq_widgets ();
 
   cpuFreq->timeoutHandle = g_timeout_add_seconds (
-    cpuFreq->options->timeout, (GSourceFunc) cpufreq_update_cpus, NULL);
+    cpuFreq->options->timeout, cpufreq_update_cpus, NULL);
 #else
   xfce_dialog_show_error (NULL, NULL, _("Your system is not supported yet!"));
 #endif /* __linux__ */
