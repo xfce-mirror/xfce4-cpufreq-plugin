@@ -29,7 +29,7 @@ guint
 cpufreq_get_normal_freq (const gchar *freq);
 
 void
-cpufreq_warn_reset ();
+cpufreq_warn_reset (void);
 
 G_END_DECLS
 

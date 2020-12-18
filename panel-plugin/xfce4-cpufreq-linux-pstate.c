@@ -27,7 +27,7 @@
 
 #define PSTATE_BASE "/sys/devices/system/cpu/intel_pstate"
 
-static gboolean read_params ();
+static gboolean read_params (void);
 
 
 
