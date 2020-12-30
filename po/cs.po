@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-17 12:52+0100\n"
-"PO-Revision-Date: 2020-12-23 20:05+0000\n"
+"PO-Revision-Date: 2020-12-30 01:54+0000\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/xfce/xfce-panel-plugins/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -113,7 +113,7 @@ msgstr "Zobrazit _regulátor procesoru"
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
-msgstr "Tento yystém nepodporuje cpufreq.\nZásuvný modul bude pouze zobrazovat aktuální frekvenci procesoru"
+msgstr "Tento systém nepodporuje cpufreq.\nZásuvný modul bude pouze zobrazovat aktuální frekvenci procesoru"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:79
 msgid "Scaling driver:"
@@ -146,15 +146,15 @@ msgstr "Přehled o všech procesorech systému"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:143
 msgid "current min"
-msgstr "současné min"
+msgstr "aktuální min"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:173
 msgid "current avg"
-msgstr "současný průměr"
+msgstr "aktuální průměr"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:200
 msgid "current max"
-msgstr "současné max"
+msgstr "aktuální max"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:500
 msgid "No CPU information available."
