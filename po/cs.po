@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-17 12:52+0100\n"
-"PO-Revision-Date: 2020-12-30 01:54+0000\n"
+"PO-Revision-Date: 2020-12-30 21:02+0000\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/xfce/xfce-panel-plugins/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "Vybrat písmo"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:224
 msgid "Configure CPU Frequency Monitor"
-msgstr "Sledování frekvence procesoru"
+msgstr "Konfigurovat sledování frekvence procesoru"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:227
 #: ../panel-plugin/xfce4-cpufreq-overview.c:257
@@ -46,7 +46,7 @@ msgstr "_Zavřít"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:230
 msgid "Configure the CPU frequency plugin"
-msgstr "Nastavit zásuvný modul frekvence procesoru"
+msgstr "Konfiguruje zásuvný modul frekvence procesoru"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:250
 msgid "<b>Monitor</b>"
@@ -189,7 +189,7 @@ msgstr "Copyright (c) 2003-2020\n"
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:848
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr "Tento systém není správně nastaven pro podporu škálování frekvence procesoru!"
+msgstr "Tento systém není správně konfigurován pro podporu škálování frekvence procesoru!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:856
 msgid "Your system is not supported yet!"
