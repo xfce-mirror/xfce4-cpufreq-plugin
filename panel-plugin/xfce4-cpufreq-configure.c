@@ -228,8 +228,6 @@ cpufreq_configure (XfcePanelPlugin *plugin)
     "window-close", _("_Close"), GTK_RESPONSE_OK,
     NULL);
 
-  xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog), _("Configure the CPU frequency plugin"));
-
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-cpufreq-plugin");
   gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
