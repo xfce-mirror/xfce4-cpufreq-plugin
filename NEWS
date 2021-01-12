@@ -1,3 +1,28 @@
+1.2.3 (2021-01-12)
+======
+- configure.ac: use AC_PROG_CC_C99
+- Remove duplicate information from configuration window's title
+- Fix missing-prototypes
+- Remove GSourceFunc casts
+- Fix font color memory leak
+- Fix fatal compiler warnings
+- Record release date in the NEWS file like in all previous releases
+- Fix CSS provider memory leak and an invalid line ordering in an 
+  if-statement
+- Use heap allocations instead of stack allocations
+- Better handling of changes in the number of installed CPUs
+- Display the actual governor instead of "current"
+- Fix font size (#5)
+- Translation Updates:
+  Albanian, Arabic, Armenian (Armenia), Basque, Belarusian, Bulgarian,
+  Catalan, Chinese (China), Chinese (Taiwan), Croatian, Czech, Danish,
+  Dutch, Eastern Armenian, English (Australia), English (United
+  Kingdom), Finnish, French, Galician, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Korean, Lithuanian, Malay, Norwegian Bokmål, Occitan (post 1500),
+  Polish, Portuguese, Portuguese (Brazil), Russian, Serbian, Slovak,
+  Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur
+
 1.2.2 (2020-10-15)
 ======
 - Update URLs and copyright year
