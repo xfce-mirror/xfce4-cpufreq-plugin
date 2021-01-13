@@ -4,7 +4,7 @@ dnl xfce4-cpufreq-plugin - Show CPU frequency and governour information
 dnl
 
 dnl Version information
-AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_MACRO_DIRS([m4])
 m4_define([cpufreq_version_major], [1])
 m4_define([cpufreq_version_minor], [2])
 m4_define([cpufreq_version_micro], [3])
