@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Demiray Muhterem <mdemiray@msn.com>, 2018
-# Emin Tufan Çetin <etcetin@gmail.com>, 2020
+# Emin Tufan Çetin <etcetin@gmail.com>, 2020-2021
 # Emin Tufan Çetin <etcetin@gmail.com>, 2020
 # Necdet Yücel <necdetyucel@gmail.com>, 2013,2017
 # Recep, 2013
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-17 12:52+0100\n"
-"PO-Revision-Date: 2020-11-22 06:28+0000\n"
+"POT-Creation-Date: 2021-01-13 00:47+0100\n"
+"PO-Revision-Date: 2021-01-14 15:00+0000\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/xfce/xfce-panel-plugins/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -39,77 +39,73 @@ msgstr "Öntanımlı yazı tipine geri dönmek için sağ tıklat."
 msgid "Select font"
 msgstr "Yazı tipi seç"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:224
+#: ../panel-plugin/xfce4-cpufreq-configure.c:225
 msgid "Configure CPU Frequency Monitor"
 msgstr "İşlemci Frekans Gözlemcisini Yapılandır"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:227
+#: ../panel-plugin/xfce4-cpufreq-configure.c:228
 #: ../panel-plugin/xfce4-cpufreq-overview.c:257
 msgid "_Close"
 msgstr "_Kapat"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:230
-msgid "Configure the CPU frequency plugin"
-msgstr "İşlemci frekans eklentisini yapılandır"
-
-#: ../panel-plugin/xfce4-cpufreq-configure.c:250
+#: ../panel-plugin/xfce4-cpufreq-configure.c:249
 msgid "<b>Monitor</b>"
 msgstr "<b>Ekran</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:267
+#: ../panel-plugin/xfce4-cpufreq-configure.c:266
 msgid "_Update interval:"
 msgstr "_Güncelleme aralığı:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:285
+#: ../panel-plugin/xfce4-cpufreq-configure.c:284
 msgid "<b>Panel</b>"
 msgstr "<b>Panel</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:306
+#: ../panel-plugin/xfce4-cpufreq-configure.c:305
 msgid "_Font:"
 msgstr "Yazı _tipi:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:325
+#: ../panel-plugin/xfce4-cpufreq-configure.c:324
 msgid "_Font color:"
 msgstr "_Yazı tipi rengi:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:335
+#: ../panel-plugin/xfce4-cpufreq-configure.c:334
 msgid "Select font color"
 msgstr "Yazı tipi rengini seç"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:345
+#: ../panel-plugin/xfce4-cpufreq-configure.c:344
 msgid "_Display CPU:"
 msgstr "İşlemci _Ekranı:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:362
+#: ../panel-plugin/xfce4-cpufreq-configure.c:361
 msgid "min"
 msgstr "min"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:363
+#: ../panel-plugin/xfce4-cpufreq-configure.c:362
 msgid "avg"
 msgstr "ort"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:364
+#: ../panel-plugin/xfce4-cpufreq-configure.c:363
 msgid "max"
 msgstr "mak"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:390
+#: ../panel-plugin/xfce4-cpufreq-configure.c:389
 msgid "_Keep compact"
 msgstr "_Kısa tut"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:395
+#: ../panel-plugin/xfce4-cpufreq-configure.c:394
 msgid "Show text in a single _line"
 msgstr "Metni tek _satırda göster"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:400
+#: ../panel-plugin/xfce4-cpufreq-configure.c:399
 msgid "Show CPU _icon"
 msgstr "İşlemci _simgesini göster"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:407
+#: ../panel-plugin/xfce4-cpufreq-configure.c:406
 msgid "Show CPU fre_quency"
 msgstr "İşlemci _frekansını göster"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:412
+#: ../panel-plugin/xfce4-cpufreq-configure.c:411
 msgid "Show CPU _governor"
 msgstr "İşlemci _yöneticisini göster"
 
@@ -148,52 +144,52 @@ msgstr "İşlemci Bilgileri"
 msgid "An overview of all the CPUs in the system"
 msgstr "Sistemdeki tüm işlemcilerin genel görünümü"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:143
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:154
 msgid "current min"
 msgstr "güncel min"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:173
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:184
 msgid "current avg"
 msgstr "güncel ort"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:200
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:211
 msgid "current max"
 msgstr "güncel mak"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:500
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:509
 msgid "No CPU information available."
 msgstr "İşlemci bilgisi bulunmamaktadır."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:506
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:515
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
 msgstr[0] "%d kullanılabilir işlemci"
 msgstr[1] "%d kullanılabilir işlemci"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:511
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:520
 msgid "Frequency: "
 msgstr "Frekans:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:519
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:528
 msgid "Governor: "
 msgstr "Yönetici:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:818
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:835
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "İşlemci frekansını ve işlemci yöneticisini göster"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:820
-msgid "Copyright (c) 2003-2020\n"
-msgstr "Telif Hakkı (c) 2003-2020\n"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:837
+msgid "Copyright (c) 2003-2021\n"
+msgstr "Telif Hakkı (c) 2003-2021\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:848
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:865
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Sisteminiz işlemci frekans ölçekleme desteği doğru yapılandırılmamış!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:856
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:873
 msgid "Your system is not supported yet!"
 msgstr "Sisteminiz henüz desteklenmiyor!"
 
