@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-02 12:49+0100\n"
-"PO-Revision-Date: 2021-01-08 14:28+0000\n"
+"POT-Creation-Date: 2021-01-13 00:47+0100\n"
+"PO-Revision-Date: 2021-01-16 19:12+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/xfce/xfce-panel-plugins/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -179,8 +179,8 @@ msgid "Show CPU frequencies and governor"
 msgstr "Rodyti procesoriaus dažnius ir reguliatorių"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:837
-msgid "Copyright (c) 2003-2020\n"
-msgstr "Autorių teisės (c) 2003-2020\n"
+msgid "Copyright (c) 2003-2021\n"
+msgstr "Autorių teisės (c) 2003-2021\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:865
 msgid ""
