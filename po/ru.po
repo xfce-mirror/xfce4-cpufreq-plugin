@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Sergey Alyoshin <alyoshin.s@gmail.com>, 2013
-# AlexanderFilev, 2020
+# AlexanderFilev <avfill@outlook.com>, 2020
 # Igor <f2404@yandex.ru>, 2017-2019
 # Nick Stone <zed0x@ya.ru>, 2013
 # Sergey Alyoshin <alyoshin.s@gmail.com>, 2013
@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-17 12:52+0100\n"
-"PO-Revision-Date: 2020-11-18 22:11+0000\n"
-"Last-Translator: AlexanderFilev\n"
+"POT-Creation-Date: 2021-01-13 00:47+0100\n"
+"PO-Revision-Date: 2021-01-12 23:47+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
 "Language-Team: Russian (http://www.transifex.com/xfce/xfce-panel-plugins/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,77 +39,73 @@ msgstr "Щелчок правой кнопкой для восстановлен
 msgid "Select font"
 msgstr "Выберите шрифт"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:224
+#: ../panel-plugin/xfce4-cpufreq-configure.c:225
 msgid "Configure CPU Frequency Monitor"
 msgstr "Настроить монитор частоты CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:227
+#: ../panel-plugin/xfce4-cpufreq-configure.c:228
 #: ../panel-plugin/xfce4-cpufreq-overview.c:257
 msgid "_Close"
 msgstr "_Закрыть"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:230
-msgid "Configure the CPU frequency plugin"
-msgstr "Настроить модуль частоты CPU"
-
-#: ../panel-plugin/xfce4-cpufreq-configure.c:250
+#: ../panel-plugin/xfce4-cpufreq-configure.c:249
 msgid "<b>Monitor</b>"
 msgstr "<b>Монитор</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:267
+#: ../panel-plugin/xfce4-cpufreq-configure.c:266
 msgid "_Update interval:"
 msgstr "Ин_тервал обновления:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:285
+#: ../panel-plugin/xfce4-cpufreq-configure.c:284
 msgid "<b>Panel</b>"
 msgstr "<b>Панель</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:306
+#: ../panel-plugin/xfce4-cpufreq-configure.c:305
 msgid "_Font:"
 msgstr "_Шрифт:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:325
+#: ../panel-plugin/xfce4-cpufreq-configure.c:324
 msgid "_Font color:"
 msgstr "Цвет _шрифта:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:335
+#: ../panel-plugin/xfce4-cpufreq-configure.c:334
 msgid "Select font color"
 msgstr "Выбор цвета шрифта"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:345
+#: ../panel-plugin/xfce4-cpufreq-configure.c:344
 msgid "_Display CPU:"
 msgstr "_Показывать CPU:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:362
+#: ../panel-plugin/xfce4-cpufreq-configure.c:361
 msgid "min"
 msgstr "мин."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:363
+#: ../panel-plugin/xfce4-cpufreq-configure.c:362
 msgid "avg"
 msgstr "сред."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:364
+#: ../panel-plugin/xfce4-cpufreq-configure.c:363
 msgid "max"
 msgstr "макс."
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:390
+#: ../panel-plugin/xfce4-cpufreq-configure.c:389
 msgid "_Keep compact"
 msgstr "Показывать _компактно"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:395
+#: ../panel-plugin/xfce4-cpufreq-configure.c:394
 msgid "Show text in a single _line"
 msgstr "Показывать текст в одну _линию"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:400
+#: ../panel-plugin/xfce4-cpufreq-configure.c:399
 msgid "Show CPU _icon"
 msgstr "Показывать з_начок CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:407
+#: ../panel-plugin/xfce4-cpufreq-configure.c:406
 msgid "Show CPU fre_quency"
 msgstr "Показывать _частоту CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:412
+#: ../panel-plugin/xfce4-cpufreq-configure.c:411
 msgid "Show CPU _governor"
 msgstr "Показывать _регулятор CPU"
 
@@ -148,23 +144,23 @@ msgstr "Информация о CPU"
 msgid "An overview of all the CPUs in the system"
 msgstr "Информация о всех CPU в системе"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:143
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:154
 msgid "current min"
 msgstr "текущая мин."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:173
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:184
 msgid "current avg"
 msgstr "текущая сред."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:200
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:211
 msgid "current max"
 msgstr "текущая макс."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:500
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:509
 msgid "No CPU information available."
 msgstr "Нет доступной информации о CPU."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:506
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:515
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
@@ -173,29 +169,29 @@ msgstr[1] "%d CPU доступно"
 msgstr[2] "%d CPU доступно"
 msgstr[3] "%d CPU доступно"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:511
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:520
 msgid "Frequency: "
 msgstr "Частота:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:519
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:528
 msgid "Governor: "
 msgstr "Регулятор:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:818
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:835
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "Показывать частоту CPU и регуляторы"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:820
-msgid "Copyright (c) 2003-2020\n"
-msgstr "Авторские права защищены © 2003-2020\n"
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:837
+msgid "Copyright (c) 2003-2021\n"
+msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:848
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:865
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Ваша система не настроена корректно для поддержки изменения частоты CPU!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:856
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:873
 msgid "Your system is not supported yet!"
 msgstr "Ваша система ещё не поддерживается!"
 
