@@ -6,13 +6,14 @@
 # Dmitry Nikitin <luckas_fb@mail.ru>, 2007
 # Yarema aka Knedlyk <yupadmin@gmail.com>, 2013,2017,2019
 # zubr139, 2018
+# Андрій Мізик <andmizyk@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-13 00:47+0100\n"
-"PO-Revision-Date: 2021-01-12 23:47+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"PO-Revision-Date: 2021-01-28 21:55+0000\n"
+"Last-Translator: Андрій Мізик <andmizyk@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/xfce/xfce-panel-plugins/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +39,7 @@ msgstr "Вибрати шрифт"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:225
 msgid "Configure CPU Frequency Monitor"
-msgstr "Налаштувати спостереження за частотою CPU"
+msgstr "Налаштувати спостереження за частотою ЦП"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:228
 #: ../panel-plugin/xfce4-cpufreq-overview.c:257
@@ -71,7 +72,7 @@ msgstr "Вибір кольору шрифту"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:344
 msgid "_Display CPU:"
-msgstr "_Показати CPU:"
+msgstr "_Відображення ЦП:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:361
 msgid "min"
@@ -88,29 +89,29 @@ msgstr "макс"
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:389
 msgid "_Keep compact"
-msgstr "_Залишати компактним"
+msgstr "_Зробити компактним"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:394
 msgid "Show text in a single _line"
-msgstr "Показати текст в одній _лінійці"
+msgstr "Показувати текст в одному _рядку"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:399
 msgid "Show CPU _icon"
-msgstr "Показати _іконку CPU"
+msgstr "Показувати _значок процесора"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:406
 msgid "Show CPU fre_quency"
-msgstr "Показати ча_стоту CPU"
+msgstr "Показувати _частоту процесора"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:411
 msgid "Show CPU _governor"
-msgstr "Показати регулятор CPU"
+msgstr "Показувати _регулятор ЦП"
 
 #: ../panel-plugin/xfce4-cpufreq-linux.c:73
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
-msgstr "Ваша система не підтримує cpufreq.\nЦей аплет відображає тільки поточну частоту процесора"
+msgstr "Ваша система не підтримує cpufreq.\nДана втулка відображає лише поточну частоту процесора"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:79
 msgid "Scaling driver:"
@@ -135,7 +136,7 @@ msgstr "Поточний регулятор:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:254
 msgid "CPU Information"
-msgstr "Інформація CPU"
+msgstr "Інформація про ЦП"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:261
 msgid "An overview of all the CPUs in the system"
@@ -143,7 +144,7 @@ msgstr "Огляд усіх процесорів в системі"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:154
 msgid "current min"
-msgstr "поточний мін"
+msgstr "поточне мін"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:184
 msgid "current avg"
@@ -151,11 +152,11 @@ msgstr "поточне сер"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:211
 msgid "current max"
-msgstr "поточний макс"
+msgstr "поточне макс"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:509
 msgid "No CPU information available."
-msgstr "Інформація про CPU недоступна."
+msgstr "Інформація про ЦП недоступна."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:515
 #, c-format
@@ -177,16 +178,16 @@ msgstr "Можливості: "
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:835
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
-msgstr "Показати частоту процесора та його можливості"
+msgstr "Показує частоту процесора і його регулятори"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:837
 msgid "Copyright (c) 2003-2021\n"
-msgstr ""
+msgstr "Авторські права (c) 2003-2021\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:865
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr "Ваша система не налаштована для використання скалювання частоти CPU!"
+msgstr "Ваша система не налаштована коректно, щоб підтримувати шкалювання частоти ЦП!"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:873
 msgid "Your system is not supported yet!"
@@ -196,8 +197,8 @@ msgstr "Ваша система ще не підтримується!"
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
-msgstr ""
+msgstr "ЦП, що відображається втулкою XFCE cpufreq було скинуто до стандартного значення"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr "Спостереження за частотою процесора"
+msgstr "Контроль за частотою ЦП"
