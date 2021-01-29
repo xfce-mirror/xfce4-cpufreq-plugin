@@ -106,7 +106,7 @@ cpufreq_label_set_font (void)
  * otherwise returns NULL.
  */
 static const gchar*
-cpufreq_cpus_single_governor ()
+cpufreq_cpus_single_governor (void)
 {
   const gchar *governor = NULL;
 
