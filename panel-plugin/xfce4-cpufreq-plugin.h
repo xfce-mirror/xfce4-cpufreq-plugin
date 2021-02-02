@@ -32,6 +32,15 @@
 #define CPU_MAX (-3)
 #define CPU_DEFAULT CPU_MAX
 
+typedef enum
+{
+  UNIT_AUTO,
+  UNIT_GHZ,
+  UNIT_MHZ,
+} CpuFreqUnit;
+
+#define UNIT_DEFAULT UNIT_GHZ
+
 typedef struct
 {
   guint  cur_freq;  /* frequency in kHz */
@@ -55,16 +64,17 @@ typedef struct
 
 typedef struct
 {
-  guint    timeout;       /* time between refresh */
-  gint     show_cpu;      /* cpu number in panel, or CPU_MIN/AVG/MAX */
-  gboolean show_icon;
-  gboolean show_label_governor;
-  gboolean show_label_freq;
-  gboolean show_warning;
-  gboolean keep_compact;
-  gboolean one_line;
-  gchar   *fontname;
-  gchar   *fontcolor;
+  guint       timeout;       /* time between refresh */
+  gint        show_cpu;      /* cpu number in panel, or CPU_MIN/AVG/MAX */
+  gboolean    show_icon;
+  gboolean    show_label_governor;
+  gboolean    show_label_freq;
+  gboolean    show_warning;
+  gboolean    keep_compact;
+  gboolean    one_line;
+  gchar      *fontname;
+  gchar      *fontcolor;
+  CpuFreqUnit unit;
 } CpuFreqPluginOptions;
 
 typedef struct

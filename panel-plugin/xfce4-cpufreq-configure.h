@@ -30,6 +30,7 @@ typedef struct
   GtkWidget *display_cpu;
   GtkWidget *monitor_timeout;
   GtkWidget *combo_cpu;
+  GtkWidget *combo_unit;
   GtkWidget *spinner_timeout;
   GtkWidget *keep_compact;
   GtkWidget *one_line;

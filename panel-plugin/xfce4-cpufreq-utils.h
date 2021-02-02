@@ -20,10 +20,12 @@
 #ifndef XFCE4_CPUFREQ_UTILS_H
 #define XFCE4_CPUFREQ_UTILS_H
 
+#include "xfce4-cpufreq-plugin.h"
+
 G_BEGIN_DECLS
 
 gchar*
-cpufreq_get_human_readable_freq (guint freq);
+cpufreq_get_human_readable_freq (guint freq, CpuFreqUnit unit);
 
 guint
 cpufreq_get_normal_freq (const gchar *freq);
