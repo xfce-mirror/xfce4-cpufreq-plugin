@@ -30,21 +30,37 @@
 
 
 gchar*
-cpufreq_get_human_readable_freq (guint freq)
+cpufreq_get_human_readable_freq (guint freq, CpuFreqUnit unit)
 {
   guint div;
   const gchar *freq_unit;
   gchar *readable_freq;
 
-  if (freq > 999999)
+  switch (unit)
   {
-    div = 1000 * 1000;
+  case UNIT_AUTO:
+    if (freq > 999999)
+    {
+      div = 1000 * 1000;
+      freq_unit = "GHz";
+    }
+    else
+    {
+      div = 1000;
+      freq_unit = "MHz";
+    }
+    break;
+  case UNIT_GHZ:
+    div = 1000*1000;
     freq_unit = "GHz";
-  }
-  else
-  {
+    break;
+  case UNIT_MHZ:
     div = 1000;
     freq_unit = "MHz";
+    break;
+  default:
+    div = 1000*1000;
+    freq_unit = "GHz";
   }
   
   if (div == 1000)

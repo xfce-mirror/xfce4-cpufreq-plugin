@@ -240,7 +240,7 @@ cpufreq_update_label (CpuInfo *cpu)
     cpuFreq->options->show_label_freq &&
     cpuFreq->options->show_label_governor;
 
-  freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
+  freq = cpufreq_get_human_readable_freq (cpu->cur_freq, cpuFreq->options->unit);
   label = g_strconcat
     (cpuFreq->options->show_label_freq ? freq : "",
      both ? (cpuFreq->options->one_line ? " " : "\n") : "",
@@ -517,7 +517,7 @@ cpufreq_update_tooltip (GtkWidget *widget,
   }
   else
   {
-    freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
+    freq = cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
     if (options->show_label_governor && options->show_label_freq)
       tooltip_msg = g_strdup_printf (ngettext ("%d cpu available",
         "%d cpus available", cpuFreq->cpus->len), cpuFreq->cpus->len);
@@ -714,9 +714,20 @@ cpufreq_read_config (void)
   options->show_warning        = xfce_rc_read_bool_entry (rc, "show_warning", TRUE);
   options->keep_compact        = xfce_rc_read_bool_entry (rc, "keep_compact", FALSE);
   options->one_line            = xfce_rc_read_bool_entry (rc, "one_line", FALSE);
+  options->unit                = xfce_rc_read_int_entry  (rc, "freq_unit", UNIT_DEFAULT);
 
   if (!options->show_label_freq && !options->show_label_governor)
     options->show_icon = TRUE;
+
+  switch (options->unit)
+  {
+  case UNIT_AUTO:
+  case UNIT_GHZ:
+  case UNIT_MHZ:
+    break;
+  default:
+    options->unit = UNIT_DEFAULT;
+  }
 
   value = xfce_rc_read_entry (rc, "fontname", NULL);
   if (value)
@@ -760,6 +771,7 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
   xfce_rc_write_bool_entry (rc, "show_warning",        options->show_warning);
   xfce_rc_write_bool_entry (rc, "keep_compact",        options->keep_compact);
   xfce_rc_write_bool_entry (rc, "one_line",            options->one_line);
+  xfce_rc_write_int_entry  (rc, "freq_unit",           options->unit);
 
   if (options->fontname)
     xfce_rc_write_entry  (rc, "fontname",            options->fontname);

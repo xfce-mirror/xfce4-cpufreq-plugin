@@ -185,6 +185,19 @@ combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 
     cpufreq_update_plugin (TRUE);
   }
+  else if (GTK_WIDGET (combo) == configure->combo_unit)
+  {
+    switch (selected)
+    {
+    case UNIT_AUTO:
+    case UNIT_GHZ:
+    case UNIT_MHZ:
+      options->unit = (CpuFreqUnit) selected;
+      break;
+    }
+
+    cpufreq_update_plugin (TRUE);
+  }
 }
 
 
@@ -219,7 +232,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gchar *cpu_name;
   GtkWidget *dialog, *dialog_vbox;
   GtkWidget *frame, *align, *label, *vbox, *hbox;
-  GtkWidget *combo, *spinner, *button;
+  GtkWidget *spinner, *button;
   GtkSizeGroup *sg0;
   CpuFreqPluginConfigure *configure;
   GdkRGBA *color;
@@ -344,52 +357,98 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   g_free (color);
 
   /* which cpu to show in panel */
-  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-
-  label = gtk_label_new_with_mnemonic (_("_Display CPU:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
-  gtk_label_set_xalign (GTK_LABEL (label), 0);
-  gtk_size_group_add_widget (sg0, label);
-
-  combo = configure->combo_cpu = gtk_combo_box_text_new ();
-  gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, TRUE, 0);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
-
-  for (guint i = 0; i < cpuFreq->cpus->len; ++i)
   {
-    cpu_name = g_strdup_printf ("%d", i);
-    gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), cpu_name);
-    g_free (cpu_name);
-  }
+    GtkWidget *combo;
 
-  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("min"));
-  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("avg"));
-  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("max"));
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-retry:
-  switch (options->show_cpu)
-  {
-  case CPU_MIN:
-    gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 0);
-    break;
-  case CPU_AVG:
-    gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 1);
-    break;
-  case CPU_MAX:
-    gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 2);
-    break;
-  default:
-    if (options->show_cpu >= 0 && options->show_cpu < (gint) cpuFreq->cpus->len)
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), options->show_cpu);
-    else
+    label = gtk_label_new_with_mnemonic (_("_Display CPU:"));
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+    gtk_label_set_xalign (GTK_LABEL (label), 0);
+    gtk_size_group_add_widget (sg0, label);
+
+    combo = configure->combo_cpu = gtk_combo_box_text_new ();
+    gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, TRUE, 0);
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
+
+    for (guint i = 0; i < cpuFreq->cpus->len; ++i)
     {
-      options->show_cpu = CPU_DEFAULT;
-      goto retry;
+      cpu_name = g_strdup_printf ("%d", i);
+      gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), cpu_name);
+      g_free (cpu_name);
     }
+
+    gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("min"));
+    gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("avg"));
+    gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("max"));
+
+  retry_cpu:
+    switch (options->show_cpu)
+    {
+    case CPU_MIN:
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 0);
+      break;
+    case CPU_AVG:
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 1);
+      break;
+    case CPU_MAX:
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 2);
+      break;
+    default:
+      if (options->show_cpu >= 0 && options->show_cpu < (gint) cpuFreq->cpus->len)
+        gtk_combo_box_set_active (GTK_COMBO_BOX (combo), options->show_cpu);
+      else
+      {
+        options->show_cpu = CPU_DEFAULT;
+        goto retry_cpu;
+      }
+    }
+
+    g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (combo_changed), configure);
   }
-  g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (combo_changed), configure);
+
+  /* which unit to use when displaying the frequency */
+  {
+    GtkWidget *combo;
+
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+    label = gtk_label_new_with_mnemonic (_("Unit:"));
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+    gtk_label_set_xalign (GTK_LABEL (label), 0);
+    gtk_size_group_add_widget (sg0, label);
+
+    combo = configure->combo_unit = gtk_combo_box_text_new ();
+    gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, TRUE, 0);
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
+
+    gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("Auto"));
+    gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("GHz"));
+    gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("MHz"));
+
+  retry_unit:
+    switch (options->unit)
+    {
+    case UNIT_AUTO:
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
+      break;
+    case UNIT_GHZ:
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 1);
+      break;
+    case UNIT_MHZ:
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 2);
+      break;
+    default:
+      options->unit = UNIT_DEFAULT;
+      goto retry_unit;
+    }
+
+    g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (combo_changed), configure);
+  }
 
   /* check buttons for display widgets in panel */
   button = configure->keep_compact = gtk_check_button_new_with_mnemonic (_("_Keep compact"));

@@ -44,6 +44,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
   GtkWidget *hbox, *dialog_vbox, *combo, *label, *icon;
   GtkSizeGroup *sg0, *sg1;
   GList *list;
+  const CpuFreqUnit unit = cpuFreq->options->unit;
 
   dialog_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER);
   gtk_widget_set_sensitive (dialog_vbox, cpu->online);
@@ -114,7 +115,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
     j = 0;
     while (list)
     {
-      text = cpufreq_get_human_readable_freq (GPOINTER_TO_UINT (list->data));
+      text = cpufreq_get_human_readable_freq (GPOINTER_TO_UINT (list->data), unit);
 
       if (GPOINTER_TO_UINT (list->data) == cpu->cur_freq)
         i = j;
@@ -132,15 +133,15 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
     gtk_size_group_add_widget (sg1, combo);
     gtk_box_pack_end (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
 
-    text = cpufreq_get_human_readable_freq (cpu->cur_freq);
+    text = cpufreq_get_human_readable_freq (cpu->cur_freq, unit);
     gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), text);
     g_free (text);
 
-    text = cpufreq_get_human_readable_freq (cpu->max_freq);
+    text = cpufreq_get_human_readable_freq (cpu->max_freq, unit);
     gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), text);
     g_free (text);
 
-    text = cpufreq_get_human_readable_freq (cpu->min_freq);
+    text = cpufreq_get_human_readable_freq (cpu->min_freq, unit);
     gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), text);
     g_free (text);
 
@@ -148,7 +149,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
   }
   else /* If there is no scaling support only show the cpu freq */
   {
-    text = cpufreq_get_human_readable_freq (cpu->cur_freq);
+    text = cpufreq_get_human_readable_freq (cpu->cur_freq, unit);
     text = g_strdup_printf ("<b>%s</b> (current frequency)", text);
     label = gtk_label_new (text);
     gtk_size_group_add_widget (sg1, label);
