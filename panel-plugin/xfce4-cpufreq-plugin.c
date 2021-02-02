@@ -497,8 +497,9 @@ cpufreq_update_tooltip (GtkWidget *widget,
                         gint y,
                         gboolean keyboard_mode,
                         GtkTooltip *tooltip,
-                        CpuFreqPlugin *cpufreq)
+                        CpuFreqPlugin *_unused)
 {
+  const CpuFreqPluginOptions *const options = cpuFreq->options;
   CpuInfo *cpu;
   gchar *tooltip_msg, *freq = NULL;
 
@@ -511,23 +512,23 @@ cpufreq_update_tooltip (GtkWidget *widget,
   else
   {
     freq = cpufreq_get_human_readable_freq (cpu->cur_freq);
-    if (cpuFreq->options->show_label_governor && cpuFreq->options->show_label_freq)
+    if (options->show_label_governor && options->show_label_freq)
       tooltip_msg = g_strdup_printf (ngettext ("%d cpu available",
         "%d cpus available", cpuFreq->cpus->len), cpuFreq->cpus->len);
     else
       tooltip_msg =
         g_strconcat
-        (!cpuFreq->options->show_label_freq ? _("Frequency: ") : "",
-         !cpuFreq->options->show_label_freq ? freq : "",
+        (!options->show_label_freq ? _("Frequency: ") : "",
+         !options->show_label_freq ? freq : "",
 
          cpu->cur_governor != NULL &&
-         !cpuFreq->options->show_label_freq &&
-         !cpuFreq->options->show_label_governor ? "\n" : "",
+         !options->show_label_freq &&
+         !options->show_label_governor ? "\n" : "",
 
          cpu->cur_governor != NULL &&
-         !cpuFreq->options->show_label_governor ? _("Governor: ") : "",
+         !options->show_label_governor ? _("Governor: ") : "",
          cpu->cur_governor != NULL &&
-         !cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
+         !options->show_label_governor ? cpu->cur_governor : "",
          NULL);
   }
 
@@ -681,6 +682,7 @@ cpufreq_widgets (void)
 static void
 cpufreq_read_config (void)
 {
+  CpuFreqPluginOptions *const options = cpuFreq->options;
   XfceRc *rc;
   gchar  *file;
   const gchar *value;
@@ -696,32 +698,32 @@ cpufreq_read_config (void)
   rc = xfce_rc_simple_open (file, FALSE);
   g_free (file);
 
-  cpuFreq->options->timeout             = xfce_rc_read_int_entry  (rc, "timeout", 1);
-  if (cpuFreq->options->timeout > TIMEOUT_MAX || cpuFreq->options->timeout < TIMEOUT_MIN)
-    cpuFreq->options->timeout = TIMEOUT_MIN;
-  cpuFreq->options->show_cpu            = xfce_rc_read_int_entry  (rc, "show_cpu", CPU_DEFAULT);
-  cpuFreq->options->show_icon           = xfce_rc_read_bool_entry (rc, "show_icon", TRUE);
-  cpuFreq->options->show_label_freq     = xfce_rc_read_bool_entry (rc, "show_label_freq", TRUE);
-  cpuFreq->options->show_label_governor = xfce_rc_read_bool_entry (rc, "show_label_governor", TRUE);
-  cpuFreq->options->show_warning        = xfce_rc_read_bool_entry (rc, "show_warning", TRUE);
-  cpuFreq->options->keep_compact        = xfce_rc_read_bool_entry (rc, "keep_compact", FALSE);
-  cpuFreq->options->one_line            = xfce_rc_read_bool_entry (rc, "one_line", FALSE);
+  options->timeout             = xfce_rc_read_int_entry  (rc, "timeout", 1);
+  if (options->timeout > TIMEOUT_MAX || options->timeout < TIMEOUT_MIN)
+    options->timeout = TIMEOUT_MIN;
+  options->show_cpu            = xfce_rc_read_int_entry  (rc, "show_cpu", CPU_DEFAULT);
+  options->show_icon           = xfce_rc_read_bool_entry (rc, "show_icon", TRUE);
+  options->show_label_freq     = xfce_rc_read_bool_entry (rc, "show_label_freq", TRUE);
+  options->show_label_governor = xfce_rc_read_bool_entry (rc, "show_label_governor", TRUE);
+  options->show_warning        = xfce_rc_read_bool_entry (rc, "show_warning", TRUE);
+  options->keep_compact        = xfce_rc_read_bool_entry (rc, "keep_compact", FALSE);
+  options->one_line            = xfce_rc_read_bool_entry (rc, "one_line", FALSE);
 
-  if (!cpuFreq->options->show_label_freq && !cpuFreq->options->show_label_governor)
-    cpuFreq->options->show_icon = TRUE;
+  if (!options->show_label_freq && !options->show_label_governor)
+    options->show_icon = TRUE;
 
   value = xfce_rc_read_entry (rc, "fontname", NULL);
   if (value)
   {
-    g_free (cpuFreq->options->fontname);
-    cpuFreq->options->fontname = g_strdup (value);
+    g_free (options->fontname);
+    options->fontname = g_strdup (value);
   }
 
   value = xfce_rc_read_entry (rc, "fontcolor", NULL);
   if (value)
   {
-    g_free (cpuFreq->options->fontcolor);
-    cpuFreq->options->fontcolor = g_strdup (value);
+    g_free (options->fontcolor);
+    options->fontcolor = g_strdup (value);
   }
 
   xfce_rc_close (rc);
@@ -732,6 +734,7 @@ cpufreq_read_config (void)
 void
 cpufreq_write_config (XfcePanelPlugin *plugin)
 {
+  const CpuFreqPluginOptions *const options = cpuFreq->options;
   XfceRc *rc;
   gchar  *file;
 
@@ -743,19 +746,19 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
   rc = xfce_rc_simple_open (file, FALSE);
   g_free(file);
 
-  xfce_rc_write_int_entry  (rc, "timeout",             cpuFreq->options->timeout);
-  xfce_rc_write_int_entry  (rc, "show_cpu",            cpuFreq->options->show_cpu);
-  xfce_rc_write_bool_entry (rc, "show_icon",           cpuFreq->options->show_icon);
-  xfce_rc_write_bool_entry (rc, "show_label_freq",     cpuFreq->options->show_label_freq);
-  xfce_rc_write_bool_entry (rc, "show_label_governor", cpuFreq->options->show_label_governor);
-  xfce_rc_write_bool_entry (rc, "show_warning",        cpuFreq->options->show_warning);
-  xfce_rc_write_bool_entry (rc, "keep_compact",        cpuFreq->options->keep_compact);
-  xfce_rc_write_bool_entry (rc, "one_line",            cpuFreq->options->one_line);
+  xfce_rc_write_int_entry  (rc, "timeout",             options->timeout);
+  xfce_rc_write_int_entry  (rc, "show_cpu",            options->show_cpu);
+  xfce_rc_write_bool_entry (rc, "show_icon",           options->show_icon);
+  xfce_rc_write_bool_entry (rc, "show_label_freq",     options->show_label_freq);
+  xfce_rc_write_bool_entry (rc, "show_label_governor", options->show_label_governor);
+  xfce_rc_write_bool_entry (rc, "show_warning",        options->show_warning);
+  xfce_rc_write_bool_entry (rc, "keep_compact",        options->keep_compact);
+  xfce_rc_write_bool_entry (rc, "one_line",            options->one_line);
 
-  if (cpuFreq->options->fontname)
-    xfce_rc_write_entry  (rc, "fontname",            cpuFreq->options->fontname);
-  if (cpuFreq->options->fontcolor)
-    xfce_rc_write_entry  (rc, "fontcolor",           cpuFreq->options->fontcolor);
+  if (options->fontname)
+    xfce_rc_write_entry  (rc, "fontname",            options->fontname);
+  if (options->fontcolor)
+    xfce_rc_write_entry  (rc, "fontcolor",           options->fontcolor);
 
   xfce_rc_close (rc);
 }
