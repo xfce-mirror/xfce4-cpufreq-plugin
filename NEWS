@@ -1,5 +1,21 @@
+1.2.4 (2021-02-02)
+=====
+- Display governors even if they differ among CPU cores
+- Enable fixed units in the frequency text box
+- Create the label widget if it does not exist
+- Update copyright year
+- Translation Updates:
+  Albanian, Arabic, Armenian (Armenia), Basque, Belarusian, Bulgarian,
+  Catalan, Chinese (China), Chinese (Taiwan), Croatian, Czech, Danish,
+  Dutch, Eastern Armenian, English (Australia), English (United
+  Kingdom), Finnish, French, Galician, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Korean, Lithuanian, Malay, Norwegian Bokmål, Occitan (post 1500),
+  Polish, Portuguese, Portuguese (Brazil), Russian, Serbian, Slovak,
+  Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur
+
 1.2.3 (2021-01-12)
-======
+=====
 - configure.ac: use AC_PROG_CC_C99
 - Remove duplicate information from configuration window's title
 - Fix missing-prototypes
@@ -24,7 +40,7 @@
   Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur
 
 1.2.2 (2020-10-15)
-======
+=====
 - Update URLs and copyright year
 - Add basic GitLab pipeline
 - Fix compilation with gcc-10
