@@ -164,19 +164,20 @@ button_fontcolor_clicked (GtkWidget *button, void *data)
 static void
 combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 {
+  CpuFreqPluginOptions *const options = cpuFreq->options;
   guint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
 
   if (GTK_WIDGET (combo) == configure->combo_cpu)
   {
     guint num_cpus = cpuFreq->cpus->len;
     if (selected < num_cpus)
-      cpuFreq->options->show_cpu = selected;
+      options->show_cpu = selected;
     else if (selected == num_cpus + 0)
-      cpuFreq->options->show_cpu = CPU_MIN;
+      options->show_cpu = CPU_MIN;
     else if (selected == num_cpus + 1)
-      cpuFreq->options->show_cpu = CPU_AVG;
+      options->show_cpu = CPU_AVG;
     else if (selected == num_cpus + 2)
-      cpuFreq->options->show_cpu = CPU_MAX;
+      options->show_cpu = CPU_MAX;
 
     cpufreq_update_plugin (TRUE);
   }
@@ -210,6 +211,7 @@ cpufreq_configure_response (GtkWidget *dialog, int response, CpuFreqPluginConfig
 void
 cpufreq_configure (XfcePanelPlugin *plugin)
 {
+  CpuFreqPluginOptions *const options = cpuFreq->options;
   gchar *cpu_name;
   GtkWidget *dialog, *dialog_vbox;
   GtkWidget *frame, *align, *label, *vbox, *hbox;
@@ -271,7 +273,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   spinner = configure->spinner_timeout =
     gtk_spin_button_new_with_range (TIMEOUT_MIN, TIMEOUT_MAX, TIMEOUT_STEP);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), spinner);
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinner), (gdouble) cpuFreq->options->timeout);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinner), (gdouble) options->timeout);
   gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, FALSE, 0);
   g_signal_connect (G_OBJECT (spinner), "value-changed",
                     G_CALLBACK (spinner_changed), configure);
@@ -328,7 +330,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_size_group_add_widget (sg0, label);
 
   color = g_new0 (GdkRGBA, 1);
-  gdk_rgba_parse (color, cpuFreq->options->fontcolor ? cpuFreq->options->fontcolor : "#000000");
+  gdk_rgba_parse (color, options->fontcolor ? options->fontcolor : "#000000");
 
   button = configure->fontcolor = gtk_color_button_new_with_rgba (color);
   gtk_color_button_set_title (GTK_COLOR_BUTTON (button), _("Select font color"));
@@ -363,7 +365,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("max"));
 
 retry:
-  switch (cpuFreq->options->show_cpu)
+  switch (options->show_cpu)
   {
   case CPU_MIN:
     gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 0);
@@ -375,11 +377,11 @@ retry:
     gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 2);
     break;
   default:
-    if (cpuFreq->options->show_cpu >= 0 && cpuFreq->options->show_cpu < (gint) cpuFreq->cpus->len)
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->options->show_cpu);
+    if (options->show_cpu >= 0 && options->show_cpu < (gint) cpuFreq->cpus->len)
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), options->show_cpu);
     else
     {
-      cpuFreq->options->show_cpu = CPU_DEFAULT;
+      options->show_cpu = CPU_DEFAULT;
       goto retry;
     }
   }
@@ -388,29 +390,29 @@ retry:
   /* check buttons for display widgets in panel */
   button = configure->keep_compact = gtk_check_button_new_with_mnemonic (_("_Keep compact"));
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->keep_compact);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->keep_compact);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
   button = configure->one_line = gtk_check_button_new_with_mnemonic (_("Show text in a single _line"));
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->one_line);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->one_line);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
   button = configure->display_icon = gtk_check_button_new_with_mnemonic (_("Show CPU _icon"));
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->show_icon);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->show_icon);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
-  if (!cpuFreq->options->show_label_freq && !cpuFreq->options->show_label_governor)
+  if (!options->show_label_freq && !options->show_label_governor)
     gtk_widget_set_sensitive (configure->display_icon, FALSE);
 
   button = configure->display_freq = gtk_check_button_new_with_mnemonic (_("Show CPU fre_quency"));
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->show_label_freq);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->show_label_freq);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
   button = configure->display_governor = gtk_check_button_new_with_mnemonic (_("Show CPU _governor"));
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), cpuFreq->options->show_label_governor);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->show_label_governor);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
   g_signal_connect(G_OBJECT (dialog), "response", G_CALLBACK(cpufreq_configure_response), configure);
