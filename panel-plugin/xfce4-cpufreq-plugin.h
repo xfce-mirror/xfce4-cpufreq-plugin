@@ -86,7 +86,7 @@ typedef struct
   IntelPState *intel_pstate;
 
   /* Widgets */
-  GtkWidget *button, *box, *icon, *label;
+  GtkWidget *button, *box, *icon, *label_orNull;
   GtkCssProvider *label_css_provider;
   gboolean layout_changed;
   gint label_max_width;
