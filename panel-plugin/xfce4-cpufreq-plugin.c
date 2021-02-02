@@ -27,6 +27,7 @@
 #endif
 
 #include <libxfce4ui/libxfce4ui.h>
+#include <string.h>
 
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-configure.h"
@@ -105,31 +106,73 @@ cpufreq_label_set_font (void)
 
 
 /*
- * Returns a valid string if all CPUs have the same governor,
- * otherwise returns NULL.
+ * Returns a single string describing governors of all CPUs, or NULL.
+ * The returned string should be freed with g_free().
  */
-static const gchar*
-cpufreq_cpus_single_governor (void)
+static gchar*
+cpufreq_governors (void)
 {
-  const gchar *governor = NULL;
+  const gchar *array[cpuFreq->cpus->len];
+  guint count = 0;
+
+  if (cpuFreq->cpus->len == 0)
+    return NULL;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
     CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+    guint j;
 
     if (!cpu->online)
       continue;
 
     if (!cpu->cur_governor || cpu->cur_governor[0] == '\0')
-      return NULL;
+      continue;
 
-    if (!governor)
-      governor = cpu->cur_governor;
-    else if (strcmp (governor, cpu->cur_governor) != 0)
-      return NULL;
+    for (j = 0; j < count; j++)
+      if (strcmp (cpu->cur_governor, array[j]) == 0)
+        break;
+    if (j == count)
+      array[count++] = cpu->cur_governor;
   }
 
-  return governor;
+  if (count != 0)
+  {
+    gchar *s;
+    gsize s_length;
+
+    // Bubble sort
+    for (guint i = 0; G_UNLIKELY (i < count-1); i++)
+      for (guint j = i+1; j < count; j++)
+        if (strcmp (array[i], array[j]) > 0)
+        {
+          const gchar *tmp = array[i];
+          array[i] = array[j];
+          array[j] = tmp;
+        }
+
+    s_length = (count-1) * strlen (",");
+    for (guint i = 0; i < count; i++)
+      s_length += strlen (array[i]);
+
+    s = g_malloc (s_length+1);
+
+    s_length = 0;
+    for (guint i = 0; i < count; i++)
+    {
+      if (i)
+        s[s_length++] = ',';
+      strcpy (s + s_length, array[i]);
+      s_length += strlen (array[i]);
+    }
+    s[s_length] = '\0';
+
+    return s;
+  }
+  else
+  {
+    return NULL;
+  }
 }
 
 
@@ -137,7 +180,8 @@ cpufreq_cpus_single_governor (void)
 static CpuInfo *
 cpufreq_cpus_calc_min (void)
 {
-  const gchar *const governor = cpufreq_cpus_single_governor ();
+  gchar *const governors = cpufreq_governors ();
+  gchar *const old_governor = cpuFreq->cpu_min ? g_strdup (cpuFreq->cpu_min->cur_governor) : g_strdup ("");
   guint freq = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
@@ -154,8 +198,15 @@ cpufreq_cpus_calc_min (void)
   cpuinfo_free (cpuFreq->cpu_min);
   cpuFreq->cpu_min = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_min->cur_freq = freq;
-  cpuFreq->cpu_min->cur_governor = g_strdup (governor ? governor : _("current min"));
+  cpuFreq->cpu_min->cur_governor = governors ? governors : g_strdup (_("current min"));
 
+  if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_min->cur_governor, old_governor) != 0)
+  {
+    cpuFreq->layout_changed = TRUE;
+    cpuFreq->label_max_width = -1;
+  }
+
+  g_free (old_governor);
   return cpuFreq->cpu_min;
 }
 
@@ -164,7 +215,8 @@ cpufreq_cpus_calc_min (void)
 static CpuInfo *
 cpufreq_cpus_calc_avg (void)
 {
-  const gchar *const governor = cpufreq_cpus_single_governor ();
+  gchar *const governors = cpufreq_governors ();
+  gchar *const old_governor = cpuFreq->cpu_avg ? g_strdup (cpuFreq->cpu_avg->cur_governor) : g_strdup ("");
   guint freq = 0, count = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
@@ -184,8 +236,15 @@ cpufreq_cpus_calc_avg (void)
   cpuinfo_free (cpuFreq->cpu_avg);
   cpuFreq->cpu_avg = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_avg->cur_freq = freq;
-  cpuFreq->cpu_avg->cur_governor = g_strdup (governor ? governor : _("current avg"));
+  cpuFreq->cpu_avg->cur_governor = governors ? governors : g_strdup (_("current avg"));
 
+  if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_avg->cur_governor, old_governor) != 0)
+  {
+    cpuFreq->layout_changed = TRUE;
+    cpuFreq->label_max_width = -1;
+  }
+
+  g_free (old_governor);
   return cpuFreq->cpu_avg;
 }
 
@@ -194,7 +253,8 @@ cpufreq_cpus_calc_avg (void)
 static CpuInfo *
 cpufreq_cpus_calc_max (void)
 {
-  const gchar *const governor = cpufreq_cpus_single_governor ();
+  gchar *const governors = cpufreq_governors ();
+  gchar *const old_governor = cpuFreq->cpu_max ? g_strdup (cpuFreq->cpu_max->cur_governor) : g_strdup ("");
   guint freq = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
@@ -211,8 +271,15 @@ cpufreq_cpus_calc_max (void)
   cpuinfo_free (cpuFreq->cpu_max);
   cpuFreq->cpu_max = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_max->cur_freq = freq;
-  cpuFreq->cpu_max->cur_governor = g_strdup (governor ? governor : _("current max"));
+  cpuFreq->cpu_max->cur_governor = governors ? governors : g_strdup (_("current max"));
 
+  if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_max->cur_governor, old_governor) != 0)
+  {
+    cpuFreq->layout_changed = TRUE;
+    cpuFreq->label_max_width = -1;
+  }
+
+  g_free (old_governor);
   return cpuFreq->cpu_max;
 }
 
