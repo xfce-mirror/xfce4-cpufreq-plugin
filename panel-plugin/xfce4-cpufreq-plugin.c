@@ -44,9 +44,12 @@ cpufreq_label_set_font (void)
 {
   gchar *css = NULL, *css_font = NULL, *css_color = NULL;
   PangoFontDescription *font;
+  GtkWidget *label;
 
-  if (G_UNLIKELY (cpuFreq->label == NULL))
+  if (G_UNLIKELY (cpuFreq->label_orNull == NULL))
     return;
+
+  label = cpuFreq->label_orNull;
 
   if (cpuFreq->options->fontname)
   {
@@ -79,7 +82,7 @@ cpufreq_label_set_font (void)
     if (cpuFreq->label_css_provider)
     {
       gtk_style_context_remove_provider (
-        GTK_STYLE_CONTEXT (gtk_widget_get_style_context (cpuFreq->label)),
+        GTK_STYLE_CONTEXT (gtk_widget_get_style_context (label)),
         GTK_STYLE_PROVIDER (cpuFreq->label_css_provider));
       cpuFreq->label_css_provider = NULL;
     }
@@ -88,7 +91,7 @@ cpufreq_label_set_font (void)
 
     gtk_css_provider_load_from_data (provider, css, -1, NULL);
     gtk_style_context_add_provider (
-      GTK_STYLE_CONTEXT (gtk_widget_get_style_context (cpuFreq->label)),
+      GTK_STYLE_CONTEXT (gtk_widget_get_style_context (label)),
       GTK_STYLE_PROVIDER (provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
     cpuFreq->label_css_provider = provider;
@@ -218,14 +221,18 @@ cpufreq_cpus_calc_max (void)
 static gboolean
 cpufreq_update_label (CpuInfo *cpu)
 {
+  GtkWidget *label_widget;
   GtkRequisition label_size;
   gchar *label, *freq;
   gint both;
 
-  if (!cpuFreq->options->show_label_governor && !cpuFreq->options->show_label_freq) {
-    if (cpuFreq->label != NULL)
-      gtk_widget_hide (cpuFreq->label);
+  if (!cpuFreq->label_orNull)
+    return TRUE;
 
+  label_widget = cpuFreq->label_orNull;
+
+  if (!cpuFreq->options->show_label_governor && !cpuFreq->options->show_label_freq) {
+    gtk_widget_hide (label_widget);
     return TRUE;
   }
 
@@ -241,26 +248,25 @@ cpufreq_update_label (CpuInfo *cpu)
      cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
      NULL);
 
-  gtk_label_set_text (GTK_LABEL (cpuFreq->label), label);
+  gtk_label_set_text (GTK_LABEL (label_widget), label);
 
   if (strcmp(label, ""))
   {
     if (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
-      gtk_label_set_angle (GTK_LABEL(cpuFreq->label), -90);
+      gtk_label_set_angle (GTK_LABEL(label_widget), -90);
     else
-      gtk_label_set_angle (GTK_LABEL(cpuFreq->label), 0);
+      gtk_label_set_angle (GTK_LABEL(label_widget), 0);
 
-    gtk_widget_show (cpuFreq->label);
+    gtk_widget_show (label_widget);
 
     /* Set label width to max width if smaller to avoid panel
        resizing/jumping (see bug #10385). */
-    gtk_widget_get_preferred_size (cpuFreq->label, NULL, &label_size);
+    gtk_widget_get_preferred_size (label_widget, NULL, &label_size);
     if (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
     {
       if (label_size.height < cpuFreq->label_max_width)
       {
-        gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label),
-          -1, cpuFreq->label_max_width);
+        gtk_widget_set_size_request (label_widget, -1, cpuFreq->label_max_width);
       }
       else if (label_size.height > cpuFreq->label_max_width)
       {
@@ -272,8 +278,7 @@ cpufreq_update_label (CpuInfo *cpu)
     {
       if (label_size.width < cpuFreq->label_max_width)
       {
-        gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label),
-          cpuFreq->label_max_width, -1);
+        gtk_widget_set_size_request (label_widget, cpuFreq->label_max_width, -1);
       }
       else if (label_size.width > cpuFreq->label_max_width)
       {
@@ -284,7 +289,7 @@ cpufreq_update_label (CpuInfo *cpu)
   }
   else
   {
-    gtk_widget_hide (cpuFreq->label);
+    gtk_widget_hide (label_widget);
   }
 
   g_free (freq);
@@ -326,9 +331,9 @@ cpufreq_widgets_layout (void)
   }
 
   /* check if the label fits below the icon, else put them side by side */
-  if (GTK_IS_WIDGET(cpuFreq->label) && ! hide_label)
+  if (cpuFreq->label_orNull && ! hide_label)
   {
-    gtk_widget_get_preferred_size (cpuFreq->label, NULL, &label_size);
+    gtk_widget_get_preferred_size (cpuFreq->label_orNull, NULL, &label_size);
     lw = label_size.width;
     lh = label_size.height;
   }
@@ -362,19 +367,19 @@ cpufreq_widgets_layout (void)
   {
       if (cpuFreq->icon)
         gtk_widget_set_halign (cpuFreq->icon, GTK_ALIGN_CENTER);
-      if (cpuFreq->label)
-        gtk_widget_set_halign (cpuFreq->label, GTK_ALIGN_CENTER);
+      if (cpuFreq->label_orNull)
+        gtk_widget_set_halign (cpuFreq->label_orNull, GTK_ALIGN_CENTER);
     }
     else
     {
       if (cpuFreq->icon)
         gtk_widget_set_valign (cpuFreq->icon, GTK_ALIGN_CENTER);
-      if (cpuFreq->label)
-        gtk_widget_set_valign (cpuFreq->label, GTK_ALIGN_CENTER);
+      if (cpuFreq->label_orNull)
+        gtk_widget_set_valign (cpuFreq->label_orNull, GTK_ALIGN_CENTER);
     }
 
-    if (cpuFreq->label)
-      gtk_label_set_justify (GTK_LABEL (cpuFreq->label),
+    if (cpuFreq->label_orNull)
+      gtk_label_set_justify (GTK_LABEL (cpuFreq->label_orNull),
         resized ? GTK_JUSTIFY_CENTER : GTK_JUSTIFY_LEFT);
 
     if (cpuFreq->icon)
@@ -391,24 +396,24 @@ cpufreq_widgets_layout (void)
         gtk_widget_set_valign (cpuFreq->icon, GTK_ALIGN_END);
       }
 
-      if (cpuFreq->label)
-        gtk_widget_set_halign (cpuFreq->label, GTK_ALIGN_CENTER);
+      if (cpuFreq->label_orNull)
+        gtk_widget_set_halign (cpuFreq->label_orNull, GTK_ALIGN_CENTER);
     }
     else
     {
       if (cpuFreq->icon)
         gtk_widget_set_valign (cpuFreq->icon, GTK_ALIGN_CENTER);
 
-      if (cpuFreq->label)
+      if (cpuFreq->label_orNull)
       {
-        gtk_widget_set_halign (cpuFreq->label, GTK_ALIGN_END);
-        gtk_widget_set_valign (cpuFreq->label, GTK_ALIGN_CENTER);
+        gtk_widget_set_halign (cpuFreq->label_orNull, GTK_ALIGN_END);
+        gtk_widget_set_valign (cpuFreq->label_orNull, GTK_ALIGN_CENTER);
       }
       pos = resized ? 1 : 0;
     }
 
-    if (cpuFreq->label)
-      gtk_label_set_justify (GTK_LABEL (cpuFreq->label),
+    if (cpuFreq->label_orNull)
+      gtk_label_set_justify (GTK_LABEL (cpuFreq->label_orNull),
         resized ? GTK_JUSTIFY_LEFT : GTK_JUSTIFY_CENTER);
 
     if (cpuFreq->icon)
@@ -416,8 +421,8 @@ cpufreq_widgets_layout (void)
         cpuFreq->icon, TRUE, TRUE, 0, GTK_PACK_START);
   }
 
-  if (cpuFreq->label)
-    gtk_box_reorder_child (GTK_BOX (cpuFreq->box), cpuFreq->label, pos);
+  if (cpuFreq->label_orNull)
+    gtk_box_reorder_child (GTK_BOX (cpuFreq->box), cpuFreq->label_orNull, pos);
 
   cpuFreq->layout_changed = FALSE;
 }
@@ -476,7 +481,8 @@ cpufreq_update_plugin (gboolean reset_label_size)
   if (reset_label_size)
   {
     cpuFreq->label_max_width = -1;
-    gtk_widget_set_size_request (GTK_WIDGET (cpuFreq->label), -1, -1);
+    if (cpuFreq->label_orNull)
+      gtk_widget_set_size_request (cpuFreq->label_orNull, -1, -1);
     cpuFreq->layout_changed = TRUE;
   }
 
@@ -612,24 +618,24 @@ cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 static void
 cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
 {
-  if (cpufreq->label)
+  if (cpufreq->label_orNull)
   {
     if (cpuFreq->label_css_provider)
     {
       gtk_style_context_remove_provider (
-        GTK_STYLE_CONTEXT (gtk_widget_get_style_context (cpuFreq->label)),
+        GTK_STYLE_CONTEXT (gtk_widget_get_style_context (cpuFreq->label_orNull)),
         GTK_STYLE_PROVIDER (cpuFreq->label_css_provider));
       cpuFreq->label_css_provider = NULL;
     }
 
-    gtk_widget_destroy (cpufreq->label);
-    cpufreq->label = NULL;
+    gtk_widget_destroy (cpufreq->label_orNull);
+    cpufreq->label_orNull = NULL;
   }
 
   if (cpuFreq->options->show_label_freq || cpuFreq->options->show_label_governor)
   {
-    cpuFreq->label = gtk_label_new (NULL);
-    gtk_box_pack_start (GTK_BOX (cpufreq->box), cpuFreq->label, TRUE, TRUE, 0);
+    cpuFreq->label_orNull = gtk_label_new (NULL);
+    gtk_box_pack_start (GTK_BOX (cpufreq->box), cpuFreq->label_orNull, TRUE, TRUE, 0);
   }
 }
 
