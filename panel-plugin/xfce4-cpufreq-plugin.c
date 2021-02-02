@@ -615,7 +615,7 @@ cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 
 
 
-static void
+void
 cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
 {
   if (cpufreq->label_orNull)

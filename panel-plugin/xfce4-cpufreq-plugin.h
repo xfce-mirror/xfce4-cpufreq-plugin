@@ -100,19 +100,22 @@ extern CpuFreqPlugin *cpuFreq;
 G_BEGIN_DECLS
 
 void
-cpuinfo_free (CpuInfo *cpu);
-
-gboolean
-cpufreq_update_plugin (gboolean reset_label_size);
+cpufreq_prepare_label (CpuFreqPlugin *cpufreq);
 
 void
 cpufreq_restart_timeout (void);
 
 void
+cpufreq_update_icon (CpuFreqPlugin *cpufreq);
+
+gboolean
+cpufreq_update_plugin (gboolean reset_label_size);
+
+void
 cpufreq_write_config (XfcePanelPlugin *plugin);
 
 void
-cpufreq_update_icon (CpuFreqPlugin *cpufreq);
+cpuinfo_free (CpuInfo *cpu);
 
 G_END_DECLS
 

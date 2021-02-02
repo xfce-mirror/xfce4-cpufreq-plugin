@@ -55,7 +55,10 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
   if (!cpuFreq->options->show_label_freq && !cpuFreq->options->show_label_governor)
   {
     if (!cpuFreq->options->show_icon)
+    {
+      cpuFreq->options->show_icon = TRUE;
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (configure->display_icon), TRUE);
+    }
 
     gtk_widget_set_sensitive (configure->display_icon, FALSE);
   }
@@ -64,6 +67,7 @@ check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
     gtk_widget_set_sensitive (configure->display_icon, TRUE);
   }
 
+  cpufreq_prepare_label (cpuFreq);
   cpufreq_update_icon (cpuFreq);
   cpufreq_update_plugin (TRUE);
 }
