@@ -841,9 +841,14 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
   xfce_rc_write_int_entry  (rc, "freq_unit",           options->unit);
 
   if (options->fontname)
-    xfce_rc_write_entry  (rc, "fontname",            options->fontname);
+    xfce_rc_write_entry (rc, "fontname", options->fontname);
+  else
+    xfce_rc_delete_entry (rc, "fontname", FALSE);
+
   if (options->fontcolor)
-    xfce_rc_write_entry  (rc, "fontcolor",           options->fontcolor);
+    xfce_rc_write_entry (rc, "fontcolor", options->fontcolor);
+  else
+    xfce_rc_delete_entry (rc, "fontcolor", FALSE);
 
   xfce_rc_close (rc);
 }
