@@ -154,12 +154,10 @@ button_fontname_pressed(GtkWidget *button, GdkEventButton *event,
 static void
 button_fontcolor_clicked (GtkWidget *button, void *data)
 {
-  GdkRGBA *color = g_new0 (GdkRGBA, 1);
-
-  gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (button), color);
+  GdkRGBA color;
+  gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (button), &color);
   g_free (cpuFreq->options->fontcolor);
-  cpuFreq->options->fontcolor = gdk_rgba_to_string (color);
-  g_free (color);
+  cpuFreq->options->fontcolor = gdk_rgba_to_string (&color);
   cpufreq_update_plugin (TRUE);
 }
 
