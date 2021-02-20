@@ -544,7 +544,7 @@ cpufreq_update_plugin (gboolean reset_label_size)
 
   cpu = cpufreq_current_cpu ();
   if (!cpu)
-      return FALSE;
+    return FALSE;
 
   if (reset_label_size)
   {
@@ -579,7 +579,7 @@ cpufreq_update_tooltip (GtkWidget *widget,
 
   cpu = cpufreq_current_cpu ();
 
-  if (G_UNLIKELY(cpu == NULL))
+  if (G_UNLIKELY (cpu == NULL))
   {
     tooltip_msg = g_strdup (_("No CPU information available."));
   }
