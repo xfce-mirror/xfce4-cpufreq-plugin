@@ -59,25 +59,16 @@ cpufreq_pstate_read (void)
 static gboolean
 read_params (void)
 {
-  gchar *file;
   IntelPState *ips;
-
-  ips = g_slice_new0(IntelPState);
 
   if (!g_file_test (PSTATE_BASE, G_FILE_TEST_EXISTS))
     return FALSE;
 
-  file = g_strdup (PSTATE_BASE "/min_perf_pct");
-  cpufreq_sysfs_read_int (file, &ips->min_perf_pct);
-  g_free (file);
+  ips = g_slice_new0(IntelPState);
 
-  file = g_strdup (PSTATE_BASE "/max_perf_pct");
-  cpufreq_sysfs_read_int (file, &ips->max_perf_pct);
-  g_free (file);
-
-  file = g_strdup (PSTATE_BASE "/no_turbo");
-  cpufreq_sysfs_read_int (file, &ips->no_turbo);
-  g_free (file);
+  cpufreq_sysfs_read_int (PSTATE_BASE "/min_perf_pct", &ips->min_perf_pct);
+  cpufreq_sysfs_read_int (PSTATE_BASE "/max_perf_pct", &ips->max_perf_pct);
+  cpufreq_sysfs_read_int (PSTATE_BASE "/no_turbo", &ips->no_turbo);
 
   g_slice_free (IntelPState, cpuFreq->intel_pstate);
   cpuFreq->intel_pstate = ips;
