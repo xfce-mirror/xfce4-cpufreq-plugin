@@ -38,7 +38,7 @@
 #include "xfce4-cpufreq-linux.h"
 #endif /* __linux__ */
 
-CpuFreqPlugin *cpuFreq;
+CpuFreqPlugin *cpuFreq = NULL;
 
 static void
 cpufreq_label_set_font (void)

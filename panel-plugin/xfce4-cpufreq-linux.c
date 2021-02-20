@@ -56,7 +56,8 @@ cpufreq_linux_init (void)
        not be much use in showing a single core's performance
        value. Besides, it's not very likely the user wants to
        follow values for 4 or 8 cores per second. */
-    if (ret && cpuFreq->options->show_warning) {
+    if (ret && cpuFreq->options->show_warning)
+    {
       cpuFreq->options->show_cpu = CPU_DEFAULT;
       cpuFreq->options->show_warning = FALSE;
     }
@@ -82,6 +83,9 @@ cpufreq_linux_init (void)
 gboolean
 cpufreq_update_cpus (gpointer data)
 {
+  if (G_UNLIKELY (cpuFreq == NULL))
+    return FALSE;
+
   if (cpufreq_sysfs_is_available ())
   {
     for (guint i = 0; i < cpuFreq->cpus->len; i++)
