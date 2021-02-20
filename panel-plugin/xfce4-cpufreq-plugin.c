@@ -930,8 +930,7 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 }
 
 static void
-cpufreq_show_about(XfcePanelPlugin *plugin,
-           CpuFreqPlugin *cpufreq)
+cpufreq_show_about(XfcePanelPlugin *plugin, CpuFreqPlugin *cpufreq)
 {
   const gchar *auth[] = {
     "Thomas Schreck <shrek@xfce.org>",
@@ -976,7 +975,7 @@ cpufreq_construct (XfcePanelPlugin *plugin)
   cpuFreq->layout_changed = TRUE;
 
 #ifdef __linux__
-  if (cpufreq_linux_init () == FALSE)
+  if (!cpufreq_linux_init ())
     xfce_dialog_show_error (NULL, NULL,
       _("Your system is not configured correctly to support CPU frequency scaling!"));
 
