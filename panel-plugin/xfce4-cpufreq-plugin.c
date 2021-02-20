@@ -886,6 +886,10 @@ cpufreq_free (XfcePanelPlugin *plugin)
 
   g_ptr_array_free (cpuFreq->cpus, TRUE);
 
+  g_free (cpuFreq->cpu_avg);
+  g_free (cpuFreq->cpu_max);
+  g_free (cpuFreq->cpu_min);
+
   g_free (cpuFreq->options->fontname);
   cpuFreq->plugin = NULL;
   g_free (cpuFreq);
