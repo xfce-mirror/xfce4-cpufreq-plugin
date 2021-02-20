@@ -39,7 +39,7 @@
 static void
 cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 {
-  gint i = 0, j;
+  gint i = 0;
   gchar *text;
   GtkWidget *hbox, *dialog_vbox, *combo, *label, *icon;
   GtkSizeGroup *sg0, *sg1;
@@ -108,6 +108,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 
   if (cpu->available_freqs != NULL) /* Linux 2.6 with scaling support */
   {
+    gint j;
     combo = gtk_combo_box_text_new ();
     gtk_size_group_add_widget (sg1, combo);
     gtk_box_pack_end (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
@@ -164,6 +165,8 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
   /* display list of available governors */
   if (cpu->available_governors != NULL) /* Linux 2.6 and cpu scaling support */
   {
+    gint j;
+
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, FALSE, FALSE, 0);
 
@@ -176,9 +179,9 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
     combo = gtk_combo_box_text_new ();
     gtk_size_group_add_widget (sg1, combo);
     gtk_box_pack_end (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
+
     list = g_list_first (cpu->available_governors);
     j = 0;
-
     while (list)
     {
       gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), list->data);

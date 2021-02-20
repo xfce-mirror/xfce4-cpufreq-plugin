@@ -30,42 +30,58 @@
 
 
 static void
-check_button_changed (GtkWidget *button, CpuFreqPluginConfigure *configure)
+update_sensitivity (const CpuFreqPluginConfigure *configure)
 {
+  const CpuFreqPluginOptions *options = cpuFreq->options;
+
+  if (!options->show_label_freq && !options->show_label_governor)
+    gtk_widget_set_sensitive (configure->display_icon, FALSE);
+  else
+    gtk_widget_set_sensitive (configure->display_icon, TRUE);
+}
+
+
+
+static void
+validate_configuration (const CpuFreqPluginConfigure *configure)
+{
+  CpuFreqPluginOptions *options = cpuFreq->options;
+
+  if (!options->show_label_freq && !options->show_label_governor)
+  {
+    if (!options->show_icon)
+    {
+      options->show_icon = TRUE;
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (configure->display_icon), TRUE);
+      update_sensitivity (configure);
+    }
+  }
+}
+
+
+
+static void
+check_button_changed (GtkWidget *button, const CpuFreqPluginConfigure *configure)
+{
+  CpuFreqPluginOptions *options = cpuFreq->options;
+
   if (button == configure->display_icon)
-    cpuFreq->options->show_icon =
-      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+    options->show_icon = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
   else if (button == configure->display_freq)
-    cpuFreq->options->show_label_freq =
-      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+    options->show_label_freq = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
   else if (button == configure->display_governor)
-    cpuFreq->options->show_label_governor =
-      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+    options->show_label_governor = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
   else if (button == configure->keep_compact)
-    cpuFreq->options->keep_compact =
-      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+    options->keep_compact = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
   else if (button == configure->one_line)
-    cpuFreq->options->one_line =
-      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+    options->one_line = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-  if (!cpuFreq->options->show_label_freq && !cpuFreq->options->show_label_governor)
-  {
-    if (!cpuFreq->options->show_icon)
-    {
-      cpuFreq->options->show_icon = TRUE;
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (configure->display_icon), TRUE);
-    }
-
-    gtk_widget_set_sensitive (configure->display_icon, FALSE);
-  }
-  else
-  {
-    gtk_widget_set_sensitive (configure->display_icon, TRUE);
-  }
+  update_sensitivity (configure);
+  validate_configuration (configure);
 
   cpufreq_prepare_label (cpuFreq);
   cpufreq_update_icon (cpuFreq);
@@ -463,8 +479,6 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->show_icon);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
-  if (!options->show_label_freq && !options->show_label_governor)
-    gtk_widget_set_sensitive (configure->display_icon, FALSE);
 
   button = configure->display_freq = gtk_check_button_new_with_mnemonic (_("Show CPU fre_quency"));
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
@@ -477,6 +491,9 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
   g_signal_connect(G_OBJECT (dialog), "response", G_CALLBACK(cpufreq_configure_response), configure);
+
+  update_sensitivity (configure);
+  validate_configuration (configure);
 
   g_object_unref (sg0);
   gtk_widget_show_all (dialog);

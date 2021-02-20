@@ -38,13 +38,12 @@
 #include "xfce4-cpufreq-linux.h"
 #endif /* __linux__ */
 
-CpuFreqPlugin *cpuFreq;
+CpuFreqPlugin *cpuFreq = NULL;
 
 static void
 cpufreq_label_set_font (void)
 {
   gchar *css = NULL, *css_font = NULL, *css_color = NULL;
-  PangoFontDescription *font;
   GtkWidget *label;
 
   if (G_UNLIKELY (cpuFreq->label_orNull == NULL))
@@ -54,6 +53,8 @@ cpufreq_label_set_font (void)
 
   if (cpuFreq->options->fontname)
   {
+    PangoFontDescription *font;
+
     font = pango_font_description_from_string(cpuFreq->options->fontname);
 
     css_font = g_strdup_printf("font-family: %s; font-size: %dpt; font-style: %s; font-weight: %s;",
@@ -182,7 +183,8 @@ cpufreq_cpus_calc_min (void)
 {
   gchar *const governors = cpufreq_governors ();
   gchar *const old_governor = cpuFreq->cpu_min ? g_strdup (cpuFreq->cpu_min->cur_governor) : g_strdup ("");
-  guint freq = 0;
+  guint freq = G_MAXUINT, max_freq = G_MAXUINT, min_freq = G_MAXUINT;
+  guint count = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
@@ -191,14 +193,21 @@ cpufreq_cpus_calc_min (void)
     if (!cpu->online)
       continue;
 
-    if (freq > cpu->cur_freq || i == 0)
-      freq = cpu->cur_freq;
+    freq = MIN (freq, cpu->cur_freq);
+    max_freq = MIN (max_freq, cpu->max_freq);
+    min_freq = MIN (min_freq, cpu->min_freq);
+    count++;
   }
+
+  if (count == 0)
+    freq = max_freq = min_freq = 0;
 
   cpuinfo_free (cpuFreq->cpu_min);
   cpuFreq->cpu_min = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_min->cur_freq = freq;
   cpuFreq->cpu_min->cur_governor = governors ? governors : g_strdup (_("current min"));
+  cpuFreq->cpu_min->max_freq = max_freq;
+  cpuFreq->cpu_min->min_freq = min_freq;
 
   if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_min->cur_governor, old_governor) != 0)
   {
@@ -217,7 +226,8 @@ cpufreq_cpus_calc_avg (void)
 {
   gchar *const governors = cpufreq_governors ();
   gchar *const old_governor = cpuFreq->cpu_avg ? g_strdup (cpuFreq->cpu_avg->cur_governor) : g_strdup ("");
-  guint freq = 0, count = 0;
+  guint freq = 0, max_freq = 0, min_freq = 0;
+  guint count = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
@@ -227,16 +237,24 @@ cpufreq_cpus_calc_avg (void)
       continue;
 
     freq += cpu->cur_freq;
+    max_freq += cpu->max_freq;
+    min_freq += cpu->min_freq;
     count++;
   }
 
-  if (count > 0)
+  if (count != 0)
+  {
     freq /= count;
+    max_freq /= count;
+    min_freq /= count;
+  }
 
   cpuinfo_free (cpuFreq->cpu_avg);
   cpuFreq->cpu_avg = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_avg->cur_freq = freq;
   cpuFreq->cpu_avg->cur_governor = governors ? governors : g_strdup (_("current avg"));
+  cpuFreq->cpu_avg->max_freq = max_freq;
+  cpuFreq->cpu_avg->min_freq = min_freq;
 
   if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_avg->cur_governor, old_governor) != 0)
   {
@@ -255,7 +273,7 @@ cpufreq_cpus_calc_max (void)
 {
   gchar *const governors = cpufreq_governors ();
   gchar *const old_governor = cpuFreq->cpu_max ? g_strdup (cpuFreq->cpu_max->cur_governor) : g_strdup ("");
-  guint freq = 0;
+  guint freq = 0, max_freq = 0, min_freq = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
@@ -264,14 +282,17 @@ cpufreq_cpus_calc_max (void)
     if (!cpu->online)
       continue;
 
-    if (freq < cpu->cur_freq)
-      freq = cpu->cur_freq;
+    freq = MAX (freq, cpu->cur_freq);
+    max_freq = MAX (max_freq, cpu->max_freq);
+    min_freq = MAX (min_freq, cpu->min_freq);
   }
 
   cpuinfo_free (cpuFreq->cpu_max);
   cpuFreq->cpu_max = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_max->cur_freq = freq;
   cpuFreq->cpu_max->cur_governor = governors ? governors : g_strdup (_("current max"));
+  cpuFreq->cpu_max->max_freq = max_freq;
+  cpuFreq->cpu_max->min_freq = min_freq;
 
   if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_max->cur_governor, old_governor) != 0)
   {
@@ -543,7 +564,7 @@ cpufreq_update_plugin (gboolean reset_label_size)
 
   cpu = cpufreq_current_cpu ();
   if (!cpu)
-      return FALSE;
+    return FALSE;
 
   if (reset_label_size)
   {
@@ -574,17 +595,17 @@ cpufreq_update_tooltip (GtkWidget *widget,
 {
   const CpuFreqPluginOptions *const options = cpuFreq->options;
   CpuInfo *cpu;
-  gchar *tooltip_msg, *freq = NULL;
+  gchar *tooltip_msg;
 
   cpu = cpufreq_current_cpu ();
 
-  if (G_UNLIKELY(cpu == NULL))
+  if (G_UNLIKELY (cpu == NULL))
   {
     tooltip_msg = g_strdup (_("No CPU information available."));
   }
   else
   {
-    freq = cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
+    gchar *freq = cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
     if (options->show_label_governor && options->show_label_freq)
       tooltip_msg = g_strdup_printf (ngettext ("%d cpu available",
         "%d cpus available", cpuFreq->cpus->len), cpuFreq->cpus->len);
@@ -603,13 +624,11 @@ cpufreq_update_tooltip (GtkWidget *widget,
          cpu->cur_governor != NULL &&
          !options->show_label_governor ? cpu->cur_governor : "",
          NULL);
+    g_free (freq);
   }
 
   gtk_tooltip_set_text (tooltip, tooltip_msg);
-
-  g_free (freq);
   g_free (tooltip_msg);
-
   return TRUE;
 }
 
@@ -887,6 +906,10 @@ cpufreq_free (XfcePanelPlugin *plugin)
 
   g_ptr_array_free (cpuFreq->cpus, TRUE);
 
+  g_free (cpuFreq->cpu_avg);
+  g_free (cpuFreq->cpu_max);
+  g_free (cpuFreq->cpu_min);
+
   g_free (cpuFreq->options->fontname);
   cpuFreq->plugin = NULL;
   g_free (cpuFreq);
@@ -907,8 +930,7 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 }
 
 static void
-cpufreq_show_about(XfcePanelPlugin *plugin,
-           CpuFreqPlugin *cpufreq)
+cpufreq_show_about(XfcePanelPlugin *plugin, CpuFreqPlugin *cpufreq)
 {
   const gchar *auth[] = {
     "Thomas Schreck <shrek@xfce.org>",
@@ -953,7 +975,7 @@ cpufreq_construct (XfcePanelPlugin *plugin)
   cpuFreq->layout_changed = TRUE;
 
 #ifdef __linux__
-  if (cpufreq_linux_init () == FALSE)
+  if (!cpufreq_linux_init ())
     xfce_dialog_show_error (NULL, NULL,
       _("Your system is not configured correctly to support CPU frequency scaling!"));
 

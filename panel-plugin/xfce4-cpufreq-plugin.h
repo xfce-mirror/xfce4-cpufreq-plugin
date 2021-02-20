@@ -66,12 +66,12 @@ typedef struct
 {
   guint       timeout;       /* time between refresh */
   gint        show_cpu;      /* cpu number in panel, or CPU_MIN/AVG/MAX */
-  gboolean    show_icon;
-  gboolean    show_label_governor;
-  gboolean    show_label_freq;
-  gboolean    show_warning;
-  gboolean    keep_compact;
-  gboolean    one_line;
+  gboolean    show_icon:1;
+  gboolean    show_label_governor:1;
+  gboolean    show_label_freq:1;
+  gboolean    show_warning:1;
+  gboolean    keep_compact:1;
+  gboolean    one_line:1;
   gchar      *fontname;
   gchar      *fontcolor;
   CpuFreqUnit unit;
