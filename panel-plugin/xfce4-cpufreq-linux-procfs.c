@@ -154,7 +154,8 @@ cpufreq_procfs_read (void)
 
     if (file)
     {
-      fscanf (file, "%d", &cpu->cur_freq);
+      if (fscanf (file, "%d", &cpu->cur_freq) != 1)
+        cpu->cur_freq = 0;
       fclose (file);
     }
 
