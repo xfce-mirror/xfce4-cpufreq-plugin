@@ -65,11 +65,6 @@ cpufreq_procfs_read_cpuinfo (void)
         if (cpu == NULL)
         {
           cpu = g_new0 (CpuInfo, 1);
-          cpu->max_freq = 0;
-          cpu->min_freq = 0;
-          cpu->cur_governor = NULL;
-          cpu->available_freqs = NULL;
-          cpu->available_governors = NULL;
           cpu->online = TRUE;
           add_cpu = TRUE;
         }
@@ -124,11 +119,7 @@ cpufreq_procfs_read (void)
       if (g_ascii_strncasecmp (line, "CPU", 3) == 0)
       {
         CpuInfo *cpu = g_new0 (CpuInfo, 1);
-        cpu->max_freq = 0;
-        cpu->min_freq = 0;
         cpu->cur_governor = g_new (gchar, 20);
-        cpu->available_freqs = NULL;
-        cpu->available_governors = NULL;
         cpu->online = TRUE;
 
         sscanf (line,
