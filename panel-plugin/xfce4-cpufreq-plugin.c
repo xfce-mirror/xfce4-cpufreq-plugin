@@ -44,7 +44,6 @@ static void
 cpufreq_label_set_font (void)
 {
   gchar *css = NULL, *css_font = NULL, *css_color = NULL;
-  PangoFontDescription *font;
   GtkWidget *label;
 
   if (G_UNLIKELY (cpuFreq->label_orNull == NULL))
@@ -54,6 +53,8 @@ cpufreq_label_set_font (void)
 
   if (cpuFreq->options->fontname)
   {
+    PangoFontDescription *font;
+
     font = pango_font_description_from_string(cpuFreq->options->fontname);
 
     css_font = g_strdup_printf("font-family: %s; font-size: %dpt; font-style: %s; font-weight: %s;",
@@ -574,7 +575,7 @@ cpufreq_update_tooltip (GtkWidget *widget,
 {
   const CpuFreqPluginOptions *const options = cpuFreq->options;
   CpuInfo *cpu;
-  gchar *tooltip_msg, *freq = NULL;
+  gchar *tooltip_msg;
 
   cpu = cpufreq_current_cpu ();
 
@@ -584,7 +585,7 @@ cpufreq_update_tooltip (GtkWidget *widget,
   }
   else
   {
-    freq = cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
+    gchar *freq = cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
     if (options->show_label_governor && options->show_label_freq)
       tooltip_msg = g_strdup_printf (ngettext ("%d cpu available",
         "%d cpus available", cpuFreq->cpus->len), cpuFreq->cpus->len);
@@ -603,13 +604,11 @@ cpufreq_update_tooltip (GtkWidget *widget,
          cpu->cur_governor != NULL &&
          !options->show_label_governor ? cpu->cur_governor : "",
          NULL);
+    g_free (freq);
   }
 
   gtk_tooltip_set_text (tooltip, tooltip_msg);
-
-  g_free (freq);
   g_free (tooltip_msg);
-
   return TRUE;
 }
 
