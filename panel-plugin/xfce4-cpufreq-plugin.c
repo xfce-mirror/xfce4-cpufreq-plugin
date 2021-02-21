@@ -52,6 +52,14 @@ cpufreq_label_set_font (void)
 
   label = cpuFreq->label_orNull;
 
+  if (cpuFreq->label_css_provider)
+  {
+    gtk_style_context_remove_provider (
+      GTK_STYLE_CONTEXT (gtk_widget_get_style_context (label)),
+      GTK_STYLE_PROVIDER (cpuFreq->label_css_provider));
+    cpuFreq->label_css_provider = NULL;
+  }
+
   if (cpuFreq->options->fontname)
   {
     PangoFontDescription *font;
@@ -80,17 +88,7 @@ cpufreq_label_set_font (void)
 
   if (css)
   {
-    GtkCssProvider *provider;
-
-    if (cpuFreq->label_css_provider)
-    {
-      gtk_style_context_remove_provider (
-        GTK_STYLE_CONTEXT (gtk_widget_get_style_context (label)),
-        GTK_STYLE_PROVIDER (cpuFreq->label_css_provider));
-      cpuFreq->label_css_provider = NULL;
-    }
-
-    provider = gtk_css_provider_new ();
+    GtkCssProvider *provider = gtk_css_provider_new ();
 
     gtk_css_provider_load_from_data (provider, css, -1, NULL);
     gtk_style_context_add_provider (
