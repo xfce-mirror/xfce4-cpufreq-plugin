@@ -317,43 +317,48 @@ cpufreq_cpus_calc_max (void)
 static void
 cpufreq_update_label (CpuInfo *cpu)
 {
+  const CpuFreqPluginOptions *const options = cpuFreq->options;
   GtkWidget *label_widget;
-  GtkRequisition label_size;
   gchar *label, *freq;
-  gint both;
+  gboolean both;
 
   if (!cpuFreq->label_orNull)
     return;
 
   label_widget = cpuFreq->label_orNull;
 
-  if (!cpuFreq->options->show_label_governor && !cpuFreq->options->show_label_freq) {
+  if (!options->show_label_governor && !options->show_label_freq)
+  {
     gtk_widget_hide (label_widget);
     return;
   }
 
   both = cpu->cur_governor != NULL &&
-    cpuFreq->options->show_label_freq &&
-    cpuFreq->options->show_label_governor;
+    options->show_label_freq &&
+    options->show_label_governor;
 
-  freq = cpufreq_get_human_readable_freq (cpu->cur_freq, cpuFreq->options->unit);
+  freq = cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
   label = g_strconcat
-    (cpuFreq->options->show_label_freq ? freq : "",
-     both ? (cpuFreq->options->one_line ? " " : "\n") : "",
+    (options->show_label_freq ? freq : "",
+     both ? (options->one_line ? " " : "\n") : "",
      cpu->cur_governor != NULL &&
-     cpuFreq->options->show_label_governor ? cpu->cur_governor : "",
+     options->show_label_governor ? cpu->cur_governor : "",
      NULL);
 
-  gtk_label_set_text (GTK_LABEL (label_widget), label);
-
-  if (strcmp(label, ""))
+  if (*label != '\0')
   {
-    if (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
-      gtk_label_set_angle (GTK_LABEL(label_widget), -90);
-    else
-      gtk_label_set_angle (GTK_LABEL(label_widget), 0);
+    gint angle;
+    GtkRequisition label_size;
 
-    gtk_widget_show (label_widget);
+    if (strcmp (gtk_label_get_text (GTK_LABEL (label_widget)), label) != 0)
+      gtk_label_set_text (GTK_LABEL (label_widget), label);
+
+    angle = (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? -90 : 0;
+    if (gtk_label_get_angle (GTK_LABEL(label_widget)) != angle)
+      gtk_label_set_angle (GTK_LABEL(label_widget), angle);
+
+    if (!gtk_widget_is_visible (label_widget))
+      gtk_widget_show (label_widget);
 
     /* Set label width to max width if smaller to avoid panel
        resizing/jumping (see bug #10385). */
