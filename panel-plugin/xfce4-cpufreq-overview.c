@@ -128,7 +128,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
     }
     gtk_combo_box_set_active (GTK_COMBO_BOX (combo), i);
   }
-  else if (cpu->cur_freq && cpu->min_freq && cpu->max_freq) /* Linux 2.4 with scaling support */
+  else if (cpu->cur_freq && cpu->min_freq && cpu->max_freq_nominal) /* Linux 2.4 with scaling support */
   {
     combo = gtk_combo_box_text_new ();
     gtk_size_group_add_widget (sg1, combo);
@@ -138,7 +138,7 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
     gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), text);
     g_free (text);
 
-    text = cpufreq_get_human_readable_freq (cpu->max_freq, unit);
+    text = cpufreq_get_human_readable_freq (cpu->max_freq_nominal, unit);
     gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), text);
     g_free (text);
 

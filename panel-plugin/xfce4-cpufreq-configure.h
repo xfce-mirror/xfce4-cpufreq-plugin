@@ -24,10 +24,11 @@
 
 typedef struct
 {
+  GtkWidget *display_cpu;
   GtkWidget *display_icon;
   GtkWidget *display_freq;
   GtkWidget *display_governor;
-  GtkWidget *display_cpu;
+  GtkWidget *icon_color_freq;
   GtkWidget *monitor_timeout;
   GtkWidget *combo_cpu;
   GtkWidget *combo_unit;

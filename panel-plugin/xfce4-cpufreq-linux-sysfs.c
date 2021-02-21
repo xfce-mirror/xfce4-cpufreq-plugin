@@ -203,7 +203,7 @@ parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 
   /* read max cpu freq */
   g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_max_freq", cpu_number);
-  cpufreq_sysfs_read_int (file, &cpu->max_freq);
+  cpufreq_sysfs_read_int (file, &cpu->max_freq_nominal);
 
   /* read min cpu freq */
   g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_min_freq", cpu_number);

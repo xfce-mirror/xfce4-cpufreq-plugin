@@ -125,10 +125,10 @@ cpufreq_procfs_read (void)
         sscanf (line,
                 "CPU %*d %d kHz (%*d %%) - %d kHz (%*d %%) - %20s",
                 &cpu->min_freq,
-                &cpu->max_freq,
+                &cpu->max_freq_nominal,
                 cpu->cur_governor);
         cpu->min_freq *= 1000;
-        cpu->max_freq *= 1000;
+        cpu->max_freq_nominal *= 1000;
 
         g_ptr_array_add (cpuFreq->cpus, cpu);
       }

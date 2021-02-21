@@ -83,6 +83,8 @@ cpufreq_linux_init (void)
 gboolean
 cpufreq_update_cpus (gpointer data)
 {
+  guint  i;
+
   if (G_UNLIKELY (cpuFreq == NULL))
     return FALSE;
 
@@ -107,6 +109,12 @@ cpufreq_update_cpus (gpointer data)
     /* We do not need to update, because no scaling available */
     return FALSE;
   }
+
+  for (i = 0; i < cpuFreq->cpus->len; i++)
+    {
+      CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+      cpu->max_freq_measured = MAX (cpu->max_freq_measured, cpu->cur_freq);
+    }
 
   return cpufreq_update_plugin (FALSE);
 }
