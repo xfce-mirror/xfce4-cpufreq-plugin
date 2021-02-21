@@ -83,6 +83,8 @@ cpufreq_linux_init (void)
 gboolean
 cpufreq_update_cpus (gpointer data)
 {
+  guint  i;
+
   if (G_UNLIKELY (cpuFreq == NULL))
     return FALSE;
 
@@ -94,10 +96,10 @@ cpufreq_update_cpus (gpointer data)
   else if (cpufreq_procfs_is_available ())
   {
     /* First we delete the cpus and then read the /proc/cpufreq file again */
-    for (guint i = 0; i < cpuFreq->cpus->len; i++)
+    while (cpuFreq->cpus->len != 0)
     {
-      CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
-      g_ptr_array_remove_fast (cpuFreq->cpus, cpu);
+      CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, 0);
+      g_ptr_array_remove_index_fast (cpuFreq->cpus, 0);
       cpuinfo_free (cpu);
     }
     cpufreq_procfs_read ();
@@ -107,6 +109,12 @@ cpufreq_update_cpus (gpointer data)
     /* We do not need to update, because no scaling available */
     return FALSE;
   }
+
+  for (i = 0; i < cpuFreq->cpus->len; i++)
+    {
+      CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+      cpu->max_freq_measured = MAX (cpu->max_freq_measured, cpu->cur_freq);
+    }
 
   return cpufreq_update_plugin (FALSE);
 }

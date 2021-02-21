@@ -44,13 +44,14 @@ typedef enum
 typedef struct
 {
   guint  cur_freq;  /* frequency in kHz */
-  guint  max_freq;
+  guint  max_freq_measured;
+  guint  max_freq_nominal;
   guint  min_freq;
   gchar  *cur_governor;
   gchar  *scaling_driver;
 
-  GList* available_freqs;
-  GList* available_governors;
+  GList *available_freqs;
+  GList *available_governors;
 
   gboolean online;
 } CpuInfo;
@@ -72,6 +73,7 @@ typedef struct
   gboolean    show_warning:1;
   gboolean    keep_compact:1;
   gboolean    one_line:1;
+  gboolean    icon_color_freq:1;
   gchar      *fontname;
   gchar      *fontcolor;
   CpuFreqUnit unit;
@@ -101,6 +103,10 @@ typedef struct
   gboolean layout_changed;
   gint label_max_width;
 
+  GdkPixbuf *base_icon;
+  GdkPixbuf *icon_pixmaps[32];  /* table with frequency color coded pixbufs */
+  GdkPixbuf *current_icon_pixmap;
+
   CpuFreqPluginOptions *options;
   gint timeoutHandle;
 } CpuFreqPlugin;
@@ -116,7 +122,7 @@ void
 cpufreq_restart_timeout (void);
 
 void
-cpufreq_update_icon (CpuFreqPlugin *cpufreq);
+cpufreq_update_icon ();
 
 gboolean
 cpufreq_update_plugin (gboolean reset_label_size);

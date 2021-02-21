@@ -38,6 +38,8 @@ update_sensitivity (const CpuFreqPluginConfigure *configure)
     gtk_widget_set_sensitive (configure->display_icon, FALSE);
   else
     gtk_widget_set_sensitive (configure->display_icon, TRUE);
+
+  gtk_widget_set_sensitive (configure->icon_color_freq, options->show_icon);
 }
 
 
@@ -74,6 +76,9 @@ check_button_changed (GtkWidget *button, const CpuFreqPluginConfigure *configure
   else if (button == configure->display_governor)
     options->show_label_governor = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
+  else if (button == configure->icon_color_freq)
+    options->icon_color_freq = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+
   else if (button == configure->keep_compact)
     options->keep_compact = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
@@ -84,7 +89,7 @@ check_button_changed (GtkWidget *button, const CpuFreqPluginConfigure *configure
   validate_configuration (configure);
 
   cpufreq_prepare_label (cpuFreq);
-  cpufreq_update_icon (cpuFreq);
+  cpufreq_update_icon ();
   cpufreq_update_plugin (TRUE);
 }
 
@@ -478,6 +483,11 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   button = configure->display_icon = gtk_check_button_new_with_mnemonic (_("Show CPU _icon"));
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->show_icon);
+  g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
+
+  button = configure->icon_color_freq = gtk_check_button_new_with_mnemonic (_("Adjust CPU icon color according to frequency"));
+  gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->icon_color_freq);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
   button = configure->display_freq = gtk_check_button_new_with_mnemonic (_("Show CPU fre_quency"));

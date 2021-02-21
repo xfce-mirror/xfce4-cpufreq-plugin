@@ -14,7 +14,8 @@ libcpufreq_la_CFLAGS =						\
 libcpufreq_la_LIBADD =						\
 	$(LIBXFCE4PANEL_LIBS)					\
 	$(LIBXFCE4UTIL_LIBS)					\
-	$(LIBXFCE4UI_LIBS)
+	$(LIBXFCE4UI_LIBS)						\
+	-lm
 
 libcpufreq_la_SOURCES =						\
 	xfce4-cpufreq-plugin.h					\

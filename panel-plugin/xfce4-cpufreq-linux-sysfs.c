@@ -36,9 +36,9 @@ static void cpufreq_sysfs_read_string_list (gchar *file, GList **list);
 
 static void parse_sysfs_init (gint cpu_number, CpuInfo *cpu);
 
-static inline gchar* read_file_contents (const gchar *file);
+static gchar* read_file_contents (const gchar *file);
 
-static inline gboolean cpufreq_cpu_exists (gint num);
+static gboolean cpufreq_cpu_exists (gint num);
 
 
 
@@ -203,7 +203,7 @@ parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 
   /* read max cpu freq */
   g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_max_freq", cpu_number);
-  cpufreq_sysfs_read_int (file, &cpu->max_freq);
+  cpufreq_sysfs_read_int (file, &cpu->max_freq_nominal);
 
   /* read min cpu freq */
   g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_min_freq", cpu_number);
@@ -215,7 +215,7 @@ parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 
 
 
-static inline gchar*
+static gchar*
 read_file_contents (const gchar *file)
 {
   GError *error = NULL;
@@ -236,7 +236,7 @@ read_file_contents (const gchar *file)
 
 
 
-static inline gboolean
+static gboolean
 cpufreq_cpu_exists (gint num)
 {
   gchar file[128];

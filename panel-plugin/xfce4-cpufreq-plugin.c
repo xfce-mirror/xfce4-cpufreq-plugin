@@ -27,6 +27,7 @@
 #endif
 
 #include <libxfce4ui/libxfce4ui.h>
+#include <math.h>
 #include <string.h>
 
 #include "xfce4-cpufreq-plugin.h"
@@ -183,7 +184,7 @@ cpufreq_cpus_calc_min (void)
 {
   gchar *const governors = cpufreq_governors ();
   gchar *const old_governor = cpuFreq->cpu_min ? g_strdup (cpuFreq->cpu_min->cur_governor) : g_strdup ("");
-  guint freq = G_MAXUINT, max_freq = G_MAXUINT, min_freq = G_MAXUINT;
+  guint freq = G_MAXUINT, max_freq_measured = G_MAXUINT, max_freq_nominal = G_MAXUINT, min_freq = G_MAXUINT;
   guint count = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
@@ -194,19 +195,21 @@ cpufreq_cpus_calc_min (void)
       continue;
 
     freq = MIN (freq, cpu->cur_freq);
-    max_freq = MIN (max_freq, cpu->max_freq);
+    max_freq_measured = MIN (max_freq_measured, cpu->max_freq_measured);
+    max_freq_nominal = MIN (max_freq_nominal, cpu->max_freq_nominal);
     min_freq = MIN (min_freq, cpu->min_freq);
     count++;
   }
 
   if (count == 0)
-    freq = max_freq = min_freq = 0;
+    freq = max_freq_measured = max_freq_nominal = min_freq = 0;
 
   cpuinfo_free (cpuFreq->cpu_min);
   cpuFreq->cpu_min = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_min->cur_freq = freq;
   cpuFreq->cpu_min->cur_governor = governors ? governors : g_strdup (_("current min"));
-  cpuFreq->cpu_min->max_freq = max_freq;
+  cpuFreq->cpu_min->max_freq_measured = max_freq_measured;
+  cpuFreq->cpu_min->max_freq_nominal = max_freq_nominal;
   cpuFreq->cpu_min->min_freq = min_freq;
 
   if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_min->cur_governor, old_governor) != 0)
@@ -226,7 +229,7 @@ cpufreq_cpus_calc_avg (void)
 {
   gchar *const governors = cpufreq_governors ();
   gchar *const old_governor = cpuFreq->cpu_avg ? g_strdup (cpuFreq->cpu_avg->cur_governor) : g_strdup ("");
-  guint freq = 0, max_freq = 0, min_freq = 0;
+  guint freq = 0, max_freq_measured = 0, max_freq_nominal = 0, min_freq = 0;
   guint count = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
@@ -237,7 +240,8 @@ cpufreq_cpus_calc_avg (void)
       continue;
 
     freq += cpu->cur_freq;
-    max_freq += cpu->max_freq;
+    max_freq_measured += cpu->max_freq_measured;
+    max_freq_nominal += cpu->max_freq_nominal;
     min_freq += cpu->min_freq;
     count++;
   }
@@ -245,7 +249,8 @@ cpufreq_cpus_calc_avg (void)
   if (count != 0)
   {
     freq /= count;
-    max_freq /= count;
+    max_freq_measured /= count;
+    max_freq_nominal /= count;
     min_freq /= count;
   }
 
@@ -253,7 +258,8 @@ cpufreq_cpus_calc_avg (void)
   cpuFreq->cpu_avg = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_avg->cur_freq = freq;
   cpuFreq->cpu_avg->cur_governor = governors ? governors : g_strdup (_("current avg"));
-  cpuFreq->cpu_avg->max_freq = max_freq;
+  cpuFreq->cpu_avg->max_freq_measured = max_freq_measured;
+  cpuFreq->cpu_avg->max_freq_nominal = max_freq_nominal;
   cpuFreq->cpu_avg->min_freq = min_freq;
 
   if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_avg->cur_governor, old_governor) != 0)
@@ -273,7 +279,7 @@ cpufreq_cpus_calc_max (void)
 {
   gchar *const governors = cpufreq_governors ();
   gchar *const old_governor = cpuFreq->cpu_max ? g_strdup (cpuFreq->cpu_max->cur_governor) : g_strdup ("");
-  guint freq = 0, max_freq = 0, min_freq = 0;
+  guint freq = 0, max_freq_measured = 0, max_freq_nominal = 0, min_freq = 0;
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
@@ -283,7 +289,8 @@ cpufreq_cpus_calc_max (void)
       continue;
 
     freq = MAX (freq, cpu->cur_freq);
-    max_freq = MAX (max_freq, cpu->max_freq);
+    max_freq_measured = MAX (max_freq_measured, cpu->max_freq_measured);
+    max_freq_nominal = MAX (max_freq_nominal, cpu->max_freq_nominal);
     min_freq = MAX (min_freq, cpu->min_freq);
   }
 
@@ -291,7 +298,8 @@ cpufreq_cpus_calc_max (void)
   cpuFreq->cpu_max = g_new0 (CpuInfo, 1);
   cpuFreq->cpu_max->cur_freq = freq;
   cpuFreq->cpu_max->cur_governor = governors ? governors : g_strdup (_("current max"));
-  cpuFreq->cpu_max->max_freq = max_freq;
+  cpuFreq->cpu_max->max_freq_measured = max_freq_measured;
+  cpuFreq->cpu_max->max_freq_nominal = max_freq_nominal;
   cpuFreq->cpu_max->min_freq = min_freq;
 
   if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_max->cur_governor, old_governor) != 0)
@@ -306,7 +314,7 @@ cpufreq_cpus_calc_max (void)
 
 
 
-static gboolean
+static void
 cpufreq_update_label (CpuInfo *cpu)
 {
   GtkWidget *label_widget;
@@ -315,13 +323,13 @@ cpufreq_update_label (CpuInfo *cpu)
   gint both;
 
   if (!cpuFreq->label_orNull)
-    return TRUE;
+    return;
 
   label_widget = cpuFreq->label_orNull;
 
   if (!cpuFreq->options->show_label_governor && !cpuFreq->options->show_label_freq) {
     gtk_widget_hide (label_widget);
-    return TRUE;
+    return;
   }
 
   both = cpu->cur_governor != NULL &&
@@ -382,8 +390,6 @@ cpufreq_update_label (CpuInfo *cpu)
 
   g_free (freq);
   g_free (label);
-
-  return TRUE;
 }
 
 
@@ -556,11 +562,86 @@ cpufreq_current_cpu (void)
 
 
 
+static void
+cpufreq_update_pixmap (CpuInfo *cpu)
+{
+  gdouble range, value;
+  gint index;
+  GdkPixbuf *pixmap;
+
+  if (G_UNLIKELY (!cpuFreq->icon || !cpuFreq->base_icon))
+    return;
+  if (G_UNLIKELY (cpu->cur_freq < cpu->min_freq))
+    return;
+
+  /* Note:
+   *   max_freq_nominal can have values that are well outside
+   *   of the actual maximum frequency of the CPU.
+   *   For example, Linux kernel 5.10.17 reports 5554687 kHz
+   *   for some CPU cores on Ryzen 3700X, but the actual top
+   *   frequency of this CPU is about 4.4 GHz.
+   *   Therefore, rely on max_freq_measured only.
+   */
+
+  range = cpu->max_freq_measured - (gdouble) cpu->min_freq;
+  if (G_UNLIKELY (range <= 0))
+    return;
+  value = (cpu->cur_freq - cpu->min_freq) / range;
+  index = round (value * (G_N_ELEMENTS (cpuFreq->icon_pixmaps) - 1));
+  if (G_UNLIKELY (index < 0 || index >= (gint) G_N_ELEMENTS (cpuFreq->icon_pixmaps)))
+    return;
+
+  pixmap = cpuFreq->icon_pixmaps[index];
+  if (!pixmap)
+  {
+    guchar color, *pixels;
+    gsize p, plength;
+    int n_channels;
+
+    color = (guchar) (255 * index / (G_N_ELEMENTS (cpuFreq->icon_pixmaps) - 1));
+
+    pixmap = gdk_pixbuf_copy (cpuFreq->base_icon);
+    if (G_UNLIKELY (!pixmap))
+      return;
+
+    pixels = gdk_pixbuf_get_pixels (pixmap);
+    plength = gdk_pixbuf_get_byte_length (pixmap);
+    n_channels = gdk_pixbuf_get_n_channels (pixmap);
+    if (G_UNLIKELY (n_channels <= 0))
+    {
+      g_object_unref (G_OBJECT (pixmap));
+      return;
+    }
+
+    for (p = 0; p+2 < plength; p += n_channels)
+    {
+      gint delta1 = abs ((gint) pixels[p] - (gint) pixels[p+1]);
+      gint delta2 = abs ((gint) pixels[p] - (gint) pixels[p+2]);
+      if (delta1 < 10 && delta2 < 10)
+        pixels[p] = MAX (pixels[p], color);
+    }
+
+    cpuFreq->icon_pixmaps[index] = pixmap;
+  }
+
+  if (cpuFreq->current_icon_pixmap != pixmap)
+  {
+    cpuFreq->current_icon_pixmap = pixmap;
+    gdk_pixbuf_copy_area (pixmap, 0, 0,
+                          gdk_pixbuf_get_width (pixmap),
+                          gdk_pixbuf_get_height (pixmap),
+                          gtk_image_get_pixbuf (GTK_IMAGE (cpuFreq->icon)),
+                          0, 0);
+    g_signal_emit_by_name (cpuFreq->icon, "style-updated");
+  }
+}
+
+
+
 gboolean
 cpufreq_update_plugin (gboolean reset_label_size)
 {
   CpuInfo *cpu;
-  gboolean ret;
 
   cpu = cpufreq_current_cpu ();
   if (!cpu)
@@ -574,7 +655,10 @@ cpufreq_update_plugin (gboolean reset_label_size)
     cpuFreq->layout_changed = TRUE;
   }
 
-  ret = cpufreq_update_label (cpu);
+  cpufreq_update_label (cpu);
+
+  if (cpuFreq->options->icon_color_freq)
+    cpufreq_update_pixmap (cpu);
 
   if (cpuFreq->layout_changed)
   {
@@ -582,7 +666,7 @@ cpufreq_update_plugin (gboolean reset_label_size)
     cpufreq_widgets_layout ();
   }
 
-  return ret;
+  return TRUE;
 }
 
 static gboolean
@@ -658,25 +742,53 @@ cpufreq_mode_changed (XfcePanelPlugin *plugin,
 
 
 
-void
-cpufreq_update_icon (CpuFreqPlugin *cpufreq)
+static void
+cpufreq_destroy_icons ()
 {
-  if (cpufreq->icon)
+  gsize i;
+
+  if (cpuFreq->icon)
   {
-    gtk_widget_destroy (cpufreq->icon);
-    cpufreq->icon = NULL;
+    gtk_widget_destroy (cpuFreq->icon);
+    cpuFreq->icon = NULL;
   }
 
-  if (cpufreq->options->show_icon)
+  if (cpuFreq->base_icon)
   {
-    GdkPixbuf *buf, *scaled;
+    g_object_unref (G_OBJECT (cpuFreq->base_icon));
+    cpuFreq->base_icon = NULL;
+  }
+
+  for (i = 0; i < G_N_ELEMENTS (cpuFreq->icon_pixmaps); i++)
+    if (cpuFreq->icon_pixmaps[i])
+    {
+      g_object_unref (G_OBJECT (cpuFreq->icon_pixmaps[i]));
+      cpuFreq->icon_pixmaps[i] = NULL;
+    }
+
+  cpuFreq->current_icon_pixmap = NULL;
+}
+
+
+
+void
+cpufreq_update_icon ()
+{
+  const CpuFreqPluginOptions *options = cpuFreq->options;
+
+  cpufreq_destroy_icons ();
+
+  /* Load and scale the icon */
+  if (options->show_icon)
+  {
+    GdkPixbuf *buf;
     gint icon_size;
 
     icon_size = cpuFreq->panel_size / cpuFreq->panel_rows;
 
-    if (cpufreq->options->keep_compact ||
-      (!cpufreq->options->show_label_freq &&
-       !cpufreq->options->show_label_governor))
+    if (options->keep_compact ||
+      (!options->show_label_freq &&
+       !options->show_label_governor))
       icon_size -= 4;
 
     buf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
@@ -684,18 +796,27 @@ cpufreq_update_icon (CpuFreqPlugin *cpufreq)
 
     if (buf)
     {
-      scaled = gdk_pixbuf_scale_simple (buf, icon_size, icon_size, GDK_INTERP_BILINEAR);
-      cpufreq->icon = gtk_image_new_from_pixbuf (scaled);
+      GdkPixbuf *scaled = gdk_pixbuf_scale_simple (buf, icon_size, icon_size, GDK_INTERP_BILINEAR);
+      if (G_LIKELY (scaled != NULL))
+      {
+        g_object_unref (G_OBJECT (buf));
+        buf = scaled;
+      }
+      cpuFreq->icon = gtk_image_new_from_pixbuf (buf);
+      cpuFreq->base_icon = gdk_pixbuf_copy (buf);
       g_object_unref (G_OBJECT (buf));
-      g_object_unref (G_OBJECT (scaled));
     }
     else
     {
-      cpufreq->icon = gtk_image_new_from_icon_name ("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
+      cpuFreq->icon = gtk_image_new_from_icon_name ("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
+      /* At this point: The storage type of the icon isn't GTK_IMAGE_PIXBUF */
     }
 
-    gtk_box_pack_start (GTK_BOX (cpufreq->box), cpufreq->icon, FALSE, FALSE, 0);
-    gtk_widget_show (cpufreq->icon);
+    if (G_LIKELY (cpuFreq->icon))
+    {
+      gtk_box_pack_start (GTK_BOX (cpuFreq->box), cpuFreq->icon, FALSE, FALSE, 0);
+      gtk_widget_show (cpuFreq->icon);
+    }
   }
 }
 
@@ -752,7 +873,7 @@ cpufreq_widgets (void)
   gtk_container_set_border_width (GTK_CONTAINER (cpuFreq->box), BORDER);
   gtk_container_add (GTK_CONTAINER (cpuFreq->button), cpuFreq->box);
 
-  cpufreq_update_icon (cpuFreq);
+  cpufreq_update_icon ();
 
   cpufreq_prepare_label (cpuFreq);
 
@@ -800,6 +921,7 @@ cpufreq_read_config (void)
   options->show_warning        = xfce_rc_read_bool_entry (rc, "show_warning", TRUE);
   options->keep_compact        = xfce_rc_read_bool_entry (rc, "keep_compact", FALSE);
   options->one_line            = xfce_rc_read_bool_entry (rc, "one_line", FALSE);
+  options->icon_color_freq     = xfce_rc_read_bool_entry (rc, "icon_color_freq", FALSE);
   options->unit                = xfce_rc_read_int_entry  (rc, "freq_unit", UNIT_DEFAULT);
 
   if (!options->show_label_freq && !options->show_label_governor)
@@ -857,6 +979,7 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
   xfce_rc_write_bool_entry (rc, "show_warning",        options->show_warning);
   xfce_rc_write_bool_entry (rc, "keep_compact",        options->keep_compact);
   xfce_rc_write_bool_entry (rc, "one_line",            options->one_line);
+  xfce_rc_write_bool_entry (rc, "icon_color_freq",     options->icon_color_freq);
   xfce_rc_write_int_entry  (rc, "freq_unit",           options->unit);
 
   if (options->fontname)
@@ -910,9 +1033,13 @@ cpufreq_free (XfcePanelPlugin *plugin)
   g_free (cpuFreq->cpu_max);
   g_free (cpuFreq->cpu_min);
 
+  cpufreq_destroy_icons ();
+
   g_free (cpuFreq->options->fontname);
+  g_free (cpuFreq->options);
   cpuFreq->plugin = NULL;
   g_free (cpuFreq);
+  cpuFreq = NULL;
 }
 
 
@@ -923,7 +1050,7 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
   cpuFreq->panel_size = size;
   cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (plugin);
 
-  cpufreq_update_icon (cpufreq);
+  cpufreq_update_icon ();
   cpufreq_update_plugin (TRUE);
 
   return TRUE;
