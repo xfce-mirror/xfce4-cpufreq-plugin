@@ -183,9 +183,9 @@ cpufreq_cpus_calc_min (void)
   gchar *const governors = cpufreq_governors ();
   gchar *const old_governor = cpuFreq->cpu_min ? g_strdup (cpuFreq->cpu_min->cur_governor) : g_strdup ("");
   guint freq = G_MAXUINT, max_freq_measured = G_MAXUINT, max_freq_nominal = G_MAXUINT, min_freq = G_MAXUINT;
-  guint count = 0;
+  guint count = 0, i;
 
-  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  for (i = 0; i < cpuFreq->cpus->len; i++)
   {
     CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
 
@@ -228,9 +228,9 @@ cpufreq_cpus_calc_avg (void)
   gchar *const governors = cpufreq_governors ();
   gchar *const old_governor = cpuFreq->cpu_avg ? g_strdup (cpuFreq->cpu_avg->cur_governor) : g_strdup ("");
   guint freq = 0, max_freq_measured = 0, max_freq_nominal = 0, min_freq = 0;
-  guint count = 0;
+  guint count = 0, i;
 
-  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  for (i = 0; i < cpuFreq->cpus->len; i++)
   {
     CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
 
@@ -278,8 +278,9 @@ cpufreq_cpus_calc_max (void)
   gchar *const governors = cpufreq_governors ();
   gchar *const old_governor = cpuFreq->cpu_max ? g_strdup (cpuFreq->cpu_max->cur_governor) : g_strdup ("");
   guint freq = 0, max_freq_measured = 0, max_freq_nominal = 0, min_freq = 0;
+  guint i;
 
-  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  for (i = 0; i < cpuFreq->cpus->len; i++)
   {
     CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
 
