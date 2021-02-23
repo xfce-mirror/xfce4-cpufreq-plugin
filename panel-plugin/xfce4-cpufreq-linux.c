@@ -90,7 +90,7 @@ cpufreq_update_cpus (gpointer data)
 
   if (cpufreq_sysfs_is_available ())
   {
-    for (guint i = 0; i < cpuFreq->cpus->len; i++)
+    for (i = 0; i < cpuFreq->cpus->len; i++)
       cpufreq_sysfs_read_current (i);
   }
   else if (cpufreq_procfs_is_available ())
