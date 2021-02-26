@@ -263,7 +263,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   dialog = xfce_titled_dialog_new_with_mixed_buttons (_("Configure CPU Frequency Monitor"),
     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
     GTK_DIALOG_DESTROY_WITH_PARENT,
-    "window-close", _("_Close"), GTK_RESPONSE_OK,
+    "window-close-symbolic", _("_Close"), GTK_RESPONSE_OK,
     NULL);
 
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);

@@ -258,7 +258,7 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
   dialog = xfce_titled_dialog_new_with_mixed_buttons (_("CPU Information"),
     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (cpufreq->plugin))),
     GTK_DIALOG_DESTROY_WITH_PARENT,
-    "window-close", _("_Close"), GTK_RESPONSE_OK,
+    "window-close-symbolic", _("_Close"), GTK_RESPONSE_OK,
     NULL);
 
   xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog),
