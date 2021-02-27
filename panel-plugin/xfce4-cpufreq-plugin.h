@@ -122,7 +122,7 @@ void
 cpufreq_restart_timeout (void);
 
 void
-cpufreq_update_icon ();
+cpufreq_update_icon (void);
 
 gboolean
 cpufreq_update_plugin (gboolean reset_label_size);
