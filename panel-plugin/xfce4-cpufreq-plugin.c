@@ -1040,6 +1040,7 @@ cpufreq_free (XfcePanelPlugin *plugin)
   cpufreq_destroy_icons ();
 
   g_free (cpuFreq->options->fontname);
+  g_free (cpuFreq->options->fontcolor);
   g_free (cpuFreq->options);
   cpuFreq->plugin = NULL;
   g_free (cpuFreq);
