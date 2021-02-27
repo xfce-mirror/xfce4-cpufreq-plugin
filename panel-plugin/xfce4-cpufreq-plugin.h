@@ -116,7 +116,7 @@ extern CpuFreqPlugin *cpuFreq;
 G_BEGIN_DECLS
 
 void
-cpufreq_prepare_label (CpuFreqPlugin *cpufreq);
+cpufreq_prepare_label (void);
 
 void
 cpufreq_restart_timeout (void);
