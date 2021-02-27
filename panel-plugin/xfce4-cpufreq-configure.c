@@ -35,9 +35,17 @@ update_sensitivity (const CpuFreqPluginConfigure *configure)
   const CpuFreqPluginOptions *options = cpuFreq->options;
 
   if (!options->show_label_freq && !options->show_label_governor)
+  {
     gtk_widget_set_sensitive (configure->display_icon, FALSE);
+    gtk_widget_set_sensitive (configure->fontcolor_hbox, FALSE);
+    gtk_widget_set_sensitive (configure->fontname_hbox, FALSE);
+  }
   else
+  {
     gtk_widget_set_sensitive (configure->display_icon, TRUE);
+    gtk_widget_set_sensitive (configure->fontcolor_hbox, TRUE);
+    gtk_widget_set_sensitive (configure->fontname_hbox, TRUE);
+  }
 
   gtk_widget_set_sensitive (configure->icon_color_freq, options->show_icon);
 }
@@ -254,7 +262,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   GtkWidget *spinner, *button;
   GtkSizeGroup *sg0;
   CpuFreqPluginConfigure *configure;
-  GdkRGBA *color;
+  GdkRGBA color = {};
 
   configure = g_new0 (CpuFreqPluginConfigure, 1);
 
@@ -337,7 +345,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_container_add (GTK_CONTAINER (align), vbox);
 
   /* font settings */
-  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+  hbox = configure->fontname_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
   label = gtk_label_new_with_mnemonic (_("_Font:"));
@@ -356,7 +364,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   button_fontname_update (button, FALSE);
 
   /* font color */
-  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+  hbox = configure->fontcolor_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
   label = gtk_label_new_with_mnemonic (_("_Font color:"));
@@ -365,15 +373,14 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_label_set_xalign (GTK_LABEL (label), 0);
   gtk_size_group_add_widget (sg0, label);
 
-  color = g_new0 (GdkRGBA, 1);
-  gdk_rgba_parse (color, options->fontcolor ? options->fontcolor : "#000000");
+  if (options->fontcolor)
+    gdk_rgba_parse (&color, options->fontcolor);
 
-  button = configure->fontcolor = gtk_color_button_new_with_rgba (color);
+  button = configure->fontcolor = gtk_color_button_new_with_rgba (&color);
   gtk_color_button_set_title (GTK_COLOR_BUTTON (button), _("Select font color"));
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, TRUE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
   g_signal_connect (button, "color-set", G_CALLBACK (button_fontcolor_clicked), NULL);
-  g_free (color);
 
   /* which cpu to show in panel */
   {

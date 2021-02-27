@@ -35,8 +35,8 @@ typedef struct
   GtkWidget *spinner_timeout;
   GtkWidget *keep_compact;
   GtkWidget *one_line;
-  GtkWidget *fontname;
-  GtkWidget *fontcolor;
+  GtkWidget *fontcolor, *fontcolor_hbox;
+  GtkWidget *fontname, *fontname_hbox;
 } CpuFreqPluginConfigure;
 
 G_BEGIN_DECLS
