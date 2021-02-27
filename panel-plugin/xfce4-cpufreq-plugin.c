@@ -429,7 +429,7 @@ cpufreq_widgets_layout (void)
   }
 
   /* check if the label fits below the icon, else put them side by side */
-  if (cpuFreq->label_orNull && ! hide_label)
+  if (cpuFreq->label_orNull && !hide_label)
   {
     gtk_widget_get_preferred_size (cpuFreq->label_orNull, NULL, &label_size);
     lw = label_size.width;
@@ -827,9 +827,9 @@ cpufreq_update_icon (void)
 
 
 void
-cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
+cpufreq_prepare_label (void)
 {
-  if (cpufreq->label_orNull)
+  if (cpuFreq->label_orNull)
   {
     if (cpuFreq->label_css_provider)
     {
@@ -839,14 +839,14 @@ cpufreq_prepare_label (CpuFreqPlugin *cpufreq)
       cpuFreq->label_css_provider = NULL;
     }
 
-    gtk_widget_destroy (cpufreq->label_orNull);
-    cpufreq->label_orNull = NULL;
+    gtk_widget_destroy (cpuFreq->label_orNull);
+    cpuFreq->label_orNull = NULL;
   }
 
   if (cpuFreq->options->show_label_freq || cpuFreq->options->show_label_governor)
   {
     cpuFreq->label_orNull = gtk_label_new (NULL);
-    gtk_box_pack_start (GTK_BOX (cpufreq->box), cpuFreq->label_orNull, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (cpuFreq->box), cpuFreq->label_orNull, TRUE, TRUE, 0);
   }
 }
 
@@ -879,14 +879,14 @@ cpufreq_widgets (void)
 
   cpufreq_update_icon ();
 
-  cpufreq_prepare_label (cpuFreq);
+  cpufreq_prepare_label ();
 
   g_signal_connect (cpuFreq->button, "button-press-event",
                     G_CALLBACK (cpufreq_overview), cpuFreq);
 
   /* activate panel widget tooltip */
   g_object_set (G_OBJECT (cpuFreq->button), "has-tooltip", TRUE, NULL);
-  g_signal_connect (G_OBJECT (cpuFreq->button), "query-tooltip",
+  g_signal_connect (cpuFreq->button, "query-tooltip",
                     G_CALLBACK (cpufreq_update_tooltip), cpuFreq);
 
   gtk_widget_show_all (cpuFreq->button);
@@ -1128,7 +1128,7 @@ cpufreq_construct (XfcePanelPlugin *plugin)
   xfce_panel_plugin_menu_show_configure (plugin);
   g_signal_connect (plugin, "configure-plugin", G_CALLBACK (cpufreq_configure), NULL);
   xfce_panel_plugin_menu_show_about(plugin);
-  g_signal_connect (G_OBJECT (plugin), "about", G_CALLBACK (cpufreq_show_about), cpuFreq);
+  g_signal_connect (plugin, "about", G_CALLBACK (cpufreq_show_about), cpuFreq);
 }
 
 XFCE_PANEL_PLUGIN_REGISTER (cpufreq_construct);

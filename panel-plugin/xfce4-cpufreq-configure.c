@@ -96,7 +96,7 @@ check_button_changed (GtkWidget *button, const CpuFreqPluginConfigure *configure
   update_sensitivity (configure);
   validate_configuration (configure);
 
-  cpufreq_prepare_label (cpuFreq);
+  cpufreq_prepare_label ();
   cpufreq_update_icon ();
   cpufreq_update_plugin (TRUE);
 }
