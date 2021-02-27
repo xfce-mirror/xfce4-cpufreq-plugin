@@ -181,13 +181,57 @@ button_fontname_pressed(GtkWidget *button, GdkEventButton *event,
 
 
 static void
+button_fontcolor_update(GtkWidget *button, gboolean update_plugin)
+{
+  if (cpuFreq->options->fontcolor == NULL)
+  {
+    GdkRGBA color = {};
+    gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (button), &color);
+    gtk_widget_set_tooltip_text (button, NULL);
+  }
+  else
+  {
+    gtk_widget_set_tooltip_text (button, _("Right-click to revert to the default color"));
+  }
+
+  if (update_plugin)
+    cpufreq_update_plugin (TRUE);
+}
+
+
+
+static void
 button_fontcolor_clicked (GtkWidget *button, void *data)
 {
   GdkRGBA color;
   gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (button), &color);
   g_free (cpuFreq->options->fontcolor);
-  cpuFreq->options->fontcolor = gdk_rgba_to_string (&color);
-  cpufreq_update_plugin (TRUE);
+  cpuFreq->options->fontcolor = NULL;
+  if (color.alpha != 0)
+    cpuFreq->options->fontcolor = gdk_rgba_to_string (&color);
+  button_fontcolor_update (button, TRUE);
+}
+
+
+
+static gboolean
+button_fontcolor_pressed(GtkWidget *button, GdkEventButton *event,
+                         CpuFreqPluginConfigure *configure)
+{
+  if (event->type != GDK_BUTTON_PRESS)
+    return FALSE;
+
+  /* right mouse click clears the font color and resets the button */
+  if (event->button == 3 && cpuFreq->options->fontcolor)
+  {
+    g_free (cpuFreq->options->fontcolor);
+    cpuFreq->options->fontcolor = NULL;
+    button_fontcolor_update(button, TRUE);
+    return TRUE;
+  }
+
+  /* left mouse click will be handled in a different function */
+  return FALSE;
 }
 
 
@@ -381,6 +425,9 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, TRUE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
   g_signal_connect (button, "color-set", G_CALLBACK (button_fontcolor_clicked), NULL);
+  g_signal_connect (button, "button_press_event",
+                    G_CALLBACK (button_fontcolor_pressed), configure);
+  button_fontcolor_update (button, FALSE);
 
   /* which cpu to show in panel */
   {
