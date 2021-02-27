@@ -747,7 +747,7 @@ cpufreq_mode_changed (XfcePanelPlugin *plugin,
 
 
 static void
-cpufreq_destroy_icons ()
+cpufreq_destroy_icons (void)
 {
   gsize i;
 
@@ -776,7 +776,7 @@ cpufreq_destroy_icons ()
 
 
 void
-cpufreq_update_icon ()
+cpufreq_update_icon (void)
 {
   const CpuFreqPluginOptions *options = cpuFreq->options;
 
