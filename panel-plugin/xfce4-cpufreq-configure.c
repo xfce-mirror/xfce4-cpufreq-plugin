@@ -127,7 +127,6 @@ static gboolean
 button_fontname_clicked(GtkWidget *button, CpuFreqPluginConfigure *configure)
 {
   GtkWidget *fc;
-  gchar *fontname;
   gint result;
 
   fc = gtk_font_chooser_dialog_new (_("Select font"),
@@ -140,13 +139,13 @@ button_fontname_clicked(GtkWidget *button, CpuFreqPluginConfigure *configure)
 
   if (result == GTK_RESPONSE_OK || result == GTK_RESPONSE_ACCEPT)
   {
-    fontname = gtk_font_chooser_get_font (GTK_FONT_CHOOSER (fc));
+    gchar *fontname = gtk_font_chooser_get_font (GTK_FONT_CHOOSER (fc));
 
     if (fontname != NULL)
     {
       gtk_button_set_label(GTK_BUTTON(button), fontname);
-      g_free (cpuFreq->options->fontname);
-      cpuFreq->options->fontname = fontname;
+      cpufreq_set_font (fontname);
+      g_free (fontname);
     }
 
     button_fontname_update(button, TRUE);
@@ -168,8 +167,7 @@ button_fontname_pressed(GtkWidget *button, GdkEventButton *event,
   /* right mouse click clears the font name and resets the button */
   if (event->button == 3 && cpuFreq->options->fontname)
   {
-    g_free (cpuFreq->options->fontname);
-    cpuFreq->options->fontname = NULL;
+    cpufreq_set_font (NULL);
     button_fontname_update(button, TRUE);
     return TRUE;
   }
