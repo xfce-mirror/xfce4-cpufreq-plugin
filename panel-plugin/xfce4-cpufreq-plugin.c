@@ -41,68 +41,6 @@
 
 CpuFreqPlugin *cpuFreq = NULL;
 
-static void
-cpufreq_label_set_font (void)
-{
-  gchar *css = NULL, *css_font = NULL, *css_color = NULL;
-  GtkWidget *label;
-
-  if (G_UNLIKELY (cpuFreq->label_orNull == NULL))
-    return;
-
-  label = cpuFreq->label_orNull;
-
-  if (cpuFreq->label_css_provider)
-  {
-    gtk_style_context_remove_provider (
-      GTK_STYLE_CONTEXT (gtk_widget_get_style_context (label)),
-      GTK_STYLE_PROVIDER (cpuFreq->label_css_provider));
-    cpuFreq->label_css_provider = NULL;
-  }
-
-  if (cpuFreq->options->fontname)
-  {
-    PangoFontDescription *font;
-
-    font = pango_font_description_from_string(cpuFreq->options->fontname);
-
-    css_font = g_strdup_printf("font-family: %s; font-size: %dpt; font-style: %s; font-weight: %s;",
-      pango_font_description_get_family (font),
-      pango_font_description_get_size (font) / PANGO_SCALE,
-      (pango_font_description_get_style (font) == PANGO_STYLE_ITALIC ||
-      pango_font_description_get_style (font) == PANGO_STYLE_OBLIQUE) ? "italic" : "normal",
-      (pango_font_description_get_weight (font) >= PANGO_WEIGHT_BOLD) ? "bold" : "normal");
-
-    pango_font_description_free (font);
-  }
-
-  if (cpuFreq->options->fontcolor)
-    css_color = g_strdup_printf ("color: %s;", cpuFreq->options->fontcolor);
-
-  if (css_font && css_color)
-    css = g_strdup_printf ("label { %s %s }", css_font, css_color);
-  else if (css_font)
-    css = g_strdup_printf ("label { %s }", css_font);
-  else if (css_color)
-    css = g_strdup_printf ("label { %s }", css_color);
-
-  if (css)
-  {
-    GtkCssProvider *provider = gtk_css_provider_new ();
-
-    gtk_css_provider_load_from_data (provider, css, -1, NULL);
-    gtk_style_context_add_provider (
-      GTK_STYLE_CONTEXT (gtk_widget_get_style_context (label)),
-      GTK_STYLE_PROVIDER (provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-    cpuFreq->label_css_provider = provider;
-  }
-
-  g_free (css);
-  g_free (css_font);
-  g_free (css_color);
-}
-
 
 
 /*
@@ -212,8 +150,8 @@ cpufreq_cpus_calc_min (void)
 
   if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_min->cur_governor, old_governor) != 0)
   {
+    cpuFreq->label.reset_size = TRUE;
     cpuFreq->layout_changed = TRUE;
-    cpuFreq->label_max_width = -1;
   }
 
   g_free (old_governor);
@@ -262,8 +200,8 @@ cpufreq_cpus_calc_avg (void)
 
   if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_avg->cur_governor, old_governor) != 0)
   {
+    cpuFreq->label.reset_size = TRUE;
     cpuFreq->layout_changed = TRUE;
-    cpuFreq->label_max_width = -1;
   }
 
   g_free (old_governor);
@@ -303,8 +241,8 @@ cpufreq_cpus_calc_max (void)
 
   if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_max->cur_governor, old_governor) != 0)
   {
+    cpuFreq->label.reset_size = TRUE;
     cpuFreq->layout_changed = TRUE;
-    cpuFreq->label_max_width = -1;
   }
 
   g_free (old_governor);
@@ -314,17 +252,17 @@ cpufreq_cpus_calc_max (void)
 
 
 static void
-cpufreq_update_label (CpuInfo *cpu)
+cpufreq_update_label (const CpuInfo *cpu)
 {
   const CpuFreqPluginOptions *const options = cpuFreq->options;
   GtkWidget *label_widget;
   gchar *label, *freq;
   gboolean both;
 
-  if (!cpuFreq->label_orNull)
+  if (!cpuFreq->label.draw_area)
     return;
 
-  label_widget = cpuFreq->label_orNull;
+  label_widget = cpuFreq->label.draw_area;
 
   if (!options->show_label_governor && !options->show_label_freq)
   {
@@ -346,49 +284,23 @@ cpufreq_update_label (CpuInfo *cpu)
 
   if (*label != '\0')
   {
-    gint angle;
-    GtkRequisition label_size;
-
-    if (strcmp (gtk_label_get_text (GTK_LABEL (label_widget)), label) != 0)
-      gtk_label_set_text (GTK_LABEL (label_widget), label);
-
-    angle = (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? -90 : 0;
-    if (gtk_label_get_angle (GTK_LABEL(label_widget)) != angle)
-      gtk_label_set_angle (GTK_LABEL(label_widget), angle);
-
     if (!gtk_widget_is_visible (label_widget))
       gtk_widget_show (label_widget);
 
-    /* Set label width to max width if smaller to avoid panel
-       resizing/jumping (see bug #10385). */
-    gtk_widget_get_preferred_size (label_widget, NULL, &label_size);
-    if (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
+    if (!cpuFreq->label.text || strcmp (cpuFreq->label.text, label) != 0)
     {
-      if (label_size.height < cpuFreq->label_max_width)
-      {
-        gtk_widget_set_size_request (label_widget, -1, cpuFreq->label_max_width);
-      }
-      else if (label_size.height > cpuFreq->label_max_width)
-      {
-        cpuFreq->label_max_width = label_size.height;
-        cpuFreq->layout_changed = TRUE;
-      }
-    }
-    else
-    {
-      if (label_size.width < cpuFreq->label_max_width)
-      {
-        gtk_widget_set_size_request (label_widget, cpuFreq->label_max_width, -1);
-      }
-      else if (label_size.width > cpuFreq->label_max_width)
-      {
-        cpuFreq->label_max_width = label_size.width;
-        cpuFreq->layout_changed = TRUE;
-      }
+      g_free (cpuFreq->label.text);
+      cpuFreq->label.text = g_strdup (label);
+      gtk_widget_queue_draw (label_widget);
     }
   }
   else
   {
+    if (cpuFreq->label.text)
+    {
+      g_free (cpuFreq->label.text);
+      cpuFreq->label.text = NULL;
+    }
     gtk_widget_hide (label_widget);
   }
 
@@ -429,9 +341,9 @@ cpufreq_widgets_layout (void)
   }
 
   /* check if the label fits below the icon, else put them side by side */
-  if (cpuFreq->label_orNull && !hide_label)
+  if (cpuFreq->label.draw_area && !hide_label)
   {
-    gtk_widget_get_preferred_size (cpuFreq->label_orNull, NULL, &label_size);
+    gtk_widget_get_preferred_size (cpuFreq->label.draw_area, NULL, &label_size);
     lw = label_size.width;
     lh = label_size.height;
   }
@@ -465,20 +377,12 @@ cpufreq_widgets_layout (void)
   {
       if (cpuFreq->icon)
         gtk_widget_set_halign (cpuFreq->icon, GTK_ALIGN_CENTER);
-      if (cpuFreq->label_orNull)
-        gtk_widget_set_halign (cpuFreq->label_orNull, GTK_ALIGN_CENTER);
     }
     else
     {
       if (cpuFreq->icon)
         gtk_widget_set_valign (cpuFreq->icon, GTK_ALIGN_CENTER);
-      if (cpuFreq->label_orNull)
-        gtk_widget_set_valign (cpuFreq->label_orNull, GTK_ALIGN_CENTER);
     }
-
-    if (cpuFreq->label_orNull)
-      gtk_label_set_justify (GTK_LABEL (cpuFreq->label_orNull),
-        resized ? GTK_JUSTIFY_CENTER : GTK_JUSTIFY_LEFT);
 
     if (cpuFreq->icon)
       gtk_box_set_child_packing (GTK_BOX (cpuFreq->box),
@@ -493,34 +397,25 @@ cpufreq_widgets_layout (void)
         gtk_widget_set_halign (cpuFreq->icon, GTK_ALIGN_CENTER);
         gtk_widget_set_valign (cpuFreq->icon, GTK_ALIGN_END);
       }
-
-      if (cpuFreq->label_orNull)
-        gtk_widget_set_halign (cpuFreq->label_orNull, GTK_ALIGN_CENTER);
     }
     else
     {
       if (cpuFreq->icon)
         gtk_widget_set_valign (cpuFreq->icon, GTK_ALIGN_CENTER);
 
-      if (cpuFreq->label_orNull)
-      {
-        gtk_widget_set_halign (cpuFreq->label_orNull, GTK_ALIGN_END);
-        gtk_widget_set_valign (cpuFreq->label_orNull, GTK_ALIGN_CENTER);
-      }
       pos = resized ? 1 : 0;
     }
-
-    if (cpuFreq->label_orNull)
-      gtk_label_set_justify (GTK_LABEL (cpuFreq->label_orNull),
-        resized ? GTK_JUSTIFY_LEFT : GTK_JUSTIFY_CENTER);
 
     if (cpuFreq->icon)
       gtk_box_set_child_packing (GTK_BOX (cpuFreq->box),
         cpuFreq->icon, TRUE, TRUE, 0, GTK_PACK_START);
   }
 
-  if (cpuFreq->label_orNull)
-    gtk_box_reorder_child (GTK_BOX (cpuFreq->box), cpuFreq->label_orNull, pos);
+  if (cpuFreq->label.draw_area)
+  {
+    gtk_box_reorder_child (GTK_BOX (cpuFreq->box), cpuFreq->label.draw_area, pos);
+    gtk_widget_queue_draw (cpuFreq->label.draw_area);
+  }
 
   cpuFreq->layout_changed = FALSE;
 }
@@ -653,9 +548,7 @@ cpufreq_update_plugin (gboolean reset_label_size)
 
   if (reset_label_size)
   {
-    cpuFreq->label_max_width = -1;
-    if (cpuFreq->label_orNull)
-      gtk_widget_set_size_request (cpuFreq->label_orNull, -1, -1);
+    cpuFreq->label.reset_size = TRUE;
     cpuFreq->layout_changed = TRUE;
   }
 
@@ -665,10 +558,7 @@ cpufreq_update_plugin (gboolean reset_label_size)
     cpufreq_update_pixmap (cpu);
 
   if (cpuFreq->layout_changed)
-  {
-    cpufreq_label_set_font ();
     cpufreq_widgets_layout ();
-  }
 
   return TRUE;
 }
@@ -730,6 +620,30 @@ cpufreq_restart_timeout (void)
   cpuFreq->timeoutHandle = g_timeout_add_seconds (
     cpuFreq->options->timeout, cpufreq_update_cpus, NULL);
 #endif
+}
+
+
+
+void
+cpufreq_set_font (const gchar *fontname_or_null)
+{
+  if (cpuFreq->label.font_desc)
+  {
+    pango_font_description_free (cpuFreq->label.font_desc);
+    cpuFreq->label.font_desc = NULL;
+  }
+
+  if (fontname_or_null)
+  {
+    g_free (cpuFreq->options->fontname);
+    cpuFreq->options->fontname = g_strdup (fontname_or_null);
+    cpuFreq->label.font_desc = pango_font_description_from_string (fontname_or_null);
+  }
+  else
+  {
+    g_free (cpuFreq->options->fontname);
+    cpuFreq->options->fontname = NULL;
+  }
 }
 
 
@@ -819,6 +733,7 @@ cpufreq_update_icon (void)
     if (G_LIKELY (cpuFreq->icon))
     {
       gtk_box_pack_start (GTK_BOX (cpuFreq->box), cpuFreq->icon, FALSE, FALSE, 0);
+      gtk_box_reorder_child (GTK_BOX (cpuFreq->box), cpuFreq->icon, 0);
       gtk_widget_show (cpuFreq->icon);
     }
   }
@@ -826,27 +741,169 @@ cpufreq_update_icon (void)
 
 
 
+static void
+label_draw (GtkWidget *widget, cairo_t *cr, gpointer data)
+{
+  GtkAllocation alloc;
+  GdkRGBA color;
+  PangoLayout *layout;
+  PangoContext *pango_context;
+  PangoRectangle extents;
+  GtkStyleContext *style_context;
+
+  if (G_UNLIKELY (!cpuFreq->label.text))
+    return;
+
+  cairo_save (cr);
+
+  gtk_widget_get_allocation (widget, &alloc);
+  pango_context = gtk_widget_get_pango_context (widget);
+  style_context = gtk_widget_get_style_context (widget);
+
+  if (cpuFreq->options->fontcolor)
+  {
+    gdk_rgba_parse (&color, cpuFreq->options->fontcolor);
+  }
+  else
+  {
+    gtk_style_context_get_color (style_context,
+                                 gtk_style_context_get_state (style_context),
+                                 &color);
+  }
+  gdk_cairo_set_source_rgba (cr, &color);
+
+  layout = pango_layout_new (pango_context);
+
+  if (cpuFreq->label.font_desc)
+    pango_layout_set_font_description (layout, cpuFreq->label.font_desc);
+
+  pango_layout_set_text (layout, cpuFreq->label.text, -1);
+
+  if (cpuFreq->panel_mode != XFCE_PANEL_PLUGIN_MODE_VERTICAL)
+  {
+    pango_layout_get_extents (layout, NULL, &extents);
+    if (alloc.width > PANGO_PIXELS_CEIL (extents.width))
+    {
+      double x0 = (double) extents.x / PANGO_SCALE;
+      double x1 = alloc.width / 2.0 - extents.width / 2.0 / PANGO_SCALE;
+      cairo_translate (cr, x1 - x0, 0);
+    }
+    if (alloc.height < PANGO_PIXELS_CEIL (extents.height))
+    {
+      double y0 = (double) extents.y / PANGO_SCALE;
+      double y1 = alloc.height / 2.0 - extents.height / 2.0 / PANGO_SCALE;
+      cairo_translate (cr, 0, y1 - y0);
+    }
+
+    /* Set label width to max width if smaller to avoid panel
+       resizing/jumping (see bug #10385). */
+    cpuFreq->label.reset_size |= alloc.width < PANGO_PIXELS_CEIL (extents.width);
+
+    if (cpuFreq->label.reset_size)
+    {
+      gtk_widget_set_size_request (widget,
+                                   PANGO_PIXELS_CEIL (extents.width),
+                                   PANGO_PIXELS_CEIL (extents.height));
+      cpuFreq->label.reset_size = FALSE;
+      cpuFreq->layout_changed = TRUE;
+    }
+  }
+  else
+  {
+    PangoRectangle non_transformed_extents;
+
+    /* rotate by 90° */
+    cairo_rotate (cr, M_PI_2);
+    cairo_translate (cr, 0, -alloc.width);
+    pango_cairo_update_layout (cr, layout);
+
+    pango_layout_get_extents (layout, NULL, &non_transformed_extents);
+    extents.x = non_transformed_extents.y;
+    extents.y = non_transformed_extents.x;
+    extents.width = non_transformed_extents.height;
+    extents.height = non_transformed_extents.width;
+    if (alloc.width < PANGO_PIXELS_CEIL (extents.width))
+    {
+      double x0 = (double) extents.x / PANGO_SCALE;
+      double x1 = alloc.width / 2.0 - extents.width / 2.0 / PANGO_SCALE;
+      /* cairo_translate: X and Y are swapped because of the rotation by 90° */
+      cairo_translate (cr, 0, x1 - x0);
+    }
+    if (alloc.height > PANGO_PIXELS_CEIL (extents.height))
+    {
+      double y0 = (double) extents.y / PANGO_SCALE;
+      double y1 = alloc.height / 2.0 - extents.height / 2.0 / PANGO_SCALE;
+      /* cairo_translate: X and Y are swapped because of the rotation by 90° */
+      cairo_translate (cr, y1 - y0, 0);
+    }
+
+    /* Set label height to max height if smaller to avoid panel
+       resizing/jumping (see bug #10385). */
+    cpuFreq->label.reset_size |= alloc.height < PANGO_PIXELS_CEIL (extents.height);
+  }
+
+  if (cpuFreq->label.reset_size)
+  {
+    gtk_widget_set_size_request (widget,
+                                 PANGO_PIXELS_CEIL (extents.width),
+                                 PANGO_PIXELS_CEIL (extents.height));
+    cpuFreq->label.reset_size = FALSE;
+    cpuFreq->layout_changed = TRUE;
+  }
+
+  pango_cairo_show_layout (cr, layout);
+
+  g_object_unref (layout);
+  cairo_restore (cr);
+}
+
+static gboolean
+label_enter (GtkWidget *widget, GdkEvent *event, gpointer user_data)
+{
+  gtk_widget_set_state_flags (cpuFreq->button, GTK_STATE_FLAG_PRELIGHT, FALSE);
+  return FALSE;
+}
+
+static gboolean
+label_leave (GtkWidget *widget, GdkEvent *event, gpointer user_data)
+{
+  gtk_widget_unset_state_flags (cpuFreq->button, GTK_STATE_FLAG_PRELIGHT);
+  return FALSE;
+}
+
+
+
 void
 cpufreq_prepare_label (void)
 {
-  if (cpuFreq->label_orNull)
-  {
-    if (cpuFreq->label_css_provider)
-    {
-      gtk_style_context_remove_provider (
-        GTK_STYLE_CONTEXT (gtk_widget_get_style_context (cpuFreq->label_orNull)),
-        GTK_STYLE_PROVIDER (cpuFreq->label_css_provider));
-      cpuFreq->label_css_provider = NULL;
-    }
-
-    gtk_widget_destroy (cpuFreq->label_orNull);
-    cpuFreq->label_orNull = NULL;
-  }
-
   if (cpuFreq->options->show_label_freq || cpuFreq->options->show_label_governor)
   {
-    cpuFreq->label_orNull = gtk_label_new (NULL);
-    gtk_box_pack_start (GTK_BOX (cpuFreq->box), cpuFreq->label_orNull, TRUE, TRUE, 0);
+    if (!cpuFreq->label.draw_area)
+    {
+      GtkWidget *draw_area = gtk_drawing_area_new ();
+      gtk_widget_add_events (draw_area, GDK_ALL_EVENTS_MASK);
+      g_signal_connect (draw_area, "draw", G_CALLBACK (label_draw), NULL);
+      g_signal_connect (draw_area, "enter-notify-event", G_CALLBACK (label_enter), NULL);
+      g_signal_connect (draw_area, "leave-notify-event", G_CALLBACK (label_leave), NULL);
+      gtk_widget_set_halign (draw_area, GTK_ALIGN_CENTER);
+      gtk_widget_set_valign (draw_area, GTK_ALIGN_CENTER);
+      gtk_box_pack_start (GTK_BOX (cpuFreq->box), draw_area, TRUE, TRUE, 0);
+      cpuFreq->label.draw_area = draw_area;
+    }
+  }
+  else
+  {
+    if (cpuFreq->label.draw_area)
+    {
+      gtk_widget_destroy (cpuFreq->label.draw_area);
+      cpuFreq->label.draw_area = NULL;
+    }
+
+    if (cpuFreq->label.text)
+    {
+      g_free (cpuFreq->label.text);
+      cpuFreq->label.text = NULL;
+    }
   }
 }
 
@@ -943,10 +1000,7 @@ cpufreq_read_config (void)
 
   value = xfce_rc_read_entry (rc, "fontname", NULL);
   if (value)
-  {
-    g_free (options->fontname);
-    options->fontname = g_strdup (value);
-  }
+    cpufreq_set_font (value);
 
   value = xfce_rc_read_entry (rc, "fontcolor", NULL);
   if (value)
@@ -1039,6 +1093,10 @@ cpufreq_free (XfcePanelPlugin *plugin)
 
   cpufreq_destroy_icons ();
 
+  if (cpuFreq->label.font_desc)
+    pango_font_description_free (cpuFreq->label.font_desc);
+  g_free (cpuFreq->label.text);
+
   g_free (cpuFreq->options->fontname);
   g_free (cpuFreq->options->fontcolor);
   g_free (cpuFreq->options);
@@ -1100,10 +1158,10 @@ cpufreq_construct (XfcePanelPlugin *plugin)
   cpuFreq->panel_mode = xfce_panel_plugin_get_mode (cpuFreq->plugin);
   cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (cpuFreq->plugin);
   cpuFreq->panel_size = xfce_panel_plugin_get_size (cpuFreq->plugin);
-  cpuFreq->label_max_width = -1;
   cpuFreq->cpus = g_ptr_array_new ();
 
   cpufreq_read_config ();
+  cpuFreq->label.reset_size = TRUE;
   cpuFreq->layout_changed = TRUE;
 
 #ifdef __linux__

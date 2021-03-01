@@ -98,10 +98,14 @@ typedef struct
   IntelPState *intel_pstate;
 
   /* Widgets */
-  GtkWidget *button, *box, *icon, *label_orNull;
-  GtkCssProvider *label_css_provider;
+  GtkWidget *button, *box, *icon;
+  struct {
+    GtkWidget            *draw_area;
+    PangoFontDescription *font_desc;
+    gboolean              reset_size;
+    gchar                *text;
+  } label;
   gboolean layout_changed;
-  gint label_max_width;
 
   GdkPixbuf *base_icon;
   GdkPixbuf *icon_pixmaps[32];  /* table with frequency color coded pixbufs */
@@ -120,6 +124,9 @@ cpufreq_prepare_label (void);
 
 void
 cpufreq_restart_timeout (void);
+
+void
+cpufreq_set_font (const gchar *fontname_or_null);
 
 void
 cpufreq_update_icon (void);
