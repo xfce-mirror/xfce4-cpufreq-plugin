@@ -23,8 +23,9 @@
 #include <config.h>
 #endif
 
-#include <stdlib.h>
 #include <dirent.h>
+#include <math.h>
+#include <stdlib.h>
 
 #include <libxfce4ui/libxfce4ui.h>
 
@@ -111,10 +112,28 @@ cpufreq_update_cpus (gpointer data)
   }
 
   for (i = 0; i < cpuFreq->cpus->len; i++)
+  {
+    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+    guint cur_freq = cpu->cur_freq;
+    gint bin;
+
+    cpu->max_freq_measured = MAX (cpu->max_freq_measured, cur_freq);
+
+    bin = round ((cur_freq - FREQ_HIST_MIN) * ((gdouble) FREQ_HIST_BINS / (FREQ_HIST_MAX - FREQ_HIST_MIN)));
+    if (G_UNLIKELY (bin < 0))
+      bin = 0;
+    if (G_UNLIKELY (bin >= FREQ_HIST_BINS))
+      bin = FREQ_HIST_BINS - 1;
+
+    if (G_UNLIKELY (cpuFreq->freq_hist[bin] == G_MAXUINT16))
     {
-      CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
-      cpu->max_freq_measured = MAX (cpu->max_freq_measured, cpu->cur_freq);
+      // Divide all bin counts by 2
+      gsize j;
+      for (j = 0; j < G_N_ELEMENTS (cpuFreq->freq_hist); j++)
+        cpuFreq->freq_hist[j] /= 2;
     }
+    cpuFreq->freq_hist[bin]++;
+  }
 
   return cpufreq_update_plugin (FALSE);
 }

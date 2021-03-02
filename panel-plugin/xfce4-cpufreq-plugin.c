@@ -464,31 +464,69 @@ cpufreq_current_cpu (void)
 static void
 cpufreq_update_pixmap (CpuInfo *cpu)
 {
-  gdouble range, value;
-  gint index;
+  const gdouble min_range = 100*1000; /* frequency in kHz */
+  gdouble freq_98, normalized_freq, range;
+  gint i, index, total_count;
   GdkPixbuf *pixmap;
 
   if (G_UNLIKELY (!cpuFreq->icon || !cpuFreq->base_icon))
     return;
-  if (G_UNLIKELY (cpu->cur_freq < cpu->min_freq))
-    return;
 
   /* Note:
-   *   max_freq_nominal can have values that are well outside
+   *   max_freq_nominal can have values that are outside
    *   of the actual maximum frequency of the CPU.
    *   For example, Linux kernel 5.10.17 reports 5554687 kHz
    *   for some CPU cores on Ryzen 3700X, but the actual top
    *   frequency of this CPU is about 4.4 GHz.
-   *   Therefore, rely on max_freq_measured only.
+   *   Therefore, the following algorithm relies on measured
+   *   frequencies only.
    */
 
-  range = cpu->max_freq_measured - (gdouble) cpu->min_freq;
-  if (G_UNLIKELY (range <= 0))
-    return;
-  value = (cpu->cur_freq - cpu->min_freq) / range;
-  index = round (value * (G_N_ELEMENTS (cpuFreq->icon_pixmaps) - 1));
-  if (G_UNLIKELY (index < 0 || index >= (gint) G_N_ELEMENTS (cpuFreq->icon_pixmaps)))
-    return;
+  /* Compute the 99th percentile of all measured frequencies
+   * and use it as the "true" maximum frequency. This is required
+   * because in a small percentage of cases the current CPU
+   * frequency reported by Linux can be unrealistic, for example
+   * 4.59 GHz on a CPU that has an actual maximum frequency
+   * of about 4.4 GHz.
+   */
+  total_count = 0;
+  for (i = 0; i < (gint) G_N_ELEMENTS (cpuFreq->freq_hist); i++)
+    total_count += cpuFreq->freq_hist[i];
+  if (total_count * 0.01 < 1)
+  {
+    /* Not enough data to reliably compute the percentile,
+     * resort to a value that isn't based on statistics */
+    freq_98 = MAX (cpu->max_freq_nominal, cpu->max_freq_measured);
+  }
+  else
+  {
+    gint percentile_2 = total_count * 0.01;
+    for (i = G_N_ELEMENTS (cpuFreq->freq_hist) - 1; i >= 0; i--)
+    {
+      guint16 count = cpuFreq->freq_hist[i];
+      if (count < percentile_2)
+        percentile_2 -= count;
+      else
+      {
+        freq_98 = FREQ_HIST_MIN + i * ((gdouble) (FREQ_HIST_MAX - FREQ_HIST_MIN) / FREQ_HIST_BINS);
+        break;
+      }
+    }
+    if (G_UNLIKELY (i == -1))
+      freq_98 = cpu->max_freq_measured;
+  }
+
+  range = freq_98 - cpu->min_freq;
+  if (cpu->cur_freq > cpu->min_freq && range >= min_range)
+    normalized_freq = (cpu->cur_freq - cpu->min_freq) / range;
+  else
+    normalized_freq = 0;
+  index = round (normalized_freq * (G_N_ELEMENTS (cpuFreq->icon_pixmaps) - 1));
+  if (G_UNLIKELY (index < 0))
+    index = 0;
+  if (index >= (gint) G_N_ELEMENTS (cpuFreq->icon_pixmaps))
+    /* This codepath is expected to be reached in 2% of cases */
+    index = G_N_ELEMENTS (cpuFreq->icon_pixmaps) - 1;
 
   pixmap = cpuFreq->icon_pixmaps[index];
   if (!pixmap)

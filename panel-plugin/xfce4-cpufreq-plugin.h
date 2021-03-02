@@ -32,6 +32,10 @@
 #define CPU_MAX (-3)
 #define CPU_DEFAULT CPU_MAX
 
+#define FREQ_HIST_BINS 128           /* number of bins */
+#define FREQ_HIST_MAX  (8*1000*1000) /* frequency in kHz */
+#define FREQ_HIST_MIN  0             /* frequency in kHz */
+
 typedef enum
 {
   UNIT_AUTO,
@@ -108,8 +112,15 @@ typedef struct
   gboolean layout_changed;
 
   GdkPixbuf *base_icon;
-  GdkPixbuf *icon_pixmaps[32];  /* table with frequency color coded pixbufs */
   GdkPixbuf *current_icon_pixmap;
+  GdkPixbuf *icon_pixmaps[32];  /* table with frequency color coded pixbufs */
+
+  /* Histogram of measured frequencies:
+   *  min: FREQ_HIST_MIN
+   *  max: FREQ_HIST_MAX
+   *  range: max - min
+   *  resolution: range / FREQ_HIST_BINS = 62.5 MHz */
+  guint16 freq_hist[FREQ_HIST_BINS];
 
   CpuFreqPluginOptions *options;
   gint timeoutHandle;
