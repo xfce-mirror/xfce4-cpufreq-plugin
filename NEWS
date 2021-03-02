@@ -1,3 +1,21 @@
+1.2.5 (2021-03-02)
+=====
+- Adjust CPU icon color according to frequency
+- Use 99th percentile as the maximum frequency when adjusting icon color
+- Display text using a drawing area instead of using a label with CSS
+- Enable font color reset
+- Disable font settings when not displaying text
+- Switch to symbolic close icons
+- Bump required version of Xfce UI to 4.14
+- Compute max_freq and min_freq when calculating avg/min/max
+- Delete font name from RC file if using the default font
+- Code cleanups, fixes and minor optimizations
+- Translation Updates:
+  Albanian, Basque, Catalan, Chinese (Taiwan), Danish, Dutch, French,
+  Galician, German, Greek, Italian, Japanese, Lithuanian, Norwegian
+  Bokmål, Portuguese, Portuguese (Brazil), Serbian, Slovak, Spanish,
+  Swedish, Turkish
+
 1.2.4 (2021-02-02)
 =====
 - Display governors even if they differ among CPU cores
