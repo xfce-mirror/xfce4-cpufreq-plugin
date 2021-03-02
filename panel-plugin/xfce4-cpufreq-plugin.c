@@ -465,7 +465,7 @@ static void
 cpufreq_update_pixmap (CpuInfo *cpu)
 {
   const gdouble min_range = 100*1000; /* frequency in kHz */
-  gdouble freq_98, normalized_freq, range;
+  gdouble freq_99, normalized_freq, range;
   gint i, index, total_count;
   GdkPixbuf *pixmap;
 
@@ -496,7 +496,7 @@ cpufreq_update_pixmap (CpuInfo *cpu)
   {
     /* Not enough data to reliably compute the percentile,
      * resort to a value that isn't based on statistics */
-    freq_98 = MAX (cpu->max_freq_nominal, cpu->max_freq_measured);
+    freq_99 = MAX (cpu->max_freq_nominal, cpu->max_freq_measured);
   }
   else
   {
@@ -508,15 +508,15 @@ cpufreq_update_pixmap (CpuInfo *cpu)
         percentile_2 -= count;
       else
       {
-        freq_98 = FREQ_HIST_MIN + i * ((gdouble) (FREQ_HIST_MAX - FREQ_HIST_MIN) / FREQ_HIST_BINS);
+        freq_99 = FREQ_HIST_MIN + i * ((gdouble) (FREQ_HIST_MAX - FREQ_HIST_MIN) / FREQ_HIST_BINS);
         break;
       }
     }
     if (G_UNLIKELY (i == -1))
-      freq_98 = cpu->max_freq_measured;
+      freq_99 = cpu->max_freq_measured;
   }
 
-  range = freq_98 - cpu->min_freq;
+  range = freq_99 - cpu->min_freq;
   if (cpu->cur_freq > cpu->min_freq && range >= min_range)
     normalized_freq = (cpu->cur_freq - cpu->min_freq) / range;
   else
@@ -525,7 +525,7 @@ cpufreq_update_pixmap (CpuInfo *cpu)
   if (G_UNLIKELY (index < 0))
     index = 0;
   if (index >= (gint) G_N_ELEMENTS (cpuFreq->icon_pixmaps))
-    /* This codepath is expected to be reached in 2% of cases */
+    /* This codepath is expected to be reached in 100-99=1% of cases */
     index = G_N_ELEMENTS (cpuFreq->icon_pixmaps) - 1;
 
   pixmap = cpuFreq->icon_pixmaps[index];
