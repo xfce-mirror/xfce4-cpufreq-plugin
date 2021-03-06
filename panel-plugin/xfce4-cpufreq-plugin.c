@@ -1160,11 +1160,13 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
 static void
 cpufreq_show_about(XfcePanelPlugin *plugin, CpuFreqPlugin *cpufreq)
 {
+  /* List of authors (in alphabetical order) */
   const gchar *auth[] = {
-    "Thomas Schreck <shrek@xfce.org>",
+    "Andre Miranda <andreldm@xfce.org>",
     "Florian Rivoal <frivoal@xfce.org>",
     "Harald Judt <h.judt@gmx.at>",
-    "Andre Miranda <andreldm@xfce.org>",
+    "Jan Ziak <0xe2.0x9a.0x9b@xfce.org>",
+    "Thomas Schreck <shrek@xfce.org>",
     NULL };
 
   GdkPixbuf *icon = xfce_panel_pixbuf_from_source ("xfce4-cpufreq-plugin", NULL, 48);
