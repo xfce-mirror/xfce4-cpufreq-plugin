@@ -28,6 +28,7 @@
 
 #include <libxfce4ui/libxfce4ui.h>
 #include <math.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "xfce4-cpufreq-plugin.h"
