@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-22 00:47+0100\n"
-"PO-Revision-Date: 2021-02-22 12:12+0000\n"
+"POT-Creation-Date: 2021-02-27 12:49+0100\n"
+"PO-Revision-Date: 2021-04-11 20:27+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/xfce/xfce-panel-plugins/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -19,109 +19,113 @@ msgstr ""
 "Language: lt\n"
 "Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);\n"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:103
+#: ../panel-plugin/xfce4-cpufreq-configure.c:111
 msgid "Select font..."
 msgstr "Pasirinkti šriftą..."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:104
+#: ../panel-plugin/xfce4-cpufreq-configure.c:112
 msgid "Select font family and size to use for the labels."
 msgstr "Pasirinkite etiketėms naudojamą, šriftą ir jo dydį."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:109
+#: ../panel-plugin/xfce4-cpufreq-configure.c:117
 msgid "Right-click to revert to the default font."
 msgstr "Spustelėkite dešinįjį pelės mygtuką, kad atkurtumėte numatytąjį šriftą."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:125
+#: ../panel-plugin/xfce4-cpufreq-configure.c:133
 msgid "Select font"
 msgstr "Pasirinkite šriftą"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:263
+#: ../panel-plugin/xfce4-cpufreq-configure.c:194
+msgid "Right-click to revert to the default color"
+msgstr "Dešiniojo pelės mygtuko spustelėjimas, kad būtų grąžinta numatytoji spalva"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Configure CPU Frequency Monitor"
 msgstr "Procesoriaus dažnių prižiūryklė"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:266
+#: ../panel-plugin/xfce4-cpufreq-configure.c:318
 #: ../panel-plugin/xfce4-cpufreq-overview.c:261
 msgid "_Close"
 msgstr "_Užverti"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:287
+#: ../panel-plugin/xfce4-cpufreq-configure.c:339
 msgid "<b>Monitor</b>"
 msgstr "<b>Prižiūryklė</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:304
+#: ../panel-plugin/xfce4-cpufreq-configure.c:356
 msgid "_Update interval:"
 msgstr "_Atnaujinimo intervalas:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:322
+#: ../panel-plugin/xfce4-cpufreq-configure.c:374
 msgid "<b>Panel</b>"
 msgstr "<b>Skydelis</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:343
+#: ../panel-plugin/xfce4-cpufreq-configure.c:395
 msgid "_Font:"
 msgstr "Šri_ftas:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:362
+#: ../panel-plugin/xfce4-cpufreq-configure.c:414
 msgid "_Font color:"
 msgstr "Šri_fto spalva:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:372
+#: ../panel-plugin/xfce4-cpufreq-configure.c:424
 msgid "Select font color"
 msgstr "Pasirinkite šrifto spalvą"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:385
+#: ../panel-plugin/xfce4-cpufreq-configure.c:439
 msgid "_Display CPU:"
 msgstr "Ro_dyti procesorių:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:402
+#: ../panel-plugin/xfce4-cpufreq-configure.c:456
 msgid "min"
 msgstr "min"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:403
+#: ../panel-plugin/xfce4-cpufreq-configure.c:457
 msgid "avg"
 msgstr "vidut"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:404
+#: ../panel-plugin/xfce4-cpufreq-configure.c:458
 msgid "max"
 msgstr "maks"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:438
+#: ../panel-plugin/xfce4-cpufreq-configure.c:492
 msgid "Unit:"
 msgstr "Vienetai:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:448
+#: ../panel-plugin/xfce4-cpufreq-configure.c:502
 msgid "Auto"
 msgstr "Automatiškai"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:449
+#: ../panel-plugin/xfce4-cpufreq-configure.c:503
 msgid "GHz"
 msgstr "GHz"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:450
+#: ../panel-plugin/xfce4-cpufreq-configure.c:504
 msgid "MHz"
 msgstr "MHz"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:473
+#: ../panel-plugin/xfce4-cpufreq-configure.c:527
 msgid "_Keep compact"
 msgstr "Išlai_kyti talpiai"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:478
+#: ../panel-plugin/xfce4-cpufreq-configure.c:532
 msgid "Show text in a single _line"
 msgstr "Rodyti tekstą vienoje ei_lutėje"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:483
+#: ../panel-plugin/xfce4-cpufreq-configure.c:537
 msgid "Show CPU _icon"
 msgstr "Rodyti procesoriaus p_iktogramą"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:488
+#: ../panel-plugin/xfce4-cpufreq-configure.c:542
 msgid "Adjust CPU icon color according to frequency"
 msgstr "Derinti procesoriaus piktogramos spalvą prie dažnio"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:493
+#: ../panel-plugin/xfce4-cpufreq-configure.c:547
 msgid "Show CPU fre_quency"
 msgstr "Rodyti procesoriaus daž_nį"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:498
+#: ../panel-plugin/xfce4-cpufreq-configure.c:552
 msgid "Show CPU _governor"
 msgstr "Rodyti procesoriaus _reguliatorių"
 
@@ -168,15 +172,15 @@ msgstr "dabartinė min"
 msgid "current avg"
 msgstr "dabartinė vidut."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:298
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:299
 msgid "current max"
 msgstr "dabartinė maks"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:691
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:692
 msgid "No CPU information available."
 msgstr "Procesoriaus informacija neprieinama."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:697
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:698
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
@@ -185,29 +189,29 @@ msgstr[1] "Prieinami %d procesoriai"
 msgstr[2] "Prieinama %d procesorių"
 msgstr[3] "Prieinamas %d procesorius"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:702
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:703
 msgid "Frequency: "
 msgstr "Dažnis:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:710
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:711
 msgid "Governor: "
 msgstr "Reguliatorius:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:1080
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:1082
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "Rodyti procesoriaus dažnius ir reguliatorių"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:1082
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:1084
 msgid "Copyright (c) 2003-2021\n"
 msgstr "Autorių teisės (c) 2003-2021\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:1110
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:1112
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Jūsų sistema nėra teisingai sukonfigūruota procesoriaus dažnio mastelio keitimo palaikymui!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:1118
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:1120
 msgid "Your system is not supported yet!"
 msgstr "Jūsų sistema kol kas nėra palaikoma!"
 
