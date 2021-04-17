@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 12:49+0100\n"
-"PO-Revision-Date: 2021-03-29 08:37+0000\n"
+"PO-Revision-Date: 2021-04-17 06:04+0000\n"
 "Last-Translator: Luna Jernberg <bittin@cafe8bitar.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/xfce/xfce-panel-plugins/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -122,7 +122,7 @@ msgstr "Visa CPU-_ikon"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:542
 msgid "Adjust CPU icon color according to frequency"
-msgstr ""
+msgstr "Justera CPU-ikonfärgen enligt frekvens"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:547
 msgid "Show CPU fre_quency"
