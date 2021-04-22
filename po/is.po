@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-13 00:47+0100\n"
-"PO-Revision-Date: 2021-01-12 23:47+0000\n"
+"POT-Creation-Date: 2021-02-27 12:49+0100\n"
+"PO-Revision-Date: 2021-02-27 11:49+0000\n"
 "Last-Translator: Xfce Bot <transifex@xfce.org>\n"
 "Language-Team: Icelandic (http://www.transifex.com/xfce/xfce-panel-plugins/language/is/)\n"
 "MIME-Version: 1.0\n"
@@ -20,177 +20,201 @@ msgstr ""
 "Language: is\n"
 "Plural-Forms: nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);\n"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:78
+#: ../panel-plugin/xfce4-cpufreq-configure.c:111
 msgid "Select font..."
 msgstr "Veldu letur..."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:79
+#: ../panel-plugin/xfce4-cpufreq-configure.c:112
 msgid "Select font family and size to use for the labels."
 msgstr "Veldu hér hvaða leturstærð þú vilt nota á skýringar."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:84
+#: ../panel-plugin/xfce4-cpufreq-configure.c:117
 msgid "Right-click to revert to the default font."
 msgstr "Hægri-smelltu til að stilla aftur á sjálfgefna stærð á letri."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:100
+#: ../panel-plugin/xfce4-cpufreq-configure.c:133
 msgid "Select font"
 msgstr "Veldu letur"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:225
+#: ../panel-plugin/xfce4-cpufreq-configure.c:194
+msgid "Right-click to revert to the default color"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Configure CPU Frequency Monitor"
 msgstr "Stilla örgjörvatíðnivöktun"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:228
-#: ../panel-plugin/xfce4-cpufreq-overview.c:257
+#: ../panel-plugin/xfce4-cpufreq-configure.c:318
+#: ../panel-plugin/xfce4-cpufreq-overview.c:261
 msgid "_Close"
 msgstr "_Loka"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:249
+#: ../panel-plugin/xfce4-cpufreq-configure.c:339
 msgid "<b>Monitor</b>"
 msgstr "<b>Vöktun</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:266
+#: ../panel-plugin/xfce4-cpufreq-configure.c:356
 msgid "_Update interval:"
 msgstr "_Uppfærslutíðni:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:284
+#: ../panel-plugin/xfce4-cpufreq-configure.c:374
 msgid "<b>Panel</b>"
 msgstr "<b>Skjástika</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:305
+#: ../panel-plugin/xfce4-cpufreq-configure.c:395
 msgid "_Font:"
 msgstr "_Letur:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:324
+#: ../panel-plugin/xfce4-cpufreq-configure.c:414
 msgid "_Font color:"
 msgstr "Litur á l_etri:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:334
+#: ../panel-plugin/xfce4-cpufreq-configure.c:424
 msgid "Select font color"
 msgstr "Veldu lit á letur"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:344
+#: ../panel-plugin/xfce4-cpufreq-configure.c:439
 msgid "_Display CPU:"
 msgstr "_Birta örgjörva:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:361
+#: ../panel-plugin/xfce4-cpufreq-configure.c:456
 msgid "min"
 msgstr "lágm"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:362
+#: ../panel-plugin/xfce4-cpufreq-configure.c:457
 msgid "avg"
 msgstr "meðalt"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:363
+#: ../panel-plugin/xfce4-cpufreq-configure.c:458
 msgid "max"
 msgstr "hám"
 
+#: ../panel-plugin/xfce4-cpufreq-configure.c:492
+msgid "Unit:"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:502
+msgid "Auto"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:503
+msgid "GHz"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:504
+msgid "MHz"
+msgstr ""
+
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:389
+#: ../panel-plugin/xfce4-cpufreq-configure.c:527
 msgid "_Keep compact"
 msgstr "_Halda þjöppuðu"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:394
+#: ../panel-plugin/xfce4-cpufreq-configure.c:532
 msgid "Show text in a single _line"
 msgstr "Birta texta á einni _línu"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:399
+#: ../panel-plugin/xfce4-cpufreq-configure.c:537
 msgid "Show CPU _icon"
 msgstr "Birta táknmynd örgjörva"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:406
+#: ../panel-plugin/xfce4-cpufreq-configure.c:542
+msgid "Adjust CPU icon color according to frequency"
+msgstr ""
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:547
 msgid "Show CPU fre_quency"
 msgstr "Sýna _tíðni örgjörva"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:411
+#: ../panel-plugin/xfce4-cpufreq-configure.c:552
 msgid "Show CPU _governor"
 msgstr "Sýna stýringu ör_gjörva"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:73
+#: ../panel-plugin/xfce4-cpufreq-linux.c:74
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
 msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:79
+#: ../panel-plugin/xfce4-cpufreq-overview.c:80
 msgid "Scaling driver:"
 msgstr "Rekill fyrir kvörðun örgjörva:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:88
+#: ../panel-plugin/xfce4-cpufreq-overview.c:89
 #, c-format
 msgid "No scaling driver available"
 msgstr "Engin rekill fyrir örgjörvakvörðun tiltækur"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:102
+#: ../panel-plugin/xfce4-cpufreq-overview.c:103
 msgid "Available frequencies:"
 msgstr "Tiltækar tíðnir:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:169
+#: ../panel-plugin/xfce4-cpufreq-overview.c:173
 msgid "Available governors:"
 msgstr "Tiltækar stýringar:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:199
+#: ../panel-plugin/xfce4-cpufreq-overview.c:203
 msgid "Current governor:"
 msgstr "Núverandi stýring:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:254
+#: ../panel-plugin/xfce4-cpufreq-overview.c:258
 msgid "CPU Information"
 msgstr "Upplýsingar um örgjörva"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:261
+#: ../panel-plugin/xfce4-cpufreq-overview.c:265
 msgid "An overview of all the CPUs in the system"
 msgstr "Yfirlit um alla örgjörva á kerfinu"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:154
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:208
 msgid "current min"
 msgstr "núverandi lágmark"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:184
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:258
 msgid "current avg"
 msgstr "núverandi meðaltal"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:211
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:299
 msgid "current max"
 msgstr "núverandi hámark"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:509
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:692
 msgid "No CPU information available."
 msgstr "Engar örgjörvaupplýsingar tiltækar."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:515
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:698
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
 msgstr[0] "%d örgjörvi tiltækur"
 msgstr[1] "%d örgjörvar tiltækir"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:520
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:703
 msgid "Frequency: "
 msgstr "Tíðni:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:528
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:711
 msgid "Governor: "
 msgstr "Stýring: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:835
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:1082
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "Sýna tíðnir og stýringar örgjörva"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:837
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:1084
 msgid "Copyright (c) 2003-2021\n"
 msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:865
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:1112
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Kerfið þitt er ekki sett upp með stuðning við kvörðun á tíðni örgjörvans!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:873
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:1120
 msgid "Your system is not supported yet!"
 msgstr "Því miður, þetta kerfi er ekki stutt - ennþá!"
 
-#: ../panel-plugin/xfce4-cpufreq-utils.c:87
+#: ../panel-plugin/xfce4-cpufreq-utils.c:103
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
