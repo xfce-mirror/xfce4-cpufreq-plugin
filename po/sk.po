@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-22 00:47+0100\n"
-"PO-Revision-Date: 2021-02-23 20:51+0000\n"
+"POT-Creation-Date: 2021-02-27 12:49+0100\n"
+"PO-Revision-Date: 2021-02-27 13:59+0000\n"
 "Last-Translator: Jan Ziak <0xe2.0x9a.0x9b@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/xfce/xfce-panel-plugins/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -22,109 +22,113 @@ msgstr ""
 "Language: sk\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:103
+#: ../panel-plugin/xfce4-cpufreq-configure.c:111
 msgid "Select font..."
 msgstr "Vybrať písmo..."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:104
+#: ../panel-plugin/xfce4-cpufreq-configure.c:112
 msgid "Select font family and size to use for the labels."
 msgstr "Vyberte rodinu a veľkosť písma na menovky."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:109
+#: ../panel-plugin/xfce4-cpufreq-configure.c:117
 msgid "Right-click to revert to the default font."
 msgstr "Pravým tlačidlom vrátite predvolené písmo."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:125
+#: ../panel-plugin/xfce4-cpufreq-configure.c:133
 msgid "Select font"
 msgstr "Vyberte písmo"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:263
+#: ../panel-plugin/xfce4-cpufreq-configure.c:194
+msgid "Right-click to revert to the default color"
+msgstr "Pravým tlačidlom myši sa vrátite k predvolenej farbe"
+
+#: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Configure CPU Frequency Monitor"
 msgstr "Nastavenie sledovania frekvencie procesora"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:266
+#: ../panel-plugin/xfce4-cpufreq-configure.c:318
 #: ../panel-plugin/xfce4-cpufreq-overview.c:261
 msgid "_Close"
 msgstr "_Zatvoriť"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:287
+#: ../panel-plugin/xfce4-cpufreq-configure.c:339
 msgid "<b>Monitor</b>"
 msgstr "<b>Monitor</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:304
+#: ../panel-plugin/xfce4-cpufreq-configure.c:356
 msgid "_Update interval:"
 msgstr "Interval _obnovenia:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:322
+#: ../panel-plugin/xfce4-cpufreq-configure.c:374
 msgid "<b>Panel</b>"
 msgstr "<b>Panel</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:343
+#: ../panel-plugin/xfce4-cpufreq-configure.c:395
 msgid "_Font:"
 msgstr "_Písmo:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:362
+#: ../panel-plugin/xfce4-cpufreq-configure.c:414
 msgid "_Font color:"
 msgstr "_Farba písma:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:372
+#: ../panel-plugin/xfce4-cpufreq-configure.c:424
 msgid "Select font color"
 msgstr "Vybrať farbu písma"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:385
+#: ../panel-plugin/xfce4-cpufreq-configure.c:439
 msgid "_Display CPU:"
 msgstr "_Zobraziť CPU:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:402
+#: ../panel-plugin/xfce4-cpufreq-configure.c:456
 msgid "min"
 msgstr "min"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:403
+#: ../panel-plugin/xfce4-cpufreq-configure.c:457
 msgid "avg"
 msgstr "priem"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:404
+#: ../panel-plugin/xfce4-cpufreq-configure.c:458
 msgid "max"
 msgstr "max"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:438
+#: ../panel-plugin/xfce4-cpufreq-configure.c:492
 msgid "Unit:"
 msgstr "Jednotka:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:448
+#: ../panel-plugin/xfce4-cpufreq-configure.c:502
 msgid "Auto"
 msgstr "Automatická"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:449
+#: ../panel-plugin/xfce4-cpufreq-configure.c:503
 msgid "GHz"
 msgstr "GHz"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:450
+#: ../panel-plugin/xfce4-cpufreq-configure.c:504
 msgid "MHz"
 msgstr "MHz"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:473
+#: ../panel-plugin/xfce4-cpufreq-configure.c:527
 msgid "_Keep compact"
 msgstr "_Kompaktné"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:478
+#: ../panel-plugin/xfce4-cpufreq-configure.c:532
 msgid "Show text in a single _line"
 msgstr "Zobraziť text v _jednom riadku"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:483
+#: ../panel-plugin/xfce4-cpufreq-configure.c:537
 msgid "Show CPU _icon"
 msgstr "Zobraziť _ikonu CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:488
+#: ../panel-plugin/xfce4-cpufreq-configure.c:542
 msgid "Adjust CPU icon color according to frequency"
 msgstr "Upravovať farbu ikony procesora podľa frekvencie"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:493
+#: ../panel-plugin/xfce4-cpufreq-configure.c:547
 msgid "Show CPU fre_quency"
 msgstr "Zobraziť fre_kvenciu CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:498
+#: ../panel-plugin/xfce4-cpufreq-configure.c:552
 msgid "Show CPU _governor"
 msgstr "Zobraziť _správcu CPU"
 
@@ -171,15 +175,15 @@ msgstr "aktuálne min"
 msgid "current avg"
 msgstr "aktuálny priem"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:298
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:299
 msgid "current max"
 msgstr "aktuálne max"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:691
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:692
 msgid "No CPU information available."
 msgstr "Nie sú dostupné informácie o oCPU"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:697
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:698
 #, c-format
 msgid "%d cpu available"
 msgid_plural "%d cpus available"
@@ -188,29 +192,29 @@ msgstr[1] "%d dostupný procesor"
 msgstr[2] "%d dostupné procesory"
 msgstr[3] "%d dostupné procesory"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:702
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:703
 msgid "Frequency: "
 msgstr "Frekvencia:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:710
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:711
 msgid "Governor: "
 msgstr "Správca:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:1080
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:1082
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "Zobraziť frekvenciu a správcu CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:1082
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:1084
 msgid "Copyright (c) 2003-2021\n"
 msgstr "Autorské práva (c) 2003-2021\n"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:1110
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:1112
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Váš systém nie je správne nastavený na podporu zmeny frekvencie CPU!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:1118
+#: ../panel-plugin/xfce4-cpufreq-plugin.c:1120
 msgid "Your system is not supported yet!"
 msgstr "Váš systém zatiaľ nie je podporovaný!"
 
