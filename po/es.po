@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 12:49+0100\n"
-"PO-Revision-Date: 2021-02-28 15:14+0000\n"
+"PO-Revision-Date: 2021-05-06 22:40+0000\n"
 "Last-Translator: Toni Estévez <toni.estevez@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/xfce/xfce-panel-plugins/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -29,27 +29,27 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:111
 msgid "Select font..."
-msgstr "Seleccionar el tipo de letra..."
+msgstr "Seleccione la tipografía..."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:112
 msgid "Select font family and size to use for the labels."
-msgstr "Seleccione el tipo de letra y el tamaño que se utilizará para las etiquetas."
+msgstr "Seleccione la familia y el tamaño de la letra que se usará para las etiquetas."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:117
 msgid "Right-click to revert to the default font."
-msgstr "Clic derecho para recuperar el tipo de letra predeterminado"
+msgstr "Clic derecho para restablecer la tipografía predeterminada."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:133
 msgid "Select font"
-msgstr "Seleccionar el tipo de letra"
+msgstr "Seleccione la tipografía"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:194
 msgid "Right-click to revert to the default color"
-msgstr "Haga clic derecho para recuperar el color predeterminado"
+msgstr "Clic derecho para restaurar el color predeterminado"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Configure CPU Frequency Monitor"
-msgstr "Configurar el monitor de frecuencia del procesador"
+msgstr "Configurar el monitor de la frecuencia del procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:318
 #: ../panel-plugin/xfce4-cpufreq-overview.c:261
@@ -70,19 +70,19 @@ msgstr "<b>Panel</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:395
 msgid "_Font:"
-msgstr "_Tipo de Letra:"
+msgstr "_Tipografía:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:414
 msgid "_Font color:"
-msgstr "Colo_r de letra:"
+msgstr "Colo_r de la letra:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:424
 msgid "Select font color"
-msgstr "Seleccionar el color de la letra"
+msgstr "Seleccione el color de la letra"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:439
 msgid "_Display CPU:"
-msgstr "_Mostrar el procesador"
+msgstr "_Mostrar el procesador:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:456
 msgid "min"
