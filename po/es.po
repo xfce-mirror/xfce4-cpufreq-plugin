@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 12:49+0100\n"
-"PO-Revision-Date: 2021-05-06 22:40+0000\n"
+"PO-Revision-Date: 2021-05-06 23:13+0000\n"
 "Last-Translator: Toni Estévez <toni.estevez@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/xfce/xfce-panel-plugins/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -141,7 +141,7 @@ msgstr "Mostrar el _perfil del procesador"
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
-msgstr "Su sistema no es compatible con cpufreq.\nEl complemento solo muestra la frecuencia actual del procesador"
+msgstr "El sistema no es compatible con el ajuste de la frecuencia del procesador.\nEl complemento solo muestra la frecuencia actual del procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:80
 msgid "Scaling driver:"
@@ -150,7 +150,7 @@ msgstr "Controlador del ajuste:"
 #: ../panel-plugin/xfce4-cpufreq-overview.c:89
 #, c-format
 msgid "No scaling driver available"
-msgstr "Controlador del ajuste no disponible"
+msgstr "No hay disponible ningún controlador del ajuste"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:103
 msgid "Available frequencies:"
@@ -158,11 +158,11 @@ msgstr "Frecuencias disponibles"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:173
 msgid "Available governors:"
-msgstr "Perfiles del procesador disponibles:"
+msgstr "Perfiles disponibles:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:203
 msgid "Current governor:"
-msgstr "Perfil actual del procesador:"
+msgstr "Perfil actual:"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:258
 msgid "CPU Information"
@@ -170,7 +170,7 @@ msgstr "Información del procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:265
 msgid "An overview of all the CPUs in the system"
-msgstr "Un resumen de todos los procesadores en el sistema"
+msgstr "Un resumen de todos los procesadores del sistema"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:208
 msgid "current min"
@@ -206,7 +206,7 @@ msgstr "Perfil:"
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:1082
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
-msgstr "Mostrar frecuencias y perfil del procesador"
+msgstr "Mostrar las frecuencias del procesador y el perfil"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:1084
 msgid "Copyright (c) 2003-2021\n"
@@ -215,18 +215,18 @@ msgstr "Copyright (c) 2003-2021\n"
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:1112
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr "No se ha configurado el sistema correctamente para admitir el ajuste de frecuencia del procesador."
+msgstr "La configuración del sistema no admite el ajuste de la frecuencia del procesador."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:1120
 msgid "Your system is not supported yet!"
-msgstr "¡Su sistema aún no es compatible!"
+msgstr "El sistema aún no es compatible."
 
 #: ../panel-plugin/xfce4-cpufreq-utils.c:103
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
-msgstr "El procesador mostrado por el complemento cpufreq de Xfce se ha restablecido a su valor por defecto"
+msgstr "Se ha restablecido el valor predeterminado del procesador que muestra el complemento CPUFreq de Xfce"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr "Monitor de frecuencia del procesador"
+msgstr "Monitor de la frecuencia del procesador"
