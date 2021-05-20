@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 12:49+0100\n"
-"PO-Revision-Date: 2021-05-15 07:26+0000\n"
+"PO-Revision-Date: 2021-05-20 20:33+0000\n"
 "Last-Translator: Toni Estévez <toni.estevez@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/xfce/xfce-panel-plugins/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr "Clic derecho para restaurar el color predeterminado"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Configure CPU Frequency Monitor"
-msgstr "Configurar el monitor de la frecuencia del procesador"
+msgstr "Configuración del monitor de frecuencias del procesador"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:318
 #: ../panel-plugin/xfce4-cpufreq-overview.c:261
@@ -62,7 +62,7 @@ msgstr "<b>Monitor</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:356
 msgid "_Update interval:"
-msgstr "Intervalo de act_ualización:"
+msgstr "Intervalo de _actualización:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:374
 msgid "<b>Panel</b>"
@@ -74,7 +74,7 @@ msgstr "_Tipografía:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:414
 msgid "_Font color:"
-msgstr "Colo_r de la letra:"
+msgstr "Color de la _letra:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:424
 msgid "Select font color"
@@ -86,15 +86,15 @@ msgstr "_Mostrar el procesador:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:456
 msgid "min"
-msgstr "mín"
+msgstr "Mínimo"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:457
 msgid "avg"
-msgstr "med"
+msgstr "Medio"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:458
 msgid "max"
-msgstr "máx"
+msgstr "Máximo"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:492
 msgid "Unit:"
@@ -102,7 +102,7 @@ msgstr "Unidad:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:502
 msgid "Auto"
-msgstr "Auto"
+msgstr "Modo automático"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:503
 msgid "GHz"
@@ -115,11 +115,11 @@ msgstr "MHz"
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:527
 msgid "_Keep compact"
-msgstr "_Mantener reducido"
+msgstr "Tamaño _reducido"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:532
 msgid "Show text in a single _line"
-msgstr "Mostrar el texto en una sola _línea"
+msgstr "Mostrar el texto en una _sola línea"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:537
 msgid "Show CPU _icon"
@@ -150,7 +150,7 @@ msgstr "Controlador del ajuste:"
 #: ../panel-plugin/xfce4-cpufreq-overview.c:89
 #, c-format
 msgid "No scaling driver available"
-msgstr "No hay disponible ningún controlador del ajuste"
+msgstr "Controlador del ajuste no disponible"
 
 #: ../panel-plugin/xfce4-cpufreq-overview.c:103
 msgid "Available frequencies:"
@@ -174,15 +174,15 @@ msgstr "Un resumen de todos los procesadores del sistema"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:208
 msgid "current min"
-msgstr "mín actual"
+msgstr "Mín. actual"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:258
 msgid "current avg"
-msgstr "med actual"
+msgstr "Med. actual"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:299
 msgid "current max"
-msgstr "máx actual"
+msgstr "Máx. actual"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:692
 msgid "No CPU information available."
@@ -225,8 +225,8 @@ msgstr "El sistema aún no es compatible."
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
-msgstr "Se ha restablecido el valor predeterminado del procesador que muestra el complemento CPUFreq de Xfce"
+msgstr "Se ha restablecido el valor predeterminado del procesador que muestra el complemento de escalada de frecuencias de Xfce"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
-msgstr "Monitor de la frecuencia del procesador"
+msgstr "Monitor de frecuencias del procesador"
