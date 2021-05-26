@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 12:49+0100\n"
-"PO-Revision-Date: 2021-05-24 11:18+0000\n"
+"PO-Revision-Date: 2021-05-26 07:34+0000\n"
 "Last-Translator: Arnold Marko <arnold.marko@gmail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/xfce/xfce-panel-plugins/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr "Interval posoda_bljanja:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:374
 msgid "<b>Panel</b>"
-msgstr "<b>Pult</b>"
+msgstr "<b>Pano</b>"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:395
 msgid "_Font:"
