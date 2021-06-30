@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 12:49+0100\n"
-"PO-Revision-Date: 2021-06-29 08:46+0000\n"
+"PO-Revision-Date: 2021-06-30 05:40+0000\n"
 "Last-Translator: Theppitak Karoonboonyanan <theppitak@gmail.com>\n"
 "Language-Team: Thai (http://www.transifex.com/xfce/xfce-panel-plugins/language/th/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "เลือกแบบอักษร"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:194
 msgid "Right-click to revert to the default color"
-msgstr ""
+msgstr "คลิกขวาเพื่อคืนกลับเป็นสีปริยาย"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Configure CPU Frequency Monitor"
@@ -90,19 +90,19 @@ msgstr "สูงสุด"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:492
 msgid "Unit:"
-msgstr ""
+msgstr "หน่วย:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:502
 msgid "Auto"
-msgstr ""
+msgstr "อัตโนมัติ"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:503
 msgid "GHz"
-msgstr ""
+msgstr "GHz"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:504
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:527
@@ -119,7 +119,7 @@ msgstr "แสดงไอ_คอนซีพียู"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:542
 msgid "Adjust CPU icon color according to frequency"
-msgstr ""
+msgstr "ปรับสีไอคอนของซีพียูตามความถี่"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:547
 msgid "Show CPU fre_quency"
@@ -216,7 +216,7 @@ msgstr "ยังไม่รองรับระบบของคุณ!"
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
-msgstr ""
+msgstr "ซีพียูที่ปลั๊กอิน cpufreq ของ XFCE แสดงได้ถูกล้างค่าเป็นค่าปริยายแล้ว"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
