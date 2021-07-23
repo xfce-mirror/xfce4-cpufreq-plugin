@@ -5,7 +5,7 @@
 # Translators:
 #  <abel.martin.ruiz@gmail.com>, 2009
 # Adolfo Jayme Barrientos, 2014
-# Adolfo Jayme-Barrientos, 2014
+# Adolfo Jayme Barrientos, 2014
 # Casper casper, 2019-2021
 # Ignacio Poggi <ignaciop.3@gmail.com>, 2020
 # Jaime Marquínez Ferrándiz, 2018
