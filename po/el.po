@@ -9,13 +9,14 @@
 # ebal <ebalaskas@ebalaskas.gr>, 2008
 # Panagiotis Mantzios <pmantzios@hotmail.com>, 2018
 # Πέτρος Σαμαράς <psamaras1@gmail.com>, 2018-2019
+# Στέργιος Γέμελας <sgemelas@protonmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 12:49+0100\n"
-"PO-Revision-Date: 2021-02-27 11:49+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"PO-Revision-Date: 2021-08-30 16:17+0000\n"
+"Last-Translator: Στέργιος Γέμελας <sgemelas@protonmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/xfce/xfce-panel-plugins/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +42,7 @@ msgstr "Επιλογή γραμματοσειράς"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:194
 msgid "Right-click to revert to the default color"
-msgstr ""
+msgstr "Δεξί κλικ για επαναφορά στο προεπιλεγμένο χρώμα"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Configure CPU Frequency Monitor"
@@ -94,19 +95,19 @@ msgstr "μέγιστο"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:492
 msgid "Unit:"
-msgstr ""
+msgstr "Μονάδα:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:502
 msgid "Auto"
-msgstr ""
+msgstr "Αυτόματα"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:503
 msgid "GHz"
-msgstr ""
+msgstr "GHz"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:504
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:527
@@ -123,7 +124,7 @@ msgstr "Εμφάνιση _εικονιδίου CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:542
 msgid "Adjust CPU icon color according to frequency"
-msgstr ""
+msgstr "Προσαρμογή του χρώματος της εικόνας του CPU σύμφωνα με τη συχνότητα"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:547
 msgid "Show CPU fre_quency"
@@ -221,7 +222,7 @@ msgstr "Το σύστημά σας δεν υποστηρίζεται ακόμα!
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
-msgstr ""
+msgstr "Ο CPU που εμφανίζεται από το πρόσθετο XFCE cpufreq έχει επιστρέψει σε μια προεπιλεγμένη τιμή"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
