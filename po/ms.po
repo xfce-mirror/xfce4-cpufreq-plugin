@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# abuyop <abuyop@gmail.com>, 2014,2017-2019
+# abuyop <abuyop@gmail.com>, 2014,2017-2019,2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 12:49+0100\n"
-"PO-Revision-Date: 2021-02-27 11:49+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"PO-Revision-Date: 2021-09-29 13:30+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/xfce/xfce-panel-plugins/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +36,7 @@ msgstr "Pilih fon"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:194
 msgid "Right-click to revert to the default color"
-msgstr ""
+msgstr "Klik-kanan untuk kembali ke warna lalai."
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:315
 msgid "Configure CPU Frequency Monitor"
@@ -89,19 +89,19 @@ msgstr "maks"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:492
 msgid "Unit:"
-msgstr ""
+msgstr "Unit:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:502
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:503
 msgid "GHz"
-msgstr ""
+msgstr "GHz"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:504
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.c:527
@@ -118,7 +118,7 @@ msgstr "Tunjuk _ikon CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:542
 msgid "Adjust CPU icon color according to frequency"
-msgstr ""
+msgstr "Laras warna ikon CPU berdasarkan frekuensi"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.c:547
 msgid "Show CPU fre_quency"
@@ -200,7 +200,7 @@ msgstr "Tunjuk frekuensi dan gabenor CPU"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:1084
 msgid "Copyright (c) 2003-2021\n"
-msgstr ""
+msgstr "Hak cipta (c) 2003-2021\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:1112
 msgid ""
@@ -215,7 +215,7 @@ msgstr "Sistem anda belum lagi disokong!"
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
-msgstr ""
+msgstr "CPU yang dipaparkan oleh pemalam cpufreq XFCE telah ditetap semula ke nilai lalainya"
 
 #: ../panel-plugin/cpufreq.desktop.in.h:1
 msgid "CPU Frequency Monitor"
