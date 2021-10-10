@@ -1,6 +1,5 @@
-dnl configure.ac
 dnl
-dnl xfce4-cpufreq-plugin - Show CPU frequency and governour information
+dnl Copyright (c) 2006-2021 The Xfce development team
 dnl
 
 dnl Version information
@@ -17,7 +16,7 @@ AC_COPYRIGHT([Copyright (c) 2006 Thomas Schreck <shrek@xfce.org>
               Copyright (c) 2010-2011 Florian Rivoal <frivoal@xfce.org>
               Copyright (c) 2013-2015 Harald Judt <h.judt@gmx.at>
               Copyright (c) 2016-2020 Andre Miranda <andreldm@xfce.org>])
-AC_INIT([xfce4-cpufreq-plugin], [cpufreq_version()], [https://gitlab.xfce.org/panel-plugins/xfce4-cpufreq-plugin], [xfce4-cpufreq-plugin])
+AC_INIT([xfce4-cpufreq-plugin],[cpufreq_version()],[https://gitlab.xfce.org/panel-plugins/xfce4-cpufreq-plugin],[xfce4-cpufreq-plugin])
 AC_PREREQ([2.60])
 
 dnl Initialize automake
@@ -27,15 +26,12 @@ AM_MAINTAINER_MODE()
 AM_SILENT_RULES([yes])
 
 dnl Check for basic programs
-AC_PROG_CC_C99
-AC_PROG_LD()
+AC_PROG_CC()
+LT_PATH_LD([])
 AC_PROG_INSTALL()
 IT_PROG_INTLTOOL([0.35.0])
 LT_PREREQ([2.2.6])
 LT_INIT([disable-static])
-
-dnl Check for standard headers
-AC_HEADER_STDC()
 
 dnl Check for i18n support
 XDT_I18N([@LINGUAS@])
@@ -51,7 +47,7 @@ dnl *** Check for debugging support ***
 dnl ***********************************
 XDT_FEATURE_DEBUG()
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 panel-plugin/Makefile
 icons/Makefile
@@ -60,3 +56,4 @@ icons/22x22/Makefile
 icons/48x48/Makefile
 po/Makefile.in
 ])
+AC_OUTPUT
