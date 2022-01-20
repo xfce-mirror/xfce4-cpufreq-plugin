@@ -1,39 +1,38 @@
-AM_CPPFLAGS= 								\
-	-I$(top_srcdir)							\
-	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"
-
 plugindir = $(libdir)/xfce4/panel/plugins
-
 plugin_LTLIBRARIES = libcpufreq.la
 
-libcpufreq_la_CFLAGS =						\
-	$(LIBXFCE4PANEL_CFLAGS)					\
-	$(LIBXFCE4UTIL_CFLAGS)					\
+AM_CPPFLAGS = \
+	-I$(top_srcdir) \
+	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"
+
+libcpufreq_la_CFLAGS = \
+	$(LIBXFCE4PANEL_CFLAGS) \
+	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS)
 
-libcpufreq_la_LIBADD =						\
-	$(LIBXFCE4PANEL_LIBS)					\
-	$(LIBXFCE4UTIL_LIBS)					\
-	$(LIBXFCE4UI_LIBS)						\
+libcpufreq_la_LIBADD = \
+	$(LIBXFCE4PANEL_LIBS) \
+	$(LIBXFCE4UTIL_LIBS) \
+	$(LIBXFCE4UI_LIBS) \
 	-lm
 
-libcpufreq_la_SOURCES =						\
-	xfce4-cpufreq-plugin.h					\
-	xfce4-cpufreq-plugin.c					\
-	xfce4-cpufreq-linux-procfs.h			\
-	xfce4-cpufreq-linux-procfs.c			\
-	xfce4-cpufreq-linux-pstate.h			\
-	xfce4-cpufreq-linux-pstate.c			\
-	xfce4-cpufreq-linux-sysfs.h				\
-	xfce4-cpufreq-linux-sysfs.c				\
-	xfce4-cpufreq-linux.h					\
-	xfce4-cpufreq-linux.c					\
-	xfce4-cpufreq-configure.h				\
-	xfce4-cpufreq-configure.c				\
-	xfce4-cpufreq-overview.h				\
-	xfce4-cpufreq-overview.c				\
-	xfce4-cpufreq-utils.h					\
-	xfce4-cpufreq-utils.c
+libcpufreq_la_SOURCES = \
+	xfce4-cpufreq-configure.c \
+	xfce4-cpufreq-configure.h \
+	xfce4-cpufreq-linux-procfs.c \
+	xfce4-cpufreq-linux-procfs.h \
+	xfce4-cpufreq-linux-pstate.c \
+	xfce4-cpufreq-linux-pstate.h \
+	xfce4-cpufreq-linux-sysfs.c \
+	xfce4-cpufreq-linux-sysfs.h \
+	xfce4-cpufreq-linux.c \
+	xfce4-cpufreq-linux.h \
+	xfce4-cpufreq-overview.c \
+	xfce4-cpufreq-overview.h \
+	xfce4-cpufreq-plugin.c \
+	xfce4-cpufreq-plugin.h \
+	xfce4-cpufreq-utils.c \
+	xfce4-cpufreq-utils.h
 
 libcpufreq_la_LDFLAGS = \
 	-avoid-version \
@@ -47,8 +46,8 @@ desktop_in_files = cpufreq.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-EXTRA_DIST = 								\
+EXTRA_DIST = \
 	$(desktop_in_files)
 
-DISTCLEANFILES =							\
+DISTCLEANFILES = \
 	$(desktop_DATA)
