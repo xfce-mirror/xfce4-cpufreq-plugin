@@ -20,6 +20,8 @@
 #ifndef XFCE4_CPUFREQ_LINUX_PROCFS_H
 #define XFCE4_CPUFREQ_LINUX_PROCFS_H
 
+#include <glib.h>
+
 G_BEGIN_DECLS
 
 gboolean cpufreq_procfs_is_available (void);
