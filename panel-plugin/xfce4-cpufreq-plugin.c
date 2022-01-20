@@ -1180,7 +1180,7 @@ cpufreq_show_about(XfcePanelPlugin *plugin, CpuFreqPlugin *cpufreq)
      "program-name", PACKAGE_NAME,
      "comments", _("Show CPU frequencies and governor"),
      "website", PLUGIN_WEBSITE,
-     "copyright", _("Copyright (c) 2003-2021\n"),
+     "copyright", _("Copyright (c) 2003-2022\n"),
      "authors", auth,
      NULL);
 
