@@ -1,20 +1,20 @@
 @SET_MAKE@
 
-SUBDIRS = panel-plugin po icons 
-
-ACLOCAL_AMFLAGS = -I m4
+# Note: The order of directories in this list isn't arbitrary
+SUBDIRS = \
+	xfce4++ \
+	xfce4++/util \
+	panel-plugin \
+	po \
+	icons
 
 distclean-local:
 	rm -rf *.cache *~
 
 distuninstallcheck_listfiles = \
-    find . -type f -print | grep -v ./share/icons/hicolor/icon-theme.cache
+	find . -type f -print | grep -v ./share/icons/hicolor/icon-theme.cache
 
-dist-bz2: dist
-	zcat $(PACKAGE)-$(VERSION).tar.gz | bzip2 --best -c > $(PACKAGE)-$(VERSION).tar.bz2
-
-distcheck-bz2: distcheck
-	zcat $(PACKAGE)-$(VERSION).tar.gz | bzip2 --best -c > $(PACKAGE)-$(VERSION).tar.bz2
+AUTOMAKE_OPTIONS = 1.8 dist-bzip2
 
 .PHONY: ChangeLog
 

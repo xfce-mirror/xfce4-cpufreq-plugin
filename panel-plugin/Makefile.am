@@ -6,17 +6,22 @@ AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"
 
 libcpufreq_la_CFLAGS = \
-	$(LIBXFCE4PANEL_CFLAGS) \
-	$(LIBXFCE4UTIL_CFLAGS) \
-	$(LIBXFCE4UI_CFLAGS)
+	@LIBXFCE4PANEL_CFLAGS@ \
+	@LIBXFCE4UI_CFLAGS@ \
+	@LIBXFCE4UTIL_CFLAGS@
+
+libcpufreq_la_CXXFLAGS = $(libcpufreq_la_CFLAGS)
 
 libcpufreq_la_LIBADD = \
-	$(LIBXFCE4PANEL_LIBS) \
-	$(LIBXFCE4UTIL_LIBS) \
-	$(LIBXFCE4UI_LIBS) \
+	$(top_builddir)/xfce4++/util/libxfce4util_pp.la \
+	@LIBXFCE4PANEL_LIBS@ \
+	@LIBXFCE4UI_LIBS@ \
+	@LIBXFCE4UTIL_LIBS@ \
 	-lm
 
 libcpufreq_la_SOURCES = \
+	plugin.c \
+	plugin.h \
 	xfce4-cpufreq-configure.c \
 	xfce4-cpufreq-configure.h \
 	xfce4-cpufreq-linux-procfs.c \
@@ -29,7 +34,7 @@ libcpufreq_la_SOURCES = \
 	xfce4-cpufreq-linux.h \
 	xfce4-cpufreq-overview.c \
 	xfce4-cpufreq-overview.h \
-	xfce4-cpufreq-plugin.c \
+	xfce4-cpufreq-plugin.cc \
 	xfce4-cpufreq-plugin.h \
 	xfce4-cpufreq-utils.c \
 	xfce4-cpufreq-utils.h
@@ -46,8 +51,6 @@ desktop_in_files = cpufreq.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-EXTRA_DIST = \
-	$(desktop_in_files)
+EXTRA_DIST = $(desktop_in_files)
 
-DISTCLEANFILES = \
-	$(desktop_DATA)
+DISTCLEANFILES = $(desktop_DATA)

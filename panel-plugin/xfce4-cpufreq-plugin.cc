@@ -3,6 +3,7 @@
  *  Copyright (c) 2006 Thomas Schreck <shrek@xfce.org>
  *  Copyright (c) 2010,2011 Florian Rivoal <frivoal@xfce.org>
  *  Copyright (c) 2013 Harald Judt <h.judt@gmx.at>
+ *  Copyright (c) 2022 Jan Ziak <0xe2.0x9a.0x9b@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,6 +20,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+/* The fixes file has to be included before any other #include directives */
+#include "xfce4++/util/fixes.h"
+
 #define SPACING           2  /* Space between the widgets */
 #define BORDER            1  /* Space between the frame and the widgets */
 
@@ -31,6 +35,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "plugin.h"
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-configure.h"
 #include "xfce4-cpufreq-overview.h"
@@ -59,7 +64,7 @@ cpufreq_governors (void)
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
-    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+    auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
     guint j;
 
     if (!cpu->online)
@@ -77,9 +82,6 @@ cpufreq_governors (void)
 
   if (count != 0)
   {
-    gchar *s;
-    gsize s_length;
-
     // Bubble sort
     for (guint i = 0; G_UNLIKELY (i < count-1); i++)
       for (guint j = i+1; j < count; j++)
@@ -90,11 +92,11 @@ cpufreq_governors (void)
           array[j] = tmp;
         }
 
-    s_length = (count-1) * strlen (",");
+    gsize s_length = (count-1) * strlen (",");
     for (guint i = 0; i < count; i++)
       s_length += strlen (array[i]);
 
-    s = g_malloc (s_length+1);
+    auto s = (gchar*) g_malloc (s_length+1);
 
     s_length = 0;
     for (guint i = 0; i < count; i++)
@@ -126,7 +128,7 @@ cpufreq_cpus_calc_min (void)
 
   for (i = 0; i < cpuFreq->cpus->len; i++)
   {
-    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+    auto cpu = (const CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
 
     if (!cpu->online)
       continue;
@@ -171,7 +173,7 @@ cpufreq_cpus_calc_avg (void)
 
   for (i = 0; i < cpuFreq->cpus->len; i++)
   {
-    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+    auto cpu = (const CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
 
     if (!cpu->online)
       continue;
@@ -221,7 +223,7 @@ cpufreq_cpus_calc_max (void)
 
   for (i = 0; i < cpuFreq->cpus->len; i++)
   {
-    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+    auto cpu = (const CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
 
     if (!cpu->online)
       continue;
@@ -454,7 +456,7 @@ cpufreq_current_cpu (void)
     break;
   default:
     if (cpuFreq->options->show_cpu >= 0 && cpuFreq->options->show_cpu < (gint) cpuFreq->cpus->len)
-      cpu = g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
+      cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
   }
 
   return cpu;
@@ -749,7 +751,7 @@ cpufreq_update_icon (void)
       icon_size -= 4;
 
     buf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-      "xfce4-cpufreq-plugin", icon_size, 0, NULL);
+      "xfce4-cpufreq-plugin", icon_size, (GtkIconLookupFlags) 0, NULL);
 
     if (buf)
     {
@@ -837,15 +839,6 @@ label_draw (GtkWidget *widget, cairo_t *cr, gpointer data)
     /* Set label width to max width if smaller to avoid panel
        resizing/jumping (see bug #10385). */
     cpuFreq->label.reset_size |= alloc.width < PANGO_PIXELS_CEIL (extents.width);
-
-    if (cpuFreq->label.reset_size)
-    {
-      gtk_widget_set_size_request (widget,
-                                   PANGO_PIXELS_CEIL (extents.width),
-                                   PANGO_PIXELS_CEIL (extents.height));
-      cpuFreq->label.reset_size = FALSE;
-      cpuFreq->layout_changed = TRUE;
-    }
   }
   else
   {
@@ -1022,7 +1015,7 @@ cpufreq_read_config (void)
   options->keep_compact        = xfce_rc_read_bool_entry (rc, "keep_compact", FALSE);
   options->one_line            = xfce_rc_read_bool_entry (rc, "one_line", FALSE);
   options->icon_color_freq     = xfce_rc_read_bool_entry (rc, "icon_color_freq", FALSE);
-  options->unit                = xfce_rc_read_int_entry  (rc, "freq_unit", UNIT_DEFAULT);
+  options->unit                = (CpuFreqUnit) xfce_rc_read_int_entry  (rc, "freq_unit", UNIT_DEFAULT);
 
   if (!options->show_label_freq && !options->show_label_governor)
     options->show_icon = TRUE;
@@ -1119,7 +1112,7 @@ cpufreq_free (XfcePanelPlugin *plugin)
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
-    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+    auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
     g_ptr_array_remove_fast (cpuFreq->cpus, cpu);
     cpuinfo_free (cpu);
   }
@@ -1188,8 +1181,8 @@ cpufreq_show_about(XfcePanelPlugin *plugin, CpuFreqPlugin *cpufreq)
     g_object_unref(G_OBJECT(icon));
 }
 
-static void
-cpufreq_construct (XfcePanelPlugin *plugin)
+void
+cpufreq_plugin_construct (XfcePanelPlugin *plugin)
 {
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
@@ -1230,5 +1223,3 @@ cpufreq_construct (XfcePanelPlugin *plugin)
   xfce_panel_plugin_menu_show_about(plugin);
   g_signal_connect (plugin, "about", G_CALLBACK (cpufreq_show_about), cpuFreq);
 }
-
-XFCE_PANEL_PLUGIN_REGISTER (cpufreq_construct);
