@@ -21,6 +21,8 @@
 #ifndef XFCE4_CPUFREQ_OVERVIEW_H
 #define XFCE4_CPUFREQ_OVERVIEW_H
 
+#include "xfce4-cpufreq-plugin.h"
+
 G_BEGIN_DECLS
 
 gboolean

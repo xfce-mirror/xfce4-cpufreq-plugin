@@ -22,6 +22,8 @@
 #ifndef XFCE4_CPUFREQ_CONFIGURE_H
 #define XFCE4_CPUFREQ_CONFIGURE_H
 
+#include "xfce4-cpufreq-plugin.h"
+
 typedef struct
 {
   GtkWidget *display_cpu;

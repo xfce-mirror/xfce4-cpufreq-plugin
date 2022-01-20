@@ -21,6 +21,8 @@
 #ifndef XFCE4_CPUFREQ_LINUX_H
 #define XFCE4_CPUFREQ_LINUX_H
 
+#include <glib.h>
+
 G_BEGIN_DECLS
 
 gboolean
