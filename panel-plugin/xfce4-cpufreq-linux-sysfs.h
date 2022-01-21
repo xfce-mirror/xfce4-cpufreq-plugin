@@ -22,16 +22,12 @@
 
 #include <glib.h>
 
-G_BEGIN_DECLS
+gboolean cpufreq_sysfs_is_available ();
 
-gboolean cpufreq_sysfs_is_available (void);
-
-gboolean cpufreq_sysfs_read (void);
+gboolean cpufreq_sysfs_read ();
 
 void cpufreq_sysfs_read_current (gint cpu_number);
 
 void cpufreq_sysfs_read_int (const gchar *file, guint *intval);
-
-G_END_DECLS
 
 #endif /* XFCE4_CPUFREQ_LINUX_SYSFS_H */

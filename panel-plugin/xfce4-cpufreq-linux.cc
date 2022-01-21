@@ -39,7 +39,7 @@
 
 
 gboolean
-cpufreq_linux_init (void)
+cpufreq_linux_init ()
 {
   if (cpuFreq->cpus == NULL)
     return FALSE;

@@ -28,12 +28,12 @@
 
 #define PSTATE_BASE "/sys/devices/system/cpu/intel_pstate"
 
-static gboolean read_params (void);
+static gboolean read_params ();
 
 
 
 gboolean
-cpufreq_pstate_is_available (void)
+cpufreq_pstate_is_available ()
 {
   return g_file_test (PSTATE_BASE, G_FILE_TEST_EXISTS);
 }
@@ -41,7 +41,7 @@ cpufreq_pstate_is_available (void)
 
 
 gboolean
-cpufreq_pstate_read (void)
+cpufreq_pstate_read ()
 {
   /* gather intel pstate parameters */
   if (!read_params ())
@@ -58,7 +58,7 @@ cpufreq_pstate_read (void)
 
 
 static gboolean
-read_params (void)
+read_params ()
 {
   IntelPState *ips;
 

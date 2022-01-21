@@ -23,14 +23,10 @@
 
 #include <glib.h>
 
-G_BEGIN_DECLS
-
 gboolean
 cpufreq_update_cpus (gpointer data);
 
 gboolean
-cpufreq_linux_init (void);
-
-G_END_DECLS
+cpufreq_linux_init ();
 
 #endif /* XFCE4_CPUFREQ_LINUX_H */
