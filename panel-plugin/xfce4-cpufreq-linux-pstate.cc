@@ -60,12 +60,10 @@ cpufreq_pstate_read ()
 static gboolean
 read_params ()
 {
-  IntelPState *ips;
-
   if (!g_file_test (PSTATE_BASE, G_FILE_TEST_EXISTS))
     return FALSE;
 
-  ips = g_slice_new0(IntelPState);
+  IntelPState *ips = g_slice_new0(IntelPState);
 
   cpufreq_sysfs_read_int (PSTATE_BASE "/min_perf_pct", &ips->min_perf_pct);
   cpufreq_sysfs_read_int (PSTATE_BASE "/max_perf_pct", &ips->max_perf_pct);

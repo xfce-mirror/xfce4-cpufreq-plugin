@@ -83,14 +83,14 @@ cpufreq_sysfs_read_current (gint cpu_number)
 gboolean
 cpufreq_sysfs_read ()
 {
-  gint count = 0, i = 0;
-
+  gint count = 0;
   while (cpufreq_cpu_exists (count))
     count++;
 
   if (count == 0)
     return FALSE;
 
+  gint i = 0;
   while (i < count)
     parse_sysfs_init (i++, NULL);
 
@@ -118,11 +118,10 @@ cpufreq_sysfs_read_int_list (const gchar *file, GList **list)
   gchar *contents = read_file_contents (file);
 
   if (contents) {
-    gchar **tokens = NULL;
-    gint i = 0;
-    tokens = g_strsplit (contents, " ", 0);
+    gchar **tokens = g_strsplit (contents, " ", 0);
     g_free (contents);
     g_list_free (*list);
+    gint i = 0;
     while (tokens[i] != NULL) {
       gint value = atoi (tokens[i]);
       *list = g_list_append (*list, GINT_TO_POINTER (value));
@@ -152,11 +151,10 @@ cpufreq_sysfs_read_string_list (const gchar *file, GList **list)
   gchar *contents = read_file_contents (file);
 
   if (contents) {
-    gchar **tokens = NULL;
-    gint i = 0;
-    tokens = g_strsplit (contents, " ", 0);
+    gchar **tokens = g_strsplit (contents, " ", 0);
     g_free (contents);
     g_list_free_full (*list, g_free);
+    gint i = 0;
     while (tokens[i] != NULL) {
       *list = g_list_append (*list, strdup (tokens[i]));
       i++;
@@ -218,12 +216,11 @@ parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 static gchar*
 read_file_contents (const gchar *file)
 {
-  GError *error = NULL;
-  gchar *contents = NULL;
-
   if (!g_file_test (file, G_FILE_TEST_EXISTS))
     return NULL;
 
+  GError *error = NULL;
+  gchar *contents = NULL;
   if (g_file_get_contents (file, &contents, NULL, &error)) {
     g_strstrip (contents);
     return contents;

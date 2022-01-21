@@ -85,14 +85,12 @@ cpufreq_linux_init ()
 gboolean
 cpufreq_update_cpus (gpointer data)
 {
-  guint  i;
-
   if (G_UNLIKELY (cpuFreq == NULL))
     return FALSE;
 
   if (cpufreq_sysfs_is_available ())
   {
-    for (i = 0; i < cpuFreq->cpus->len; i++)
+    for (guint i = 0; i < cpuFreq->cpus->len; i++)
       cpufreq_sysfs_read_current (i);
   }
   else if (cpufreq_procfs_is_available ())
@@ -112,15 +110,14 @@ cpufreq_update_cpus (gpointer data)
     return FALSE;
   }
 
-  for (i = 0; i < cpuFreq->cpus->len; i++)
+  for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
     auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
     guint cur_freq = cpu->cur_freq;
-    gint bin;
 
     cpu->max_freq_measured = MAX (cpu->max_freq_measured, cur_freq);
 
-    bin = round ((cur_freq - FREQ_HIST_MIN) * ((gdouble) FREQ_HIST_BINS / (FREQ_HIST_MAX - FREQ_HIST_MIN)));
+    gint bin = round ((cur_freq - FREQ_HIST_MIN) * ((gdouble) FREQ_HIST_BINS / (FREQ_HIST_MAX - FREQ_HIST_MIN)));
     if (G_UNLIKELY (bin < 0))
       bin = 0;
     if (G_UNLIKELY (bin >= FREQ_HIST_BINS))
@@ -129,8 +126,7 @@ cpufreq_update_cpus (gpointer data)
     if (G_UNLIKELY (cpuFreq->freq_hist[bin] == G_MAXUINT16))
     {
       // Divide all bin counts by 2
-      gsize j;
-      for (j = 0; j < G_N_ELEMENTS (cpuFreq->freq_hist); j++)
+      for (gsize j = 0; j < G_N_ELEMENTS (cpuFreq->freq_hist); j++)
         cpuFreq->freq_hist[j] /= 2;
     }
     cpuFreq->freq_hist[bin]++;

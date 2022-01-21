@@ -35,7 +35,6 @@ cpufreq_get_human_readable_freq (guint freq, CpuFreqUnit unit)
 {
   guint div;
   const gchar *freq_unit;
-  gchar *readable_freq;
 
   switch (unit)
   {
@@ -64,6 +63,7 @@ cpufreq_get_human_readable_freq (guint freq, CpuFreqUnit unit)
     freq_unit = "GHz";
   }
   
+  gchar *readable_freq;
   if (div == 1000)
   {
     guint rounded_freq = (freq + div/2) / div;
@@ -80,11 +80,9 @@ cpufreq_get_human_readable_freq (guint freq, CpuFreqUnit unit)
 guint
 cpufreq_get_normal_freq (const gchar *freq)
 {
+  gchar **tokens = g_strsplit (freq, " ", 0);
+
   guint result;
-  gchar **tokens;
-
-  tokens = g_strsplit (freq, " ", 0);
-
   if (g_ascii_strcasecmp (tokens[1], "GHz") == 0)
     result = (guint) (atof (tokens[0]) * 1000 * 1000);
   else

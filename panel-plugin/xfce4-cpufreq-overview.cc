@@ -40,21 +40,18 @@
 static void
 cpufreq_overview_add (const CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 {
-  gint i = 0;
   gchar *text;
-  GtkWidget *hbox, *dialog_vbox, *combo, *label, *icon;
-  GtkSizeGroup *sg0, *sg1;
-  GList *list;
+  GtkWidget *hbox, *label;
   const CpuFreqUnit unit = cpuFreq->options->unit;
 
-  dialog_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER);
+  GtkWidget *dialog_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER);
   gtk_widget_set_sensitive (dialog_vbox, cpu->online);
   gtk_box_pack_start (GTK_BOX (dialog_hbox), dialog_vbox, TRUE, TRUE, 0);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
   gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, TRUE, TRUE, 0);
 
-  icon = gtk_image_new_from_icon_name ("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
+  GtkWidget *icon = gtk_image_new_from_icon_name ("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
   gtk_widget_set_halign (icon, GTK_ALIGN_END);
   gtk_widget_set_valign (icon, GTK_ALIGN_CENTER);
   gtk_widget_set_margin_top (icon, 10);
@@ -71,8 +68,8 @@ cpufreq_overview_add (const CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hb
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
   g_free (text);
 
-  sg0 = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
-  sg1 = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+  GtkSizeGroup *sg0 = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+  GtkSizeGroup *sg1 = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   /* display driver */
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
@@ -109,12 +106,11 @@ cpufreq_overview_add (const CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hb
 
   if (cpu->available_freqs != NULL) /* Linux 2.6 with scaling support */
   {
-    gint j;
-    combo = gtk_combo_box_text_new ();
+    GtkWidget *combo = gtk_combo_box_text_new ();
     gtk_size_group_add_widget (sg1, combo);
     gtk_box_pack_end (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
-    list = g_list_first (cpu->available_freqs);
-    j = 0;
+    GList *list = g_list_first (cpu->available_freqs);
+    gint i = 0, j = 0;
     while (list)
     {
       text = cpufreq_get_human_readable_freq (GPOINTER_TO_UINT (list->data), unit);
@@ -131,7 +127,7 @@ cpufreq_overview_add (const CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hb
   }
   else if (cpu->cur_freq && cpu->min_freq && cpu->max_freq_nominal) /* Linux 2.4 with scaling support */
   {
-    combo = gtk_combo_box_text_new ();
+    GtkWidget *combo = gtk_combo_box_text_new ();
     gtk_size_group_add_widget (sg1, combo);
     gtk_box_pack_end (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
 
@@ -166,8 +162,6 @@ cpufreq_overview_add (const CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hb
   /* display list of available governors */
   if (cpu->available_governors != NULL) /* Linux 2.6 and cpu scaling support */
   {
-    gint j;
-
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, FALSE, FALSE, 0);
 
@@ -177,12 +171,12 @@ cpufreq_overview_add (const CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hb
     gtk_label_set_xalign (GTK_LABEL (label), 0);
     gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
-    combo = gtk_combo_box_text_new ();
+    GtkWidget *combo = gtk_combo_box_text_new ();
     gtk_size_group_add_widget (sg1, combo);
     gtk_box_pack_end (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
 
-    list = g_list_first (cpu->available_governors);
-    j = 0;
+    GList *list = g_list_first (cpu->available_governors);
+    gint i = 0, j = 0;
     while (list)
     {
       auto list_data = (const gchar*) list->data;
@@ -240,10 +234,6 @@ cpufreq_overview_response (GtkWidget *dialog, gint response, gpointer data)
 gboolean
 cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
 {
-  gint step;
-  GtkWidget *dialog, *dialog_vbox;
-  GtkWidget *dialog_hbox, *separator;
-
   if (ev->button != 1)
     return FALSE;
 
@@ -258,7 +248,7 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpufreq->button), TRUE);
 
-  dialog = xfce_titled_dialog_new_with_mixed_buttons (_("CPU Information"),
+  GtkWidget *dialog = xfce_titled_dialog_new_with_mixed_buttons (_("CPU Information"),
     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (cpufreq->plugin))),
     GTK_DIALOG_DESTROY_WITH_PARENT,
     "window-close-symbolic", _("_Close"), GTK_RESPONSE_OK,
@@ -272,9 +262,10 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
 
   g_object_set_data (G_OBJECT (cpufreq->plugin), "overview", dialog);
 
-  dialog_vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+  GtkWidget *dialog_vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 
   /* choose how many columns and rows depending on cpu count */
+  gint step;
   if (cpufreq->cpus->len < 4)
     step = 1;
   else if (cpufreq->cpus->len < 9)
@@ -285,7 +276,7 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
     step = 3;
 
   for (guint i = 0; i < cpufreq->cpus->len; i += step) {
-    dialog_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER * 2);
+    GtkWidget *dialog_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER * 2);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), dialog_hbox, FALSE, FALSE, BORDER * 2);
     gtk_container_set_border_width (GTK_CONTAINER (dialog_hbox), BORDER * 2);
 
@@ -294,12 +285,12 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
       cpufreq_overview_add (cpu, j, dialog_hbox);
 
       if (j + 1 < cpufreq->cpus->len && j + 1 == i + step) {
-        separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+        GtkWidget *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
         gtk_box_pack_start (GTK_BOX (dialog_vbox), separator, FALSE, FALSE, 0);
       }
 
       if (j + 1 < cpufreq->cpus->len && j + 1 < i + step) {
-        separator = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
+        GtkWidget *separator = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
         gtk_box_pack_start (GTK_BOX (dialog_hbox), separator, FALSE, FALSE, 0);
       }
     }
