@@ -41,12 +41,11 @@ gboolean
 cpufreq_procfs_read_cpuinfo ()
 {
   const char *const filePath = "/proc/cpuinfo";
-  FILE *file;
 
   if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
     return FALSE;
 
-  file = fopen (filePath, "r");
+  FILE *file = fopen (filePath, "r");
 
   if (file)
   {
@@ -100,17 +99,14 @@ cpufreq_procfs_read_cpuinfo ()
 gboolean
 cpufreq_procfs_read ()
 {
-  FILE *file;
-  gchar *filePath;
-
-  filePath = g_strdup (PROCFS_BASE);
+  gchar *filePath = g_strdup (PROCFS_BASE);
   if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
   {
     g_free (filePath);
     return FALSE;
   }
 
-  file = fopen (filePath, "r");
+  FILE *file = fopen (filePath, "r");
 
   if (file)
   {

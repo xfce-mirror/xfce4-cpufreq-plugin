@@ -127,16 +127,13 @@ button_fontname_update(GtkWidget *button, gboolean update_plugin)
 static gboolean
 button_fontname_clicked(GtkWidget *button, CpuFreqPluginConfigure *configure)
 {
-  GtkWidget *fc;
-  gint result;
-
-  fc = gtk_font_chooser_dialog_new (_("Select font"),
+  GtkWidget *fc = gtk_font_chooser_dialog_new (_("Select font"),
     GTK_WINDOW(gtk_widget_get_toplevel(button)));
 
   if (cpuFreq->options->fontname)
     gtk_font_chooser_set_font (GTK_FONT_CHOOSER (fc), cpuFreq->options->fontname);
 
-  result = gtk_dialog_run(GTK_DIALOG(fc));
+  gint result = gtk_dialog_run(GTK_DIALOG(fc));
 
   if (result == GTK_RESPONSE_OK || result == GTK_RESPONSE_ACCEPT)
   {
@@ -299,19 +296,15 @@ void
 cpufreq_configure (XfcePanelPlugin *plugin)
 {
   CpuFreqPluginOptions *const options = cpuFreq->options;
-  gchar *cpu_name;
-  GtkWidget *dialog, *dialog_vbox;
   GtkWidget *frame, *align, *label, *vbox, *hbox;
   GtkWidget *spinner, *button;
-  GtkSizeGroup *sg0;
-  CpuFreqPluginConfigure *configure;
   GdkRGBA color = {};
 
-  configure = g_new0 (CpuFreqPluginConfigure, 1);
+  CpuFreqPluginConfigure *configure = g_new0 (CpuFreqPluginConfigure, 1);
 
   xfce_panel_plugin_block_menu (cpuFreq->plugin);
 
-  dialog = xfce_titled_dialog_new_with_mixed_buttons (_("Configure CPU Frequency Monitor"),
+  GtkWidget *dialog = xfce_titled_dialog_new_with_mixed_buttons (_("Configure CPU Frequency Monitor"),
     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
     GTK_DIALOG_DESTROY_WITH_PARENT,
     "window-close-symbolic", _("_Close"), GTK_RESPONSE_OK,
@@ -324,11 +317,11 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
   g_object_set_data (G_OBJECT (cpuFreq->plugin), "configure", dialog);
 
-  dialog_vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+  GtkWidget *dialog_vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
   gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox), 12);
   gtk_box_set_spacing (GTK_BOX (dialog_vbox), 18);
 
-  sg0 = gtk_size_group_new(GTK_SIZE_GROUP_BOTH);
+  GtkSizeGroup *sg0 = gtk_size_group_new(GTK_SIZE_GROUP_BOTH);
 
   /* monitor behaviours */
   frame = gtk_frame_new (NULL);
@@ -447,7 +440,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
     for (guint i = 0; i < cpuFreq->cpus->len; ++i)
     {
-      cpu_name = g_strdup_printf ("%d", i);
+      gchar *cpu_name = g_strdup_printf ("%d", i);
       gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), cpu_name);
       g_free (cpu_name);
     }
