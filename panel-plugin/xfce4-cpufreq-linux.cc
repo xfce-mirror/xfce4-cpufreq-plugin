@@ -38,18 +38,18 @@
 
 
 
-gboolean
+bool
 cpufreq_linux_init ()
 {
   if (cpuFreq->cpus == NULL)
-    return FALSE;
+    return false;
 
   if (cpufreq_sysfs_is_available ())
     return cpufreq_sysfs_read ();
 
   if (cpufreq_pstate_is_available ())
   {
-    gboolean ret = cpufreq_pstate_read ();
+    bool ret = cpufreq_pstate_read ();
 
     /* Tools like i7z show the current real frequency using the
        current maximum performance. Assuming this is the proper
@@ -61,7 +61,7 @@ cpufreq_linux_init ()
     if (ret && cpuFreq->options->show_warning)
     {
       cpuFreq->options->show_cpu = CPU_DEFAULT;
-      cpuFreq->options->show_warning = FALSE;
+      cpuFreq->options->show_warning = false;
     }
 
     return ret;
@@ -74,7 +74,7 @@ cpufreq_linux_init ()
   {
     xfce_dialog_show_warning (NULL, NULL,
       _("Your system does not support cpufreq.\nThe plugin only shows the current cpu frequency"));
-    cpuFreq->options->show_warning = FALSE;
+    cpuFreq->options->show_warning = false;
   }
 
   return cpufreq_procfs_read_cpuinfo ();
@@ -86,7 +86,7 @@ gboolean
 cpufreq_update_cpus (gpointer data)
 {
   if (G_UNLIKELY (cpuFreq == NULL))
-    return FALSE;
+    return false;
 
   if (cpufreq_sysfs_is_available ())
   {
@@ -107,7 +107,7 @@ cpufreq_update_cpus (gpointer data)
   else
   {
     /* We do not need to update, because no scaling available */
-    return FALSE;
+    return false;
   }
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
@@ -132,5 +132,5 @@ cpufreq_update_cpus (gpointer data)
     cpuFreq->freq_hist[bin]++;
   }
 
-  return cpufreq_update_plugin (FALSE);
+  return cpufreq_update_plugin (false);
 }

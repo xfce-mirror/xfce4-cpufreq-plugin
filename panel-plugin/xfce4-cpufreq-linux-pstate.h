@@ -20,10 +20,8 @@
 #ifndef XFCE4_CPUFREQ_LINUX_PSTATE_H
 #define XFCE4_CPUFREQ_LINUX_PSTATE_H
 
-#include <glib.h>
+bool cpufreq_pstate_is_available ();
 
-gboolean cpufreq_pstate_is_available ();
-
-gboolean cpufreq_pstate_read ();
+bool cpufreq_pstate_read ();
 
 #endif /* XFCE4_CPUFREQ_LINUX_PSTATE_H */

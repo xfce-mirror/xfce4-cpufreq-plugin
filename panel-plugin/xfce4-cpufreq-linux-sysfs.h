@@ -22,9 +22,9 @@
 
 #include <glib.h>
 
-gboolean cpufreq_sysfs_is_available ();
+bool cpufreq_sysfs_is_available ();
 
-gboolean cpufreq_sysfs_read ();
+bool cpufreq_sysfs_read ();
 
 void cpufreq_sysfs_read_current (gint cpu_number);
 
