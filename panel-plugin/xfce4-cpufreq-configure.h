@@ -24,7 +24,7 @@
 
 #include "xfce4-cpufreq-plugin.h"
 
-typedef struct
+struct CpuFreqPluginConfigure
 {
   GtkWidget *display_cpu;
   GtkWidget *display_icon;
@@ -39,7 +39,7 @@ typedef struct
   GtkWidget *one_line;
   GtkWidget *fontcolor, *fontcolor_hbox;
   GtkWidget *fontname, *fontname_hbox;
-} CpuFreqPluginConfigure;
+};
 
 void
 cpufreq_configure (XfcePanelPlugin *plugin);

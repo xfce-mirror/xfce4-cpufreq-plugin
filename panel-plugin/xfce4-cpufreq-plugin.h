@@ -36,16 +36,16 @@
 #define FREQ_HIST_MAX  (8*1000*1000) /* frequency in kHz */
 #define FREQ_HIST_MIN  0             /* frequency in kHz */
 
-typedef enum
+enum CpuFreqUnit
 {
   UNIT_AUTO,
   UNIT_GHZ,
   UNIT_MHZ,
-} CpuFreqUnit;
+};
 
 #define UNIT_DEFAULT UNIT_GHZ
 
-typedef struct
+struct CpuInfo
 {
   guint  cur_freq;  /* frequency in kHz */
   guint  max_freq_measured;
@@ -58,16 +58,16 @@ typedef struct
   GList *available_governors;
 
   gboolean online;
-} CpuInfo;
+};
 
-typedef struct
+struct IntelPState
 {
   guint min_perf_pct;
   guint max_perf_pct;
   guint no_turbo;
-} IntelPState;
+};
 
-typedef struct
+struct CpuFreqPluginOptions
 {
   guint       timeout;       /* time between refresh */
   gint        show_cpu;      /* cpu number in panel, or CPU_MIN/AVG/MAX */
@@ -81,9 +81,9 @@ typedef struct
   gchar      *fontname;
   gchar      *fontcolor;
   CpuFreqUnit unit;
-} CpuFreqPluginOptions;
+};
 
-typedef struct
+struct CpuFreqPlugin
 {
   XfcePanelPlugin *plugin;
   XfcePanelPluginMode panel_mode;
@@ -124,7 +124,7 @@ typedef struct
 
   CpuFreqPluginOptions *options;
   gint timeoutHandle;
-} CpuFreqPlugin;
+};
 
 extern CpuFreqPlugin *cpuFreq;
 
