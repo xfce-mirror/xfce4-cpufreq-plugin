@@ -3,6 +3,7 @@
  *  Copyright (c) 2006 Thomas Schreck <shrek@xfce.org>
  *  Copyright (c) 2010,2011 Florian Rivoal <frivoal@xfce.org>
  *  Copyright (c) 2013 Harald Judt <h.judt@gmx.at>
+ *  Copyright (c) 2022 Jan Ziak <0xe2.0x9a.0x9b@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -99,7 +100,7 @@ cpufreq_update_cpus (gpointer data)
     /* First we delete the cpus and then read the /proc/cpufreq file again */
     while (cpuFreq->cpus->len != 0)
     {
-      CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, 0);
+      auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, 0);
       g_ptr_array_remove_index_fast (cpuFreq->cpus, 0);
       cpuinfo_free (cpu);
     }
@@ -113,7 +114,7 @@ cpufreq_update_cpus (gpointer data)
 
   for (i = 0; i < cpuFreq->cpus->len; i++)
   {
-    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+    auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
     guint cur_freq = cpu->cur_freq;
     gint bin;
 

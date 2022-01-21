@@ -3,6 +3,7 @@
  *  Copyright (c) 2006 Thomas Schreck <shrek@xfce.org>
  *  Copyright (c) 2010,2011 Florian Rivoal <frivoal@xfce.org>
  *  Copyright (c) 2013 Harald Judt <h.judt@gmx.at>
+ *  Copyright (c) 2022 Jan Ziak <0xe2.0x9a.0x9b@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

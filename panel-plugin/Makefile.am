@@ -22,21 +22,21 @@ libcpufreq_la_LIBADD = \
 libcpufreq_la_SOURCES = \
 	plugin.c \
 	plugin.h \
-	xfce4-cpufreq-configure.c \
+	xfce4-cpufreq-configure.cc \
 	xfce4-cpufreq-configure.h \
-	xfce4-cpufreq-linux-procfs.c \
+	xfce4-cpufreq-linux-procfs.cc \
 	xfce4-cpufreq-linux-procfs.h \
-	xfce4-cpufreq-linux-pstate.c \
+	xfce4-cpufreq-linux-pstate.cc \
 	xfce4-cpufreq-linux-pstate.h \
-	xfce4-cpufreq-linux-sysfs.c \
+	xfce4-cpufreq-linux-sysfs.cc \
 	xfce4-cpufreq-linux-sysfs.h \
-	xfce4-cpufreq-linux.c \
+	xfce4-cpufreq-linux.cc \
 	xfce4-cpufreq-linux.h \
-	xfce4-cpufreq-overview.c \
+	xfce4-cpufreq-overview.cc \
 	xfce4-cpufreq-overview.h \
 	xfce4-cpufreq-plugin.cc \
 	xfce4-cpufreq-plugin.h \
-	xfce4-cpufreq-utils.c \
+	xfce4-cpufreq-utils.cc \
 	xfce4-cpufreq-utils.h
 
 libcpufreq_la_LDFLAGS = \

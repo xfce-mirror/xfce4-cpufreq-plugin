@@ -3,6 +3,7 @@
  *  Copyright (c) 2006 Thomas Schreck <shrek@xfce.org>
  *  Copyright (c) 2010,2011 Florian Rivoal <frivoal@xfce.org>
  *  Copyright (c) 2013 Harald Judt <h.judt@gmx.at>
+ *  Copyright (c) 2022 Jan Ziak <0xe2.0x9a.0x9b@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,7 +38,7 @@
 
 
 static void
-cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
+cpufreq_overview_add (const CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
 {
   gint i = 0;
   gchar *text;
@@ -184,9 +185,11 @@ cpufreq_overview_add (CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
     j = 0;
     while (list)
     {
-      gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), list->data);
+      auto list_data = (const gchar*) list->data;
 
-      if (g_ascii_strcasecmp (list->data, cpu->cur_governor) == 0)
+      gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), list_data);
+
+      if (g_ascii_strcasecmp (list_data, cpu->cur_governor) == 0)
         i = j;
 
       list = g_list_next (list);
@@ -238,13 +241,13 @@ gboolean
 cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
 {
   gint step;
-  GtkWidget *dialog, *dialog_vbox, *window;
+  GtkWidget *dialog, *dialog_vbox;
   GtkWidget *dialog_hbox, *separator;
 
   if (ev->button != 1)
     return FALSE;
 
-  window = g_object_get_data (G_OBJECT (cpufreq->plugin), "overview");
+  auto window = (GtkWidget*) g_object_get_data (G_OBJECT (cpufreq->plugin), "overview");
 
   if (window) {
     g_object_set_data (G_OBJECT (cpufreq->plugin), "overview", NULL);
@@ -287,7 +290,7 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
     gtk_container_set_border_width (GTK_CONTAINER (dialog_hbox), BORDER * 2);
 
     for (guint j = i; j < cpufreq->cpus->len && j < i + step; j++) {
-      CpuInfo *cpu = g_ptr_array_index (cpufreq->cpus, j);
+      auto cpu = (const CpuInfo*) g_ptr_array_index (cpufreq->cpus, j);
       cpufreq_overview_add (cpu, j, dialog_hbox);
 
       if (j + 1 < cpufreq->cpus->len && j + 1 == i + step) {
