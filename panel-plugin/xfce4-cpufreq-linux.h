@@ -26,7 +26,7 @@
 gboolean
 cpufreq_update_cpus (gpointer data);
 
-gboolean
+bool
 cpufreq_linux_init ();
 
 #endif /* XFCE4_CPUFREQ_LINUX_H */

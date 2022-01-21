@@ -153,8 +153,8 @@ cpufreq_cpus_calc_min ()
 
   if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_min->cur_governor, old_governor) != 0)
   {
-    cpuFreq->label.reset_size = TRUE;
-    cpuFreq->layout_changed = TRUE;
+    cpuFreq->label.reset_size = true;
+    cpuFreq->layout_changed = true;
   }
 
   g_free (old_governor);
@@ -203,8 +203,8 @@ cpufreq_cpus_calc_avg ()
 
   if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_avg->cur_governor, old_governor) != 0)
   {
-    cpuFreq->label.reset_size = TRUE;
-    cpuFreq->layout_changed = TRUE;
+    cpuFreq->label.reset_size = true;
+    cpuFreq->layout_changed = true;
   }
 
   g_free (old_governor);
@@ -243,8 +243,8 @@ cpufreq_cpus_calc_max ()
 
   if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_max->cur_governor, old_governor) != 0)
   {
-    cpuFreq->label.reset_size = TRUE;
-    cpuFreq->layout_changed = TRUE;
+    cpuFreq->label.reset_size = true;
+    cpuFreq->layout_changed = true;
   }
 
   g_free (old_governor);
@@ -269,7 +269,7 @@ cpufreq_update_label (const CpuInfo *cpu)
     return;
   }
 
-  gboolean both = cpu->cur_governor && options->show_label_freq && options->show_label_governor;
+  bool both = cpu->cur_governor && options->show_label_freq && options->show_label_governor;
 
   gchar *freq = cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
   gchar *label = g_strconcat
@@ -311,12 +311,12 @@ static void
 cpufreq_widgets_layout ()
 {
   GtkOrientation orientation = GTK_ORIENTATION_HORIZONTAL;
-  gboolean resized = FALSE;
-  const gboolean hide_label = (!cpuFreq->options->show_label_freq && !cpuFreq->options->show_label_governor);
+  bool resized = false;
+  const bool hide_label = (!cpuFreq->options->show_label_freq && !cpuFreq->options->show_label_governor);
   gint pos = 1, lw = 0, lh = 0, iw = 0, ih = 0;
 
   /* keep plugin small if label is hidden or user requested compact size */
-  const gboolean small = (hide_label ? TRUE : cpuFreq->options->keep_compact);
+  const bool small = (hide_label ? true : cpuFreq->options->keep_compact);
 
   switch (cpuFreq->panel_mode)
   {
@@ -330,7 +330,7 @@ cpufreq_widgets_layout ()
     break;
   case XFCE_PANEL_PLUGIN_MODE_DESKBAR:
     orientation = small ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
-    xfce_panel_plugin_set_small (cpuFreq->plugin, hide_label ? TRUE : FALSE);
+    xfce_panel_plugin_set_small (cpuFreq->plugin, hide_label ? true : false);
     break;
   }
 
@@ -355,14 +355,14 @@ cpufreq_widgets_layout ()
     lh + ih + BORDER * 2 >= cpuFreq->panel_size)
   {
     orientation = GTK_ORIENTATION_HORIZONTAL;
-    resized = TRUE;
+    resized = true;
   }
   else if (orientation == GTK_ORIENTATION_HORIZONTAL &&
     lw + iw + BORDER * 2 >= cpuFreq->panel_size &&
     (cpuFreq->panel_mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR || !small))
   {
     orientation = GTK_ORIENTATION_VERTICAL;
-    resized = TRUE;
+    resized = true;
   }
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (cpuFreq->box), orientation);
@@ -382,7 +382,7 @@ cpufreq_widgets_layout ()
 
     if (cpuFreq->icon)
       gtk_box_set_child_packing (GTK_BOX (cpuFreq->box),
-        cpuFreq->icon, FALSE, FALSE, 0, GTK_PACK_START);
+        cpuFreq->icon, false, false, 0, GTK_PACK_START);
   }
   else
   {
@@ -404,7 +404,7 @@ cpufreq_widgets_layout ()
 
     if (cpuFreq->icon)
       gtk_box_set_child_packing (GTK_BOX (cpuFreq->box),
-        cpuFreq->icon, TRUE, TRUE, 0, GTK_PACK_START);
+        cpuFreq->icon, true, true, 0, GTK_PACK_START);
   }
 
   if (cpuFreq->label.draw_area)
@@ -413,7 +413,7 @@ cpufreq_widgets_layout ()
     gtk_widget_queue_draw (cpuFreq->label.draw_area);
   }
 
-  cpuFreq->layout_changed = FALSE;
+  cpuFreq->layout_changed = false;
 }
 
 
@@ -564,17 +564,17 @@ cpufreq_update_pixmap (CpuInfo *cpu)
 
 
 
-gboolean
-cpufreq_update_plugin (gboolean reset_label_size)
+bool
+cpufreq_update_plugin (bool reset_label_size)
 {
   CpuInfo *cpu = cpufreq_current_cpu ();
   if (!cpu)
-    return FALSE;
+    return false;
 
   if (reset_label_size)
   {
-    cpuFreq->label.reset_size = TRUE;
-    cpuFreq->layout_changed = TRUE;
+    cpuFreq->label.reset_size = true;
+    cpuFreq->layout_changed = true;
   }
 
   cpufreq_update_label (cpu);
@@ -585,7 +585,7 @@ cpufreq_update_plugin (gboolean reset_label_size)
   if (cpuFreq->layout_changed)
     cpufreq_widgets_layout ();
 
-  return TRUE;
+  return true;
 }
 
 static gboolean
@@ -631,7 +631,7 @@ cpufreq_update_tooltip (GtkWidget *widget,
 
   gtk_tooltip_set_text (tooltip, tooltip_msg);
   g_free (tooltip_msg);
-  return TRUE;
+  return true;
 }
 
 
@@ -679,7 +679,7 @@ cpufreq_mode_changed (XfcePanelPlugin *plugin,
 {
   cpuFreq->panel_mode = mode;
   cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (plugin);
-  cpufreq_update_plugin (TRUE);
+  cpufreq_update_plugin (true);
 }
 
 
@@ -751,7 +751,7 @@ cpufreq_update_icon ()
 
     if (G_LIKELY (cpuFreq->icon))
     {
-      gtk_box_pack_start (GTK_BOX (cpuFreq->box), cpuFreq->icon, FALSE, FALSE, 0);
+      gtk_box_pack_start (GTK_BOX (cpuFreq->box), cpuFreq->icon, false, false, 0);
       gtk_box_reorder_child (GTK_BOX (cpuFreq->box), cpuFreq->icon, 0);
       gtk_widget_show (cpuFreq->icon);
     }
@@ -853,8 +853,8 @@ label_draw (GtkWidget *widget, cairo_t *cr, gpointer data)
     gtk_widget_set_size_request (widget,
                                  PANGO_PIXELS_CEIL (extents.width),
                                  PANGO_PIXELS_CEIL (extents.height));
-    cpuFreq->label.reset_size = FALSE;
-    cpuFreq->layout_changed = TRUE;
+    cpuFreq->label.reset_size = false;
+    cpuFreq->layout_changed = true;
   }
 
   pango_cairo_show_layout (cr, layout);
@@ -866,15 +866,15 @@ label_draw (GtkWidget *widget, cairo_t *cr, gpointer data)
 static gboolean
 label_enter (GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
-  gtk_widget_set_state_flags (cpuFreq->button, GTK_STATE_FLAG_PRELIGHT, FALSE);
-  return FALSE;
+  gtk_widget_set_state_flags (cpuFreq->button, GTK_STATE_FLAG_PRELIGHT, false);
+  return false;
 }
 
 static gboolean
 label_leave (GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
   gtk_widget_unset_state_flags (cpuFreq->button, GTK_STATE_FLAG_PRELIGHT);
-  return FALSE;
+  return false;
 }
 
 
@@ -893,7 +893,7 @@ cpufreq_prepare_label ()
       g_signal_connect (draw_area, "leave-notify-event", G_CALLBACK (label_leave), NULL);
       gtk_widget_set_halign (draw_area, GTK_ALIGN_CENTER);
       gtk_widget_set_valign (draw_area, GTK_ALIGN_CENTER);
-      gtk_box_pack_start (GTK_BOX (cpuFreq->box), draw_area, TRUE, TRUE, 0);
+      gtk_box_pack_start (GTK_BOX (cpuFreq->box), draw_area, true, true, 0);
       cpuFreq->label.draw_area = draw_area;
     }
   }
@@ -945,13 +945,13 @@ cpufreq_widgets ()
                     G_CALLBACK (cpufreq_overview), cpuFreq);
 
   /* activate panel widget tooltip */
-  g_object_set (G_OBJECT (cpuFreq->button), "has-tooltip", TRUE, NULL);
+  g_object_set (G_OBJECT (cpuFreq->button), "has-tooltip", true, NULL);
   g_signal_connect (cpuFreq->button, "query-tooltip",
                     G_CALLBACK (cpufreq_update_tooltip), cpuFreq);
 
   gtk_widget_show_all (cpuFreq->button);
 
-  cpufreq_update_plugin (TRUE);
+  cpufreq_update_plugin (true);
 }
 
 
@@ -965,29 +965,29 @@ cpufreq_read_config ()
   gchar *file = xfce_panel_plugin_lookup_rc_file (cpuFreq->plugin);
 
   if (G_UNLIKELY (!file))
-    file = xfce_panel_plugin_save_location (cpuFreq->plugin, FALSE);
+    file = xfce_panel_plugin_save_location (cpuFreq->plugin, false);
 
   if (G_UNLIKELY (!file))
     return;
 
-  XfceRc *rc = xfce_rc_simple_open (file, FALSE);
+  XfceRc *rc = xfce_rc_simple_open (file, false);
   g_free (file);
 
   options->timeout             = xfce_rc_read_int_entry  (rc, "timeout", 1);
   if (options->timeout > TIMEOUT_MAX || options->timeout < TIMEOUT_MIN)
     options->timeout = TIMEOUT_MIN;
   options->show_cpu            = xfce_rc_read_int_entry  (rc, "show_cpu", CPU_DEFAULT);
-  options->show_icon           = xfce_rc_read_bool_entry (rc, "show_icon", TRUE);
-  options->show_label_freq     = xfce_rc_read_bool_entry (rc, "show_label_freq", TRUE);
-  options->show_label_governor = xfce_rc_read_bool_entry (rc, "show_label_governor", TRUE);
-  options->show_warning        = xfce_rc_read_bool_entry (rc, "show_warning", TRUE);
-  options->keep_compact        = xfce_rc_read_bool_entry (rc, "keep_compact", FALSE);
-  options->one_line            = xfce_rc_read_bool_entry (rc, "one_line", FALSE);
-  options->icon_color_freq     = xfce_rc_read_bool_entry (rc, "icon_color_freq", FALSE);
+  options->show_icon           = xfce_rc_read_bool_entry (rc, "show_icon", true);
+  options->show_label_freq     = xfce_rc_read_bool_entry (rc, "show_label_freq", true);
+  options->show_label_governor = xfce_rc_read_bool_entry (rc, "show_label_governor", true);
+  options->show_warning        = xfce_rc_read_bool_entry (rc, "show_warning", true);
+  options->keep_compact        = xfce_rc_read_bool_entry (rc, "keep_compact", false);
+  options->one_line            = xfce_rc_read_bool_entry (rc, "one_line", false);
+  options->icon_color_freq     = xfce_rc_read_bool_entry (rc, "icon_color_freq", false);
   options->unit                = (CpuFreqUnit) xfce_rc_read_int_entry  (rc, "freq_unit", UNIT_DEFAULT);
 
   if (!options->show_label_freq && !options->show_label_governor)
-    options->show_icon = TRUE;
+    options->show_icon = true;
 
   switch (options->unit)
   {
@@ -1020,12 +1020,12 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
 {
   const CpuFreqPluginOptions *const options = cpuFreq->options;
 
-  gchar *file = xfce_panel_plugin_save_location (plugin, TRUE);
+  gchar *file = xfce_panel_plugin_save_location (plugin, true);
 
   if (G_UNLIKELY (!file))
     return;
 
-  XfceRc *rc = xfce_rc_simple_open (file, FALSE);
+  XfceRc *rc = xfce_rc_simple_open (file, false);
   g_free(file);
 
   xfce_rc_write_int_entry  (rc, "timeout",             options->timeout);
@@ -1042,12 +1042,12 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
   if (options->fontname)
     xfce_rc_write_entry (rc, "fontname", options->fontname);
   else
-    xfce_rc_delete_entry (rc, "fontname", FALSE);
+    xfce_rc_delete_entry (rc, "fontname", false);
 
   if (options->fontcolor)
     xfce_rc_write_entry (rc, "fontcolor", options->fontcolor);
   else
-    xfce_rc_delete_entry (rc, "fontcolor", FALSE);
+    xfce_rc_delete_entry (rc, "fontcolor", false);
 
   xfce_rc_close (rc);
 }
@@ -1084,7 +1084,7 @@ cpufreq_free (XfcePanelPlugin *plugin)
     cpuinfo_free (cpu);
   }
 
-  g_ptr_array_free (cpuFreq->cpus, TRUE);
+  g_ptr_array_free (cpuFreq->cpus, true);
 
   g_free (cpuFreq->cpu_avg);
   g_free (cpuFreq->cpu_max);
@@ -1113,9 +1113,9 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
   cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (plugin);
 
   cpufreq_update_icon ();
-  cpufreq_update_plugin (TRUE);
+  cpufreq_update_plugin (true);
 
-  return TRUE;
+  return true;
 }
 
 static void
@@ -1162,8 +1162,8 @@ cpufreq_plugin_construct (XfcePanelPlugin *plugin)
   cpuFreq->cpus = g_ptr_array_new ();
 
   cpufreq_read_config ();
-  cpuFreq->label.reset_size = TRUE;
-  cpuFreq->layout_changed = TRUE;
+  cpuFreq->label.reset_size = true;
+  cpuFreq->layout_changed = true;
 
 #ifdef __linux__
   if (!cpufreq_linux_init ())

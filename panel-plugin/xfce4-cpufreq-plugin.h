@@ -57,7 +57,7 @@ struct CpuInfo
   GList *available_freqs;
   GList *available_governors;
 
-  gboolean online;
+  bool online;
 };
 
 struct IntelPState
@@ -71,13 +71,13 @@ struct CpuFreqPluginOptions
 {
   guint       timeout;       /* time between refresh */
   gint        show_cpu;      /* cpu number in panel, or CPU_MIN/AVG/MAX */
-  gboolean    show_icon:1;
-  gboolean    show_label_governor:1;
-  gboolean    show_label_freq:1;
-  gboolean    show_warning:1;
-  gboolean    keep_compact:1;
-  gboolean    one_line:1;
-  gboolean    icon_color_freq:1;
+  bool        show_icon:1;
+  bool        show_label_governor:1;
+  bool        show_label_freq:1;
+  bool        show_warning:1;
+  bool        keep_compact:1;
+  bool        one_line:1;
+  bool        icon_color_freq:1;
   gchar      *fontname;
   gchar      *fontcolor;
   CpuFreqUnit unit;
@@ -106,10 +106,10 @@ struct CpuFreqPlugin
   struct {
     GtkWidget            *draw_area;
     PangoFontDescription *font_desc;
-    gboolean              reset_size;
+    bool                  reset_size;
     gchar                *text;
   } label;
-  gboolean layout_changed;
+  bool layout_changed;
 
   GdkPixbuf *base_icon;
   GdkPixbuf *current_icon_pixmap;
@@ -140,8 +140,8 @@ cpufreq_set_font (const gchar *fontname_or_null);
 void
 cpufreq_update_icon ();
 
-gboolean
-cpufreq_update_plugin (gboolean reset_label_size);
+bool
+cpufreq_update_plugin (bool reset_label_size);
 
 void
 cpufreq_write_config (XfcePanelPlugin *plugin);

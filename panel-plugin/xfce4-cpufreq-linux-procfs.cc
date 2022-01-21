@@ -29,7 +29,7 @@
 
 
 
-gboolean
+bool
 cpufreq_procfs_is_available ()
 {
   return g_file_test (PROCFS_BASE, G_FILE_TEST_EXISTS);
@@ -37,13 +37,13 @@ cpufreq_procfs_is_available ()
 
 
 
-gboolean
+bool
 cpufreq_procfs_read_cpuinfo ()
 {
   const char *const filePath = "/proc/cpuinfo";
 
   if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-    return FALSE;
+    return false;
 
   FILE *file = fopen (filePath, "r");
 
@@ -56,7 +56,7 @@ cpufreq_procfs_read_cpuinfo ()
       if (g_ascii_strncasecmp (line, "cpu MHz", 7) == 0)
       {
         CpuInfo *cpu = NULL;
-        gboolean add_cpu = FALSE;
+        bool add_cpu = false;
         gchar *freq;
 
         if (cpuFreq->cpus && cpuFreq->cpus->len > i)
@@ -65,8 +65,8 @@ cpufreq_procfs_read_cpuinfo ()
         if (cpu == NULL)
         {
           cpu = g_new0 (CpuInfo, 1);
-          cpu->online = TRUE;
-          add_cpu = TRUE;
+          cpu->online = true;
+          add_cpu = true;
         }
 
         freq = g_strrstr (line, ":");
@@ -91,19 +91,19 @@ cpufreq_procfs_read_cpuinfo ()
     fclose (file);
   }
 
-  return TRUE;
+  return true;
 }
 
 
 
-gboolean
+bool
 cpufreq_procfs_read ()
 {
   gchar *filePath = g_strdup (PROCFS_BASE);
   if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
   {
     g_free (filePath);
-    return FALSE;
+    return false;
   }
 
   FILE *file = fopen (filePath, "r");
@@ -117,7 +117,7 @@ cpufreq_procfs_read ()
       {
         CpuInfo *cpu = g_new0 (CpuInfo, 1);
         cpu->cur_governor = g_new (gchar, 20);
-        cpu->online = TRUE;
+        cpu->online = true;
 
         sscanf (line,
                 "CPU %*d %d kHz (%*d %%) - %d kHz (%*d %%) - %20s",
@@ -144,7 +144,7 @@ cpufreq_procfs_read ()
     if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
     {
       g_free (filePath);
-      return FALSE;
+      return false;
     }
 
     file = fopen (filePath, "r");
@@ -159,5 +159,5 @@ cpufreq_procfs_read ()
     g_free (filePath);
   }
 
-  return TRUE;
+  return true;
 }

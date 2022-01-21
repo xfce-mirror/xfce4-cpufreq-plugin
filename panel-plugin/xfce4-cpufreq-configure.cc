@@ -37,15 +37,15 @@ update_sensitivity (const CpuFreqPluginConfigure *configure)
 
   if (!options->show_label_freq && !options->show_label_governor)
   {
-    gtk_widget_set_sensitive (configure->display_icon, FALSE);
-    gtk_widget_set_sensitive (configure->fontcolor_hbox, FALSE);
-    gtk_widget_set_sensitive (configure->fontname_hbox, FALSE);
+    gtk_widget_set_sensitive (configure->display_icon, false);
+    gtk_widget_set_sensitive (configure->fontcolor_hbox, false);
+    gtk_widget_set_sensitive (configure->fontname_hbox, false);
   }
   else
   {
-    gtk_widget_set_sensitive (configure->display_icon, TRUE);
-    gtk_widget_set_sensitive (configure->fontcolor_hbox, TRUE);
-    gtk_widget_set_sensitive (configure->fontname_hbox, TRUE);
+    gtk_widget_set_sensitive (configure->display_icon, true);
+    gtk_widget_set_sensitive (configure->fontcolor_hbox, true);
+    gtk_widget_set_sensitive (configure->fontname_hbox, true);
   }
 
   gtk_widget_set_sensitive (configure->icon_color_freq, options->show_icon);
@@ -62,8 +62,8 @@ validate_configuration (const CpuFreqPluginConfigure *configure)
   {
     if (!options->show_icon)
     {
-      options->show_icon = TRUE;
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (configure->display_icon), TRUE);
+      options->show_icon = true;
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (configure->display_icon), true);
       update_sensitivity (configure);
     }
   }
@@ -99,7 +99,7 @@ check_button_changed (GtkWidget *button, const CpuFreqPluginConfigure *configure
 
   cpufreq_prepare_label ();
   cpufreq_update_icon ();
-  cpufreq_update_plugin (TRUE);
+  cpufreq_update_plugin (true);
 }
 
 
@@ -119,7 +119,7 @@ button_fontname_update(GtkWidget *button, gboolean update_plugin)
   }
 
   if (update_plugin)
-    cpufreq_update_plugin (TRUE);
+    cpufreq_update_plugin (true);
 }
 
 
@@ -146,11 +146,11 @@ button_fontname_clicked(GtkWidget *button, CpuFreqPluginConfigure *configure)
       g_free (fontname);
     }
 
-    button_fontname_update(button, TRUE);
+    button_fontname_update(button, true);
   }
 
   gtk_widget_destroy(GTK_WIDGET(fc));
-  return TRUE;
+  return true;
 }
 
 
@@ -160,18 +160,18 @@ button_fontname_pressed(GtkWidget *button, GdkEventButton *event,
                         CpuFreqPluginConfigure *configure)
 {
   if (event->type != GDK_BUTTON_PRESS)
-    return FALSE;
+    return false;
 
   /* right mouse click clears the font name and resets the button */
   if (event->button == 3 && cpuFreq->options->fontname)
   {
     cpufreq_set_font (NULL);
-    button_fontname_update(button, TRUE);
-    return TRUE;
+    button_fontname_update(button, true);
+    return true;
   }
 
   /* left mouse click will be handled in a different function */
-  return FALSE;
+  return false;
 }
 
 
@@ -191,7 +191,7 @@ button_fontcolor_update(GtkWidget *button, gboolean update_plugin)
   }
 
   if (update_plugin)
-    cpufreq_update_plugin (TRUE);
+    cpufreq_update_plugin (true);
 }
 
 
@@ -205,7 +205,7 @@ button_fontcolor_clicked (GtkWidget *button, void *data)
   cpuFreq->options->fontcolor = NULL;
   if (color.alpha != 0)
     cpuFreq->options->fontcolor = gdk_rgba_to_string (&color);
-  button_fontcolor_update (button, TRUE);
+  button_fontcolor_update (button, true);
 }
 
 
@@ -215,19 +215,19 @@ button_fontcolor_pressed(GtkWidget *button, GdkEventButton *event,
                          CpuFreqPluginConfigure *configure)
 {
   if (event->type != GDK_BUTTON_PRESS)
-    return FALSE;
+    return false;
 
   /* right mouse click clears the font color and resets the button */
   if (event->button == 3 && cpuFreq->options->fontcolor)
   {
     g_free (cpuFreq->options->fontcolor);
     cpuFreq->options->fontcolor = NULL;
-    button_fontcolor_update(button, TRUE);
-    return TRUE;
+    button_fontcolor_update(button, true);
+    return true;
   }
 
   /* left mouse click will be handled in a different function */
-  return FALSE;
+  return false;
 }
 
 
@@ -250,7 +250,7 @@ combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
     else if (selected == num_cpus + 2)
       options->show_cpu = CPU_MAX;
 
-    cpufreq_update_plugin (TRUE);
+    cpufreq_update_plugin (true);
   }
   else if (GTK_WIDGET (combo) == configure->combo_unit)
   {
@@ -263,7 +263,7 @@ combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
       break;
     }
 
-    cpufreq_update_plugin (TRUE);
+    cpufreq_update_plugin (true);
   }
 }
 
@@ -312,7 +312,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-cpufreq-plugin");
-  gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
+  gtk_window_set_keep_above (GTK_WINDOW (dialog), true);
   gtk_window_stick (GTK_WINDOW (dialog));
 
   g_object_set_data (G_OBJECT (cpuFreq->plugin), "configure", dialog);
@@ -325,18 +325,18 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
   /* monitor behaviours */
   frame = gtk_frame_new (NULL);
-  gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, false, true, 0);
   gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
 
   label = gtk_label_new (_("<b>Monitor</b>"));
   gtk_frame_set_label_widget (GTK_FRAME (frame), label);
-  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+  gtk_label_set_use_markup (GTK_LABEL (label), true);
 
   align = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_set_halign(align, GTK_ALIGN_START);
   gtk_widget_set_valign(align, GTK_ALIGN_CENTER);
-  gtk_widget_set_hexpand(align, TRUE);
-  gtk_widget_set_vexpand(align, TRUE);
+  gtk_widget_set_hexpand(align, true);
+  gtk_widget_set_vexpand(align, true);
 
   gtk_container_add (GTK_CONTAINER (frame), align);
   gtk_widget_set_margin_top (align, 6);
@@ -346,7 +346,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_container_add (GTK_CONTAINER (align), hbox);
 
   label = gtk_label_new_with_mnemonic (_("_Update interval:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), label, false, false, 0);
   gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
   gtk_size_group_add_widget (sg0, label);
 
@@ -354,24 +354,24 @@ cpufreq_configure (XfcePanelPlugin *plugin)
     gtk_spin_button_new_with_range (TIMEOUT_MIN, TIMEOUT_MAX, TIMEOUT_STEP);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), spinner);
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinner), (gdouble) options->timeout);
-  gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), spinner, false, false, 0);
   g_signal_connect (G_OBJECT (spinner), "value-changed",
                     G_CALLBACK (spinner_changed), configure);
 
   /* panel behaviours */
   frame = gtk_frame_new (NULL);
-  gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, false, true, 0);
   gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
 
   label = gtk_label_new (_("<b>Panel</b>"));
   gtk_frame_set_label_widget (GTK_FRAME (frame), label);
-  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+  gtk_label_set_use_markup (GTK_LABEL (label), true);
 
   align = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_set_halign(align, GTK_ALIGN_FILL);
   gtk_widget_set_valign(align, GTK_ALIGN_CENTER);
-  gtk_widget_set_hexpand(align, TRUE);
-  gtk_widget_set_vexpand(align, TRUE);
+  gtk_widget_set_hexpand(align, true);
+  gtk_widget_set_vexpand(align, true);
 
   gtk_container_add (GTK_CONTAINER (frame), align);
   gtk_widget_set_margin_top (align, 6);
@@ -382,29 +382,29 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
   /* font settings */
   hbox = configure->fontname_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), hbox, false, false, 0);
 
   label = gtk_label_new_with_mnemonic (_("_Font:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), label, false, false, 0);
   gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
   gtk_label_set_xalign (GTK_LABEL (label), 0);
   gtk_size_group_add_widget (sg0, label);
 
   button = configure->fontname = gtk_button_new ();
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
-  gtk_box_pack_start (GTK_BOX (hbox), button, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), button, true, true, 0);
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (button_fontname_clicked), configure);
   g_signal_connect (G_OBJECT (button), "button_press_event",
                     G_CALLBACK (button_fontname_pressed), configure);
-  button_fontname_update (button, FALSE);
+  button_fontname_update (button, false);
 
   /* font color */
   hbox = configure->fontcolor_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), hbox, false, false, 0);
 
   label = gtk_label_new_with_mnemonic (_("_Font color:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), label, false, false, 0);
   gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
   gtk_label_set_xalign (GTK_LABEL (label), 0);
   gtk_size_group_add_widget (sg0, label);
@@ -414,28 +414,28 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
   button = configure->fontcolor = gtk_color_button_new_with_rgba (&color);
   gtk_color_button_set_title (GTK_COLOR_BUTTON (button), _("Select font color"));
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), button, false, true, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
   g_signal_connect (button, "color-set", G_CALLBACK (button_fontcolor_clicked), NULL);
   g_signal_connect (button, "button_press_event",
                     G_CALLBACK (button_fontcolor_pressed), configure);
-  button_fontcolor_update (button, FALSE);
+  button_fontcolor_update (button, false);
 
   /* which cpu to show in panel */
   {
     GtkWidget *combo;
 
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, false, false, 0);
 
     label = gtk_label_new_with_mnemonic (_("_Display CPU:"));
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), label, false, false, 0);
     gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
     gtk_label_set_xalign (GTK_LABEL (label), 0);
     gtk_size_group_add_widget (sg0, label);
 
     combo = configure->combo_cpu = gtk_combo_box_text_new ();
-    gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), combo, false, true, 0);
     gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
 
     for (guint i = 0; i < cpuFreq->cpus->len; ++i)
@@ -479,16 +479,16 @@ cpufreq_configure (XfcePanelPlugin *plugin)
     GtkWidget *combo;
 
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, false, false, 0);
 
     label = gtk_label_new_with_mnemonic (_("Unit:"));
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), label, false, false, 0);
     gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
     gtk_label_set_xalign (GTK_LABEL (label), 0);
     gtk_size_group_add_widget (sg0, label);
 
     combo = configure->combo_unit = gtk_combo_box_text_new ();
-    gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), combo, false, true, 0);
     gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
 
     gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("Auto"));
@@ -517,32 +517,32 @@ cpufreq_configure (XfcePanelPlugin *plugin)
 
   /* check buttons for display widgets in panel */
   button = configure->keep_compact = gtk_check_button_new_with_mnemonic (_("_Keep compact"));
-  gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), button, false, false, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->keep_compact);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
   button = configure->one_line = gtk_check_button_new_with_mnemonic (_("Show text in a single _line"));
-  gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), button, false, false, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->one_line);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
   button = configure->display_icon = gtk_check_button_new_with_mnemonic (_("Show CPU _icon"));
-  gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), button, false, false, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->show_icon);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
   button = configure->icon_color_freq = gtk_check_button_new_with_mnemonic (_("Adjust CPU icon color according to frequency"));
-  gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), button, false, false, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->icon_color_freq);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
   button = configure->display_freq = gtk_check_button_new_with_mnemonic (_("Show CPU fre_quency"));
-  gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), button, false, false, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->show_label_freq);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 
   button = configure->display_governor = gtk_check_button_new_with_mnemonic (_("Show CPU _governor"));
-  gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), button, false, false, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->show_label_governor);
   g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
 

@@ -39,11 +39,11 @@ static void parse_sysfs_init (gint cpu_number, CpuInfo *cpu);
 
 static gchar* read_file_contents (const gchar *file);
 
-static gboolean cpufreq_cpu_exists (gint num);
+static bool cpufreq_cpu_exists (gint num);
 
 
 
-gboolean
+bool
 cpufreq_sysfs_is_available ()
 {
   return g_file_test (SYSFS_BASE"/cpu0/cpufreq", G_FILE_TEST_EXISTS);
@@ -80,7 +80,7 @@ cpufreq_sysfs_read_current (gint cpu_number)
 
 
 
-gboolean
+bool
 cpufreq_sysfs_read ()
 {
   gint count = 0;
@@ -88,13 +88,13 @@ cpufreq_sysfs_read ()
     count++;
 
   if (count == 0)
-    return FALSE;
+    return false;
 
   gint i = 0;
   while (i < count)
     parse_sysfs_init (i++, NULL);
 
-  return TRUE;
+  return true;
 }
 
 
@@ -169,12 +169,12 @@ static void
 parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 {
   gchar file[128];
-  gboolean add_cpu = FALSE;
+  bool add_cpu = false;
 
   if (cpu == NULL) {
     cpu = g_new0 (CpuInfo, 1);
-    cpu->online = TRUE;
-    add_cpu = TRUE;
+    cpu->online = true;
+    add_cpu = true;
   }
 
   /* read available cpu freqs */
@@ -233,7 +233,7 @@ read_file_contents (const gchar *file)
 
 
 
-static gboolean
+static bool
 cpufreq_cpu_exists (gint num)
 {
   gchar file[128];

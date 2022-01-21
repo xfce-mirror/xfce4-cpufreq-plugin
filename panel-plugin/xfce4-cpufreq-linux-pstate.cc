@@ -28,40 +28,11 @@
 
 #define PSTATE_BASE "/sys/devices/system/cpu/intel_pstate"
 
-static gboolean read_params ();
-
-
-
-gboolean
-cpufreq_pstate_is_available ()
-{
-  return g_file_test (PSTATE_BASE, G_FILE_TEST_EXISTS);
-}
-
-
-
-gboolean
-cpufreq_pstate_read ()
-{
-  /* gather intel pstate parameters */
-  if (!read_params ())
-    return FALSE;
-
-  /* now read the number of cpus and the remaining cpufreq info
-     for each of them from sysfs */
-  if (!cpufreq_sysfs_read ())
-    return FALSE;
-
-  return TRUE;
-}
-
-
-
-static gboolean
+static bool
 read_params ()
 {
   if (!g_file_test (PSTATE_BASE, G_FILE_TEST_EXISTS))
-    return FALSE;
+    return false;
 
   IntelPState *ips = g_slice_new0(IntelPState);
 
@@ -72,5 +43,30 @@ read_params ()
   g_slice_free (IntelPState, cpuFreq->intel_pstate);
   cpuFreq->intel_pstate = ips;
 
-  return TRUE;
+  return true;
+}
+
+
+
+bool
+cpufreq_pstate_is_available ()
+{
+  return g_file_test (PSTATE_BASE, G_FILE_TEST_EXISTS);
+}
+
+
+
+bool
+cpufreq_pstate_read ()
+{
+  /* gather intel pstate parameters */
+  if (!read_params ())
+    return false;
+
+  /* now read the number of cpus and the remaining cpufreq info
+     for each of them from sysfs */
+  if (!cpufreq_sysfs_read ())
+    return false;
+
+  return true;
 }
