@@ -1,6 +1,7 @@
 /*  xfce4-cpu-freq-plugin - panel plugin for cpu informations
  *
  *  Copyright (c) 2018 Andre Miranda <andreldm@xfce.org>
+ *  Copyright (c) 2022 Jan Ziak <0xe2.0x9a.0x9b@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -60,7 +61,7 @@ cpufreq_procfs_read_cpuinfo (void)
         gchar *freq;
 
         if (cpuFreq->cpus && cpuFreq->cpus->len > i)
-          cpu = g_ptr_array_index (cpuFreq->cpus, i);
+          cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
 
         if (cpu == NULL)
         {
@@ -141,7 +142,7 @@ cpufreq_procfs_read (void)
 
   for (guint i = 0; i < cpuFreq->cpus->len; i++)
   {
-    CpuInfo *cpu = g_ptr_array_index (cpuFreq->cpus, i);
+    auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
     filePath = g_strdup_printf ("/proc/sys/cpu/%d/speed", i);
 
     if (!g_file_test (filePath, G_FILE_TEST_EXISTS))

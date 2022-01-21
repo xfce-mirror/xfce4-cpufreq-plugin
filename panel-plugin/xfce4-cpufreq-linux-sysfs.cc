@@ -1,6 +1,7 @@
 /*  xfce4-cpu-freq-plugin - panel plugin for cpu informations
  *
  *  Copyright (c) 2018 Andre Miranda <andreldm@xfce.org>
+ *  Copyright (c) 2022 Jan Ziak <0xe2.0x9a.0x9b@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,11 +29,11 @@
 
 #define SYSFS_BASE  "/sys/devices/system/cpu"
 
-static void cpufreq_sysfs_read_int_list (gchar *file, GList **list);
+static void cpufreq_sysfs_read_int_list (const gchar *file, GList **list);
 
-static void cpufreq_sysfs_read_string (gchar *file, gchar **string);
+static void cpufreq_sysfs_read_string (const gchar *file, gchar **string);
 
-static void cpufreq_sysfs_read_string_list (gchar *file, GList **list);
+static void cpufreq_sysfs_read_string_list (const gchar *file, GList **list);
 
 static void parse_sysfs_init (gint cpu_number, CpuInfo *cpu);
 
@@ -53,10 +54,9 @@ cpufreq_sysfs_is_available (void)
 void
 cpufreq_sysfs_read_current (gint cpu_number)
 {
-  CpuInfo *cpu;
   gchar file[128];
 
-  cpu = g_ptr_array_index (cpuFreq->cpus, cpu_number);
+  auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, cpu_number);
 
   /* read current cpu freq */
   g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
@@ -100,7 +100,7 @@ cpufreq_sysfs_read (void)
 
 
 void
-cpufreq_sysfs_read_int (gchar *file, guint *intval)
+cpufreq_sysfs_read_int (const gchar *file, guint *intval)
 {
   gchar *contents = read_file_contents (file);
 
@@ -113,7 +113,7 @@ cpufreq_sysfs_read_int (gchar *file, guint *intval)
 
 
 static void
-cpufreq_sysfs_read_int_list (gchar *file, GList **list)
+cpufreq_sysfs_read_int_list (const gchar *file, GList **list)
 {
   gchar *contents = read_file_contents (file);
 
@@ -134,7 +134,7 @@ cpufreq_sysfs_read_int_list (gchar *file, GList **list)
 
 
 static void
-cpufreq_sysfs_read_string (gchar *file, gchar **string)
+cpufreq_sysfs_read_string (const gchar *file, gchar **string)
 {
   gchar *contents = read_file_contents (file);
 
@@ -147,7 +147,7 @@ cpufreq_sysfs_read_string (gchar *file, gchar **string)
 
 
 static void
-cpufreq_sysfs_read_string_list (gchar *file, GList **list)
+cpufreq_sysfs_read_string_list (const gchar *file, GList **list)
 {
   gchar *contents = read_file_contents (file);
 

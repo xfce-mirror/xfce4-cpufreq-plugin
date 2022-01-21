@@ -30,7 +30,7 @@ gboolean cpufreq_sysfs_read (void);
 
 void cpufreq_sysfs_read_current (gint cpu_number);
 
-void cpufreq_sysfs_read_int (gchar *file, guint *intval);
+void cpufreq_sysfs_read_int (const gchar *file, guint *intval);
 
 G_END_DECLS
 
