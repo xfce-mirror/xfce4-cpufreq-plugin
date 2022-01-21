@@ -22,14 +22,10 @@
 
 #include <glib.h>
 
-G_BEGIN_DECLS
+gboolean cpufreq_procfs_is_available ();
 
-gboolean cpufreq_procfs_is_available (void);
+gboolean cpufreq_procfs_read ();
 
-gboolean cpufreq_procfs_read (void);
-
-gboolean cpufreq_procfs_read_cpuinfo (void);
-
-G_END_DECLS
+gboolean cpufreq_procfs_read_cpuinfo ();
 
 #endif /* XFCE4_CPUFREQ_LINUX_PROCFS_H */

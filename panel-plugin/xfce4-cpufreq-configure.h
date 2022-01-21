@@ -41,15 +41,11 @@ typedef struct
   GtkWidget *fontname, *fontname_hbox;
 } CpuFreqPluginConfigure;
 
-G_BEGIN_DECLS
-
 void
 cpufreq_configure (XfcePanelPlugin *plugin);
 
 #define TIMEOUT_MIN	1
 #define TIMEOUT_MAX	10
 #define TIMEOUT_STEP	1
-
-G_END_DECLS
 
 #endif /* XFCE4_CPUFREQ_CONFIGURE_H */

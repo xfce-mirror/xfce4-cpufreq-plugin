@@ -22,8 +22,6 @@
 
 #include "xfce4-cpufreq-plugin.h"
 
-G_BEGIN_DECLS
-
 gchar*
 cpufreq_get_human_readable_freq (guint freq, CpuFreqUnit unit);
 
@@ -31,8 +29,6 @@ guint
 cpufreq_get_normal_freq (const gchar *freq);
 
 void
-cpufreq_warn_reset (void);
-
-G_END_DECLS
+cpufreq_warn_reset ();
 
 #endif /* XFCE4_CPUFREQ_UTILS_H */

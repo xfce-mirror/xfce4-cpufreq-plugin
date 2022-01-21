@@ -22,12 +22,8 @@
 
 #include <glib.h>
 
-G_BEGIN_DECLS
+gboolean cpufreq_pstate_is_available ();
 
-gboolean cpufreq_pstate_is_available (void);
-
-gboolean cpufreq_pstate_read (void);
-
-G_END_DECLS
+gboolean cpufreq_pstate_read ();
 
 #endif /* XFCE4_CPUFREQ_LINUX_PSTATE_H */

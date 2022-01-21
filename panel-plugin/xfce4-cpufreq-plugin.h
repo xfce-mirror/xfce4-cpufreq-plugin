@@ -128,19 +128,17 @@ typedef struct
 
 extern CpuFreqPlugin *cpuFreq;
 
-G_BEGIN_DECLS
+void
+cpufreq_prepare_label ();
 
 void
-cpufreq_prepare_label (void);
-
-void
-cpufreq_restart_timeout (void);
+cpufreq_restart_timeout ();
 
 void
 cpufreq_set_font (const gchar *fontname_or_null);
 
 void
-cpufreq_update_icon (void);
+cpufreq_update_icon ();
 
 gboolean
 cpufreq_update_plugin (gboolean reset_label_size);
@@ -150,7 +148,5 @@ cpufreq_write_config (XfcePanelPlugin *plugin);
 
 void
 cpuinfo_free (CpuInfo *cpu);
-
-G_END_DECLS
 
 #endif /* XFCE4_CPU_FREQ_H */

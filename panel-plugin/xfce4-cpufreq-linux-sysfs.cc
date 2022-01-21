@@ -44,7 +44,7 @@ static gboolean cpufreq_cpu_exists (gint num);
 
 
 gboolean
-cpufreq_sysfs_is_available (void)
+cpufreq_sysfs_is_available ()
 {
   return g_file_test (SYSFS_BASE"/cpu0/cpufreq", G_FILE_TEST_EXISTS);
 }
@@ -81,7 +81,7 @@ cpufreq_sysfs_read_current (gint cpu_number)
 
 
 gboolean
-cpufreq_sysfs_read (void)
+cpufreq_sysfs_read ()
 {
   gint count = 0, i = 0;
 

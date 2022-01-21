@@ -54,7 +54,7 @@ CpuFreqPlugin *cpuFreq = NULL;
  * The returned string should be freed with g_free().
  */
 static gchar*
-cpufreq_governors (void)
+cpufreq_governors ()
 {
   const gchar *array[cpuFreq->cpus->len];
   guint count = 0;
@@ -119,7 +119,7 @@ cpufreq_governors (void)
 
 
 static CpuInfo *
-cpufreq_cpus_calc_min (void)
+cpufreq_cpus_calc_min ()
 {
   gchar *const governors = cpufreq_governors ();
   gchar *const old_governor = cpuFreq->cpu_min ? g_strdup (cpuFreq->cpu_min->cur_governor) : g_strdup ("");
@@ -164,7 +164,7 @@ cpufreq_cpus_calc_min (void)
 
 
 static CpuInfo *
-cpufreq_cpus_calc_avg (void)
+cpufreq_cpus_calc_avg ()
 {
   gchar *const governors = cpufreq_governors ();
   gchar *const old_governor = cpuFreq->cpu_avg ? g_strdup (cpuFreq->cpu_avg->cur_governor) : g_strdup ("");
@@ -214,7 +214,7 @@ cpufreq_cpus_calc_avg (void)
 
 
 static CpuInfo *
-cpufreq_cpus_calc_max (void)
+cpufreq_cpus_calc_max ()
 {
   gchar *const governors = cpufreq_governors ();
   gchar *const old_governor = cpuFreq->cpu_max ? g_strdup (cpuFreq->cpu_max->cur_governor) : g_strdup ("");
@@ -314,7 +314,7 @@ cpufreq_update_label (const CpuInfo *cpu)
 
 
 static void
-cpufreq_widgets_layout (void)
+cpufreq_widgets_layout ()
 {
   GtkRequisition icon_size, label_size;
   GtkOrientation orientation = GTK_ORIENTATION_HORIZONTAL;
@@ -426,7 +426,7 @@ cpufreq_widgets_layout (void)
 
 
 static CpuInfo *
-cpufreq_current_cpu (void)
+cpufreq_current_cpu ()
 {
   CpuInfo *cpu = NULL;
 
@@ -654,7 +654,7 @@ cpufreq_update_tooltip (GtkWidget *widget,
 
 
 void
-cpufreq_restart_timeout (void)
+cpufreq_restart_timeout ()
 {
 #ifdef __linux__
   g_source_remove (cpuFreq->timeoutHandle);
@@ -702,7 +702,7 @@ cpufreq_mode_changed (XfcePanelPlugin *plugin,
 
 
 static void
-cpufreq_destroy_icons (void)
+cpufreq_destroy_icons ()
 {
   gsize i;
 
@@ -731,7 +731,7 @@ cpufreq_destroy_icons (void)
 
 
 void
-cpufreq_update_icon (void)
+cpufreq_update_icon ()
 {
   const CpuFreqPluginOptions *options = cpuFreq->options;
 
@@ -906,7 +906,7 @@ label_leave (GtkWidget *widget, GdkEvent *event, gpointer user_data)
 
 
 void
-cpufreq_prepare_label (void)
+cpufreq_prepare_label ()
 {
   if (cpuFreq->options->show_label_freq || cpuFreq->options->show_label_governor)
   {
@@ -942,7 +942,7 @@ cpufreq_prepare_label (void)
 
 
 static void
-cpufreq_widgets (void)
+cpufreq_widgets ()
 {
   gchar *css;
   GtkCssProvider *provider;
@@ -986,7 +986,7 @@ cpufreq_widgets (void)
 
 
 static void
-cpufreq_read_config (void)
+cpufreq_read_config ()
 {
   CpuFreqPluginOptions *const options = cpuFreq->options;
   XfceRc *rc;

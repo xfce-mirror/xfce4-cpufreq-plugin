@@ -30,7 +30,7 @@
 
 
 gboolean
-cpufreq_procfs_is_available (void)
+cpufreq_procfs_is_available ()
 {
   return g_file_test (PROCFS_BASE, G_FILE_TEST_EXISTS);
 }
@@ -38,7 +38,7 @@ cpufreq_procfs_is_available (void)
 
 
 gboolean
-cpufreq_procfs_read_cpuinfo (void)
+cpufreq_procfs_read_cpuinfo ()
 {
   const char *const filePath = "/proc/cpuinfo";
   FILE *file;
@@ -98,7 +98,7 @@ cpufreq_procfs_read_cpuinfo (void)
 
 
 gboolean
-cpufreq_procfs_read (void)
+cpufreq_procfs_read ()
 {
   FILE *file;
   gchar *filePath;

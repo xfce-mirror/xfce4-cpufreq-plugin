@@ -98,7 +98,7 @@ cpufreq_get_normal_freq (const gchar *freq)
 
 
 void
-cpufreq_warn_reset (void)
+cpufreq_warn_reset ()
 {
   xfce_dialog_show_warning (NULL, NULL,
     _("The CPU displayed by the XFCE cpufreq plugin has been reset to a default value"));
