@@ -34,19 +34,22 @@
 static bool
 read_params ()
 {
-  if (!g_file_test (PSTATE_BASE, G_FILE_TEST_EXISTS))
+  if (g_file_test (PSTATE_BASE, G_FILE_TEST_EXISTS))
+  {
+    auto ips = xfce4::make<IntelPState>();
+
+    cpufreq_sysfs_read_uint (PSTATE_BASE "/min_perf_pct", &ips->min_perf_pct);
+    cpufreq_sysfs_read_uint (PSTATE_BASE "/max_perf_pct", &ips->max_perf_pct);
+    cpufreq_sysfs_read_uint (PSTATE_BASE "/no_turbo", &ips->no_turbo);
+
+    cpuFreq->intel_pstate = ips;
+    return true;
+  }
+  else
+  {
+    cpuFreq->intel_pstate = nullptr;
     return false;
-
-  auto ips = new IntelPState();
-
-  cpufreq_sysfs_read_uint (PSTATE_BASE "/min_perf_pct", &ips->min_perf_pct);
-  cpufreq_sysfs_read_uint (PSTATE_BASE "/max_perf_pct", &ips->max_perf_pct);
-  cpufreq_sysfs_read_uint (PSTATE_BASE "/no_turbo", &ips->no_turbo);
-
-  delete cpuFreq->intel_pstate;
-  cpuFreq->intel_pstate = ips;
-
-  return true;
+  }
 }
 
 

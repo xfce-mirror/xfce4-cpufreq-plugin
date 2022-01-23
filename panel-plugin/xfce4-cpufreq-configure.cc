@@ -36,7 +36,7 @@
 static void
 update_sensitivity (const CpuFreqPluginConfigure *configure)
 {
-  const CpuFreqPluginOptions *options = cpuFreq->options;
+  auto options = cpuFreq->options;
 
   if (!options->show_label_freq && !options->show_label_governor)
   {
@@ -59,7 +59,7 @@ update_sensitivity (const CpuFreqPluginConfigure *configure)
 static void
 validate_configuration (const CpuFreqPluginConfigure *configure)
 {
-  CpuFreqPluginOptions *options = cpuFreq->options;
+  auto options = cpuFreq->options;
 
   if (!options->show_label_freq && !options->show_label_governor)
   {
@@ -77,7 +77,7 @@ validate_configuration (const CpuFreqPluginConfigure *configure)
 static void
 check_button_changed (GtkWidget *button, const CpuFreqPluginConfigure *configure)
 {
-  CpuFreqPluginOptions *options = cpuFreq->options;
+  auto options = cpuFreq->options;
 
   if (button == configure->display_icon)
     options->show_icon = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
@@ -237,7 +237,8 @@ button_fontcolor_pressed(GtkWidget *button, GdkEventButton *event,
 static void
 combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 {
-  CpuFreqPluginOptions *const options = cpuFreq->options;
+  auto options = cpuFreq->options;
+
   guint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
 
   if (GTK_WIDGET (combo) == configure->combo_cpu)
@@ -297,7 +298,7 @@ cpufreq_configure_response (GtkWidget *dialog, int response, CpuFreqPluginConfig
 void
 cpufreq_configure (XfcePanelPlugin *plugin)
 {
-  CpuFreqPluginOptions *const options = cpuFreq->options;
+  auto options = cpuFreq->options;
   GtkWidget *frame, *align, *label, *vbox, *hbox;
   GtkWidget *spinner, *button;
   GdkRGBA color = {};

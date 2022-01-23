@@ -28,6 +28,9 @@
 #include <vector>
 #include "xfce4++/util.h"
 
+using xfce4::Ptr;
+using xfce4::Ptr0;
+
 #define PLUGIN_WEBSITE ("https://docs.xfce.org/panel-plugins/xfce4-cpufreq-plugin")
 
 #define CPU_MIN (-1)
@@ -95,15 +98,15 @@ struct CpuFreqPlugin
   gint panel_rows = 0;
 
   /* Array with all CPUs */
-  std::vector<CpuInfo*> cpus;
+  std::vector<Ptr<CpuInfo>> cpus;
 
   /* Calculated values */
-  CpuInfo *cpu_min = nullptr;
-  CpuInfo *cpu_avg = nullptr;
-  CpuInfo *cpu_max = nullptr;
+  Ptr0<CpuInfo> cpu_min;
+  Ptr0<CpuInfo> cpu_avg;
+  Ptr0<CpuInfo> cpu_max;
 
   /* Intel P-State parameters */
-  IntelPState *intel_pstate = nullptr;
+  Ptr0<IntelPState> intel_pstate;
 
   /* Widgets */
   GtkWidget *button = nullptr;
@@ -128,7 +131,8 @@ struct CpuFreqPlugin
    *  resolution: range / FREQ_HIST_BINS = 62.5 MHz */
   guint16 freq_hist[FREQ_HIST_BINS] = {};
 
-  CpuFreqPluginOptions *const options = new CpuFreqPluginOptions();
+  const Ptr<CpuFreqPluginOptions> options = xfce4::make<CpuFreqPluginOptions>();
+
   gint timeoutHandle = 0;
 
   CpuFreqPlugin(XfcePanelPlugin *plugin);

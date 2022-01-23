@@ -41,7 +41,7 @@ static void cpufreq_sysfs_read_string (const std::string &file, std::string &str
 
 static void cpufreq_sysfs_read_list (const std::string &file, std::vector<std::string> &list);
 
-static void parse_sysfs_init (gint cpu_number, CpuInfo *cpu);
+static void parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu);
 
 static gchar* read_file_contents (const std::string &file);
 
@@ -60,9 +60,8 @@ cpufreq_sysfs_is_available ()
 void
 cpufreq_sysfs_read_current (gint cpu_number)
 {
+  Ptr<CpuInfo> cpu = cpuFreq->cpus[cpu_number];
   std::string file;
-
-  CpuInfo *cpu = cpuFreq->cpus[cpu_number];
 
   /* read current cpu freq */
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
@@ -80,7 +79,7 @@ cpufreq_sysfs_read_current (gint cpu_number)
     file = xfce4::sprintf (SYSFS_BASE "/cpu%i/online", cpu_number);
     cpufreq_sysfs_read_uint (file, &online);
 
-    cpu->online = online != 0;
+    cpu->online = (online != 0);
   }
 }
 
@@ -98,7 +97,7 @@ cpufreq_sysfs_read ()
 
   gint i = 0;
   while (i < count)
-    parse_sysfs_init (i++, NULL);
+    parse_sysfs_init (i++, nullptr);
 
   return true;
 }
@@ -169,19 +168,19 @@ cpufreq_sysfs_read_list (const std::string &file, std::vector<std::string> &list
 
 
 static void
-parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
+parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
 {
   std::string file;
   bool add_cpu = false;
 
-  if (cpu == NULL) {
-    cpu = new CpuInfo();
+  if (cpu == nullptr) {
+    cpu = xfce4::make<CpuInfo>();
     cpu->online = true;
     add_cpu = true;
   }
 
   /* read available cpu freqs */
-  if (cpuFreq->intel_pstate == NULL) {
+  if (cpuFreq->intel_pstate == nullptr) {
     file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_available_frequencies", cpu_number);
     cpufreq_sysfs_read_list (file, cpu->available_freqs);
   }
@@ -211,7 +210,7 @@ parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
   cpufreq_sysfs_read_uint (file, &cpu->min_freq);
 
   if (add_cpu)
-    cpuFreq->cpus.push_back(cpu);
+    cpuFreq->cpus.push_back(cpu.toPtr());
 }
 
 

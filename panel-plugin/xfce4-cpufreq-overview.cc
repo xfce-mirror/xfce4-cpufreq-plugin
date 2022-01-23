@@ -42,7 +42,7 @@
 
 
 static void
-cpufreq_overview_add (const CpuInfo *cpu, guint cpu_number, GtkWidget *dialog_hbox)
+cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget *dialog_hbox)
 {
   GtkWidget *hbox, *label;
   const CpuFreqUnit unit = cpuFreq->options->unit;
@@ -269,7 +269,7 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
     gtk_container_set_border_width (GTK_CONTAINER (dialog_hbox), BORDER * 2);
 
     for (size_t j = i; j < cpufreq->cpus.size() && j < i + step; j++) {
-      const CpuInfo *cpu = cpufreq->cpus[j];
+      Ptr<const CpuInfo> cpu = cpufreq->cpus[j];
       cpufreq_overview_add (cpu, j, dialog_hbox);
 
       if (j + 1 < cpufreq->cpus.size() && j + 1 == i + step) {
