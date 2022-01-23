@@ -58,33 +58,27 @@ cpufreq_procfs_read_cpuinfo ()
     {
       if (g_ascii_strncasecmp (line, "cpu MHz", 7) == 0)
       {
-        CpuInfo *cpu = NULL;
+        Ptr0<CpuInfo> cpu;
         bool add_cpu = false;
 
         if (i < cpuFreq->cpus.size())
           cpu = cpuFreq->cpus[i];
 
-        if (cpu == NULL)
+        if (cpu == nullptr)
         {
-          cpu = new CpuInfo();
+          cpu = xfce4::make<CpuInfo>();
           cpu->online = true;
           add_cpu = true;
         }
 
         gchar *freq = g_strrstr (line, ":");
-
         if (freq == NULL)
-        {
-          if (add_cpu)
-            delete cpu;
           break;
-        }
-
         sscanf (++freq, "%d.", &cpu->cur_freq);
         cpu->cur_freq *= 1000;
 
         if (add_cpu)
-          cpuFreq->cpus.push_back(cpu);
+          cpuFreq->cpus.push_back(cpu.toPtr());
 
         ++i;
       }
@@ -115,7 +109,7 @@ cpufreq_procfs_read ()
     {
       if (g_ascii_strncasecmp (line, "CPU", 3) == 0)
       {
-        auto cpu = new CpuInfo();
+        auto cpu = xfce4::make<CpuInfo>();
         cpu->online = true;
 
         char gov[20];
@@ -138,7 +132,7 @@ cpufreq_procfs_read ()
 
   for (size_t i = 0; i < cpuFreq->cpus.size(); i++)
   {
-    CpuInfo *cpu = cpuFreq->cpus[i];
+    const Ptr<CpuInfo> &cpu = cpuFreq->cpus[i];
     filePath = xfce4::sprintf ("/proc/sys/cpu/%zu/speed", i);
 
     if (!g_file_test (filePath.c_str(), G_FILE_TEST_EXISTS))

@@ -96,12 +96,7 @@ cpufreq_update_cpus (gpointer data)
   else if (cpufreq_procfs_is_available ())
   {
     /* First we delete the cpus and then read the /proc/cpufreq file again */
-    while (!cpuFreq->cpus.empty())
-    {
-      auto cpu = cpuFreq->cpus.back();
-      cpuFreq->cpus.pop_back();
-      delete cpu;
-    }
+    cpuFreq->cpus.clear();
     cpufreq_procfs_read ();
   }
   else
@@ -110,7 +105,7 @@ cpufreq_update_cpus (gpointer data)
     return false;
   }
 
-  for (CpuInfo *cpu : cpuFreq->cpus)
+  for (const Ptr<CpuInfo> &cpu : cpuFreq->cpus)
   {
     guint cur_freq = cpu->cur_freq;
 

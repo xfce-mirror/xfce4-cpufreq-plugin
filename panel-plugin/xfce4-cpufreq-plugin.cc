@@ -61,7 +61,7 @@ cpufreq_governors ()
   /* Governors (in alphabetical ASCII order) */
   std::set<std::string> set;
 
-  for (const CpuInfo *cpu : cpuFreq->cpus)
+  for (const Ptr<CpuInfo> &cpu : cpuFreq->cpus)
     if (cpu->online && !cpu->cur_governor.empty())
       set.insert(cpu->cur_governor);
 
@@ -78,7 +78,7 @@ cpufreq_governors ()
 
 
 
-static CpuInfo *
+static Ptr<CpuInfo>
 cpufreq_cpus_calc_min ()
 {
   const std::string governors = cpufreq_governors ();
@@ -86,7 +86,7 @@ cpufreq_cpus_calc_min ()
   guint freq = G_MAXUINT, max_freq_measured = G_MAXUINT, max_freq_nominal = G_MAXUINT, min_freq = G_MAXUINT;
   guint count = 0;
 
-  for (const CpuInfo *cpu : cpuFreq->cpus)
+  for (const Ptr<CpuInfo> &cpu : cpuFreq->cpus)
   {
     if (!cpu->online)
       continue;
@@ -101,8 +101,7 @@ cpufreq_cpus_calc_min ()
   if (count == 0)
     freq = max_freq_measured = max_freq_nominal = min_freq = 0;
 
-  delete cpuFreq->cpu_min;
-  cpuFreq->cpu_min = new CpuInfo();
+  cpuFreq->cpu_min = xfce4::make<CpuInfo>();
   cpuFreq->cpu_min->cur_freq = freq;
   cpuFreq->cpu_min->cur_governor = !governors.empty() ? governors : _("current min");
   cpuFreq->cpu_min->max_freq_measured = max_freq_measured;
@@ -115,12 +114,12 @@ cpufreq_cpus_calc_min ()
     cpuFreq->layout_changed = true;
   }
 
-  return cpuFreq->cpu_min;
+  return cpuFreq->cpu_min.toPtr();
 }
 
 
 
-static CpuInfo *
+static Ptr<CpuInfo>
 cpufreq_cpus_calc_avg ()
 {
   const std::string governors = cpufreq_governors ();
@@ -128,7 +127,7 @@ cpufreq_cpus_calc_avg ()
   guint freq = 0, max_freq_measured = 0, max_freq_nominal = 0, min_freq = 0;
   guint count = 0;
 
-  for (const CpuInfo *cpu : cpuFreq->cpus)
+  for (const Ptr<CpuInfo> &cpu : cpuFreq->cpus)
   {
     if (!cpu->online)
       continue;
@@ -148,8 +147,7 @@ cpufreq_cpus_calc_avg ()
     min_freq /= count;
   }
 
-  delete cpuFreq->cpu_avg;
-  cpuFreq->cpu_avg = new CpuInfo();
+  cpuFreq->cpu_avg = xfce4::make<CpuInfo>();
   cpuFreq->cpu_avg->cur_freq = freq;
   cpuFreq->cpu_avg->cur_governor = !governors.empty() ? governors : _("current avg");
   cpuFreq->cpu_avg->max_freq_measured = max_freq_measured;
@@ -162,19 +160,19 @@ cpufreq_cpus_calc_avg ()
     cpuFreq->layout_changed = true;
   }
 
-  return cpuFreq->cpu_avg;
+  return cpuFreq->cpu_avg.toPtr();
 }
 
 
 
-static CpuInfo *
+static Ptr<CpuInfo>
 cpufreq_cpus_calc_max ()
 {
   const std::string governors = cpufreq_governors ();
   const std::string old_governor = cpuFreq->cpu_max ? cpuFreq->cpu_max->cur_governor : std::string();
   guint freq = 0, max_freq_measured = 0, max_freq_nominal = 0, min_freq = 0;
 
-  for (const CpuInfo *cpu : cpuFreq->cpus)
+  for (const Ptr<CpuInfo> &cpu : cpuFreq->cpus)
   {
     if (!cpu->online)
       continue;
@@ -185,8 +183,7 @@ cpufreq_cpus_calc_max ()
     min_freq = MAX (min_freq, cpu->min_freq);
   }
 
-  delete cpuFreq->cpu_max;
-  cpuFreq->cpu_max = new CpuInfo();
+  cpuFreq->cpu_max = xfce4::make<CpuInfo>();
   cpuFreq->cpu_max->cur_freq = freq;
   cpuFreq->cpu_max->cur_governor = !governors.empty() ? governors : _("current max");
   cpuFreq->cpu_max->max_freq_measured = max_freq_measured;
@@ -199,15 +196,15 @@ cpufreq_cpus_calc_max ()
     cpuFreq->layout_changed = true;
   }
 
-  return cpuFreq->cpu_max;
+  return cpuFreq->cpu_max.toPtr();
 }
 
 
 
 static void
-cpufreq_update_label (const CpuInfo *cpu)
+cpufreq_update_label (const Ptr<CpuInfo> &cpu)
 {
-  const CpuFreqPluginOptions *const options = cpuFreq->options;
+  auto options = cpuFreq->options;
 
   if (!cpuFreq->label.draw_area)
     return;
@@ -367,7 +364,7 @@ cpufreq_widgets_layout ()
 
 
 
-static CpuInfo *
+static Ptr0<CpuInfo>
 cpufreq_current_cpu ()
 {
   if (G_UNLIKELY (cpuFreq->options->show_cpu >= (ssize_t) cpuFreq->cpus.size()))
@@ -383,7 +380,7 @@ cpufreq_current_cpu ()
     cpufreq_warn_reset ();
   }
 
-  CpuInfo *cpu = NULL;
+  Ptr0<CpuInfo> cpu;
   switch (cpuFreq->options->show_cpu)
   {
   case CPU_MIN:
@@ -406,7 +403,7 @@ cpufreq_current_cpu ()
 
 
 static void
-cpufreq_update_pixmap (CpuInfo *cpu)
+cpufreq_update_pixmap (const Ptr<CpuInfo> &cpu)
 {
   const gdouble min_range = 100*1000; /* frequency in kHz */
 
@@ -516,9 +513,11 @@ cpufreq_update_pixmap (CpuInfo *cpu)
 bool
 cpufreq_update_plugin (bool reset_label_size)
 {
-  CpuInfo *cpu = cpufreq_current_cpu ();
-  if (!cpu)
+  Ptr0<CpuInfo> cpu0 = cpufreq_current_cpu ();
+  if (!cpu0)
     return false;
+
+  Ptr<CpuInfo> cpu = cpu0.toPtr();
 
   if (reset_label_size)
   {
@@ -545,12 +544,12 @@ cpufreq_update_tooltip (GtkWidget *widget,
                         GtkTooltip *tooltip,
                         CpuFreqPlugin *_unused)
 {
-  const CpuFreqPluginOptions *const options = cpuFreq->options;
+  auto options = cpuFreq->options;
 
-  const CpuInfo *cpu = cpufreq_current_cpu ();
+  Ptr0<CpuInfo> cpu = cpufreq_current_cpu ();
 
   std::string tooltip_msg;
-  if (G_UNLIKELY (cpu == NULL))
+  if (G_UNLIKELY (cpu == nullptr))
   {
     tooltip_msg = _("No CPU information available.");
   }
@@ -611,7 +610,7 @@ cpufreq_mode_changed (XfcePanelPlugin *plugin,
 void
 cpufreq_update_icon ()
 {
-  const CpuFreqPluginOptions *options = cpuFreq->options;
+  auto options = cpuFreq->options;
 
   cpuFreq->destroy_icons();
 
@@ -851,7 +850,7 @@ cpufreq_widgets ()
 static void
 cpufreq_read_config ()
 {
-  CpuFreqPluginOptions *const options = cpuFreq->options;
+  auto options = cpuFreq->options;
 
   gchar *file = xfce_panel_plugin_lookup_rc_file (cpuFreq->plugin);
   if (G_UNLIKELY (!file))
@@ -907,7 +906,7 @@ cpufreq_read_config ()
 void
 cpufreq_write_config (XfcePanelPlugin *plugin)
 {
-  const CpuFreqPluginOptions *const options = cpuFreq->options;
+  auto options = cpuFreq->options;
 
   gchar *file = xfce_panel_plugin_save_location (plugin, true);
   if (G_UNLIKELY (!file))
@@ -1040,19 +1039,8 @@ CpuFreqPlugin::CpuFreqPlugin(XfcePanelPlugin *_plugin) : plugin(_plugin)
 
 CpuFreqPlugin::~CpuFreqPlugin()
 {
-  for (CpuInfo *cpu : cpus)
-    delete cpu;
-
-  delete cpu_avg;
-  delete cpu_max;
-  delete cpu_min;
-
-  delete intel_pstate;
-
   if (label.font_desc)
     pango_font_description_free (label.font_desc);
-
-  delete options;
 
   destroy_icons();
 }
