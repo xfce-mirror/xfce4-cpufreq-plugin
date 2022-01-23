@@ -26,8 +26,6 @@
 #endif
 
 #include <libxfce4util/libxfce4util.h>
-#include "xfce4++/util/collection-utils.h"
-#include "xfce4++/util/gtk.h"
 #include "xfce4++/util/rc.h"
 #include "xfce4++/util/string-utils.h"
 
