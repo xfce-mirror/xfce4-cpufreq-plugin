@@ -51,6 +51,8 @@ struct Rc final {
     bool         read_bool_entry (const string &key, bool          fallback       ) const G_GNUC_WARN_UNUSED_RESULT;
     Ptr0<string> read_entry      (const char   *key, const char   *fallback_orNull) const G_GNUC_WARN_UNUSED_RESULT;
     Ptr0<string> read_entry      (const string &key, const char   *fallback_orNull) const G_GNUC_WARN_UNUSED_RESULT;
+    string       read_entry      (const char   *key, const string &fallback       ) const G_GNUC_WARN_UNUSED_RESULT;
+    string       read_entry      (const string &key, const string &fallback       ) const G_GNUC_WARN_UNUSED_RESULT;
     float        read_float_entry(const char   *key, float         fallback       ) const G_GNUC_WARN_UNUSED_RESULT;
     float        read_float_entry(const string &key, float         fallback       ) const G_GNUC_WARN_UNUSED_RESULT;
     gint         read_int_entry  (const char   *key, gint          fallback       ) const G_GNUC_WARN_UNUSED_RESULT;

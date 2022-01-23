@@ -23,6 +23,7 @@
 
 #include <glib.h>
 #include <string>
+#include <vector>
 #include "optional.h"
 
 namespace xfce4 {
@@ -49,6 +50,8 @@ gulong parse_ulong(gchar **s, unsigned base = 0, bool *error = nullptr);
 
 bool        ends_with  (const std::string &s, const char        *suffix);
 bool        ends_with  (const std::string &s, const std::string &suffix);
+std::string join       (const std::vector<std::string> &strings, const char        *separator);
+std::string join       (const std::vector<std::string> &strings, const std::string &separator);
 std::string sprintf    (const char *fmt, ...) G_GNUC_PRINTF(1, 2);
 bool        starts_with(const std::string &s, const char        *prefix);
 bool        starts_with(const std::string &s, const std::string &prefix);

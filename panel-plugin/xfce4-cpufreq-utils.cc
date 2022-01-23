@@ -19,6 +19,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+/* The fixes file has to be included before any other #include directives */
+#include "xfce4++/util/fixes.h"
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -30,7 +33,7 @@
 
 
 
-gchar*
+std::string
 cpufreq_get_human_readable_freq (guint freq, CpuFreqUnit unit)
 {
   guint div;
@@ -63,34 +66,16 @@ cpufreq_get_human_readable_freq (guint freq, CpuFreqUnit unit)
     freq_unit = "GHz";
   }
   
-  gchar *readable_freq;
+  std::string readable_freq;
   if (div == 1000)
   {
     guint rounded_freq = (freq + div/2) / div;
-    readable_freq = g_strdup_printf ("%u %s", rounded_freq, freq_unit);
+    readable_freq = xfce4::sprintf ("%u %s", rounded_freq, freq_unit);
   }
   else
-    readable_freq = g_strdup_printf ("%3.2f %s", (gfloat) freq / div, freq_unit);
+    readable_freq = xfce4::sprintf ("%3.2f %s", (gfloat) freq / div, freq_unit);
 
   return readable_freq;
-}
-
-
-
-guint
-cpufreq_get_normal_freq (const gchar *freq)
-{
-  gchar **tokens = g_strsplit (freq, " ", 0);
-
-  guint result;
-  if (g_ascii_strcasecmp (tokens[1], "GHz") == 0)
-    result = (guint) (atof (tokens[0]) * 1000 * 1000);
-  else
-    result = (guint) (atof (tokens[0]) * 1000);
-
-  g_strfreev (tokens);
-
-  return result;
 }
 
 

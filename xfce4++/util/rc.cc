@@ -71,6 +71,18 @@ Ptr0<std::string> Rc::read_entry(const string &key, const char *fallback_orNull)
     return read_entry(key.c_str(), fallback_orNull);
 }
 
+std::string Rc::read_entry(const char *key, const string &fallback) const {
+    const gchar *e = xfce_rc_read_entry(rc, key, fallback.c_str());
+    if(e)
+        return e;
+    else
+        return fallback;
+}
+
+std::string Rc::read_entry(const string &key, const string &fallback) const {
+    return read_entry(key.c_str(), fallback);
+}
+
 float Rc::read_float_entry(const char *key, float fallback) const {
     Ptr0<string> e = read_entry(key, nullptr);
     if(e) {

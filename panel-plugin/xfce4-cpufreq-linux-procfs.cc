@@ -18,6 +18,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+/* The fixes file has to be included before any other #include directives */
+#include "xfce4++/util/fixes.h"
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -57,24 +60,23 @@ cpufreq_procfs_read_cpuinfo ()
       {
         CpuInfo *cpu = NULL;
         bool add_cpu = false;
-        gchar *freq;
 
-        if (cpuFreq->cpus && cpuFreq->cpus->len > i)
-          cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
+        if (i < cpuFreq->cpus.size())
+          cpu = cpuFreq->cpus[i];
 
         if (cpu == NULL)
         {
-          cpu = g_new0 (CpuInfo, 1);
+          cpu = new CpuInfo();
           cpu->online = true;
           add_cpu = true;
         }
 
-        freq = g_strrstr (line, ":");
+        gchar *freq = g_strrstr (line, ":");
 
         if (freq == NULL)
         {
           if (add_cpu)
-            cpuinfo_free (cpu);
+            delete cpu;
           break;
         }
 
@@ -82,7 +84,7 @@ cpufreq_procfs_read_cpuinfo ()
         cpu->cur_freq *= 1000;
 
         if (add_cpu)
-          g_ptr_array_add (cpuFreq->cpus, cpu);
+          cpuFreq->cpus.push_back(cpu);
 
         ++i;
       }
@@ -99,14 +101,12 @@ cpufreq_procfs_read_cpuinfo ()
 bool
 cpufreq_procfs_read ()
 {
-  gchar *filePath = g_strdup (PROCFS_BASE);
-  if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-  {
-    g_free (filePath);
-    return false;
-  }
+  std::string filePath = PROCFS_BASE;
 
-  FILE *file = fopen (filePath, "r");
+  if (!g_file_test (filePath.c_str(), G_FILE_TEST_EXISTS))
+    return false;
+
+  FILE *file = fopen (filePath.c_str(), "r");
 
   if (file)
   {
@@ -115,39 +115,36 @@ cpufreq_procfs_read ()
     {
       if (g_ascii_strncasecmp (line, "CPU", 3) == 0)
       {
-        CpuInfo *cpu = g_new0 (CpuInfo, 1);
-        cpu->cur_governor = g_new (gchar, 20);
+        auto cpu = new CpuInfo();
         cpu->online = true;
 
+        char gov[20];
         sscanf (line,
                 "CPU %*d %d kHz (%*d %%) - %d kHz (%*d %%) - %20s",
                 &cpu->min_freq,
                 &cpu->max_freq_nominal,
-                cpu->cur_governor);
+                gov);
         cpu->min_freq *= 1000;
         cpu->max_freq_nominal *= 1000;
+        gov[G_N_ELEMENTS(gov)-1] = '\0';
+        cpu->cur_governor = gov;
 
-        g_ptr_array_add (cpuFreq->cpus, cpu);
+        cpuFreq->cpus.push_back(cpu);
       }
     }
 
     fclose (file);
   }
 
-  g_free (filePath);
-
-  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  for (size_t i = 0; i < cpuFreq->cpus.size(); i++)
   {
-    auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
-    filePath = g_strdup_printf ("/proc/sys/cpu/%d/speed", i);
+    CpuInfo *cpu = cpuFreq->cpus[i];
+    filePath = xfce4::sprintf ("/proc/sys/cpu/%zu/speed", i);
 
-    if (!g_file_test (filePath, G_FILE_TEST_EXISTS))
-    {
-      g_free (filePath);
+    if (!g_file_test (filePath.c_str(), G_FILE_TEST_EXISTS))
       return false;
-    }
 
-    file = fopen (filePath, "r");
+    file = fopen (filePath.c_str(), "r");
 
     if (file)
     {
@@ -155,8 +152,6 @@ cpufreq_procfs_read ()
         cpu->cur_freq = 0;
       fclose (file);
     }
-
-    g_free (filePath);
   }
 
   return true;

@@ -48,6 +48,29 @@ bool ends_with(const std::string &s, const std::string &suffix) {
     }
 }
 
+std::string join(const std::vector<std::string> &strings, const char *separator) {
+    return join(strings, std::string(separator));
+}
+
+std::string join(const std::vector<std::string> &strings, const std::string &separator) {
+    size_t size = 0;
+    for (size_t i = 0; i < strings.size(); i++) {
+        if(i) {
+            size += separator.size();
+        }
+        size += strings[i].size();
+    }
+    std::string s;
+    s.reserve(size);
+    for (size_t i = 0; i < strings.size(); i++) {
+        if(i) {
+            s.append(separator);
+        }
+        s.append(strings[i]);
+    }
+    return s;
+}
+
 template<typename T, typename fT>
 static T parse_number(gchar **s, unsigned base, bool *error, fT (*f)(const gchar*, gchar**, guint)) {
     gchar *end;

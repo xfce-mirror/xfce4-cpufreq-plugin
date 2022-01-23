@@ -18,6 +18,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+/* The fixes file has to be included before any other #include directives */
+#include "xfce4++/util/fixes.h"
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -34,13 +37,13 @@ read_params ()
   if (!g_file_test (PSTATE_BASE, G_FILE_TEST_EXISTS))
     return false;
 
-  IntelPState *ips = g_slice_new0(IntelPState);
+  auto ips = new IntelPState();
 
-  cpufreq_sysfs_read_int (PSTATE_BASE "/min_perf_pct", &ips->min_perf_pct);
-  cpufreq_sysfs_read_int (PSTATE_BASE "/max_perf_pct", &ips->max_perf_pct);
-  cpufreq_sysfs_read_int (PSTATE_BASE "/no_turbo", &ips->no_turbo);
+  cpufreq_sysfs_read_uint (PSTATE_BASE "/min_perf_pct", &ips->min_perf_pct);
+  cpufreq_sysfs_read_uint (PSTATE_BASE "/max_perf_pct", &ips->max_perf_pct);
+  cpufreq_sysfs_read_uint (PSTATE_BASE "/no_turbo", &ips->no_turbo);
 
-  g_slice_free (IntelPState, cpuFreq->intel_pstate);
+  delete cpuFreq->intel_pstate;
   cpuFreq->intel_pstate = ips;
 
   return true;
