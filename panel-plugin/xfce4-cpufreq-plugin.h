@@ -24,6 +24,9 @@
 
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
+#include <string>
+#include <vector>
+#include "xfce4++/util.h"
 
 #define PLUGIN_WEBSITE ("https://docs.xfce.org/panel-plugins/xfce4-cpufreq-plugin")
 
@@ -47,83 +50,92 @@ enum CpuFreqUnit
 
 struct CpuInfo
 {
-  guint  cur_freq;  /* frequency in kHz */
-  guint  max_freq_measured;
-  guint  max_freq_nominal;
-  guint  min_freq;
-  gchar  *cur_governor;
-  gchar  *scaling_driver;
+  guint  cur_freq = 0;  /* frequency in kHz */
+  guint  max_freq_measured = 0;
+  guint  max_freq_nominal = 0;
+  guint  min_freq = 0;
 
-  GList *available_freqs;
-  GList *available_governors;
+  std::string cur_governor;
+  std::string scaling_driver;
 
-  bool online;
+  std::vector<guint> available_freqs;
+  std::vector<std::string> available_governors;
+
+  bool online = false;
 };
 
 struct IntelPState
 {
-  guint min_perf_pct;
-  guint max_perf_pct;
-  guint no_turbo;
+  guint min_perf_pct = 0;
+  guint max_perf_pct = 0;
+  guint no_turbo = 0;
 };
 
 struct CpuFreqPluginOptions
 {
-  guint       timeout;       /* time between refresh */
-  gint        show_cpu;      /* cpu number in panel, or CPU_MIN/AVG/MAX */
-  bool        show_icon:1;
-  bool        show_label_governor:1;
-  bool        show_label_freq:1;
-  bool        show_warning:1;
-  bool        keep_compact:1;
-  bool        one_line:1;
-  bool        icon_color_freq:1;
-  gchar      *fontname;
-  gchar      *fontcolor;
-  CpuFreqUnit unit;
+  guint       timeout = 1;             /* time between refresh */
+  gint        show_cpu = CPU_DEFAULT;  /* cpu number in panel, or CPU_MIN/AVG/MAX */
+  bool        show_icon = true;
+  bool        show_label_freq = true;
+  bool        show_label_governor = true;
+  bool        show_warning = true;
+  bool        keep_compact = false;
+  bool        one_line = false;
+  bool        icon_color_freq = false;
+  std::string fontname;
+  std::string fontcolor;
+  CpuFreqUnit unit = UNIT_DEFAULT;
 };
 
 struct CpuFreqPlugin
 {
-  XfcePanelPlugin *plugin;
-  XfcePanelPluginMode panel_mode;
-  gint panel_size;
-  gint panel_rows;
+  XfcePanelPlugin *const plugin;
+  XfcePanelPluginMode panel_mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
+  gint panel_size = 0;
+  gint panel_rows = 0;
 
   /* Array with all CPUs */
-  GPtrArray *cpus;
+  std::vector<CpuInfo*> cpus;
 
   /* Calculated values */
-  CpuInfo *cpu_min;
-  CpuInfo *cpu_avg;
-  CpuInfo *cpu_max;
+  CpuInfo *cpu_min = nullptr;
+  CpuInfo *cpu_avg = nullptr;
+  CpuInfo *cpu_max = nullptr;
 
   /* Intel P-State parameters */
-  IntelPState *intel_pstate;
+  IntelPState *intel_pstate = nullptr;
 
   /* Widgets */
-  GtkWidget *button, *box, *icon;
+  GtkWidget *button = nullptr;
+  GtkWidget *box = nullptr;
+  GtkWidget *icon = nullptr;
   struct {
-    GtkWidget            *draw_area;
-    PangoFontDescription *font_desc;
-    bool                  reset_size;
-    gchar                *text;
+    GtkWidget            *draw_area = nullptr;
+    PangoFontDescription *font_desc = nullptr;
+    bool                  reset_size = false;
+    std::string           text;
   } label;
   bool layout_changed;
 
-  GdkPixbuf *base_icon;
-  GdkPixbuf *current_icon_pixmap;
-  GdkPixbuf *icon_pixmaps[32];  /* table with frequency color coded pixbufs */
+  GdkPixbuf *base_icon = nullptr;
+  GdkPixbuf *current_icon_pixmap = nullptr;
+  GdkPixbuf *icon_pixmaps[32] = {};  /* table with frequency color coded pixbufs */
 
   /* Histogram of measured frequencies:
    *  min: FREQ_HIST_MIN
    *  max: FREQ_HIST_MAX
    *  range: max - min
    *  resolution: range / FREQ_HIST_BINS = 62.5 MHz */
-  guint16 freq_hist[FREQ_HIST_BINS];
+  guint16 freq_hist[FREQ_HIST_BINS] = {};
 
-  CpuFreqPluginOptions *options;
-  gint timeoutHandle;
+  CpuFreqPluginOptions *const options = new CpuFreqPluginOptions();
+  gint timeoutHandle = 0;
+
+  CpuFreqPlugin(XfcePanelPlugin *plugin);
+  ~CpuFreqPlugin();
+
+  void destroy_icons();
+  void set_font(const std::string &fontname_orEmpty);
 };
 
 extern CpuFreqPlugin *cpuFreq;
@@ -135,9 +147,6 @@ void
 cpufreq_restart_timeout ();
 
 void
-cpufreq_set_font (const gchar *fontname_or_null);
-
-void
 cpufreq_update_icon ();
 
 bool
@@ -145,8 +154,5 @@ cpufreq_update_plugin (bool reset_label_size);
 
 void
 cpufreq_write_config (XfcePanelPlugin *plugin);
-
-void
-cpuinfo_free (CpuInfo *cpu);
 
 #endif /* XFCE4_CPU_FREQ_H */

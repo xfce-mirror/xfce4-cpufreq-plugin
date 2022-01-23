@@ -30,8 +30,10 @@
 #include <config.h>
 #endif
 
+#include <algorithm>
 #include <libxfce4ui/libxfce4ui.h>
 #include <math.h>
+#include <set>
 #include <stdlib.h>
 #include <string.h>
 
@@ -40,6 +42,7 @@
 #include "xfce4-cpufreq-configure.h"
 #include "xfce4-cpufreq-overview.h"
 #include "xfce4-cpufreq-utils.h"
+#include "xfce4++/util.h"
 
 #ifdef __linux__
 #include "xfce4-cpufreq-linux.h"
@@ -50,69 +53,26 @@ CpuFreqPlugin *cpuFreq = NULL;
 
 
 /*
- * Returns a single string describing governors of all CPUs, or NULL.
- * The returned string should be freed with g_free().
+ * Returns a single string describing governors of all CPUs, or an empty string.
  */
-static gchar*
+static std::string
 cpufreq_governors ()
 {
-  const gchar *array[cpuFreq->cpus->len];
-  guint count = 0;
+  /* Governors (in alphabetical ASCII order) */
+  std::set<std::string> set;
 
-  if (cpuFreq->cpus->len == 0)
-    return NULL;
+  for (const CpuInfo *cpu : cpuFreq->cpus)
+    if (cpu->online && !cpu->cur_governor.empty())
+      set.insert(cpu->cur_governor);
 
-  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  switch (set.size())
   {
-    auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
-
-    if (!cpu->online)
-      continue;
-
-    if (!cpu->cur_governor || cpu->cur_governor[0] == '\0')
-      continue;
-
-    guint j;
-    for (j = 0; j < count; j++)
-      if (strcmp (cpu->cur_governor, array[j]) == 0)
-        break;
-    if (j == count)
-      array[count++] = cpu->cur_governor;
-  }
-
-  if (count != 0)
-  {
-    // Bubble sort
-    for (guint i = 0; G_UNLIKELY (i < count-1); i++)
-      for (guint j = i+1; j < count; j++)
-        if (strcmp (array[i], array[j]) > 0)
-        {
-          const gchar *tmp = array[i];
-          array[i] = array[j];
-          array[j] = tmp;
-        }
-
-    gsize s_length = (count-1) * strlen (",");
-    for (guint i = 0; i < count; i++)
-      s_length += strlen (array[i]);
-
-    auto s = (gchar*) g_malloc (s_length+1);
-
-    s_length = 0;
-    for (guint i = 0; i < count; i++)
-    {
-      if (i)
-        s[s_length++] = ',';
-      strcpy (s + s_length, array[i]);
-      s_length += strlen (array[i]);
-    }
-    s[s_length] = '\0';
-
-    return s;
-  }
-  else
-  {
-    return NULL;
+  case 0:
+    return std::string();
+  case 1:
+    return *set.begin();
+  default:
+    return xfce4::join(std::vector<std::string>(set.cbegin(), set.cend()), ",");
   }
 }
 
@@ -121,15 +81,13 @@ cpufreq_governors ()
 static CpuInfo *
 cpufreq_cpus_calc_min ()
 {
-  gchar *const governors = cpufreq_governors ();
-  gchar *const old_governor = cpuFreq->cpu_min ? g_strdup (cpuFreq->cpu_min->cur_governor) : g_strdup ("");
+  const std::string governors = cpufreq_governors ();
+  const std::string old_governor = cpuFreq->cpu_min ? cpuFreq->cpu_min->cur_governor : std::string();
   guint freq = G_MAXUINT, max_freq_measured = G_MAXUINT, max_freq_nominal = G_MAXUINT, min_freq = G_MAXUINT;
   guint count = 0;
 
-  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  for (const CpuInfo *cpu : cpuFreq->cpus)
   {
-    auto cpu = (const CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
-
     if (!cpu->online)
       continue;
 
@@ -143,21 +101,20 @@ cpufreq_cpus_calc_min ()
   if (count == 0)
     freq = max_freq_measured = max_freq_nominal = min_freq = 0;
 
-  cpuinfo_free (cpuFreq->cpu_min);
-  cpuFreq->cpu_min = g_new0 (CpuInfo, 1);
+  delete cpuFreq->cpu_min;
+  cpuFreq->cpu_min = new CpuInfo();
   cpuFreq->cpu_min->cur_freq = freq;
-  cpuFreq->cpu_min->cur_governor = governors ? governors : g_strdup (_("current min"));
+  cpuFreq->cpu_min->cur_governor = !governors.empty() ? governors : _("current min");
   cpuFreq->cpu_min->max_freq_measured = max_freq_measured;
   cpuFreq->cpu_min->max_freq_nominal = max_freq_nominal;
   cpuFreq->cpu_min->min_freq = min_freq;
 
-  if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_min->cur_governor, old_governor) != 0)
+  if (cpuFreq->options->show_label_governor && cpuFreq->cpu_min->cur_governor != old_governor)
   {
     cpuFreq->label.reset_size = true;
     cpuFreq->layout_changed = true;
   }
 
-  g_free (old_governor);
   return cpuFreq->cpu_min;
 }
 
@@ -166,15 +123,13 @@ cpufreq_cpus_calc_min ()
 static CpuInfo *
 cpufreq_cpus_calc_avg ()
 {
-  gchar *const governors = cpufreq_governors ();
-  gchar *const old_governor = cpuFreq->cpu_avg ? g_strdup (cpuFreq->cpu_avg->cur_governor) : g_strdup ("");
+  const std::string governors = cpufreq_governors ();
+  const std::string old_governor = cpuFreq->cpu_avg ? cpuFreq->cpu_avg->cur_governor : std::string();
   guint freq = 0, max_freq_measured = 0, max_freq_nominal = 0, min_freq = 0;
   guint count = 0;
 
-  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  for (const CpuInfo *cpu : cpuFreq->cpus)
   {
-    auto cpu = (const CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
-
     if (!cpu->online)
       continue;
 
@@ -193,21 +148,20 @@ cpufreq_cpus_calc_avg ()
     min_freq /= count;
   }
 
-  cpuinfo_free (cpuFreq->cpu_avg);
-  cpuFreq->cpu_avg = g_new0 (CpuInfo, 1);
+  delete cpuFreq->cpu_avg;
+  cpuFreq->cpu_avg = new CpuInfo();
   cpuFreq->cpu_avg->cur_freq = freq;
-  cpuFreq->cpu_avg->cur_governor = governors ? governors : g_strdup (_("current avg"));
+  cpuFreq->cpu_avg->cur_governor = !governors.empty() ? governors : _("current avg");
   cpuFreq->cpu_avg->max_freq_measured = max_freq_measured;
   cpuFreq->cpu_avg->max_freq_nominal = max_freq_nominal;
   cpuFreq->cpu_avg->min_freq = min_freq;
 
-  if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_avg->cur_governor, old_governor) != 0)
+  if (cpuFreq->options->show_label_governor && cpuFreq->cpu_avg->cur_governor != old_governor)
   {
     cpuFreq->label.reset_size = true;
     cpuFreq->layout_changed = true;
   }
 
-  g_free (old_governor);
   return cpuFreq->cpu_avg;
 }
 
@@ -216,14 +170,12 @@ cpufreq_cpus_calc_avg ()
 static CpuInfo *
 cpufreq_cpus_calc_max ()
 {
-  gchar *const governors = cpufreq_governors ();
-  gchar *const old_governor = cpuFreq->cpu_max ? g_strdup (cpuFreq->cpu_max->cur_governor) : g_strdup ("");
+  const std::string governors = cpufreq_governors ();
+  const std::string old_governor = cpuFreq->cpu_max ? cpuFreq->cpu_max->cur_governor : std::string();
   guint freq = 0, max_freq_measured = 0, max_freq_nominal = 0, min_freq = 0;
 
-  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  for (const CpuInfo *cpu : cpuFreq->cpus)
   {
-    auto cpu = (const CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
-
     if (!cpu->online)
       continue;
 
@@ -233,21 +185,20 @@ cpufreq_cpus_calc_max ()
     min_freq = MAX (min_freq, cpu->min_freq);
   }
 
-  cpuinfo_free (cpuFreq->cpu_max);
-  cpuFreq->cpu_max = g_new0 (CpuInfo, 1);
+  delete cpuFreq->cpu_max;
+  cpuFreq->cpu_max = new CpuInfo();
   cpuFreq->cpu_max->cur_freq = freq;
-  cpuFreq->cpu_max->cur_governor = governors ? governors : g_strdup (_("current max"));
+  cpuFreq->cpu_max->cur_governor = !governors.empty() ? governors : _("current max");
   cpuFreq->cpu_max->max_freq_measured = max_freq_measured;
   cpuFreq->cpu_max->max_freq_nominal = max_freq_nominal;
   cpuFreq->cpu_max->min_freq = min_freq;
 
-  if (cpuFreq->options->show_label_governor && strcmp(cpuFreq->cpu_max->cur_governor, old_governor) != 0)
+  if (cpuFreq->options->show_label_governor && cpuFreq->cpu_max->cur_governor != old_governor)
   {
     cpuFreq->label.reset_size = true;
     cpuFreq->layout_changed = true;
   }
 
-  g_free (old_governor);
   return cpuFreq->cpu_max;
 }
 
@@ -269,40 +220,38 @@ cpufreq_update_label (const CpuInfo *cpu)
     return;
   }
 
-  bool both = cpu->cur_governor && options->show_label_freq && options->show_label_governor;
 
-  gchar *freq = cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
-  gchar *label = g_strconcat
-    (options->show_label_freq ? freq : "",
-     both ? (options->one_line ? " " : "\n") : "",
-     cpu->cur_governor != NULL &&
-     options->show_label_governor ? cpu->cur_governor : "",
-     NULL);
+  std::string label;
+  if (options->show_label_freq)
+  {
+    std::string freq = cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
+    label += freq;
+  }
+  if (options->show_label_governor && !cpu->cur_governor.empty())
+  {
+    if (!label.empty())
+      label += options->one_line ? " " : "\n";
+    label += cpu->cur_governor;
+  }
 
-  if (*label != '\0')
+  if (!label.empty())
   {
     if (!gtk_widget_is_visible (label_widget))
       gtk_widget_show (label_widget);
 
-    if (!cpuFreq->label.text || strcmp (cpuFreq->label.text, label) != 0)
+    if (cpuFreq->label.text != label)
     {
-      g_free (cpuFreq->label.text);
-      cpuFreq->label.text = g_strdup (label);
+      cpuFreq->label.text = label;
       gtk_widget_queue_draw (label_widget);
     }
   }
   else
   {
-    if (cpuFreq->label.text)
-    {
-      g_free (cpuFreq->label.text);
-      cpuFreq->label.text = NULL;
-    }
-    gtk_widget_hide (label_widget);
-  }
+    if (gtk_widget_is_visible (label_widget))
+      gtk_widget_hide (label_widget);
 
-  g_free (freq);
-  g_free (label);
+    cpuFreq->label.text.clear();
+  }
 }
 
 
@@ -421,7 +370,7 @@ cpufreq_widgets_layout ()
 static CpuInfo *
 cpufreq_current_cpu ()
 {
-  if (G_UNLIKELY (cpuFreq->options->show_cpu >= (gint) cpuFreq->cpus->len))
+  if (G_UNLIKELY (cpuFreq->options->show_cpu >= (ssize_t) cpuFreq->cpus.size()))
   {
     /* Covered use cases:
      * - The user upgraded the cpufreq plugin to a newer version
@@ -447,8 +396,8 @@ cpufreq_current_cpu ()
     cpu = cpufreq_cpus_calc_max ();
     break;
   default:
-    if (cpuFreq->options->show_cpu >= 0 && cpuFreq->options->show_cpu < (gint) cpuFreq->cpus->len)
-      cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, cpuFreq->options->show_cpu);
+    if (cpuFreq->options->show_cpu >= 0 && guint(cpuFreq->options->show_cpu) < cpuFreq->cpus.size())
+      cpu = cpuFreq->cpus[cpuFreq->options->show_cpu];
   }
 
   return cpu;
@@ -597,40 +546,39 @@ cpufreq_update_tooltip (GtkWidget *widget,
                         CpuFreqPlugin *_unused)
 {
   const CpuFreqPluginOptions *const options = cpuFreq->options;
-  gchar *tooltip_msg;
 
-  CpuInfo *cpu = cpufreq_current_cpu ();
+  const CpuInfo *cpu = cpufreq_current_cpu ();
 
+  std::string tooltip_msg;
   if (G_UNLIKELY (cpu == NULL))
   {
-    tooltip_msg = g_strdup (_("No CPU information available."));
+    tooltip_msg = _("No CPU information available.");
   }
   else
   {
-    gchar *freq = cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
     if (options->show_label_governor && options->show_label_freq)
-      tooltip_msg = g_strdup_printf (ngettext ("%d cpu available",
-        "%d cpus available", cpuFreq->cpus->len), cpuFreq->cpus->len);
+    {
+      size_t num_cpu = cpuFreq->cpus.size();
+      tooltip_msg = xfce4::sprintf (ngettext ("%zu cpu available", "%zu cpus available", num_cpu), num_cpu);
+    }
     else
-      tooltip_msg =
-        g_strconcat
-        (!options->show_label_freq ? _("Frequency: ") : "",
-         !options->show_label_freq ? freq : "",
-
-         cpu->cur_governor != NULL &&
-         !options->show_label_freq &&
-         !options->show_label_governor ? "\n" : "",
-
-         cpu->cur_governor != NULL &&
-         !options->show_label_governor ? _("Governor: ") : "",
-         cpu->cur_governor != NULL &&
-         !options->show_label_governor ? cpu->cur_governor : "",
-         NULL);
-    g_free (freq);
+    {
+      if(!options->show_label_freq)
+      {
+        tooltip_msg += _("Frequency: ");
+        tooltip_msg += cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
+      }
+      if(!options->show_label_governor && !cpu->cur_governor.empty())
+      {
+        if(!tooltip_msg.empty())
+          tooltip_msg += "\n";
+        tooltip_msg += _("Governor: ");
+        tooltip_msg += cpu->cur_governor;
+      }
+    }
   }
 
-  gtk_tooltip_set_text (tooltip, tooltip_msg);
-  g_free (tooltip_msg);
+  gtk_tooltip_set_text (tooltip, tooltip_msg.c_str());
   return true;
 }
 
@@ -648,30 +596,6 @@ cpufreq_restart_timeout ()
 
 
 
-void
-cpufreq_set_font (const gchar *fontname_or_null)
-{
-  if (cpuFreq->label.font_desc)
-  {
-    pango_font_description_free (cpuFreq->label.font_desc);
-    cpuFreq->label.font_desc = NULL;
-  }
-
-  if (fontname_or_null)
-  {
-    g_free (cpuFreq->options->fontname);
-    cpuFreq->options->fontname = g_strdup (fontname_or_null);
-    cpuFreq->label.font_desc = pango_font_description_from_string (fontname_or_null);
-  }
-  else
-  {
-    g_free (cpuFreq->options->fontname);
-    cpuFreq->options->fontname = NULL;
-  }
-}
-
-
-
 static void
 cpufreq_mode_changed (XfcePanelPlugin *plugin,
                       XfcePanelPluginMode mode,
@@ -684,39 +608,12 @@ cpufreq_mode_changed (XfcePanelPlugin *plugin,
 
 
 
-static void
-cpufreq_destroy_icons ()
-{
-  if (cpuFreq->icon)
-  {
-    gtk_widget_destroy (cpuFreq->icon);
-    cpuFreq->icon = NULL;
-  }
-
-  if (cpuFreq->base_icon)
-  {
-    g_object_unref (G_OBJECT (cpuFreq->base_icon));
-    cpuFreq->base_icon = NULL;
-  }
-
-  for (gsize i = 0; i < G_N_ELEMENTS (cpuFreq->icon_pixmaps); i++)
-    if (cpuFreq->icon_pixmaps[i])
-    {
-      g_object_unref (G_OBJECT (cpuFreq->icon_pixmaps[i]));
-      cpuFreq->icon_pixmaps[i] = NULL;
-    }
-
-  cpuFreq->current_icon_pixmap = NULL;
-}
-
-
-
 void
 cpufreq_update_icon ()
 {
   const CpuFreqPluginOptions *options = cpuFreq->options;
 
-  cpufreq_destroy_icons ();
+  cpuFreq->destroy_icons();
 
   /* Load and scale the icon */
   if (options->show_icon)
@@ -763,7 +660,7 @@ cpufreq_update_icon ()
 static void
 label_draw (GtkWidget *widget, cairo_t *cr, gpointer data)
 {
-  if (G_UNLIKELY (!cpuFreq->label.text))
+  if (cpuFreq->label.text.empty())
     return;
 
   cairo_save (cr);
@@ -774,9 +671,9 @@ label_draw (GtkWidget *widget, cairo_t *cr, gpointer data)
   GtkStyleContext *style_context = gtk_widget_get_style_context (widget);
 
   GdkRGBA color;
-  if (cpuFreq->options->fontcolor)
+  if (!cpuFreq->options->fontcolor.empty())
   {
-    gdk_rgba_parse (&color, cpuFreq->options->fontcolor);
+    gdk_rgba_parse (&color, cpuFreq->options->fontcolor.c_str());
   }
   else
   {
@@ -791,7 +688,7 @@ label_draw (GtkWidget *widget, cairo_t *cr, gpointer data)
   if (cpuFreq->label.font_desc)
     pango_layout_set_font_description (layout, cpuFreq->label.font_desc);
 
-  pango_layout_set_text (layout, cpuFreq->label.text, -1);
+  pango_layout_set_text (layout, cpuFreq->label.text.c_str(), -1);
 
   PangoRectangle extents;
   if (cpuFreq->panel_mode != XFCE_PANEL_PLUGIN_MODE_VERTICAL)
@@ -905,11 +802,7 @@ cpufreq_prepare_label ()
       cpuFreq->label.draw_area = NULL;
     }
 
-    if (cpuFreq->label.text)
-    {
-      g_free (cpuFreq->label.text);
-      cpuFreq->label.text = NULL;
-    }
+    cpuFreq->label.text.clear();
   }
 }
 
@@ -923,7 +816,7 @@ cpufreq_widgets ()
   xfce_panel_plugin_add_action_widget (cpuFreq->plugin, cpuFreq->button);
   gtk_container_add (GTK_CONTAINER (cpuFreq->plugin), cpuFreq->button);
 
-  gchar *css = g_strdup_printf("button { padding: 0px; }");
+  const gchar *css = "button { padding: 0px; }";
 
   GtkCssProvider *provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_data (provider, css, -1, NULL);
@@ -931,7 +824,6 @@ cpufreq_widgets ()
     GTK_STYLE_CONTEXT (gtk_widget_get_style_context (cpuFreq->button)),
     GTK_STYLE_PROVIDER(provider),
     GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-  g_free(css);
 
   cpuFreq->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, SPACING);
   gtk_container_set_border_width (GTK_CONTAINER (cpuFreq->box), BORDER);
@@ -960,57 +852,54 @@ static void
 cpufreq_read_config ()
 {
   CpuFreqPluginOptions *const options = cpuFreq->options;
-  const gchar *value;
 
   gchar *file = xfce_panel_plugin_lookup_rc_file (cpuFreq->plugin);
-
-  if (G_UNLIKELY (!file))
-    file = xfce_panel_plugin_save_location (cpuFreq->plugin, false);
-
   if (G_UNLIKELY (!file))
     return;
 
-  XfceRc *rc = xfce_rc_simple_open (file, false);
+  const auto rc = xfce4::Rc::simple_open(file, true);
   g_free (file);
 
-  options->timeout             = xfce_rc_read_int_entry  (rc, "timeout", 1);
-  if (options->timeout > TIMEOUT_MAX || options->timeout < TIMEOUT_MIN)
-    options->timeout = TIMEOUT_MIN;
-  options->show_cpu            = xfce_rc_read_int_entry  (rc, "show_cpu", CPU_DEFAULT);
-  options->show_icon           = xfce_rc_read_bool_entry (rc, "show_icon", true);
-  options->show_label_freq     = xfce_rc_read_bool_entry (rc, "show_label_freq", true);
-  options->show_label_governor = xfce_rc_read_bool_entry (rc, "show_label_governor", true);
-  options->show_warning        = xfce_rc_read_bool_entry (rc, "show_warning", true);
-  options->keep_compact        = xfce_rc_read_bool_entry (rc, "keep_compact", false);
-  options->one_line            = xfce_rc_read_bool_entry (rc, "one_line", false);
-  options->icon_color_freq     = xfce_rc_read_bool_entry (rc, "icon_color_freq", false);
-  options->unit                = (CpuFreqUnit) xfce_rc_read_int_entry  (rc, "freq_unit", UNIT_DEFAULT);
-
-  if (!options->show_label_freq && !options->show_label_governor)
-    options->show_icon = true;
-
-  switch (options->unit)
+  if (rc)
   {
-  case UNIT_AUTO:
-  case UNIT_GHZ:
-  case UNIT_MHZ:
-    break;
-  default:
-    options->unit = UNIT_DEFAULT;
+    const CpuFreqPluginOptions defaults;
+
+    options->timeout             = rc->read_int_entry  ("timeout", defaults.timeout);
+    options->show_cpu            = rc->read_int_entry  ("show_cpu", defaults.show_cpu);
+    options->show_icon           = rc->read_bool_entry ("show_icon", defaults.show_icon);
+    options->show_label_freq     = rc->read_bool_entry ("show_label_freq", defaults.show_label_freq);
+    options->show_label_governor = rc->read_bool_entry ("show_label_governor", defaults.show_label_governor);
+    options->show_warning        = rc->read_bool_entry ("show_warning", defaults.show_warning);
+    options->keep_compact        = rc->read_bool_entry ("keep_compact", defaults.keep_compact);
+    options->one_line            = rc->read_bool_entry ("one_line", defaults.one_line);
+    options->icon_color_freq     = rc->read_bool_entry ("icon_color_freq", defaults.icon_color_freq);
+    options->fontcolor           = rc->read_entry      ("fontcolor", defaults.fontcolor);
+    options->unit                = (CpuFreqUnit) rc->read_int_entry ("freq_unit", defaults.unit);
+
+    auto fontname = rc->read_entry ("fontname", defaults.fontname);
+    cpuFreq->set_font (fontname);
+
+    rc->close ();
   }
 
-  value = xfce_rc_read_entry (rc, "fontname", NULL);
-  if (value)
-    cpufreq_set_font (value);
-
-  value = xfce_rc_read_entry (rc, "fontcolor", NULL);
-  if (value)
+  // Validate settings
   {
-    g_free (options->fontcolor);
-    options->fontcolor = g_strdup (value);
-  }
+    if (options->timeout > TIMEOUT_MAX || options->timeout < TIMEOUT_MIN)
+      options->timeout = TIMEOUT_MIN;
 
-  xfce_rc_close (rc);
+    if (!options->show_label_freq && !options->show_label_governor)
+      options->show_icon = true;
+
+    switch (options->unit)
+    {
+    case UNIT_AUTO:
+    case UNIT_GHZ:
+    case UNIT_MHZ:
+      break;
+    default:
+      options->unit = UNIT_DEFAULT;
+    }
+  }
 }
 
 
@@ -1021,50 +910,31 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
   const CpuFreqPluginOptions *const options = cpuFreq->options;
 
   gchar *file = xfce_panel_plugin_save_location (plugin, true);
-
   if (G_UNLIKELY (!file))
     return;
 
-  XfceRc *rc = xfce_rc_simple_open (file, false);
+  auto rc = xfce4::Rc::simple_open (file, false);
   g_free(file);
 
-  xfce_rc_write_int_entry  (rc, "timeout",             options->timeout);
-  xfce_rc_write_int_entry  (rc, "show_cpu",            options->show_cpu);
-  xfce_rc_write_bool_entry (rc, "show_icon",           options->show_icon);
-  xfce_rc_write_bool_entry (rc, "show_label_freq",     options->show_label_freq);
-  xfce_rc_write_bool_entry (rc, "show_label_governor", options->show_label_governor);
-  xfce_rc_write_bool_entry (rc, "show_warning",        options->show_warning);
-  xfce_rc_write_bool_entry (rc, "keep_compact",        options->keep_compact);
-  xfce_rc_write_bool_entry (rc, "one_line",            options->one_line);
-  xfce_rc_write_bool_entry (rc, "icon_color_freq",     options->icon_color_freq);
-  xfce_rc_write_int_entry  (rc, "freq_unit",           options->unit);
+  if (rc)
+  {
+    const CpuFreqPluginOptions defaults;
 
-  if (options->fontname)
-    xfce_rc_write_entry (rc, "fontname", options->fontname);
-  else
-    xfce_rc_delete_entry (rc, "fontname", false);
+    rc->write_default_int_entry  ("timeout",             options->timeout, defaults.timeout);
+    rc->write_default_int_entry  ("show_cpu",            options->show_cpu, defaults.show_cpu);
+    rc->write_default_bool_entry ("show_icon",           options->show_icon, defaults.show_icon);
+    rc->write_default_bool_entry ("show_label_freq",     options->show_label_freq, defaults.show_label_freq);
+    rc->write_default_bool_entry ("show_label_governor", options->show_label_governor, defaults.show_label_governor);
+    rc->write_default_bool_entry ("show_warning",        options->show_warning, defaults.show_warning);
+    rc->write_default_bool_entry ("keep_compact",        options->keep_compact, defaults.keep_compact);
+    rc->write_default_bool_entry ("one_line",            options->one_line, defaults.one_line);
+    rc->write_default_bool_entry ("icon_color_freq",     options->icon_color_freq, defaults.icon_color_freq);
+    rc->write_default_int_entry  ("freq_unit",           options->unit, defaults.unit);
+    rc->write_default_entry      ("fontname",            options->fontname, defaults.fontname);
+    rc->write_default_entry      ("fontcolor",           options->fontcolor, defaults.fontcolor);
 
-  if (options->fontcolor)
-    xfce_rc_write_entry (rc, "fontcolor", options->fontcolor);
-  else
-    xfce_rc_delete_entry (rc, "fontcolor", false);
-
-  xfce_rc_close (rc);
-}
-
-
-
-void
-cpuinfo_free (CpuInfo *cpu)
-{
-  if (G_UNLIKELY(cpu == NULL))
-    return;
-
-  g_free (cpu->cur_governor);
-  g_free (cpu->scaling_driver);
-  g_list_free (cpu->available_freqs);
-  g_list_free_full (cpu->available_governors, g_free);
-  g_free (cpu);
+    rc->close ();
+  }
 }
 
 
@@ -1075,32 +945,7 @@ cpufreq_free (XfcePanelPlugin *plugin)
   if (cpuFreq->timeoutHandle)
     g_source_remove (cpuFreq->timeoutHandle);
 
-  g_slice_free (IntelPState, cpuFreq->intel_pstate);
-
-  for (guint i = 0; i < cpuFreq->cpus->len; i++)
-  {
-    auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
-    g_ptr_array_remove_fast (cpuFreq->cpus, cpu);
-    cpuinfo_free (cpu);
-  }
-
-  g_ptr_array_free (cpuFreq->cpus, true);
-
-  g_free (cpuFreq->cpu_avg);
-  g_free (cpuFreq->cpu_max);
-  g_free (cpuFreq->cpu_min);
-
-  cpufreq_destroy_icons ();
-
-  if (cpuFreq->label.font_desc)
-    pango_font_description_free (cpuFreq->label.font_desc);
-  g_free (cpuFreq->label.text);
-
-  g_free (cpuFreq->options->fontname);
-  g_free (cpuFreq->options->fontcolor);
-  g_free (cpuFreq->options);
-  cpuFreq->plugin = NULL;
-  g_free (cpuFreq);
+  delete cpuFreq;
   cpuFreq = NULL;
 }
 
@@ -1153,13 +998,7 @@ cpufreq_plugin_construct (XfcePanelPlugin *plugin)
 {
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
-  cpuFreq = g_new0 (CpuFreqPlugin, 1);
-  cpuFreq->options = g_new0 (CpuFreqPluginOptions, 1);
-  cpuFreq->plugin = plugin;
-  cpuFreq->panel_mode = xfce_panel_plugin_get_mode (cpuFreq->plugin);
-  cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (cpuFreq->plugin);
-  cpuFreq->panel_size = xfce_panel_plugin_get_size (cpuFreq->plugin);
-  cpuFreq->cpus = g_ptr_array_new ();
+  cpuFreq = new CpuFreqPlugin(plugin);
 
   cpufreq_read_config ();
   cpuFreq->label.reset_size = true;
@@ -1173,8 +1012,7 @@ cpufreq_plugin_construct (XfcePanelPlugin *plugin)
   gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, -1);
   cpufreq_widgets ();
 
-  cpuFreq->timeoutHandle = g_timeout_add_seconds (
-    cpuFreq->options->timeout, cpufreq_update_cpus, NULL);
+  cpuFreq->timeoutHandle = g_timeout_add_seconds (cpuFreq->options->timeout, cpufreq_update_cpus, NULL);
 #else
   xfce_dialog_show_error (NULL, NULL, _("Your system is not supported yet!"));
 #endif /* __linux__ */
@@ -1189,4 +1027,75 @@ cpufreq_plugin_construct (XfcePanelPlugin *plugin)
   g_signal_connect (plugin, "configure-plugin", G_CALLBACK (cpufreq_configure), NULL);
   xfce_panel_plugin_menu_show_about(plugin);
   g_signal_connect (plugin, "about", G_CALLBACK (cpufreq_show_about), cpuFreq);
+}
+
+
+
+CpuFreqPlugin::CpuFreqPlugin(XfcePanelPlugin *_plugin) : plugin(_plugin)
+{
+  panel_mode = xfce_panel_plugin_get_mode (plugin);
+  panel_rows = xfce_panel_plugin_get_nrows (plugin);
+  panel_size = xfce_panel_plugin_get_size (plugin);
+}
+
+CpuFreqPlugin::~CpuFreqPlugin()
+{
+  for (CpuInfo *cpu : cpus)
+    delete cpu;
+
+  delete cpu_avg;
+  delete cpu_max;
+  delete cpu_min;
+
+  delete intel_pstate;
+
+  if (label.font_desc)
+    pango_font_description_free (label.font_desc);
+
+  delete options;
+
+  destroy_icons();
+}
+
+void CpuFreqPlugin::destroy_icons()
+{
+  if (icon)
+  {
+    gtk_widget_destroy (icon);
+    icon = NULL;
+  }
+
+  if (base_icon)
+  {
+    g_object_unref (G_OBJECT (base_icon));
+    base_icon = NULL;
+  }
+
+  for (gsize i = 0; i < G_N_ELEMENTS (icon_pixmaps); i++)
+    if (icon_pixmaps[i])
+    {
+      g_object_unref (G_OBJECT (icon_pixmaps[i]));
+      icon_pixmaps[i] = NULL;
+    }
+
+  current_icon_pixmap = NULL;
+}
+
+void CpuFreqPlugin::set_font(const std::string &fontname_orEmpty)
+{
+  if (label.font_desc)
+  {
+    pango_font_description_free (label.font_desc);
+    label.font_desc = NULL;
+  }
+
+  if (!fontname_orEmpty.empty())
+  {
+    options->fontname = fontname_orEmpty;
+    label.font_desc = pango_font_description_from_string (fontname_orEmpty.c_str());
+  }
+  else
+  {
+    options->fontname.clear();
+  }
 }

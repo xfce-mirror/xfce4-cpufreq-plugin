@@ -21,6 +21,7 @@
 #define XFCE4_CPUFREQ_LINUX_SYSFS_H
 
 #include <glib.h>
+#include <string>
 
 bool cpufreq_sysfs_is_available ();
 
@@ -28,6 +29,6 @@ bool cpufreq_sysfs_read ();
 
 void cpufreq_sysfs_read_current (gint cpu_number);
 
-void cpufreq_sysfs_read_int (const gchar *file, guint *intval);
+void cpufreq_sysfs_read_uint (const std::string &file, guint *intval);
 
 #endif /* XFCE4_CPUFREQ_LINUX_SYSFS_H */

@@ -26,19 +26,19 @@
 
 struct CpuFreqPluginConfigure
 {
-  GtkWidget *display_cpu;
-  GtkWidget *display_icon;
-  GtkWidget *display_freq;
-  GtkWidget *display_governor;
-  GtkWidget *icon_color_freq;
-  GtkWidget *monitor_timeout;
-  GtkWidget *combo_cpu;
-  GtkWidget *combo_unit;
-  GtkWidget *spinner_timeout;
-  GtkWidget *keep_compact;
-  GtkWidget *one_line;
-  GtkWidget *fontcolor, *fontcolor_hbox;
-  GtkWidget *fontname, *fontname_hbox;
+  GtkWidget *display_cpu = nullptr;
+  GtkWidget *display_icon = nullptr;
+  GtkWidget *display_freq = nullptr;
+  GtkWidget *display_governor = nullptr;
+  GtkWidget *icon_color_freq = nullptr;
+  GtkWidget *monitor_timeout = nullptr;
+  GtkWidget *combo_cpu = nullptr;
+  GtkWidget *combo_unit = nullptr;
+  GtkWidget *spinner_timeout = nullptr;
+  GtkWidget *keep_compact = nullptr;
+  GtkWidget *one_line = nullptr;
+  GtkWidget *fontcolor = nullptr, *fontcolor_hbox = nullptr;
+  GtkWidget *fontname = nullptr, *fontname_hbox = nullptr;
 };
 
 void

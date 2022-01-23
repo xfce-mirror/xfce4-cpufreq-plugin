@@ -18,26 +18,32 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+/* The fixes file has to be included before any other #include directives */
+#include "xfce4++/util/fixes.h"
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+
 #include <stdlib.h>
+#include <string>
 #include <string.h>
+#include <vector>
 
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-linux-sysfs.h"
 
 #define SYSFS_BASE  "/sys/devices/system/cpu"
 
-static void cpufreq_sysfs_read_int_list (const gchar *file, GList **list);
+static void cpufreq_sysfs_read_list (const std::string &file, std::vector<guint> &list);
 
-static void cpufreq_sysfs_read_string (const gchar *file, gchar **string);
+static void cpufreq_sysfs_read_string (const std::string &file, std::string &string);
 
-static void cpufreq_sysfs_read_string_list (const gchar *file, GList **list);
+static void cpufreq_sysfs_read_list (const std::string &file, std::vector<std::string> &list);
 
 static void parse_sysfs_init (gint cpu_number, CpuInfo *cpu);
 
-static gchar* read_file_contents (const gchar *file);
+static gchar* read_file_contents (const std::string &file);
 
 static bool cpufreq_cpu_exists (gint num);
 
@@ -54,25 +60,25 @@ cpufreq_sysfs_is_available ()
 void
 cpufreq_sysfs_read_current (gint cpu_number)
 {
-  gchar file[128];
+  std::string file;
 
-  auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, cpu_number);
+  CpuInfo *cpu = cpuFreq->cpus[cpu_number];
 
   /* read current cpu freq */
-  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
-  cpufreq_sysfs_read_int (file, &cpu->cur_freq);
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
+  cpufreq_sysfs_read_uint (file, &cpu->cur_freq);
 
   /* read current cpu governor */
-  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_governor", cpu_number);
-  cpufreq_sysfs_read_string (file, &cpu->cur_governor);
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_governor", cpu_number);
+  cpufreq_sysfs_read_string (file, cpu->cur_governor);
 
   /* read whether the cpu is online, skip first */
   if (cpu_number != 0)
   {
     guint online;
 
-    g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/online", cpu_number);
-    cpufreq_sysfs_read_int (file, &online);
+    file = xfce4::sprintf (SYSFS_BASE "/cpu%i/online", cpu_number);
+    cpufreq_sysfs_read_uint (file, &online);
 
     cpu->online = online != 0;
   }
@@ -100,12 +106,13 @@ cpufreq_sysfs_read ()
 
 
 void
-cpufreq_sysfs_read_int (const gchar *file, guint *intval)
+cpufreq_sysfs_read_uint (const std::string &file, guint *intval)
 {
   gchar *contents = read_file_contents (file);
-
   if (contents) {
-    (*intval) = atoi (contents);
+    int i = atoi (contents);
+    if (i >= 0)
+      *intval = guint(i);
     g_free (contents);
   }
 }
@@ -113,19 +120,18 @@ cpufreq_sysfs_read_int (const gchar *file, guint *intval)
 
 
 static void
-cpufreq_sysfs_read_int_list (const gchar *file, GList **list)
+cpufreq_sysfs_read_list (const std::string &file, std::vector<guint> &list)
 {
   gchar *contents = read_file_contents (file);
 
   if (contents) {
     gchar **tokens = g_strsplit (contents, " ", 0);
     g_free (contents);
-    g_list_free (*list);
-    gint i = 0;
-    while (tokens[i] != NULL) {
+    list.clear();
+    for(gint i = 0; tokens[i] != NULL; i++) {
       gint value = atoi (tokens[i]);
-      *list = g_list_append (*list, GINT_TO_POINTER (value));
-      i++;
+      if (value >= 0)
+        list.push_back(guint(value));
     }
     g_strfreev (tokens);
   }
@@ -133,31 +139,28 @@ cpufreq_sysfs_read_int_list (const gchar *file, GList **list)
 
 
 static void
-cpufreq_sysfs_read_string (const gchar *file, gchar **string)
+cpufreq_sysfs_read_string (const std::string &file, std::string &string)
 {
   gchar *contents = read_file_contents (file);
-
   if (contents) {
-    g_free (*string);
-    *string = contents;
+    string = contents;
+    g_free (contents);
   }
 }
 
 
 
 static void
-cpufreq_sysfs_read_string_list (const gchar *file, GList **list)
+cpufreq_sysfs_read_list (const std::string &file, std::vector<std::string> &list)
 {
   gchar *contents = read_file_contents (file);
 
   if (contents) {
     gchar **tokens = g_strsplit (contents, " ", 0);
     g_free (contents);
-    g_list_free_full (*list, g_free);
-    gint i = 0;
-    while (tokens[i] != NULL) {
-      *list = g_list_append (*list, strdup (tokens[i]));
-      i++;
+    list.clear();
+    for(gint i = 0; tokens[i] != NULL; i++) {
+      list.push_back(tokens[i]);
     }
     g_strfreev (tokens);
   }
@@ -168,65 +171,65 @@ cpufreq_sysfs_read_string_list (const gchar *file, GList **list)
 static void
 parse_sysfs_init (gint cpu_number, CpuInfo *cpu)
 {
-  gchar file[128];
+  std::string file;
   bool add_cpu = false;
 
   if (cpu == NULL) {
-    cpu = g_new0 (CpuInfo, 1);
+    cpu = new CpuInfo();
     cpu->online = true;
     add_cpu = true;
   }
 
   /* read available cpu freqs */
   if (cpuFreq->intel_pstate == NULL) {
-    g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_available_frequencies", cpu_number);
-    cpufreq_sysfs_read_int_list (file, &cpu->available_freqs);
+    file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_available_frequencies", cpu_number);
+    cpufreq_sysfs_read_list (file, cpu->available_freqs);
   }
 
   /* read available cpu governors */
-  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_available_governors", cpu_number);
-  cpufreq_sysfs_read_string_list (file, &cpu->available_governors);
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_available_governors", cpu_number);
+  cpufreq_sysfs_read_list (file, cpu->available_governors);
 
   /* read cpu driver */
-  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_driver", cpu_number);
-  cpufreq_sysfs_read_string (file, &cpu->scaling_driver);
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_driver", cpu_number);
+  cpufreq_sysfs_read_string (file, cpu->scaling_driver);
 
   /* read current cpu freq */
-  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
-  cpufreq_sysfs_read_int (file, &cpu->cur_freq);
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
+  cpufreq_sysfs_read_uint (file, &cpu->cur_freq);
 
   /* read current cpu governor */
-  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_governor", cpu_number);
-  cpufreq_sysfs_read_string (file, &cpu->cur_governor);
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_governor", cpu_number);
+  cpufreq_sysfs_read_string (file, cpu->cur_governor);
 
   /* read max cpu freq */
-  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_max_freq", cpu_number);
-  cpufreq_sysfs_read_int (file, &cpu->max_freq_nominal);
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_max_freq", cpu_number);
+  cpufreq_sysfs_read_uint (file, &cpu->max_freq_nominal);
 
   /* read min cpu freq */
-  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%i/cpufreq/scaling_min_freq", cpu_number);
-  cpufreq_sysfs_read_int (file, &cpu->min_freq);
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_min_freq", cpu_number);
+  cpufreq_sysfs_read_uint (file, &cpu->min_freq);
 
   if (add_cpu)
-    g_ptr_array_add (cpuFreq->cpus, cpu);
+    cpuFreq->cpus.push_back(cpu);
 }
 
 
 
 static gchar*
-read_file_contents (const gchar *file)
+read_file_contents (const std::string &file)
 {
-  if (!g_file_test (file, G_FILE_TEST_EXISTS))
+  if (!g_file_test (file.c_str(), G_FILE_TEST_EXISTS))
     return NULL;
 
   GError *error = NULL;
   gchar *contents = NULL;
-  if (g_file_get_contents (file, &contents, NULL, &error)) {
+  if (g_file_get_contents (file.c_str(), &contents, NULL, &error)) {
     g_strstrip (contents);
     return contents;
   }
 
-  g_debug ("Error reading %s: %s\n", file, error->message);
+  g_debug ("Error reading %s: %s\n", file.c_str(), error->message);
   g_error_free (error);
   return NULL;
 }
@@ -238,6 +241,6 @@ cpufreq_cpu_exists (gint num)
 {
   gchar file[128];
 
-  g_snprintf (file, sizeof (file), SYSFS_BASE"/cpu%d", num);
+  g_snprintf (file, sizeof (file), SYSFS_BASE "/cpu%d", num);
   return g_file_test (file, G_FILE_TEST_EXISTS);
 }

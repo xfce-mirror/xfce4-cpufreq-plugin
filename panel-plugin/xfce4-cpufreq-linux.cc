@@ -20,6 +20,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+/* The fixes file has to be included before any other #include directives */
+#include "xfce4++/util/fixes.h"
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -41,9 +44,6 @@
 bool
 cpufreq_linux_init ()
 {
-  if (cpuFreq->cpus == NULL)
-    return false;
-
   if (cpufreq_sysfs_is_available ())
     return cpufreq_sysfs_read ();
 
@@ -90,17 +90,17 @@ cpufreq_update_cpus (gpointer data)
 
   if (cpufreq_sysfs_is_available ())
   {
-    for (guint i = 0; i < cpuFreq->cpus->len; i++)
+    for (size_t i = 0; i < cpuFreq->cpus.size(); i++)
       cpufreq_sysfs_read_current (i);
   }
   else if (cpufreq_procfs_is_available ())
   {
     /* First we delete the cpus and then read the /proc/cpufreq file again */
-    while (cpuFreq->cpus->len != 0)
+    while (!cpuFreq->cpus.empty())
     {
-      auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, 0);
-      g_ptr_array_remove_index_fast (cpuFreq->cpus, 0);
-      cpuinfo_free (cpu);
+      auto cpu = cpuFreq->cpus.back();
+      cpuFreq->cpus.pop_back();
+      delete cpu;
     }
     cpufreq_procfs_read ();
   }
@@ -110,9 +110,8 @@ cpufreq_update_cpus (gpointer data)
     return false;
   }
 
-  for (guint i = 0; i < cpuFreq->cpus->len; i++)
+  for (CpuInfo *cpu : cpuFreq->cpus)
   {
-    auto cpu = (CpuInfo*) g_ptr_array_index (cpuFreq->cpus, i);
     guint cur_freq = cpu->cur_freq;
 
     cpu->max_freq_measured = MAX (cpu->max_freq_measured, cur_freq);

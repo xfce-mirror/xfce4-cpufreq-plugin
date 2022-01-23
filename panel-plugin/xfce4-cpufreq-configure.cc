@@ -20,6 +20,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+/* The fixes file has to be included before any other #include directives */
+#include "xfce4++/util/fixes.h"
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -107,14 +110,14 @@ check_button_changed (GtkWidget *button, const CpuFreqPluginConfigure *configure
 static void
 button_fontname_update(GtkWidget *button, gboolean update_plugin)
 {
-  if (cpuFreq->options->fontname == NULL)
+  if (cpuFreq->options->fontname.empty())
   {
     gtk_button_set_label (GTK_BUTTON (button), _("Select font..."));
     gtk_widget_set_tooltip_text (button, _("Select font family and size to use for the labels."));
   }
   else
   {
-    gtk_button_set_label (GTK_BUTTON (button), cpuFreq->options->fontname);
+    gtk_button_set_label (GTK_BUTTON (button), cpuFreq->options->fontname.c_str());
     gtk_widget_set_tooltip_text (button, _("Right-click to revert to the default font."));
   }
 
@@ -130,8 +133,8 @@ button_fontname_clicked(GtkWidget *button, CpuFreqPluginConfigure *configure)
   GtkWidget *fc = gtk_font_chooser_dialog_new (_("Select font"),
     GTK_WINDOW(gtk_widget_get_toplevel(button)));
 
-  if (cpuFreq->options->fontname)
-    gtk_font_chooser_set_font (GTK_FONT_CHOOSER (fc), cpuFreq->options->fontname);
+  if (!cpuFreq->options->fontname.empty())
+    gtk_font_chooser_set_font (GTK_FONT_CHOOSER (fc), cpuFreq->options->fontname.c_str());
 
   gint result = gtk_dialog_run(GTK_DIALOG(fc));
 
@@ -142,7 +145,7 @@ button_fontname_clicked(GtkWidget *button, CpuFreqPluginConfigure *configure)
     if (fontname != NULL)
     {
       gtk_button_set_label(GTK_BUTTON(button), fontname);
-      cpufreq_set_font (fontname);
+      cpuFreq->set_font (fontname);
       g_free (fontname);
     }
 
@@ -163,9 +166,9 @@ button_fontname_pressed(GtkWidget *button, GdkEventButton *event,
     return false;
 
   /* right mouse click clears the font name and resets the button */
-  if (event->button == 3 && cpuFreq->options->fontname)
+  if (event->button == 3 && !cpuFreq->options->fontname.empty())
   {
-    cpufreq_set_font (NULL);
+    cpuFreq->set_font ("");
     button_fontname_update(button, true);
     return true;
   }
@@ -179,7 +182,7 @@ button_fontname_pressed(GtkWidget *button, GdkEventButton *event,
 static void
 button_fontcolor_update(GtkWidget *button, gboolean update_plugin)
 {
-  if (cpuFreq->options->fontcolor == NULL)
+  if (cpuFreq->options->fontcolor.empty())
   {
     GdkRGBA color = {};
     gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (button), &color);
@@ -201,10 +204,10 @@ button_fontcolor_clicked (GtkWidget *button, void *data)
 {
   GdkRGBA color;
   gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (button), &color);
-  g_free (cpuFreq->options->fontcolor);
-  cpuFreq->options->fontcolor = NULL;
   if (color.alpha != 0)
     cpuFreq->options->fontcolor = gdk_rgba_to_string (&color);
+  else
+    cpuFreq->options->fontcolor.clear();
   button_fontcolor_update (button, true);
 }
 
@@ -218,10 +221,9 @@ button_fontcolor_pressed(GtkWidget *button, GdkEventButton *event,
     return false;
 
   /* right mouse click clears the font color and resets the button */
-  if (event->button == 3 && cpuFreq->options->fontcolor)
+  if (event->button == 3 && !cpuFreq->options->fontcolor.empty())
   {
-    g_free (cpuFreq->options->fontcolor);
-    cpuFreq->options->fontcolor = NULL;
+    cpuFreq->options->fontcolor.clear();
     button_fontcolor_update(button, true);
     return true;
   }
@@ -240,7 +242,7 @@ combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 
   if (GTK_WIDGET (combo) == configure->combo_cpu)
   {
-    guint num_cpus = cpuFreq->cpus->len;
+    size_t num_cpus = cpuFreq->cpus.size();
     if (selected < num_cpus)
       options->show_cpu = selected;
     else if (selected == num_cpus + 0)
@@ -272,7 +274,7 @@ combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 static void
 spinner_changed (GtkWidget *spinner, CpuFreqPluginConfigure *configure)
 {
-  cpuFreq->options->timeout =gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spinner));
+  cpuFreq->options->timeout = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spinner));
   cpufreq_restart_timeout ();
 }
 
@@ -287,7 +289,7 @@ cpufreq_configure_response (GtkWidget *dialog, int response, CpuFreqPluginConfig
 
   cpufreq_write_config (cpuFreq->plugin);
 
-  g_free (configure);
+  delete configure;
 }
 
 
@@ -300,7 +302,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   GtkWidget *spinner, *button;
   GdkRGBA color = {};
 
-  CpuFreqPluginConfigure *configure = g_new0 (CpuFreqPluginConfigure, 1);
+  auto configure = new CpuFreqPluginConfigure();
 
   xfce_panel_plugin_block_menu (cpuFreq->plugin);
 
@@ -409,8 +411,8 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_label_set_xalign (GTK_LABEL (label), 0);
   gtk_size_group_add_widget (sg0, label);
 
-  if (options->fontcolor)
-    gdk_rgba_parse (&color, options->fontcolor);
+  if (!options->fontcolor.empty())
+    gdk_rgba_parse (&color, options->fontcolor.c_str());
 
   button = configure->fontcolor = gtk_color_button_new_with_rgba (&color);
   gtk_color_button_set_title (GTK_COLOR_BUTTON (button), _("Select font color"));
@@ -438,11 +440,10 @@ cpufreq_configure (XfcePanelPlugin *plugin)
     gtk_box_pack_start (GTK_BOX (hbox), combo, false, true, 0);
     gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
 
-    for (guint i = 0; i < cpuFreq->cpus->len; ++i)
+    for (size_t i = 0; i < cpuFreq->cpus.size(); i++)
     {
-      gchar *cpu_name = g_strdup_printf ("%d", i);
-      gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), cpu_name);
-      g_free (cpu_name);
+      auto cpu_name = xfce4::sprintf ("%zu", i);
+      gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), cpu_name.c_str());
     }
 
     gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("min"));
@@ -453,16 +454,16 @@ cpufreq_configure (XfcePanelPlugin *plugin)
     switch (options->show_cpu)
     {
     case CPU_MIN:
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 0);
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus.size() + 0);
       break;
     case CPU_AVG:
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 1);
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus.size() + 1);
       break;
     case CPU_MAX:
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus->len + 2);
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), cpuFreq->cpus.size() + 2);
       break;
     default:
-      if (options->show_cpu >= 0 && options->show_cpu < (gint) cpuFreq->cpus->len)
+      if (options->show_cpu >= 0 && guint(options->show_cpu) < cpuFreq->cpus.size())
         gtk_combo_box_set_active (GTK_COMBO_BOX (combo), options->show_cpu);
       else
       {
