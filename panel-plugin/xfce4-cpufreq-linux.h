@@ -23,8 +23,8 @@
 
 #include <glib.h>
 
-gboolean
-cpufreq_update_cpus (gpointer data);
+void
+cpufreq_update_cpus ();
 
 bool
 cpufreq_linux_init ();

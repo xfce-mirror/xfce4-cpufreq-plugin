@@ -23,7 +23,7 @@
 
 #include "xfce4-cpufreq-plugin.h"
 
-gboolean
-cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpuFreq);
+bool
+cpufreq_overview (GdkEventButton *ev);
 
 #endif /* XFCE4_CPUFREQ_OVERVIEW_H */

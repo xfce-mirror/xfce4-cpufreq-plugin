@@ -142,7 +142,7 @@ struct CpuFreqPlugin
   void set_font(const std::string &fontname_orEmpty);
 };
 
-extern CpuFreqPlugin *cpuFreq;
+extern Ptr0<CpuFreqPlugin> cpuFreq;
 
 void
 cpufreq_prepare_label ();
@@ -153,7 +153,7 @@ cpufreq_restart_timeout ();
 void
 cpufreq_update_icon ();
 
-bool
+void
 cpufreq_update_plugin (bool reset_label_size);
 
 void

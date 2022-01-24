@@ -33,8 +33,15 @@
 
 
 
+CpuFreqPluginConfigure::~CpuFreqPluginConfigure()
+{
+  g_info ("%s", __PRETTY_FUNCTION__);
+}
+
+
+
 static void
-update_sensitivity (const CpuFreqPluginConfigure *configure)
+update_sensitivity (const Ptr<CpuFreqPluginConfigure> &configure)
 {
   auto options = cpuFreq->options;
 
@@ -57,7 +64,7 @@ update_sensitivity (const CpuFreqPluginConfigure *configure)
 
 
 static void
-validate_configuration (const CpuFreqPluginConfigure *configure)
+validate_configuration (const Ptr<CpuFreqPluginConfigure> &configure)
 {
   auto options = cpuFreq->options;
 
@@ -75,7 +82,7 @@ validate_configuration (const CpuFreqPluginConfigure *configure)
 
 
 static void
-check_button_changed (GtkWidget *button, const CpuFreqPluginConfigure *configure)
+check_button_changed (GtkWidget *button, const Ptr<CpuFreqPluginConfigure> &configure)
 {
   auto options = cpuFreq->options;
 
@@ -108,17 +115,17 @@ check_button_changed (GtkWidget *button, const CpuFreqPluginConfigure *configure
 
 
 static void
-button_fontname_update(GtkWidget *button, gboolean update_plugin)
+button_fontname_update(GtkButton *button, gboolean update_plugin)
 {
   if (cpuFreq->options->fontname.empty())
   {
-    gtk_button_set_label (GTK_BUTTON (button), _("Select font..."));
-    gtk_widget_set_tooltip_text (button, _("Select font family and size to use for the labels."));
+    gtk_button_set_label (button, _("Select font..."));
+    gtk_widget_set_tooltip_text (GTK_WIDGET (button), _("Select font family and size to use for the labels."));
   }
   else
   {
-    gtk_button_set_label (GTK_BUTTON (button), cpuFreq->options->fontname.c_str());
-    gtk_widget_set_tooltip_text (button, _("Right-click to revert to the default font."));
+    gtk_button_set_label (button, cpuFreq->options->fontname.c_str());
+    gtk_widget_set_tooltip_text (GTK_WIDGET (button), _("Right-click to revert to the default font."));
   }
 
   if (update_plugin)
@@ -127,11 +134,10 @@ button_fontname_update(GtkWidget *button, gboolean update_plugin)
 
 
 
-static gboolean
-button_fontname_clicked(GtkWidget *button, CpuFreqPluginConfigure *configure)
+static void
+button_fontname_clicked(GtkButton *button)
 {
-  GtkWidget *fc = gtk_font_chooser_dialog_new (_("Select font"),
-    GTK_WINDOW(gtk_widget_get_toplevel(button)));
+  GtkWidget *fc = gtk_font_chooser_dialog_new (_("Select font"), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (button))));
 
   if (!cpuFreq->options->fontname.empty())
     gtk_font_chooser_set_font (GTK_FONT_CHOOSER (fc), cpuFreq->options->fontname.c_str());
@@ -144,7 +150,7 @@ button_fontname_clicked(GtkWidget *button, CpuFreqPluginConfigure *configure)
 
     if (fontname != NULL)
     {
-      gtk_button_set_label(GTK_BUTTON(button), fontname);
+      gtk_button_set_label (button, fontname);
       cpuFreq->set_font (fontname);
       g_free (fontname);
     }
@@ -153,34 +159,32 @@ button_fontname_clicked(GtkWidget *button, CpuFreqPluginConfigure *configure)
   }
 
   gtk_widget_destroy(GTK_WIDGET(fc));
-  return true;
 }
 
 
 
-static gboolean
-button_fontname_pressed(GtkWidget *button, GdkEventButton *event,
-                        CpuFreqPluginConfigure *configure)
+static xfce4::Propagation
+button_fontname_pressed(GtkWidget *button, GdkEventButton *event)
 {
   if (event->type != GDK_BUTTON_PRESS)
-    return false;
+    return xfce4::PROPAGATE;
 
   /* right mouse click clears the font name and resets the button */
   if (event->button == 3 && !cpuFreq->options->fontname.empty())
   {
     cpuFreq->set_font ("");
-    button_fontname_update(button, true);
-    return true;
+    button_fontname_update(GTK_BUTTON (button), true);
+    return xfce4::STOP;
   }
 
   /* left mouse click will be handled in a different function */
-  return false;
+  return xfce4::PROPAGATE;
 }
 
 
 
 static void
-button_fontcolor_update(GtkWidget *button, gboolean update_plugin)
+button_fontcolor_update(GtkWidget *button, bool update_plugin)
 {
   if (cpuFreq->options->fontcolor.empty())
   {
@@ -200,7 +204,7 @@ button_fontcolor_update(GtkWidget *button, gboolean update_plugin)
 
 
 static void
-button_fontcolor_clicked (GtkWidget *button, void *data)
+button_fontcolor_clicked (GtkColorButton *button)
 {
   GdkRGBA color;
   gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (button), &color);
@@ -208,38 +212,37 @@ button_fontcolor_clicked (GtkWidget *button, void *data)
     cpuFreq->options->fontcolor = gdk_rgba_to_string (&color);
   else
     cpuFreq->options->fontcolor.clear();
-  button_fontcolor_update (button, true);
+  button_fontcolor_update (GTK_WIDGET (button), true);
 }
 
 
 
-static gboolean
-button_fontcolor_pressed(GtkWidget *button, GdkEventButton *event,
-                         CpuFreqPluginConfigure *configure)
+static xfce4::Propagation
+button_fontcolor_pressed(GtkWidget *button, GdkEventButton *event)
 {
   if (event->type != GDK_BUTTON_PRESS)
-    return false;
+    return xfce4::PROPAGATE;
 
   /* right mouse click clears the font color and resets the button */
   if (event->button == 3 && !cpuFreq->options->fontcolor.empty())
   {
     cpuFreq->options->fontcolor.clear();
     button_fontcolor_update(button, true);
-    return true;
+    return xfce4::STOP;
   }
 
   /* left mouse click will be handled in a different function */
-  return false;
+  return xfce4::PROPAGATE;
 }
 
 
 
 static void
-combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
+combo_changed (GtkComboBox *combo, const Ptr<CpuFreqPluginConfigure> &configure)
 {
   auto options = cpuFreq->options;
 
-  guint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
+  guint selected = gtk_combo_box_get_active (combo);
 
   if (GTK_WIDGET (combo) == configure->combo_cpu)
   {
@@ -273,24 +276,22 @@ combo_changed (GtkWidget *combo, CpuFreqPluginConfigure *configure)
 
 
 static void
-spinner_changed (GtkWidget *spinner, CpuFreqPluginConfigure *configure)
+spinner_changed (GtkSpinButton *spinner)
 {
-  cpuFreq->options->timeout = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spinner));
+  cpuFreq->options->timeout = gtk_spin_button_get_value_as_int (spinner);
   cpufreq_restart_timeout ();
 }
 
 
 
 static void
-cpufreq_configure_response (GtkWidget *dialog, int response, CpuFreqPluginConfigure *configure)
+cpufreq_configure_response (GtkDialog *dialog)
 {
   g_object_set_data (G_OBJECT (cpuFreq->plugin), "configure", NULL);
   xfce_panel_plugin_unblock_menu (cpuFreq->plugin);
-  gtk_widget_destroy (dialog);
+  gtk_widget_destroy (GTK_WIDGET (dialog));
 
   cpufreq_write_config (cpuFreq->plugin);
-
-  delete configure;
 }
 
 
@@ -303,7 +304,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   GtkWidget *spinner, *button;
   GdkRGBA color = {};
 
-  auto configure = new CpuFreqPluginConfigure();
+  auto configure = xfce4::make<CpuFreqPluginConfigure>();
 
   xfce_panel_plugin_block_menu (cpuFreq->plugin);
 
@@ -358,8 +359,9 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), spinner);
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinner), (gdouble) options->timeout);
   gtk_box_pack_start (GTK_BOX (hbox), spinner, false, false, 0);
-  g_signal_connect (G_OBJECT (spinner), "value-changed",
-                    G_CALLBACK (spinner_changed), configure);
+  xfce4::connect_value_changed (GTK_SPIN_BUTTON (spinner), [](GtkSpinButton *sb) {
+      spinner_changed (sb);
+  });
 
   /* panel behaviours */
   frame = gtk_frame_new (NULL);
@@ -396,11 +398,13 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   button = configure->fontname = gtk_button_new ();
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
   gtk_box_pack_start (GTK_BOX (hbox), button, true, true, 0);
-  g_signal_connect (G_OBJECT (button), "clicked",
-                    G_CALLBACK (button_fontname_clicked), configure);
-  g_signal_connect (G_OBJECT (button), "button_press_event",
-                    G_CALLBACK (button_fontname_pressed), configure);
-  button_fontname_update (button, false);
+  xfce4::connect_clicked (GTK_BUTTON (button), [](GtkButton *b) {
+      button_fontname_clicked (b);
+  });
+  xfce4::connect_button_press (button, [](GtkWidget *w, GdkEventButton *event) {
+      return button_fontname_pressed (w, event);
+  });
+  button_fontname_update (GTK_BUTTON (button), false);
 
   /* font color */
   hbox = configure->fontcolor_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
@@ -419,15 +423,14 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_color_button_set_title (GTK_COLOR_BUTTON (button), _("Select font color"));
   gtk_box_pack_start (GTK_BOX (hbox), button, false, true, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
-  g_signal_connect (button, "color-set", G_CALLBACK (button_fontcolor_clicked), NULL);
-  g_signal_connect (button, "button_press_event",
-                    G_CALLBACK (button_fontcolor_pressed), configure);
+  xfce4::connect_color_set (GTK_COLOR_BUTTON (button), button_fontcolor_clicked);
+  xfce4::connect_button_press (button, [](GtkWidget *w, GdkEventButton *event) {
+      return button_fontcolor_pressed (w, event);
+  });
   button_fontcolor_update (button, false);
 
   /* which cpu to show in panel */
   {
-    GtkWidget *combo;
-
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, false, false, 0);
 
@@ -437,7 +440,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
     gtk_label_set_xalign (GTK_LABEL (label), 0);
     gtk_size_group_add_widget (sg0, label);
 
-    combo = configure->combo_cpu = gtk_combo_box_text_new ();
+    GtkWidget *combo = configure->combo_cpu = gtk_combo_box_text_new ();
     gtk_box_pack_start (GTK_BOX (hbox), combo, false, true, 0);
     gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
 
@@ -473,13 +476,13 @@ cpufreq_configure (XfcePanelPlugin *plugin)
       }
     }
 
-    g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (combo_changed), configure);
+    xfce4::connect_changed (GTK_COMBO_BOX (combo), [configure](GtkComboBox *b) {
+        combo_changed (b, configure);
+    });
   }
 
   /* which unit to use when displaying the frequency */
   {
-    GtkWidget *combo;
-
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, false, false, 0);
 
@@ -489,7 +492,7 @@ cpufreq_configure (XfcePanelPlugin *plugin)
     gtk_label_set_xalign (GTK_LABEL (label), 0);
     gtk_size_group_add_widget (sg0, label);
 
-    combo = configure->combo_unit = gtk_combo_box_text_new ();
+    GtkWidget *combo = configure->combo_unit = gtk_combo_box_text_new ();
     gtk_box_pack_start (GTK_BOX (hbox), combo, false, true, 0);
     gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
 
@@ -514,41 +517,57 @@ cpufreq_configure (XfcePanelPlugin *plugin)
       goto retry_unit;
     }
 
-    g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (combo_changed), configure);
+    xfce4::connect_changed (GTK_COMBO_BOX (combo), [configure](GtkComboBox *b) {
+        combo_changed (b, configure);
+    });
   }
 
   /* check buttons for display widgets in panel */
   button = configure->keep_compact = gtk_check_button_new_with_mnemonic (_("_Keep compact"));
   gtk_box_pack_start (GTK_BOX (vbox), button, false, false, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->keep_compact);
-  g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
+  xfce4::connect_toggled (GTK_TOGGLE_BUTTON (button), [configure](GtkToggleButton *b) {
+      check_button_changed (GTK_WIDGET (b), configure);
+  });
 
   button = configure->one_line = gtk_check_button_new_with_mnemonic (_("Show text in a single _line"));
   gtk_box_pack_start (GTK_BOX (vbox), button, false, false, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->one_line);
-  g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
+  xfce4::connect_toggled (GTK_TOGGLE_BUTTON (button), [configure](GtkToggleButton *b) {
+      check_button_changed (GTK_WIDGET (b), configure);
+  });
 
   button = configure->display_icon = gtk_check_button_new_with_mnemonic (_("Show CPU _icon"));
   gtk_box_pack_start (GTK_BOX (vbox), button, false, false, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->show_icon);
-  g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
+  xfce4::connect_toggled (GTK_TOGGLE_BUTTON (button), [configure](GtkToggleButton *b) {
+      check_button_changed (GTK_WIDGET (b), configure);
+  });
 
   button = configure->icon_color_freq = gtk_check_button_new_with_mnemonic (_("Adjust CPU icon color according to frequency"));
   gtk_box_pack_start (GTK_BOX (vbox), button, false, false, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->icon_color_freq);
-  g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
+  xfce4::connect_toggled (GTK_TOGGLE_BUTTON (button), [configure](GtkToggleButton *b) {
+      check_button_changed (GTK_WIDGET (b), configure);
+  });
 
   button = configure->display_freq = gtk_check_button_new_with_mnemonic (_("Show CPU fre_quency"));
   gtk_box_pack_start (GTK_BOX (vbox), button, false, false, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->show_label_freq);
-  g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
+  xfce4::connect_toggled (GTK_TOGGLE_BUTTON (button), [configure](GtkToggleButton *b) {
+      check_button_changed (GTK_WIDGET (b), configure);
+  });
 
   button = configure->display_governor = gtk_check_button_new_with_mnemonic (_("Show CPU _governor"));
   gtk_box_pack_start (GTK_BOX (vbox), button, false, false, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), options->show_label_governor);
-  g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (check_button_changed), configure);
+  xfce4::connect_toggled (GTK_TOGGLE_BUTTON (button), [configure](GtkToggleButton *b) {
+      check_button_changed (GTK_WIDGET (b), configure);
+  });
 
-  g_signal_connect(G_OBJECT (dialog), "response", G_CALLBACK(cpufreq_configure_response), configure);
+  xfce4::connect_response (GTK_DIALOG (dialog), [](GtkDialog *widget, gint response) {
+      cpufreq_configure_response (widget);
+  });
 
   update_sensitivity (configure);
   validate_configuration (configure);
