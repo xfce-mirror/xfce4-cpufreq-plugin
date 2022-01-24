@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-20 12:53+0100\n"
-"PO-Revision-Date: 2022-01-20 11:53+0000\n"
+"POT-Creation-Date: 2022-01-24 00:51+0100\n"
+"PO-Revision-Date: 2022-01-23 23:51+0000\n"
 "Last-Translator: Xfce Bot <transifex@xfce.org>\n"
 "Language-Team: Korean (http://www.transifex.com/xfce/xfce-panel-plugins/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -21,200 +21,199 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:111
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:115
 msgid "Select font..."
 msgstr "글꼴을 선택하십시오..."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:112
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:116
 msgid "Select font family and size to use for the labels."
 msgstr "레이블에 사용할 글꼴 모음과 크기를 선택하십시오."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:117
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:121
 msgid "Right-click to revert to the default font."
 msgstr "기본 글꼴로 되돌리려면 마우스 오른쪽 단추를 누르십시오."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:132
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:133
 msgid "Select font"
 msgstr "글꼴 선택"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:192
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:193
 msgid "Right-click to revert to the default color"
 msgstr "기본 색상으로 되돌리려면 마우스 오른쪽 단추를 누르십시오"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:313
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:310
 msgid "Configure CPU Frequency Monitor"
 msgstr "CPU 주파수 감시기 설정"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:316
-#: ../panel-plugin/xfce4-cpufreq-overview.c:261
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:313
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:242
 msgid "_Close"
 msgstr "닫기(_C)"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:337
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:334
 msgid "<b>Monitor</b>"
 msgstr "<b>모니터</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:354
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:351
 msgid "_Update interval:"
 msgstr "업데이트 주기(_U):"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:372
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:369
 msgid "<b>Panel</b>"
 msgstr "<b>패널</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:393
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:390
 msgid "_Font:"
 msgstr "글꼴(_F):"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:412
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:409
 msgid "_Font color:"
 msgstr "글꼴 색(_F):"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:422
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:419
 msgid "Select font color"
 msgstr "글꼴의 색을 고르세요"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:437
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:434
 msgid "_Display CPU:"
 msgstr "CPU 표시(_D):"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:454
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:450
 msgid "min"
 msgstr "최소"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:455
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:451
 msgid "avg"
 msgstr "평균"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:456
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:452
 msgid "max"
 msgstr "최대"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:490
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:486
 msgid "Unit:"
 msgstr "단위:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:500
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:496
 msgid "Auto"
 msgstr "자동"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:501
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:497
 msgid "GHz"
 msgstr "GHz"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:502
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:498
 msgid "MHz"
 msgstr "MHz"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:525
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:521
 msgid "_Keep compact"
 msgstr "최소화 유지(_K)"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:530
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:526
 msgid "Show text in a single _line"
 msgstr "단일 행에 텍스트 표시(_L)"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:535
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:531
 msgid "Show CPU _icon"
 msgstr "CPU 아이콘 표시(_I)"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:540
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:536
 msgid "Adjust CPU icon color according to frequency"
 msgstr "주파수에 따라 CPU 아이콘 색을 조절합니다"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:545
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:541
 msgid "Show CPU fre_quency"
 msgstr "CPU 주파수 표시(_Q)"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:550
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:546
 msgid "Show CPU _governor"
 msgstr "CPU 정책 표시(_G)"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:75
+#: ../panel-plugin/xfce4-cpufreq-linux.cc:76
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
 msgstr "시스템에서 cpufreq를 지원하지 않습니다.\n플러그인에서는 현재 CPU 주파수만 보여줍니다"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:80
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:79
 msgid "Scaling driver:"
 msgstr "스케일링 드라이버:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:89
-#, c-format
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:90
 msgid "No scaling driver available"
 msgstr "사용가능한 스케일링 드라이버가 없습니다"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:103
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:104
 msgid "Available frequencies:"
 msgstr "사용 가능한 주파수:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:173
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:162
 msgid "Available governors:"
 msgstr "사용 가능한 정책:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:203
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:189
 msgid "Current governor:"
 msgstr "현재 정책:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:258
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:239
 msgid "CPU Information"
 msgstr "CPU 정보"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:265
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:246
 msgid "An overview of all the CPUs in the system"
 msgstr "시스템의 모든 CPU에 대한 개요입니다"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:147
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:106
 msgid "current min"
 msgstr "현재 최소"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:197
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:152
 msgid "current avg"
 msgstr "현재 평균"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:238
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:188
 msgid "current max"
 msgstr "현재 최대"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:621
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:554
 msgid "No CPU information available."
 msgstr "CPU 정보가 없습니다."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:627
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:561
 #, c-format
-msgid "%d cpu available"
-msgid_plural "%d cpus available"
-msgstr[0] "CPU %d개를 사용할 수 있습니다"
+msgid "%zu cpu available"
+msgid_plural "%zu cpus available"
+msgstr[0] ""
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:632
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:567
 msgid "Frequency: "
 msgstr "주파수:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:640
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:574
 msgid "Governor: "
 msgstr "정책:"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:1181
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:985
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "CPU 주파수와 정책을 보여줍니다"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:1183
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:987
 msgid "Copyright (c) 2003-2022\n"
 msgstr ""
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:1211
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1009
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "CPU 주파수 조절을 지원하려는 시스템 설정이 올바르지 않습니다!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:1219
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1016
 msgid "Your system is not supported yet!"
 msgstr "아직 이 시스템을 지원하지 않습니다!"
 
-#: ../panel-plugin/xfce4-cpufreq-utils.c:103
+#: ../panel-plugin/xfce4-cpufreq-utils.cc:87
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
