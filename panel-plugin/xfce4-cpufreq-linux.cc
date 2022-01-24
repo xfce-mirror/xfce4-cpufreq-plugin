@@ -82,11 +82,11 @@ cpufreq_linux_init ()
 
 
 
-gboolean
-cpufreq_update_cpus (gpointer data)
+void
+cpufreq_update_cpus ()
 {
-  if (G_UNLIKELY (cpuFreq == NULL))
-    return false;
+  if (G_UNLIKELY (cpuFreq == nullptr))
+    return;
 
   if (cpufreq_sysfs_is_available ())
   {
@@ -102,7 +102,7 @@ cpufreq_update_cpus (gpointer data)
   else
   {
     /* We do not need to update, because no scaling available */
-    return false;
+    return;
   }
 
   for (const Ptr<CpuInfo> &cpu : cpuFreq->cpus)
@@ -126,5 +126,5 @@ cpufreq_update_cpus (gpointer data)
     cpuFreq->freq_hist[bin]++;
   }
 
-  return cpufreq_update_plugin (false);
+  cpufreq_update_plugin (false);
 }

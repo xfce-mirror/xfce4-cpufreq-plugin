@@ -48,7 +48,7 @@
 #include "xfce4-cpufreq-linux.h"
 #endif /* __linux__ */
 
-CpuFreqPlugin *cpuFreq = NULL;
+Ptr0<CpuFreqPlugin> cpuFreq;
 
 
 
@@ -510,12 +510,12 @@ cpufreq_update_pixmap (const Ptr<CpuInfo> &cpu)
 
 
 
-bool
+void
 cpufreq_update_plugin (bool reset_label_size)
 {
   Ptr0<CpuInfo> cpu0 = cpufreq_current_cpu ();
   if (!cpu0)
-    return false;
+    return;
 
   Ptr<CpuInfo> cpu = cpu0.toPtr();
 
@@ -532,17 +532,10 @@ cpufreq_update_plugin (bool reset_label_size)
 
   if (cpuFreq->layout_changed)
     cpufreq_widgets_layout ();
-
-  return true;
 }
 
-static gboolean
-cpufreq_update_tooltip (GtkWidget *widget,
-                        gint x,
-                        gint y,
-                        gboolean keyboard_mode,
-                        GtkTooltip *tooltip,
-                        CpuFreqPlugin *_unused)
+static xfce4::TooltipTime
+cpufreq_update_tooltip (GtkTooltip *tooltip)
 {
   auto options = cpuFreq->options;
 
@@ -578,7 +571,7 @@ cpufreq_update_tooltip (GtkWidget *widget,
   }
 
   gtk_tooltip_set_text (tooltip, tooltip_msg.c_str());
-  return true;
+  return xfce4::NOW;
 }
 
 
@@ -588,17 +581,17 @@ cpufreq_restart_timeout ()
 {
 #ifdef __linux__
   g_source_remove (cpuFreq->timeoutHandle);
-  cpuFreq->timeoutHandle = g_timeout_add_seconds (
-    cpuFreq->options->timeout, cpufreq_update_cpus, NULL);
+  cpuFreq->timeoutHandle = xfce4::timeout_add (1000 * cpuFreq->options->timeout, []() {
+      cpufreq_update_cpus ();
+      return xfce4::TIMEOUT_AGAIN;
+  });
 #endif
 }
 
 
 
 static void
-cpufreq_mode_changed (XfcePanelPlugin *plugin,
-                      XfcePanelPluginMode mode,
-                      CpuFreqPlugin *cpufreq)
+cpufreq_mode_changed (XfcePanelPlugin *plugin, XfcePanelPluginMode mode)
 {
   cpuFreq->panel_mode = mode;
   cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (plugin);
@@ -656,11 +649,11 @@ cpufreq_update_icon ()
 
 
 
-static void
-label_draw (GtkWidget *widget, cairo_t *cr, gpointer data)
+static xfce4::Propagation
+label_draw (GtkWidget *widget, cairo_t *cr)
 {
   if (cpuFreq->label.text.empty())
-    return;
+    return xfce4::PROPAGATE;
 
   cairo_save (cr);
 
@@ -757,20 +750,22 @@ label_draw (GtkWidget *widget, cairo_t *cr, gpointer data)
 
   g_object_unref (layout);
   cairo_restore (cr);
+
+  return xfce4::PROPAGATE;
 }
 
-static gboolean
-label_enter (GtkWidget *widget, GdkEvent *event, gpointer user_data)
+static xfce4::Propagation
+label_enter (GtkWidget*, GdkEventCrossing*)
 {
   gtk_widget_set_state_flags (cpuFreq->button, GTK_STATE_FLAG_PRELIGHT, false);
-  return false;
+  return xfce4::STOP;
 }
 
-static gboolean
-label_leave (GtkWidget *widget, GdkEvent *event, gpointer user_data)
+static xfce4::Propagation
+label_leave (GtkWidget*, GdkEventCrossing*)
 {
   gtk_widget_unset_state_flags (cpuFreq->button, GTK_STATE_FLAG_PRELIGHT);
-  return false;
+  return xfce4::STOP;
 }
 
 
@@ -784,9 +779,9 @@ cpufreq_prepare_label ()
     {
       GtkWidget *draw_area = gtk_drawing_area_new ();
       gtk_widget_add_events (draw_area, GDK_ALL_EVENTS_MASK);
-      g_signal_connect (draw_area, "draw", G_CALLBACK (label_draw), NULL);
-      g_signal_connect (draw_area, "enter-notify-event", G_CALLBACK (label_enter), NULL);
-      g_signal_connect (draw_area, "leave-notify-event", G_CALLBACK (label_leave), NULL);
+      xfce4::connect_draw (draw_area, label_draw);
+      xfce4::connect_enter_notify (draw_area, label_enter);
+      xfce4::connect_leave_notify (draw_area, label_leave);
       gtk_widget_set_halign (draw_area, GTK_ALIGN_CENTER);
       gtk_widget_set_valign (draw_area, GTK_ALIGN_CENTER);
       gtk_box_pack_start (GTK_BOX (cpuFreq->box), draw_area, true, true, 0);
@@ -832,13 +827,15 @@ cpufreq_widgets ()
 
   cpufreq_prepare_label ();
 
-  g_signal_connect (cpuFreq->button, "button-press-event",
-                    G_CALLBACK (cpufreq_overview), cpuFreq);
+  xfce4::connect_button_press (cpuFreq->button, [](GtkWidget*, GdkEventButton *event) {
+    return cpufreq_overview (event) ? xfce4::STOP : xfce4::PROPAGATE;
+  });
 
   /* activate panel widget tooltip */
   g_object_set (G_OBJECT (cpuFreq->button), "has-tooltip", true, NULL);
-  g_signal_connect (cpuFreq->button, "query-tooltip",
-                    G_CALLBACK (cpufreq_update_tooltip), cpuFreq);
+  xfce4::connect_query_tooltip (cpuFreq->button, [](GtkWidget*, gint x, gint y, bool keyboard, GtkTooltip *tooltip) {
+      return cpufreq_update_tooltip (tooltip);
+  });
 
   gtk_widget_show_all (cpuFreq->button);
 
@@ -939,19 +936,21 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
 
 
 static void
-cpufreq_free (XfcePanelPlugin *plugin)
+cpufreq_free (XfcePanelPlugin*)
 {
   if (cpuFreq->timeoutHandle)
+  {
     g_source_remove (cpuFreq->timeoutHandle);
+    cpuFreq->timeoutHandle = 0;
+  }
 
-  delete cpuFreq;
-  cpuFreq = NULL;
+  cpuFreq = nullptr;
 }
 
 
 
-static gboolean
-cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
+static xfce4::PluginSize
+cpufreq_set_size (XfcePanelPlugin *plugin, gint size)
 {
   cpuFreq->panel_size = size;
   cpuFreq->panel_rows = xfce_panel_plugin_get_nrows (plugin);
@@ -959,11 +958,11 @@ cpufreq_set_size (XfcePanelPlugin *plugin, gint size, CpuFreqPlugin *cpufreq)
   cpufreq_update_icon ();
   cpufreq_update_plugin (true);
 
-  return true;
+  return xfce4::RECTANGLE;
 }
 
 static void
-cpufreq_show_about(XfcePanelPlugin *plugin, CpuFreqPlugin *cpufreq)
+cpufreq_show_about(XfcePanelPlugin*)
 {
   /* List of authors (in alphabetical order) */
   const gchar *auth[] = {
@@ -997,7 +996,7 @@ cpufreq_plugin_construct (XfcePanelPlugin *plugin)
 {
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
-  cpuFreq = new CpuFreqPlugin(plugin);
+  cpuFreq = xfce4::make<CpuFreqPlugin>(plugin);
 
   cpufreq_read_config ();
   cpuFreq->label.reset_size = true;
@@ -1011,21 +1010,24 @@ cpufreq_plugin_construct (XfcePanelPlugin *plugin)
   gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, -1);
   cpufreq_widgets ();
 
-  cpuFreq->timeoutHandle = g_timeout_add_seconds (cpuFreq->options->timeout, cpufreq_update_cpus, NULL);
+  cpuFreq->timeoutHandle = xfce4::timeout_add (1000 * cpuFreq->options->timeout, []() {
+      cpufreq_update_cpus ();
+      return xfce4::TIMEOUT_AGAIN;
+  });
 #else
   xfce_dialog_show_error (NULL, NULL, _("Your system is not supported yet!"));
 #endif /* __linux__ */
 
-  g_signal_connect (plugin, "free-data", G_CALLBACK (cpufreq_free), NULL);
-  g_signal_connect (plugin, "save", G_CALLBACK (cpufreq_write_config), NULL);
-  g_signal_connect (plugin, "size-changed", G_CALLBACK (cpufreq_set_size), cpuFreq);
-  g_signal_connect (plugin, "mode-changed", G_CALLBACK (cpufreq_mode_changed), cpuFreq);
+  xfce4::connect_free_data (plugin, cpufreq_free);
+  xfce4::connect_save (plugin, cpufreq_write_config);
+  xfce4::connect_size_changed (plugin, cpufreq_set_size);
+  xfce4::connect_mode_changed (plugin, cpufreq_mode_changed);
 
-  /* the configure and about menu items are hidden by default */
+  /* Enable the configure and about menu items (they are hidden by default) */
   xfce_panel_plugin_menu_show_configure (plugin);
-  g_signal_connect (plugin, "configure-plugin", G_CALLBACK (cpufreq_configure), NULL);
-  xfce_panel_plugin_menu_show_about(plugin);
-  g_signal_connect (plugin, "about", G_CALLBACK (cpufreq_show_about), cpuFreq);
+  xfce_panel_plugin_menu_show_about (plugin);
+  xfce4::connect_configure_plugin (plugin, cpufreq_configure);
+  xfce4::connect_about (plugin, cpufreq_show_about);
 }
 
 
@@ -1039,6 +1041,11 @@ CpuFreqPlugin::CpuFreqPlugin(XfcePanelPlugin *_plugin) : plugin(_plugin)
 
 CpuFreqPlugin::~CpuFreqPlugin()
 {
+  g_info ("%s", __PRETTY_FUNCTION__);
+
+  if (G_UNLIKELY (timeoutHandle))
+    g_source_remove (timeoutHandle);
+
   if (label.font_desc)
     pango_font_description_free (label.font_desc);
 

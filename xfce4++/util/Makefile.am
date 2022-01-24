@@ -30,6 +30,8 @@ libxfce4util_pp_la_LIBADD = \
 
 libxfce4util_pp_la_SOURCES = \
 	fixes.h \
+	gtk.h \
+	gtk.cc \
 	memory.h \
 	memory.cc \
 	optional.h \

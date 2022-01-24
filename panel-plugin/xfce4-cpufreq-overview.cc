@@ -210,34 +210,34 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
 
 
 static void
-cpufreq_overview_response (GtkWidget *dialog, gint response, gpointer data)
+cpufreq_overview_response (GtkDialog *dialog, gint response)
 {
   g_object_set_data (G_OBJECT (cpuFreq->plugin), "overview", NULL);
-  gtk_widget_destroy (dialog);
+  gtk_widget_destroy (GTK_WIDGET (dialog));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpuFreq->button), false);
 }
 
 
 
-gboolean
-cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
+bool
+cpufreq_overview (GdkEventButton *ev)
 {
   if (ev->button != 1)
     return false;
 
-  auto window = (GtkWidget*) g_object_get_data (G_OBJECT (cpufreq->plugin), "overview");
+  auto window = (GtkWidget*) g_object_get_data (G_OBJECT (cpuFreq->plugin), "overview");
 
   if (window) {
-    g_object_set_data (G_OBJECT (cpufreq->plugin), "overview", NULL);
+    g_object_set_data (G_OBJECT (cpuFreq->plugin), "overview", NULL);
     gtk_widget_destroy (window);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpufreq->button), false);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpuFreq->button), false);
     return true;
   }
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpufreq->button), true);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpuFreq->button), true);
 
   GtkWidget *dialog = xfce_titled_dialog_new_with_mixed_buttons (_("CPU Information"),
-    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (cpufreq->plugin))),
+    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (cpuFreq->plugin))),
     GTK_DIALOG_DESTROY_WITH_PARENT,
     "window-close-symbolic", _("_Close"), GTK_RESPONSE_OK,
     NULL);
@@ -248,44 +248,43 @@ cpufreq_overview (GtkWidget *widget, GdkEventButton *ev, CpuFreqPlugin *cpufreq)
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-cpufreq-plugin");
 
-  g_object_set_data (G_OBJECT (cpufreq->plugin), "overview", dialog);
+  g_object_set_data (G_OBJECT (cpuFreq->plugin), "overview", dialog);
 
   GtkWidget *dialog_vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 
   /* choose how many columns and rows depending on cpu count */
   size_t step;
-  if (cpufreq->cpus.size() < 4)
+  if (cpuFreq->cpus.size() < 4)
     step = 1;
-  else if (cpufreq->cpus.size() < 9)
+  else if (cpuFreq->cpus.size() < 9)
     step = 2;
-  else if (cpufreq->cpus.size() % 3 != 0)
+  else if (cpuFreq->cpus.size() % 3 != 0)
     step = 4;
   else
     step = 3;
 
-  for (size_t i = 0; i < cpufreq->cpus.size(); i += step) {
+  for (size_t i = 0; i < cpuFreq->cpus.size(); i += step) {
     GtkWidget *dialog_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER * 2);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), dialog_hbox, false, false, BORDER * 2);
     gtk_container_set_border_width (GTK_CONTAINER (dialog_hbox), BORDER * 2);
 
-    for (size_t j = i; j < cpufreq->cpus.size() && j < i + step; j++) {
-      Ptr<const CpuInfo> cpu = cpufreq->cpus[j];
+    for (size_t j = i; j < cpuFreq->cpus.size() && j < i + step; j++) {
+      Ptr<const CpuInfo> cpu = cpuFreq->cpus[j];
       cpufreq_overview_add (cpu, j, dialog_hbox);
 
-      if (j + 1 < cpufreq->cpus.size() && j + 1 == i + step) {
+      if (j + 1 < cpuFreq->cpus.size() && j + 1 == i + step) {
         GtkWidget *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
         gtk_box_pack_start (GTK_BOX (dialog_vbox), separator, false, false, 0);
       }
 
-      if (j + 1 < cpufreq->cpus.size() && j + 1 < i + step) {
+      if (j + 1 < cpuFreq->cpus.size() && j + 1 < i + step) {
         GtkWidget *separator = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
         gtk_box_pack_start (GTK_BOX (dialog_hbox), separator, false, false, 0);
       }
     }
   }
 
-  g_signal_connect (G_OBJECT (dialog), "response",
-                    G_CALLBACK (cpufreq_overview_response), NULL);
+  xfce4::connect_response (GTK_DIALOG (dialog), cpufreq_overview_response);
 
   gtk_widget_show_all (dialog);
 

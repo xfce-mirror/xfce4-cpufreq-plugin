@@ -39,6 +39,8 @@ struct CpuFreqPluginConfigure
   GtkWidget *one_line = nullptr;
   GtkWidget *fontcolor = nullptr, *fontcolor_hbox = nullptr;
   GtkWidget *fontname = nullptr, *fontname_hbox = nullptr;
+
+  ~CpuFreqPluginConfigure();
 };
 
 void
