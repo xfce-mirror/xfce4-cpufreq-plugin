@@ -87,7 +87,7 @@ struct IntelPState
 
 struct CpuFreqPluginOptions
 {
-  guint       timeout = 1;             /* time between refresh */
+  float       timeout = 1.0;           /* refresh interval, in seconds */
   gint        show_cpu = CPU_DEFAULT;  /* cpu number in panel, or CPU_MIN/AVG/MAX */
   bool        show_icon = true;
   bool        show_label_freq = true;
@@ -99,6 +99,8 @@ struct CpuFreqPluginOptions
   std::string fontname;
   std::string fontcolor;
   CpuFreqUnit unit = UNIT_DEFAULT;
+
+  void validate();
 };
 
 struct CpuFreqPlugin

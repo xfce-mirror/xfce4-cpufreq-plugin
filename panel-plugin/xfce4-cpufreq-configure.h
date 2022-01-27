@@ -46,8 +46,8 @@ struct CpuFreqPluginConfigure
 void
 cpufreq_configure (XfcePanelPlugin *plugin);
 
-#define TIMEOUT_MIN	1
-#define TIMEOUT_MAX	10
-#define TIMEOUT_STEP	1
+#define TIMEOUT_MIN	0.25
+#define TIMEOUT_MAX	10.0
+#define TIMEOUT_STEP	0.25
 
 #endif /* XFCE4_CPUFREQ_CONFIGURE_H */
