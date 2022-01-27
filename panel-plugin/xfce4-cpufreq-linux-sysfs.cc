@@ -58,29 +58,52 @@ cpufreq_sysfs_is_available ()
 
 
 void
-cpufreq_sysfs_read_current (gint cpu_number)
+cpufreq_sysfs_read_current ()
 {
-  Ptr<CpuInfo> cpu = cpuFreq->cpus[cpu_number];
-  std::string file;
+  /*
+   * The following code reads cpufreq data from sysfs asynchronously,
+   * in a different thread that isn't interfering with the GUI thread.
+   *
+   * The reason for this is that reading all the '/sys/.../scaling_cur_freq' files can
+   * take a long time, for example, 800 milliseconds on a Ryzen 3900X CPU with 24 threads.
+   */
 
-  /* read current cpu freq */
-  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
-  cpufreq_sysfs_read_uint (file, &cpu->cur_freq);
+  /* Start a new sysfs-read only if the previous read has finished */
+  xfce4::LaunchConfig config;
+  config.start_if_busy = false;
 
-  /* read current cpu governor */
-  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_governor", cpu_number);
-  cpufreq_sysfs_read_string (file, cpu->cur_governor);
+  const std::vector<Ptr<CpuInfo>> cpus = cpuFreq->cpus;
+  xfce4::singleThreadQueue->start(config, [cpus]() {
+      for (size_t i = 0; i < cpus.size(); i++) {
+        Ptr<CpuInfo> cpu = cpus[i];
+        std::string file;
 
-  /* read whether the cpu is online, skip first */
-  if (cpu_number != 0)
-  {
-    guint online;
+        /* read current cpu freq */
+        guint cur_freq;
+        file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/scaling_cur_freq", i);
+        cpufreq_sysfs_read_uint (file, &cur_freq);
 
-    file = xfce4::sprintf (SYSFS_BASE "/cpu%i/online", cpu_number);
-    cpufreq_sysfs_read_uint (file, &online);
+        /* read current cpu governor */
+        std::string cpu_governor;
+        file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/scaling_governor", i);
+        cpufreq_sysfs_read_string (file, cpu_governor);
 
-    cpu->online = (online != 0);
-  }
+        /* read whether the cpu is online, skip first */
+        guint online = 1;
+        if (i != 0)
+        {
+          file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/online", i);
+          cpufreq_sysfs_read_uint (file, &online);
+        }
+
+        {
+            std::lock_guard<std::mutex> guard(cpu->mutex);
+            cpu->shared.cur_freq = cur_freq;
+            cpu->shared.cur_governor = cpu_governor;
+            cpu->shared.online = (online != 0);
+        }
+      }
+    });
 }
 
 
@@ -175,7 +198,6 @@ parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
 
   if (cpu == nullptr) {
     cpu = xfce4::make<CpuInfo>();
-    cpu->online = true;
     add_cpu = true;
   }
 
@@ -194,12 +216,14 @@ parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
   cpufreq_sysfs_read_string (file, cpu->scaling_driver);
 
   /* read current cpu freq */
+  guint cur_freq;
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
-  cpufreq_sysfs_read_uint (file, &cpu->cur_freq);
+  cpufreq_sysfs_read_uint (file, &cur_freq);
 
   /* read current cpu governor */
+  std::string cur_governor;
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_governor", cpu_number);
-  cpufreq_sysfs_read_string (file, cpu->cur_governor);
+  cpufreq_sysfs_read_string (file, cur_governor);
 
   /* read max cpu freq */
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_max_freq", cpu_number);
@@ -208,6 +232,13 @@ parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
   /* read min cpu freq */
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_min_freq", cpu_number);
   cpufreq_sysfs_read_uint (file, &cpu->min_freq);
+
+  {
+    std::lock_guard<std::mutex> guard(cpu->mutex);
+    cpu->shared.online = true;
+    cpu->shared.cur_freq = cur_freq;
+    cpu->shared.cur_governor = cur_governor;
+  }
 
   if (add_cpu)
     cpuFreq->cpus.push_back(cpu.toPtr());

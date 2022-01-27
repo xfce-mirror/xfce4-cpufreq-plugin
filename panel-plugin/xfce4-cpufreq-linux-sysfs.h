@@ -27,7 +27,7 @@ bool cpufreq_sysfs_is_available ();
 
 bool cpufreq_sysfs_read ();
 
-void cpufreq_sysfs_read_current (gint cpu_number);
+void cpufreq_sysfs_read_current ();
 
 void cpufreq_sysfs_read_uint (const std::string &file, guint *intval);
 

@@ -24,6 +24,7 @@
 
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
+#include <mutex>
 #include <string>
 #include <vector>
 #include "xfce4++/util.h"
@@ -53,18 +54,28 @@ enum CpuFreqUnit
 
 struct CpuInfo
 {
-  guint  cur_freq = 0;  /* frequency in kHz */
+  mutable std::mutex mutex;
+
+  /*
+   * These fields are shared among multiple OS threads.
+   * Use the mutex when accessing these fields.
+   */
+  struct Shared {
+    guint cur_freq = 0;  /* frequency in kHz */
+    std::string cur_governor;
+    bool online = false;
+  } shared;
+
+  guint  min_freq = 0;
   guint  max_freq_measured = 0;
   guint  max_freq_nominal = 0;
-  guint  min_freq = 0;
 
-  std::string cur_governor;
   std::string scaling_driver;
 
   std::vector<guint> available_freqs;
   std::vector<std::string> available_governors;
 
-  bool online = false;
+  std::string get_cur_governor() const;
 };
 
 struct IntelPState
