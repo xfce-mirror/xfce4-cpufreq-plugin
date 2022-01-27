@@ -67,15 +67,22 @@ cpufreq_procfs_read_cpuinfo ()
         if (cpu == nullptr)
         {
           cpu = xfce4::make<CpuInfo>();
-          cpu->online = true;
+          {
+            std::lock_guard<std::mutex> guard(cpu->mutex);
+            cpu->shared.online = true;
+          }
           add_cpu = true;
         }
 
         gchar *freq = g_strrstr (line, ":");
         if (freq == NULL)
           break;
-        sscanf (++freq, "%d.", &cpu->cur_freq);
-        cpu->cur_freq *= 1000;
+
+        {
+            std::lock_guard<std::mutex> guard(cpu->mutex);
+            sscanf (++freq, "%d.", &cpu->shared.cur_freq);
+            cpu->shared.cur_freq *= 1000;
+        }
 
         if (add_cpu)
           cpuFreq->cpus.push_back(cpu.toPtr());
@@ -110,7 +117,6 @@ cpufreq_procfs_read ()
       if (g_ascii_strncasecmp (line, "CPU", 3) == 0)
       {
         auto cpu = xfce4::make<CpuInfo>();
-        cpu->online = true;
 
         char gov[20];
         sscanf (line,
@@ -121,7 +127,12 @@ cpufreq_procfs_read ()
         cpu->min_freq *= 1000;
         cpu->max_freq_nominal *= 1000;
         gov[G_N_ELEMENTS(gov)-1] = '\0';
-        cpu->cur_governor = gov;
+
+        {
+            std::lock_guard<std::mutex> guard(cpu->mutex);
+            cpu->shared.online = true;
+            cpu->shared.cur_governor = gov;
+        }
 
         cpuFreq->cpus.push_back(cpu);
       }
@@ -142,9 +153,15 @@ cpufreq_procfs_read ()
 
     if (file)
     {
-      if (fscanf (file, "%d", &cpu->cur_freq) != 1)
-        cpu->cur_freq = 0;
+      guint cur_freq;
+      if (fscanf (file, "%d", &cur_freq) != 1)
+        cur_freq = 0;
       fclose (file);
+
+      {
+        std::lock_guard<std::mutex> guard(cpu->mutex);
+        cpu->shared.cur_freq = cur_freq;
+      }
     }
   }
 

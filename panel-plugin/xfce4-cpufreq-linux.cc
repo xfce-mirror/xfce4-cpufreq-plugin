@@ -90,8 +90,7 @@ cpufreq_update_cpus ()
 
   if (cpufreq_sysfs_is_available ())
   {
-    for (size_t i = 0; i < cpuFreq->cpus.size(); i++)
-      cpufreq_sysfs_read_current (i);
+    cpufreq_sysfs_read_current ();
   }
   else if (cpufreq_procfs_is_available ())
   {
@@ -107,7 +106,11 @@ cpufreq_update_cpus ()
 
   for (const Ptr<CpuInfo> &cpu : cpuFreq->cpus)
   {
-    guint cur_freq = cpu->cur_freq;
+    guint cur_freq;
+    {
+      std::lock_guard<std::mutex> guard(cpu->mutex);
+      cur_freq = cpu->shared.cur_freq;
+    }
 
     cpu->max_freq_measured = MAX (cpu->max_freq_measured, cur_freq);
 
