@@ -456,22 +456,22 @@ cpufreq_update_pixmap (const Ptr<CpuInfo> &cpu)
    */
   gdouble freq_99 = cpu->max_freq_measured;
   gint total_count = 0;
-  for (gsize i = 0; i < G_N_ELEMENTS (cpuFreq->freq_hist); i++)
-    total_count += cpuFreq->freq_hist[i];
+  for (auto count : cpuFreq->freq_hist)
+    total_count += count;
   if (total_count * 0.01 < 1)
   {
     /* Not enough data to reliably compute the percentile,
      * resort to a value that isn't based on statistics */
-    freq_99 = MAX (cpu->max_freq_nominal, cpu->max_freq_measured);
+    freq_99 = std::max (cpu->max_freq_nominal, cpu->max_freq_measured);
   }
   else
   {
-    gint percentile_2 = total_count * 0.01;
+    gint percentile_1 = total_count * 0.01;
     for (gssize i = G_N_ELEMENTS (cpuFreq->freq_hist) - 1; i >= 0; i--)
     {
       guint16 count = cpuFreq->freq_hist[i];
-      if (count < percentile_2)
-        percentile_2 -= count;
+      if (count < percentile_1)
+        percentile_1 -= count;
       else
       {
         freq_99 = FREQ_HIST_MIN + i * ((gdouble) (FREQ_HIST_MAX - FREQ_HIST_MIN) / FREQ_HIST_BINS);
@@ -520,7 +520,7 @@ cpufreq_update_pixmap (const Ptr<CpuInfo> &cpu)
       gint delta1 = abs ((gint) pixels[p] - (gint) pixels[p+1]);
       gint delta2 = abs ((gint) pixels[p] - (gint) pixels[p+2]);
       if (delta1 < 10 && delta2 < 10)
-        pixels[p] = MAX (pixels[p], color);
+        pixels[p] = std::max (pixels[p], color);
     }
 
     cpuFreq->icon_pixmaps[index] = pixmap;
