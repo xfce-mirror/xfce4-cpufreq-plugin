@@ -456,22 +456,22 @@ cpufreq_update_pixmap (const Ptr<CpuInfo> &cpu)
    */
   gdouble freq_99 = cpu->max_freq_measured;
   gint total_count = 0;
-  for (gsize i = 0; i < G_N_ELEMENTS (cpuFreq->freq_hist); i++)
-    total_count += cpuFreq->freq_hist[i];
+  for (auto count : cpuFreq->freq_hist)
+    total_count += count;
   if (total_count * 0.01 < 1)
   {
     /* Not enough data to reliably compute the percentile,
      * resort to a value that isn't based on statistics */
-    freq_99 = MAX (cpu->max_freq_nominal, cpu->max_freq_measured);
+    freq_99 = std::max (cpu->max_freq_nominal, cpu->max_freq_measured);
   }
   else
   {
-    gint percentile_2 = total_count * 0.01;
+    gint percentile_1 = total_count * 0.01;
     for (gssize i = G_N_ELEMENTS (cpuFreq->freq_hist) - 1; i >= 0; i--)
     {
       guint16 count = cpuFreq->freq_hist[i];
-      if (count < percentile_2)
-        percentile_2 -= count;
+      if (count < percentile_1)
+        percentile_1 -= count;
       else
       {
         freq_99 = FREQ_HIST_MIN + i * ((gdouble) (FREQ_HIST_MAX - FREQ_HIST_MIN) / FREQ_HIST_BINS);
@@ -520,7 +520,7 @@ cpufreq_update_pixmap (const Ptr<CpuInfo> &cpu)
       gint delta1 = abs ((gint) pixels[p] - (gint) pixels[p+1]);
       gint delta2 = abs ((gint) pixels[p] - (gint) pixels[p+2]);
       if (delta1 < 10 && delta2 < 10)
-        pixels[p] = MAX (pixels[p], color);
+        pixels[p] = std::max (pixels[p], color);
     }
 
     cpuFreq->icon_pixmaps[index] = pixmap;
@@ -612,10 +612,16 @@ cpufreq_restart_timeout ()
 {
 #ifdef __linux__
   g_source_remove (cpuFreq->timeoutHandle);
-  cpuFreq->timeoutHandle = xfce4::timeout_add (1000 * cpuFreq->options->timeout, []() {
-      cpufreq_update_cpus ();
-      return xfce4::TIMEOUT_AGAIN;
-  });
+  cpuFreq->timeoutHandle = 0;
+
+  int timeout_ms = int(1000 * cpuFreq->options->timeout);
+  if (G_LIKELY (timeout_ms >= 10))
+  {
+    cpuFreq->timeoutHandle = xfce4::timeout_add (timeout_ms, []() {
+        cpufreq_update_cpus ();
+        return xfce4::TIMEOUT_AGAIN;
+    });
+  }
 #endif
 }
 
@@ -891,7 +897,7 @@ cpufreq_read_config ()
   {
     const CpuFreqPluginOptions defaults;
 
-    options->timeout             = rc->read_int_entry  ("timeout", defaults.timeout);
+    options->timeout             = rc->read_float_entry("timeout", defaults.timeout);
     options->show_cpu            = rc->read_int_entry  ("show_cpu", defaults.show_cpu);
     options->show_icon           = rc->read_bool_entry ("show_icon", defaults.show_icon);
     options->show_label_freq     = rc->read_bool_entry ("show_label_freq", defaults.show_label_freq);
@@ -909,24 +915,7 @@ cpufreq_read_config ()
     rc->close ();
   }
 
-  // Validate settings
-  {
-    if (options->timeout > TIMEOUT_MAX || options->timeout < TIMEOUT_MIN)
-      options->timeout = TIMEOUT_MIN;
-
-    if (!options->show_label_freq && !options->show_label_governor)
-      options->show_icon = true;
-
-    switch (options->unit)
-    {
-    case UNIT_AUTO:
-    case UNIT_GHZ:
-    case UNIT_MHZ:
-      break;
-    default:
-      options->unit = UNIT_DEFAULT;
-    }
-  }
+  options->validate();
 }
 
 
@@ -947,7 +936,7 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
   {
     const CpuFreqPluginOptions defaults;
 
-    rc->write_default_int_entry  ("timeout",             options->timeout, defaults.timeout);
+    rc->write_default_float_entry("timeout",             options->timeout, defaults.timeout, 0.001);
     rc->write_default_int_entry  ("show_cpu",            options->show_cpu, defaults.show_cpu);
     rc->write_default_bool_entry ("show_icon",           options->show_icon, defaults.show_icon);
     rc->write_default_bool_entry ("show_label_freq",     options->show_label_freq, defaults.show_label_freq);
@@ -1041,10 +1030,14 @@ cpufreq_plugin_construct (XfcePanelPlugin *plugin)
   gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, -1);
   cpufreq_widgets ();
 
-  cpuFreq->timeoutHandle = xfce4::timeout_add (1000 * cpuFreq->options->timeout, []() {
-      cpufreq_update_cpus ();
-      return xfce4::TIMEOUT_AGAIN;
-  });
+  guint timeout_ms = int(1000 * cpuFreq->options->timeout);
+  if (G_LIKELY (timeout_ms >= 10))
+  {
+    cpuFreq->timeoutHandle = xfce4::timeout_add (timeout_ms, []() {
+        cpufreq_update_cpus ();
+        return xfce4::TIMEOUT_AGAIN;
+    });
+  }
 #else
   xfce_dialog_show_error (NULL, NULL, _("Your system is not supported yet!"));
 #endif /* __linux__ */
@@ -1131,5 +1124,28 @@ void CpuFreqPlugin::set_font(const std::string &fontname_orEmpty)
   else
   {
     options->fontname.clear();
+  }
+}
+
+
+
+void CpuFreqPluginOptions::validate()
+{
+  if (timeout < TIMEOUT_MIN)
+    timeout = TIMEOUT_MIN;
+  else if (timeout > TIMEOUT_MAX)
+    timeout = TIMEOUT_MAX;
+
+  if (!show_label_freq && !show_label_governor)
+    show_icon = true;
+
+  switch (unit)
+  {
+  case UNIT_AUTO:
+  case UNIT_GHZ:
+  case UNIT_MHZ:
+    break;
+  default:
+    unit = UNIT_DEFAULT;
   }
 }

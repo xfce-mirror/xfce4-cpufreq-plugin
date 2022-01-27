@@ -278,7 +278,7 @@ combo_changed (GtkComboBox *combo, const Ptr<CpuFreqPluginConfigure> &configure)
 static void
 spinner_changed (GtkSpinButton *spinner)
 {
-  cpuFreq->options->timeout = gtk_spin_button_get_value_as_int (spinner);
+  cpuFreq->options->timeout = gtk_spin_button_get_value (spinner);
   cpufreq_restart_timeout ();
 }
 
@@ -354,10 +354,10 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
   gtk_size_group_add_widget (sg0, label);
 
-  spinner = configure->spinner_timeout =
-    gtk_spin_button_new_with_range (TIMEOUT_MIN, TIMEOUT_MAX, TIMEOUT_STEP);
+  spinner = configure->spinner_timeout = gtk_spin_button_new_with_range (TIMEOUT_MIN, TIMEOUT_MAX, TIMEOUT_STEP);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), spinner);
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinner), (gdouble) options->timeout);
+  gtk_spin_button_set_digits (GTK_SPIN_BUTTON (spinner), 2);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinner), options->timeout);
   gtk_box_pack_start (GTK_BOX (hbox), spinner, false, false, 0);
   xfce4::connect_value_changed (GTK_SPIN_BUTTON (spinner), [](GtkSpinButton *sb) {
       spinner_changed (sb);
