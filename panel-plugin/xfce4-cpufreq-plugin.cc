@@ -62,8 +62,11 @@ cpufreq_governors ()
   std::set<std::string> set;
 
   for (const Ptr<CpuInfo> &cpu : cpuFreq->cpus)
-    if (cpu->online && !cpu->cur_governor.empty())
-      set.insert(cpu->cur_governor);
+  {
+    std::lock_guard<std::mutex> guard(cpu->mutex);
+    if (cpu->shared.online && !cpu->shared.cur_governor.empty())
+      set.insert(cpu->shared.cur_governor);
+  }
 
   switch (set.size())
   {
@@ -82,39 +85,46 @@ static Ptr<CpuInfo>
 cpufreq_cpus_calc_min ()
 {
   const std::string governors = cpufreq_governors ();
-  const std::string old_governor = cpuFreq->cpu_min ? cpuFreq->cpu_min->cur_governor : std::string();
+  const std::string old_governor = cpuFreq->cpu_min ? cpuFreq->cpu_min->get_cur_governor() : std::string();
   guint freq = G_MAXUINT, max_freq_measured = G_MAXUINT, max_freq_nominal = G_MAXUINT, min_freq = G_MAXUINT;
   guint count = 0;
 
   for (const Ptr<CpuInfo> &cpu : cpuFreq->cpus)
   {
-    if (!cpu->online)
+    std::lock_guard<std::mutex> guard(cpu->mutex);
+
+    if (!cpu->shared.online)
       continue;
 
-    freq = MIN (freq, cpu->cur_freq);
-    max_freq_measured = MIN (max_freq_measured, cpu->max_freq_measured);
-    max_freq_nominal = MIN (max_freq_nominal, cpu->max_freq_nominal);
-    min_freq = MIN (min_freq, cpu->min_freq);
+    freq = std::min (freq, cpu->shared.cur_freq);
+    max_freq_measured = std::min (max_freq_measured, cpu->max_freq_measured);
+    max_freq_nominal = std::min (max_freq_nominal, cpu->max_freq_nominal);
+    min_freq = std::min (min_freq, cpu->min_freq);
     count++;
   }
 
   if (count == 0)
     freq = max_freq_measured = max_freq_nominal = min_freq = 0;
 
-  cpuFreq->cpu_min = xfce4::make<CpuInfo>();
-  cpuFreq->cpu_min->cur_freq = freq;
-  cpuFreq->cpu_min->cur_governor = !governors.empty() ? governors : _("current min");
-  cpuFreq->cpu_min->max_freq_measured = max_freq_measured;
-  cpuFreq->cpu_min->max_freq_nominal = max_freq_nominal;
-  cpuFreq->cpu_min->min_freq = min_freq;
-
-  if (cpuFreq->options->show_label_governor && cpuFreq->cpu_min->cur_governor != old_governor)
+  Ptr<CpuInfo> cpu = xfce4::make<CpuInfo>();
   {
-    cpuFreq->label.reset_size = true;
-    cpuFreq->layout_changed = true;
+    std::lock_guard<std::mutex> guard(cpu->mutex);
+
+    cpu->shared.cur_freq = freq;
+    cpu->shared.cur_governor = !governors.empty() ? governors : _("current min");
+    cpu->max_freq_measured = max_freq_measured;
+    cpu->max_freq_nominal = max_freq_nominal;
+    cpu->min_freq = min_freq;
+
+    if (cpuFreq->options->show_label_governor && cpu->shared.cur_governor != old_governor)
+    {
+      cpuFreq->label.reset_size = true;
+      cpuFreq->layout_changed = true;
+    }
   }
 
-  return cpuFreq->cpu_min.toPtr();
+  cpuFreq->cpu_min = cpu;
+  return cpu;
 }
 
 
@@ -123,16 +133,18 @@ static Ptr<CpuInfo>
 cpufreq_cpus_calc_avg ()
 {
   const std::string governors = cpufreq_governors ();
-  const std::string old_governor = cpuFreq->cpu_avg ? cpuFreq->cpu_avg->cur_governor : std::string();
+  const std::string old_governor = cpuFreq->cpu_avg ? cpuFreq->cpu_avg->get_cur_governor() : std::string();
   guint freq = 0, max_freq_measured = 0, max_freq_nominal = 0, min_freq = 0;
   guint count = 0;
 
   for (const Ptr<CpuInfo> &cpu : cpuFreq->cpus)
   {
-    if (!cpu->online)
+    std::lock_guard<std::mutex> guard(cpu->mutex);
+
+    if (!cpu->shared.online)
       continue;
 
-    freq += cpu->cur_freq;
+    freq += cpu->shared.cur_freq;
     max_freq_measured += cpu->max_freq_measured;
     max_freq_nominal += cpu->max_freq_nominal;
     min_freq += cpu->min_freq;
@@ -147,20 +159,25 @@ cpufreq_cpus_calc_avg ()
     min_freq /= count;
   }
 
-  cpuFreq->cpu_avg = xfce4::make<CpuInfo>();
-  cpuFreq->cpu_avg->cur_freq = freq;
-  cpuFreq->cpu_avg->cur_governor = !governors.empty() ? governors : _("current avg");
-  cpuFreq->cpu_avg->max_freq_measured = max_freq_measured;
-  cpuFreq->cpu_avg->max_freq_nominal = max_freq_nominal;
-  cpuFreq->cpu_avg->min_freq = min_freq;
-
-  if (cpuFreq->options->show_label_governor && cpuFreq->cpu_avg->cur_governor != old_governor)
+  Ptr<CpuInfo> cpu = xfce4::make<CpuInfo>();
   {
-    cpuFreq->label.reset_size = true;
-    cpuFreq->layout_changed = true;
+    std::lock_guard<std::mutex> guard(cpu->mutex);
+
+    cpu->shared.cur_freq = freq;
+    cpu->shared.cur_governor = !governors.empty() ? governors : _("current avg");
+    cpu->max_freq_measured = max_freq_measured;
+    cpu->max_freq_nominal = max_freq_nominal;
+    cpu->min_freq = min_freq;
+
+    if (cpuFreq->options->show_label_governor && cpu->shared.cur_governor != old_governor)
+    {
+      cpuFreq->label.reset_size = true;
+      cpuFreq->layout_changed = true;
+    }
   }
 
-  return cpuFreq->cpu_avg.toPtr();
+  cpuFreq->cpu_avg = cpu;
+  return cpu;
 }
 
 
@@ -169,34 +186,41 @@ static Ptr<CpuInfo>
 cpufreq_cpus_calc_max ()
 {
   const std::string governors = cpufreq_governors ();
-  const std::string old_governor = cpuFreq->cpu_max ? cpuFreq->cpu_max->cur_governor : std::string();
+  const std::string old_governor = cpuFreq->cpu_max ? cpuFreq->cpu_max->get_cur_governor() : std::string();
   guint freq = 0, max_freq_measured = 0, max_freq_nominal = 0, min_freq = 0;
 
   for (const Ptr<CpuInfo> &cpu : cpuFreq->cpus)
   {
-    if (!cpu->online)
+    std::lock_guard<std::mutex> guard(cpu->mutex);
+
+    if (!cpu->shared.online)
       continue;
 
-    freq = MAX (freq, cpu->cur_freq);
-    max_freq_measured = MAX (max_freq_measured, cpu->max_freq_measured);
-    max_freq_nominal = MAX (max_freq_nominal, cpu->max_freq_nominal);
-    min_freq = MAX (min_freq, cpu->min_freq);
+    freq = std::max (freq, cpu->shared.cur_freq);
+    max_freq_measured = std::max (max_freq_measured, cpu->max_freq_measured);
+    max_freq_nominal = std::max (max_freq_nominal, cpu->max_freq_nominal);
+    min_freq = std::max (min_freq, cpu->min_freq);
   }
 
-  cpuFreq->cpu_max = xfce4::make<CpuInfo>();
-  cpuFreq->cpu_max->cur_freq = freq;
-  cpuFreq->cpu_max->cur_governor = !governors.empty() ? governors : _("current max");
-  cpuFreq->cpu_max->max_freq_measured = max_freq_measured;
-  cpuFreq->cpu_max->max_freq_nominal = max_freq_nominal;
-  cpuFreq->cpu_max->min_freq = min_freq;
-
-  if (cpuFreq->options->show_label_governor && cpuFreq->cpu_max->cur_governor != old_governor)
+  Ptr<CpuInfo> cpu = xfce4::make<CpuInfo>();
   {
-    cpuFreq->label.reset_size = true;
-    cpuFreq->layout_changed = true;
+    std::lock_guard<std::mutex> guard(cpu->mutex);
+
+    cpu->shared.cur_freq = freq;
+    cpu->shared.cur_governor = !governors.empty() ? governors : _("current max");
+    cpu->max_freq_measured = max_freq_measured;
+    cpu->max_freq_nominal = max_freq_nominal;
+    cpu->min_freq = min_freq;
+
+    if (cpuFreq->options->show_label_governor && cpu->shared.cur_governor != old_governor)
+    {
+      cpuFreq->label.reset_size = true;
+      cpuFreq->layout_changed = true;
+    }
   }
 
-  return cpuFreq->cpu_max.toPtr();
+  cpuFreq->cpu_max = cpu;
+  return cpu;
 }
 
 
@@ -217,18 +241,21 @@ cpufreq_update_label (const Ptr<CpuInfo> &cpu)
     return;
   }
 
-
   std::string label;
-  if (options->show_label_freq)
   {
-    std::string freq = cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
-    label += freq;
-  }
-  if (options->show_label_governor && !cpu->cur_governor.empty())
-  {
-    if (!label.empty())
-      label += options->one_line ? " " : "\n";
-    label += cpu->cur_governor;
+    std::lock_guard<std::mutex> guard(cpu->mutex);
+
+    if (options->show_label_freq)
+    {
+      std::string freq = cpufreq_get_human_readable_freq (cpu->shared.cur_freq, options->unit);
+      label += freq;
+    }
+    if (options->show_label_governor && !cpu->shared.cur_governor.empty())
+    {
+      if (!label.empty())
+        label += options->one_line ? " " : "\n";
+      label += cpu->shared.cur_governor;
+    }
   }
 
   if (!label.empty())
@@ -455,10 +482,13 @@ cpufreq_update_pixmap (const Ptr<CpuInfo> &cpu)
 
   const gdouble range = freq_99 - cpu->min_freq;
   gdouble normalized_freq;
-  if (cpu->cur_freq > cpu->min_freq && range >= min_range)
-    normalized_freq = (cpu->cur_freq - cpu->min_freq) / range;
-  else
-    normalized_freq = 0;
+  {
+    std::lock_guard<std::mutex> guard(cpu->mutex);
+    if (cpu->shared.cur_freq > cpu->min_freq && range >= min_range)
+      normalized_freq = (cpu->shared.cur_freq - cpu->min_freq) / range;
+    else
+      normalized_freq = 0;
+  }
 
   gint index = round (normalized_freq * (G_N_ELEMENTS (cpuFreq->icon_pixmaps) - 1));
   if (G_UNLIKELY (index < 0))
@@ -537,8 +567,6 @@ cpufreq_update_plugin (bool reset_label_size)
 static xfce4::TooltipTime
 cpufreq_update_tooltip (GtkTooltip *tooltip)
 {
-  auto options = cpuFreq->options;
-
   Ptr0<CpuInfo> cpu = cpufreq_current_cpu ();
 
   std::string tooltip_msg;
@@ -548,6 +576,7 @@ cpufreq_update_tooltip (GtkTooltip *tooltip)
   }
   else
   {
+    auto options = cpuFreq->options;
     if (options->show_label_governor && options->show_label_freq)
     {
       size_t num_cpu = cpuFreq->cpus.size();
@@ -555,17 +584,19 @@ cpufreq_update_tooltip (GtkTooltip *tooltip)
     }
     else
     {
+      std::lock_guard<std::mutex> guard(cpu->mutex);
+
       if(!options->show_label_freq)
       {
         tooltip_msg += _("Frequency: ");
-        tooltip_msg += cpufreq_get_human_readable_freq (cpu->cur_freq, options->unit);
+        tooltip_msg += cpufreq_get_human_readable_freq (cpu->shared.cur_freq, options->unit);
       }
-      if(!options->show_label_governor && !cpu->cur_governor.empty())
+      if(!options->show_label_governor && !cpu->shared.cur_governor.empty())
       {
         if(!tooltip_msg.empty())
           tooltip_msg += "\n";
         tooltip_msg += _("Governor: ");
-        tooltip_msg += cpu->cur_governor;
+        tooltip_msg += cpu->shared.cur_governor;
       }
     }
   }
@@ -1028,6 +1059,14 @@ cpufreq_plugin_construct (XfcePanelPlugin *plugin)
   xfce_panel_plugin_menu_show_about (plugin);
   xfce4::connect_configure_plugin (plugin, cpufreq_configure);
   xfce4::connect_about (plugin, cpufreq_show_about);
+}
+
+
+
+std::string CpuInfo::get_cur_governor() const
+{
+    std::lock_guard<std::mutex> guard(mutex);
+    return shared.cur_governor;
 }
 
 

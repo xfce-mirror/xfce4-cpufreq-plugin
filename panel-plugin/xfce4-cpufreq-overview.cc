@@ -47,8 +47,15 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
   GtkWidget *hbox, *label;
   const CpuFreqUnit unit = cpuFreq->options->unit;
 
+  /* Copy shared fields to a local variable. The local variable can then be accessed without a mutex. */
+  CpuInfo::Shared cpu_shared;
+  {
+      std::lock_guard<std::mutex> guard(cpu->mutex);
+      cpu_shared = cpu->shared;
+  }
+
   GtkWidget *dialog_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER);
-  gtk_widget_set_sensitive (dialog_vbox, cpu->online);
+  gtk_widget_set_sensitive (dialog_vbox, cpu_shared.online);
   gtk_box_pack_start (GTK_BOX (dialog_hbox), dialog_vbox, true, true, 0);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
@@ -118,18 +125,18 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
       std::string available_freq = cpufreq_get_human_readable_freq (cpu->available_freqs[j], unit);
       gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), available_freq.c_str());
 
-      if (cpu->available_freqs[j] == cpu->cur_freq)
+      if (cpu->available_freqs[j] == cpu_shared.cur_freq)
         i = j;
     }
     gtk_combo_box_set_active (GTK_COMBO_BOX (combo), i);
   }
-  else if (cpu->cur_freq && cpu->min_freq && cpu->max_freq_nominal) /* Linux 2.4 with scaling support */
+  else if (cpu_shared.cur_freq && cpu->min_freq && cpu->max_freq_nominal) /* Linux 2.4 with scaling support */
   {
     GtkWidget *combo = gtk_combo_box_text_new ();
     gtk_size_group_add_widget (sg1, combo);
     gtk_box_pack_end (GTK_BOX (hbox), combo, true, true, 0);
 
-    std::string cur_freq = cpufreq_get_human_readable_freq (cpu->cur_freq, unit);
+    std::string cur_freq = cpufreq_get_human_readable_freq (cpu_shared.cur_freq, unit);
     gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), cur_freq.c_str());
 
     std::string max_freq_nominal = cpufreq_get_human_readable_freq (cpu->max_freq_nominal, unit);
@@ -142,7 +149,7 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
   }
   else /* If there is no scaling support only show the cpu freq */
   {
-    std::string cur_freq = cpufreq_get_human_readable_freq (cpu->cur_freq, unit);
+    std::string cur_freq = cpufreq_get_human_readable_freq (cpu_shared.cur_freq, unit);
     cur_freq = "<b>" + cur_freq + "</b> (current frequency)";
     label = gtk_label_new (cur_freq.c_str());
     gtk_size_group_add_widget (sg1, label);
@@ -175,13 +182,13 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
       const std::string &available_governor = cpu->available_governors[j];
       gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), available_governor.c_str());
 
-      if (g_ascii_strcasecmp (available_governor.c_str(), cpu->cur_governor.c_str()) == 0)
+      if (g_ascii_strcasecmp (available_governor.c_str(), cpu_shared.cur_governor.c_str()) == 0)
         i = j;
     }
 
     gtk_combo_box_set_active (GTK_COMBO_BOX (combo), i);
   }
-  else if (!cpu->cur_governor.empty()) /* Linux 2.4 and cpu scaling support */
+  else if (!cpu_shared.cur_governor.empty()) /* Linux 2.4 and cpu scaling support */
   {
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, false, false, 0);
@@ -192,7 +199,7 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
     gtk_label_set_xalign (GTK_LABEL (label), 0);
     gtk_box_pack_start (GTK_BOX (hbox), label, true, true, 0);
 
-    std::string cur_governor = "<b>" + cpu->cur_governor + "</b>";
+    std::string cur_governor = "<b>" + cpu_shared.cur_governor + "</b>";
     label = gtk_label_new (cur_governor.c_str());
     gtk_size_group_add_widget (sg1, label);
     gtk_widget_set_valign (label, GTK_ALIGN_CENTER);

@@ -29,6 +29,8 @@ libxfce4util_pp_la_LIBADD = \
 	@LIBXFCE4UTIL_LIBS@
 
 libxfce4util_pp_la_SOURCES = \
+	async.h \
+	async.cc \
 	fixes.h \
 	gtk.h \
 	gtk.cc \
