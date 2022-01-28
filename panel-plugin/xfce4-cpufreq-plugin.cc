@@ -611,12 +611,17 @@ void
 cpufreq_restart_timeout ()
 {
 #ifdef __linux__
-  g_source_remove (cpuFreq->timeoutHandle);
-  cpuFreq->timeoutHandle = 0;
+  if (cpuFreq->timeoutHandle != 0)
+  {
+    g_source_remove (cpuFreq->timeoutHandle);
+    cpuFreq->timeoutHandle = 0;
+  }
 
   int timeout_ms = int(1000 * cpuFreq->options->timeout);
   if (G_LIKELY (timeout_ms >= 10))
   {
+    xfce4::invoke_later (cpufreq_update_cpus);
+
     cpuFreq->timeoutHandle = xfce4::timeout_add (timeout_ms, []() {
         cpufreq_update_cpus ();
         return xfce4::TIMEOUT_AGAIN;
@@ -1030,17 +1035,11 @@ cpufreq_plugin_construct (XfcePanelPlugin *plugin)
   gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, -1);
   cpufreq_widgets ();
 
-  guint timeout_ms = int(1000 * cpuFreq->options->timeout);
-  if (G_LIKELY (timeout_ms >= 10))
-  {
-    cpuFreq->timeoutHandle = xfce4::timeout_add (timeout_ms, []() {
-        cpufreq_update_cpus ();
-        return xfce4::TIMEOUT_AGAIN;
-    });
-  }
 #else
   xfce_dialog_show_error (NULL, NULL, _("Your system is not supported yet!"));
 #endif /* __linux__ */
+
+  cpufreq_restart_timeout ();
 
   xfce4::connect_free_data (plugin, cpufreq_free);
   xfce4::connect_save (plugin, cpufreq_write_config);

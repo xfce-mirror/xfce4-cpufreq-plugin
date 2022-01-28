@@ -253,6 +253,15 @@ void connect_size_changed(XfcePanelPlugin *plugin, const std::function<SizeChang
 
 
 
+void invoke_later(const std::function<void()> &task) {
+    timeout_add(0, [task]() {
+        task();
+        return TIMEOUT_REMOVE;
+    });
+}
+
+
+
 struct TimeoutHandlerData {
     static const uint32_t MAGIC = 0x99F67650;
     const uint32_t magic = MAGIC;

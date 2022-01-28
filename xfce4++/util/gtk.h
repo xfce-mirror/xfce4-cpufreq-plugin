@@ -139,6 +139,8 @@ void connect_mode_changed    (XfcePanelPlugin *plugin, const std::function<ModeC
 void connect_save            (XfcePanelPlugin *plugin, const std::function<PluginHandler>     &handler);
 void connect_size_changed    (XfcePanelPlugin *plugin, const std::function<SizeChangeHandler> &handler);
 
+void invoke_later(const std::function<void()> &task);
+
 typedef TimeoutResponse TimeoutHandler();
 
 guint timeout_add(guint interval_ms, const std::function<TimeoutHandler> &handler);
