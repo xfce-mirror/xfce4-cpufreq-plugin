@@ -215,10 +215,10 @@ parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_driver", cpu_number);
   cpufreq_sysfs_read_string (file, cpu->scaling_driver);
 
-  /* read current cpu freq */
-  guint cur_freq;
-  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_cur_freq", cpu_number);
-  cpufreq_sysfs_read_uint (file, &cur_freq);
+  /* NOTE: Do NOT read the current CPU frequency here.
+   *       Reading all '/sys/.../scaling_cur_freq' files
+   *       can take hundreds of milliseconds (for example: 800 milliseconds).
+   */
 
   /* read current cpu governor */
   std::string cur_governor;
@@ -236,7 +236,7 @@ parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
   {
     std::lock_guard<std::mutex> guard(cpu->mutex);
     cpu->shared.online = true;
-    cpu->shared.cur_freq = cur_freq;
+    cpu->shared.cur_freq = 0;
     cpu->shared.cur_governor = cur_governor;
   }
 
