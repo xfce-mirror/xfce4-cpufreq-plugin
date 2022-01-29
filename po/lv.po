@@ -152,11 +152,11 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:173
 #, fuzzy, c-format
-msgid "%d cpu available"
-msgid_plural "%d cpus available"
-msgstr[0] "%d cpu pieejams(-i)"
-msgstr[1] "%d cpu pieejams(-i)"
-msgstr[2] "%d cpu pieejams(-i)"
+msgid "%zu cpu available"
+msgid_plural "%zu cpus available"
+msgstr[0] "%zu cpu pieejams(-i)"
+msgstr[1] "%zu cpu pieejams(-i)"
+msgstr[2] "%zu cpu pieejams(-i)"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:176
 msgid "Frequency: "

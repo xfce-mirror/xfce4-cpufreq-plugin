@@ -184,8 +184,8 @@ msgstr "PUZaren informaziorik ez."
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "PUZ %zu erabilgarri"
+msgstr[1] "%zu PUZ erabilgarri"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:567
 msgid "Frequency: "

@@ -182,10 +182,10 @@ msgstr "Ni podatkov o procesorju."
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Na voljo je %zu procesor"
+msgstr[1] "Na voljo sta %zu procesorja"
+msgstr[2] "Na voljo so %zu procesorji"
+msgstr[3] "Na voljo je %zu procesorjev"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:567
 msgid "Frequency: "
