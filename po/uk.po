@@ -186,10 +186,10 @@ msgstr "Інформація про ЦП недоступна."
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%zu процесор доступний"
+msgstr[1] "%zu процесорів доступно"
+msgstr[2] "%zu процесорів доступно"
+msgstr[3] "%zu процесорів доступно"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:567
 msgid "Frequency: "

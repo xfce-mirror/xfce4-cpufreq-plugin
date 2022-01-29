@@ -182,12 +182,12 @@ msgstr "لا تتوفر أية معلومات عن المعالج."
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "%zu معالج متوفر"
+msgstr[1] "%zu معالجات متوفرة"
+msgstr[2] "%zu معالجات متوفرة"
+msgstr[3] "%zu معالجات متوفرة"
+msgstr[4] "%zu معالجات متوفرة"
+msgstr[5] "%zu معالجات متوفرة"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:567
 msgid "Frequency: "

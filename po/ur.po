@@ -152,10 +152,10 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:173
 #, fuzzy, c-format
-msgid "%d cpu available"
-msgid_plural "%d cpus available"
-msgstr[0] "%d سی پی یو دستیاب ہے"
-msgstr[1] "%d سی پی یو دستیاب ہے"
+msgid "%zu cpu available"
+msgid_plural "%zu cpus available"
+msgstr[0] "%zu سی پی یو دستیاب ہے"
+msgstr[1] "%zu سی پی یو دستیاب ہے"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:176
 msgid "Frequency: "

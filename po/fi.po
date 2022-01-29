@@ -183,8 +183,8 @@ msgstr "Suoritintietoja ei ole saatavilla."
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%zu suoritin käytettävissä"
+msgstr[1] "%zu suoritinta käytettävissä"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:567
 msgid "Frequency: "

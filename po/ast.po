@@ -156,10 +156,10 @@ msgstr "Nun hai información de la CPU disponible."
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:389
 #, c-format
-msgid "%d cpu available"
-msgid_plural "%d cpus available"
-msgstr[0] "%d CPU disponible"
-msgstr[1] "%d CPUs disponible"
+msgid "%zu cpu available"
+msgid_plural "%zu cpus available"
+msgstr[0] "%zu CPU disponible"
+msgstr[1] "%zu CPUs disponible"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:396
 msgid "Frequency: "
