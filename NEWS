@@ -1,3 +1,29 @@
+1.2.6 (2022-01-29)
+=====
+- Update README
+- Prevent cur_freq sysfs reads from stalling plugin initialization
+- Enable fractional update internals
+- Prevent sysfs read latency from interfering with GUI updates
+- Improve static type-safety of signal handlers
+- Replace C pointers with reference-counted pointers
+- Rename C files to C++
+- Cleanup configuration files
+- Bump libxfce4panel requirement from 4.12 to 4.14
+- Update copyright year
+- Bump required xdt-autogen version to 4.14.0
+- Update configure.ac.in syntax
+- Update and sort the list of authors
+- Manually update %d to %zu in translations
+- Translation Updates:
+  Albanian, Arabic, Armenian (Armenia), Basque, Belarusian,
+  Bulgarian, Catalan, Chinese (China), Chinese (Taiwan), Croatian,
+  Czech, Danish, Dutch, Eastern Armenian, English (Australia), English
+  (United Kingdom), Finnish, French, Galician, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Korean, Lithuanian, Malay, Norwegian Bokmål, Occitan (post 1500),
+  Polish, Portuguese, Portuguese (Brazil), Russian, Serbian, Slovak,
+  Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian
+
 1.2.5 (2021-03-02)
 =====
 - Adjust CPU icon color according to frequency
