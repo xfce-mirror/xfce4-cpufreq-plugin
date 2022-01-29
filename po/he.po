@@ -184,10 +184,10 @@ msgstr "אף מידע מעבד לא זמין."
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%zu מעבד זמין"
+msgstr[1] "%zu מעבדים זמינים"
+msgstr[2] "%zu מעבדים זמינים"
+msgstr[3] "%zu מעבדים זמינים"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:567
 msgid "Frequency: "

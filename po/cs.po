@@ -183,10 +183,10 @@ msgstr "Informace o procesoru nedostupné."
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%zu procesor dostupný"
+msgstr[1] "%zu procesory dostupné"
+msgstr[2] "%zu procesorů dostupných"
+msgstr[3] "%zu procesorů dostupných"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:567
 msgid "Frequency: "

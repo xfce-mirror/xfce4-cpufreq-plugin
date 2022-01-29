@@ -156,10 +156,10 @@ msgstr "Процессор ақпараты"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:173
 #, c-format
-msgid "%d cpu available"
-msgid_plural "%d cpus available"
-msgstr[0] "%d процессор бар"
-msgstr[1] "%d процессор бар"
+msgid "%zu cpu available"
+msgid_plural "%zu cpus available"
+msgstr[0] "%zu процессор бар"
+msgstr[1] "%zu процессор бар"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:176
 msgid "Frequency: "

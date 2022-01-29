@@ -157,10 +157,10 @@ msgstr ""
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:515
 #, c-format
-msgid "%d cpu available"
-msgid_plural "%d cpus available"
+msgid "%zu cpu available"
+msgid_plural "%zu cpus available"
 msgstr[0] ""
-msgstr[1] "ئىشلەتكىلى بولىدىغان س پ ئۇ (CPU) نىڭ سانى %d"
+msgstr[1] "ئىشلەتكىلى بولىدىغان س پ ئۇ (CPU) نىڭ سانى %zu"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.c:520
 msgid "Frequency: "

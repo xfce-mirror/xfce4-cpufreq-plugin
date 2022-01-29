@@ -185,7 +185,7 @@ msgstr "CPU 정보가 없습니다."
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
-msgstr[0] ""
+msgstr[0] "CPU %zu개를 사용할 수 있습니다"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:567
 msgid "Frequency: "
