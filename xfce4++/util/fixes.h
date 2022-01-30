@@ -37,7 +37,20 @@ extern "C" {
     #if LIBXFCE4UTIL_CHECK_VERSION(4, 17, 0)
         #include <libxfce4util/xfce-gio-extensions.h>
     #endif
-    #include <libxfce4util/xfce-i18n.h>
+
+    /*
+     * Define the macro GETTEXT_PACKAGE in order to avoid getting
+     * an invalid ngettext() definition from <libxfce4util/xfce-i18n.h>.
+     *
+     * See also: https://gitlab.xfce.org/xfce/libxfce4util/-/issues/7
+     */
+    #ifdef GETTEXT_PACKAGE
+        #include <libxfce4util/xfce-i18n.h>
+    #else
+        #define GETTEXT_PACKAGE "(gettext-package)"
+        #include <libxfce4util/xfce-i18n.h>
+        #undef GETTEXT_PACKAGE
+    #endif
 }
 #undef LIBXFCE4UTIL_INSIDE_LIBXFCE4UTIL_H
 
