@@ -43,6 +43,7 @@ struct Ptr final {
     template<typename U> Ptr(const Ptr<U> &p) : ptr(p.ptr) {}
 
     T* operator->() const { return ptr.get(); }
+    T& operator*() const { return *ptr; }
 
     template<typename U> bool operator<(const Ptr<U> &p) const { return ptr < p.ptr; }
 

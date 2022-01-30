@@ -21,6 +21,7 @@
 /* The fixes file has to be included before any other #include directives */
 #include "xfce4++/util/fixes.h"
 
+#include <errno.h>
 #include "rc.h"
 #include "string-utils.h"
 
@@ -86,9 +87,13 @@ std::string Rc::read_entry(const string &key, const string &fallback) const {
 float Rc::read_float_entry(const char *key, float fallback) const {
     Ptr0<string> e = read_entry(key, nullptr);
     if(e) {
-        Optional<float> value = parse_float(*e);
-        if(value.has_value())
-            return value.value();
+        const std::string s = trim(*e.toPtr());
+        gchar *endptr = NULL;
+        errno = 0;
+        gdouble value = g_ascii_strtod(s.c_str(), &endptr);
+        if(errno == 0 && endptr == s.c_str() + s.size()) {
+            return value;
+        }
     }
     return fallback;
 }
@@ -123,8 +128,14 @@ void Rc::write_entry(const char   *key, const string &value) { xfce_rc_write_ent
 void Rc::write_entry(const string &key, const char   *value) { xfce_rc_write_entry(rc, key.c_str(), value        ); }
 void Rc::write_entry(const string &key, const string &value) { xfce_rc_write_entry(rc, key.c_str(), value.c_str()); }
 
-void Rc::write_float_entry(const char   *key, float value) { write_entry(key, xfce4::sprintf("%g", value)); }
-void Rc::write_float_entry(const string &key, float value) { write_entry(key, xfce4::sprintf("%g", value)); }
+void Rc::write_float_entry(const char *key, float value) {
+    gchar buf[G_ASCII_DTOSTR_BUF_SIZE+1];
+    g_ascii_dtostr(buf, G_ASCII_DTOSTR_BUF_SIZE, value);
+    buf[G_ASCII_DTOSTR_BUF_SIZE] = '\0';
+    write_entry(key, buf);
+}
+
+void Rc::write_float_entry(const string &key, float value) { write_float_entry(key.c_str(), value); }
 
 void Rc::write_int_entry(const char   *key, gint value) { xfce_rc_write_int_entry(rc, key        , value); }
 void Rc::write_int_entry(const string &key, gint value) { xfce_rc_write_int_entry(rc, key.c_str(), value); }
