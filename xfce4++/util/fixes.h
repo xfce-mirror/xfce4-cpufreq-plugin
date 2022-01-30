@@ -47,7 +47,10 @@ extern "C" {
     #ifdef GETTEXT_PACKAGE
         #include <libxfce4util/xfce-i18n.h>
     #else
-        #define GETTEXT_PACKAGE "(gettext-package)"
+        /* Note: The symbol __UNDEFINED__GETTEXT_PACKAGE__... is meant not to be defined anywhere.
+         *       The numeric suffix is a random 64-bit number. The random number makes it improbable
+         *       for any 3rd-party source code to define such a symbol. */
+        #define GETTEXT_PACKAGE __UNDEFINED__GETTEXT_PACKAGE__RND_11148334482592236430__
         #include <libxfce4util/xfce-i18n.h>
         #undef GETTEXT_PACKAGE
     #endif
