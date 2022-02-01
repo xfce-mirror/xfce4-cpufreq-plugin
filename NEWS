@@ -1,3 +1,10 @@
+1.2.7 (2022-02-01)
+=====
+- Use locale-independent floats in configuration files
+- Fix translations not showing in the GUI
+- Translation Updates:
+  Indonesian, Slovenian, Turkish
+
 1.2.6 (2022-01-29)
 =====
 - Update README
