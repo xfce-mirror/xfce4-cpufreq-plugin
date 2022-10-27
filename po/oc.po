@@ -90,19 +90,19 @@ msgstr "max"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.cc:486
 msgid "Unit:"
-msgstr ""
+msgstr "Unitat :"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.cc:496
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.cc:497
 msgid "GHz"
-msgstr ""
+msgstr "GHz"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.cc:498
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. check buttons for display widgets in panel
 #: ../panel-plugin/xfce4-cpufreq-configure.cc:521
@@ -201,7 +201,7 @@ msgstr "Afichar las frequéncias del processor e del governador"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:987
 msgid "Copyright (c) 2003-2022\n"
-msgstr ""
+msgstr "Copyright (c) 2003-2022\n"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:1009
 msgid ""
