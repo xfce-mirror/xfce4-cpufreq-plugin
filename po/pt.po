@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-24 00:51+0100\n"
-"PO-Revision-Date: 2022-01-26 16:02+0000\n"
-"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"PO-Revision-Date: 2013-07-03 18:53+0000\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>, 2019-2022\n"
 "Language-Team: Portuguese (http://www.transifex.com/xfce/xfce-panel-plugins/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.cc:115
 msgid "Select font..."
@@ -40,7 +40,7 @@ msgstr "Selecionar tipo de letra"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.cc:193
 msgid "Right-click to revert to the default color"
-msgstr "Clique direito para reverter para a cor predefinida."
+msgstr "Clique direito para reverter para a cor predefinida"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.cc:310
 msgid "Configure CPU Frequency Monitor"
@@ -69,7 +69,7 @@ msgstr "_Tipo de letra:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.cc:409
 msgid "_Font color:"
-msgstr "_Cor da letra"
+msgstr "_Cor da letra:"
 
 #: ../panel-plugin/xfce4-cpufreq-configure.cc:419
 msgid "Select font color"
@@ -188,14 +188,15 @@ msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
 msgstr[0] "%zu cpu disponível"
 msgstr[1] "%zu cpus disponíveis"
+msgstr[2] "%zu cpus disponíveis"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:567
 msgid "Frequency: "
-msgstr "Frequência:"
+msgstr "Frequência: "
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:574
 msgid "Governor: "
-msgstr "Regulador:"
+msgstr "Regulador: "
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:985
 #: ../panel-plugin/cpufreq.desktop.in.h:2
