@@ -8,7 +8,7 @@ m4_define([cpufreq_version_major], [1])
 m4_define([cpufreq_version_minor], [2])
 m4_define([cpufreq_version_micro], [8])
 m4_define([cpufreq_version_build], [@REVISION@])
-m4_define([cpufreq_version_tag], [])
+m4_define([cpufreq_version_tag], [git])
 m4_define([cpufreq_version], [cpufreq_version_major().cpufreq_version_minor().cpufreq_version_micro()ifelse(cpufreq_version_tag(), [git], [cpufreq_version_tag()-cpufreq_version_build()], [cpufreq_version_tag()])])
 
 dnl Initialize autoconf
