@@ -1,3 +1,12 @@
+1.2.8 (2022-11-03)
+=====
+- Remove code obsoleted by libxfce4util-4.17.2
+- Fix GLib warnings occurring with newer xfce4-dev-tools
+- Fix intltool lock file bug in make distcheck
+- Translation Updates:
+  Basque, Belarusian, Danish, French, Hebrew, Malay, Occitan (post
+  1500), Portuguese, Portuguese (Brazil), Russian, Turkish, Ukrainian
+
 1.2.7 (2022-02-01)
 =====
 - Use locale-independent floats in configuration files
