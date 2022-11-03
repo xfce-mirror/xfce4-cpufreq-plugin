@@ -18,9 +18,6 @@
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/* The fixes file has to be included before any other #include directives */
-#include "xfce4++/util/fixes.h"
-
 #include <errno.h>
 #include "rc.h"
 #include "string-utils.h"

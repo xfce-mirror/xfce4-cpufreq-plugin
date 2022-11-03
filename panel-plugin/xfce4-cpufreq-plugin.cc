@@ -20,9 +20,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-/* The fixes file has to be included before any other #include directives */
-#include "xfce4++/util/fixes.h"
-
 #define SPACING           2  /* Space between the widgets */
 #define BORDER            1  /* Space between the frame and the widgets */
 

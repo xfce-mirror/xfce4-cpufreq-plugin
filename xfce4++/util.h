@@ -21,10 +21,6 @@
 #ifndef _XFCE4PP_UTIL_H_
 #define _XFCE4PP_UTIL_H_
 
-#ifndef _XFCE4PP_UTIL_FIXES_H_
-#error "Please include xfce4++/util/fixes.h before any other include directives"
-#endif
-
 #include <libxfce4util/libxfce4util.h>
 #include "xfce4++/util/async.h"
 #include "xfce4++/util/gtk.h"
