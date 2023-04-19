@@ -12,66 +12,66 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-24 00:51+0100\n"
-"PO-Revision-Date: 2022-01-24 11:39+0000\n"
-"Last-Translator: Luna Jernberg <bittin@cafe8bitar.se>\n"
-"Language-Team: Swedish (http://www.transifex.com/xfce/xfce-panel-plugins/language/sv/)\n"
+"POT-Creation-Date: 2023-04-19 01:16+0200\n"
+"PO-Revision-Date: 2013-07-03 18:53+0000\n"
+"Last-Translator: Luna Jernberg <bittin@cafe8bitar.se>, 2020-2022\n"
+"Language-Team: Swedish (http://app.transifex.com/xfce/xfce-panel-plugins/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:115
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:119
 msgid "Select font..."
 msgstr "Välj typsnitt..."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:116
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:120
 msgid "Select font family and size to use for the labels."
 msgstr "Välj typsnittsfamilj och storlek för etiketterna."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:121
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:125
 msgid "Right-click to revert to the default font."
 msgstr "Högerklicka för att återgå till standardtypsnittet."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:133
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:137
 msgid "Select font"
 msgstr "Välj typsnitt"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:193
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:194
 msgid "Right-click to revert to the default color"
 msgstr "Högerklicka för att återgå till standardfärg."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:310
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:308
 msgid "Configure CPU Frequency Monitor"
 msgstr "Konfigurera CPU-Frekvensövervakning"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:313
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:242
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:311
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:246
 msgid "_Close"
 msgstr "_Stäng"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:334
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:332
 msgid "<b>Monitor</b>"
 msgstr "<b>Övervakning</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:351
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:349
 msgid "_Update interval:"
 msgstr "_Uppdateringsintervall:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:369
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:368
 msgid "<b>Panel</b>"
 msgstr "<b>Panel</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:390
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:389
 msgid "_Font:"
 msgstr "_Typsnitt:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:409
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:410
 msgid "_Font color:"
 msgstr "_Teckensnittsfärg:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:419
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:420
 msgid "Select font color"
 msgstr "Välj teckensnittsfärg"
 
@@ -108,114 +108,110 @@ msgid "MHz"
 msgstr "MHz"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:521
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:523
 msgid "_Keep compact"
 msgstr "Behåll _kompakt"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:526
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:530
 msgid "Show text in a single _line"
 msgstr "Visa _text i en enda rad"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:531
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:537
 msgid "Show CPU _icon"
 msgstr "Visa CPU-_ikon"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:536
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:544
 msgid "Adjust CPU icon color according to frequency"
 msgstr "Justera CPU-ikonfärgen enligt frekvens"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:541
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:551
 msgid "Show CPU fre_quency"
 msgstr "Visa CPU-_frekvens"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:546
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:558
 msgid "Show CPU _governor"
 msgstr "Visa CPU-_regulator"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.cc:76
+#: ../panel-plugin/xfce4-cpufreq-linux.cc:73
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
 msgstr "Ditt system stöder inte cpufreq.\nDetta insticksprogram visar bara aktuell cpufrekvens"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:79
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:83
 msgid "Scaling driver:"
 msgstr "Skala drivrutin"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:90
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:94
 msgid "No scaling driver available"
 msgstr "Ingen skalningsdrivrutin tillgänglig"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:104
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:108
 msgid "Available frequencies:"
 msgstr "Tillgängliga frekvenser:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:162
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:166
 msgid "Available governors:"
 msgstr "Tillgängliga regulatorer:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:189
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:193
 msgid "Current governor:"
 msgstr "Nuvarande regulator:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:239
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:243
 msgid "CPU Information"
 msgstr "CPU-information"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:246
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:250
 msgid "An overview of all the CPUs in the system"
 msgstr "En översikt över alla systemets CPU:er"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:106
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:111
 msgid "current min"
 msgstr "aktuellt min"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:152
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:164
 msgid "current avg"
 msgstr "aktuellt snitt"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:188
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:207
 msgid "current max"
 msgstr "aktuellt max"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:554
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:572
 msgid "No CPU information available."
 msgstr "Ingen CPU-information tillgänglig."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:561
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:580
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
 msgstr[0] "%zu cpu tillgänglig"
 msgstr[1] "%zu cpus tillgängliga"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:567
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:588
 msgid "Frequency: "
 msgstr "Frekvens: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:574
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:595
 msgid "Governor: "
 msgstr "Reglerare: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:985
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1006
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "Visa CPU-frekvenser och regulator"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:987
-msgid "Copyright (c) 2003-2022\n"
-msgstr "Copyright (c) 2003-2022\n"
-
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1009
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1030
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Ditt system är inte korrekt konfigurerat för att stödja CPU-frekvensskalning!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1016
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1036
 msgid "Your system is not supported yet!"
 msgstr "Ditt system stöds inte än!"
 
-#: ../panel-plugin/xfce4-cpufreq-utils.cc:87
+#: ../panel-plugin/xfce4-cpufreq-utils.cc:84
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
