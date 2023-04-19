@@ -10,66 +10,66 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-24 00:51+0100\n"
-"PO-Revision-Date: 2022-02-12 14:56+0000\n"
-"Last-Translator: beriain\n"
-"Language-Team: Basque (http://www.transifex.com/xfce/xfce-panel-plugins/language/eu/)\n"
+"POT-Creation-Date: 2023-04-19 01:16+0200\n"
+"PO-Revision-Date: 2013-07-03 18:53+0000\n"
+"Last-Translator: beriain, 2020-2022\n"
+"Language-Team: Basque (http://app.transifex.com/xfce/xfce-panel-plugins/language/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:115
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:119
 msgid "Select font..."
 msgstr "Hautatu letra-tipoa..."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:116
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:120
 msgid "Select font family and size to use for the labels."
 msgstr "Hautatu etiketetan erabili beharreko letra-tipo familia eta tamaina."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:121
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:125
 msgid "Right-click to revert to the default font."
 msgstr "Eskuin-klik letra-tipo lehenetsira itzultzeko."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:133
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:137
 msgid "Select font"
 msgstr "Hautatu letra-tipoa"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:193
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:194
 msgid "Right-click to revert to the default color"
 msgstr "Eskuin-klik egin kolore lehenetsira itzultzeko."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:310
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:308
 msgid "Configure CPU Frequency Monitor"
 msgstr "Konfiguratu PUZaren maiztasun monitorea"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:313
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:242
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:311
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:246
 msgid "_Close"
 msgstr "_Itxi"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:334
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:332
 msgid "<b>Monitor</b>"
 msgstr "<b>Monitorea</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:351
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:349
 msgid "_Update interval:"
 msgstr "Eguneratze _tartea:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:369
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:368
 msgid "<b>Panel</b>"
 msgstr "<b>Panela</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:390
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:389
 msgid "_Font:"
 msgstr "_Letra-tipoa:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:409
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:410
 msgid "_Font color:"
 msgstr "Letraren kolorea:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:419
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:420
 msgid "Select font color"
 msgstr "Letraren kolorea hautatu"
 
@@ -106,114 +106,110 @@ msgid "MHz"
 msgstr "MHz"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:521
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:523
 msgid "_Keep compact"
 msgstr "_Mantendu trinkoa"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:526
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:530
 msgid "Show text in a single _line"
 msgstr "Erakutsi testua _lerro bakarrean"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:531
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:537
 msgid "Show CPU _icon"
 msgstr "Erakutsi PUZ _ikonoa"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:536
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:544
 msgid "Adjust CPU icon color according to frequency"
 msgstr "PUZ ikonoaren kolorea maiztasunari lotu"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:541
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:551
 msgid "Show CPU fre_quency"
 msgstr "Erakutsi PUZ _maiztasuna"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:546
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:558
 msgid "Show CPU _governor"
 msgstr "Erakutsi PUZ _erregulagailua"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.cc:76
+#: ../panel-plugin/xfce4-cpufreq-linux.cc:73
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
 msgstr "Zure sistemak ez du cpufreq onartzen.\nPlugin honek uneko puz-aren maiztasuna besterik ez du erakusten"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:79
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:83
 msgid "Scaling driver:"
 msgstr "Eskalatze kontrolatzailea:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:90
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:94
 msgid "No scaling driver available"
 msgstr "Ez dago eskalatze kontrolatzaile erabilgarririk."
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:104
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:108
 msgid "Available frequencies:"
 msgstr "Maiztasun erabilgarriak:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:162
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:166
 msgid "Available governors:"
 msgstr "Erregulagailu erabilgarriak:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:189
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:193
 msgid "Current governor:"
 msgstr "Uneko erregulagailua:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:239
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:243
 msgid "CPU Information"
 msgstr "PUZaren informazioa"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:246
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:250
 msgid "An overview of all the CPUs in the system"
 msgstr "Sistemako PUZ guztien ikuspegi orokorra"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:106
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:111
 msgid "current min"
 msgstr "uneko gutx"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:152
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:164
 msgid "current avg"
 msgstr "uneko batezb"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:188
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:207
 msgid "current max"
 msgstr "uneko geh"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:554
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:572
 msgid "No CPU information available."
 msgstr "PUZaren informaziorik ez."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:561
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:580
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
 msgstr[0] "PUZ %zu eskuragarri"
 msgstr[1] "%zu PUZ eskuragarri"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:567
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:588
 msgid "Frequency: "
 msgstr "Maiztasuna: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:574
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:595
 msgid "Governor: "
 msgstr "Erregulagailua: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:985
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1006
 #: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "Erakutsi PUZ maiztasun eta erregulagailuak"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:987
-msgid "Copyright (c) 2003-2022\n"
-msgstr "Copyright (c) 2003-2022\n"
-
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1009
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1030
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Zure sistema ez dago PUZ maiztasun eskalatzea \nonartzeko behar bezala konfiguraturik!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1016
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1036
 msgid "Your system is not supported yet!"
 msgstr "Zure sistemarako ez dago euskarririk oraindik!"
 
-#: ../panel-plugin/xfce4-cpufreq-utils.cc:87
+#: ../panel-plugin/xfce4-cpufreq-utils.cc:84
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
