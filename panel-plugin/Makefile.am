@@ -30,6 +30,8 @@ libcpufreq_la_SOURCES = \
 	xfce4-cpufreq-linux-pstate.h \
 	xfce4-cpufreq-linux-sysfs.cc \
 	xfce4-cpufreq-linux-sysfs.h \
+	xfce4-cpufreq-linux-dbus.cc \
+	xfce4-cpufreq-linux-dbus.h \
 	xfce4-cpufreq-linux.cc \
 	xfce4-cpufreq-linux.h \
 	xfce4-cpufreq-overview.cc \
@@ -46,6 +48,21 @@ libcpufreq_la_LDFLAGS = \
 	-export-symbols-regex '^xfce_panel_module_(preinit|init|construct)' \
 	$(PLATFORM_LDFLAGS)
 
+bin_PROGRAMS = cpufreq-service
+cpufreq_service_SOURCES = cpufreq-service.c
+cpufreq_service_CFLAGS = $(shell pkg-config --cflags --libs dbus-glib-1)
+
+dbusconfdir = $(datadir)/dbus-1/system.d
+dbusconf_DATA = org.xfce.cpufreq.CPUChanger.conf
+
+dbusservicedir = $(datadir)/dbus-1/system-services
+dbusservice_DATA = org.xfce.cpufreq.CPUChanger.service
+
+org.xfce.cpufreq.CPUChanger.service: org.xfce.cpufreq.CPUChanger.service.in
+	$(AM_V_GEN)$(SED)                 \
+		-e s!\@bindir\@!$(bindir)!    \
+		< $< > $@
+
 desktopdir = $(datadir)/xfce4/panel/plugins
 desktop_in_files = cpufreq.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
@@ -53,4 +70,4 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 EXTRA_DIST = $(desktop_in_files)
 
-DISTCLEANFILES = $(desktop_DATA)
+DISTCLEANFILES = $(desktop_DATA) $(dbusservice_DATA)
