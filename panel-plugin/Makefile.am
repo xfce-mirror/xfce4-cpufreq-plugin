@@ -58,7 +58,8 @@ dbusconf_DATA = org.xfce.cpufreq.CPUChanger.conf
 dbusservicedir = $(datadir)/dbus-1/system-services
 dbusservice_DATA = org.xfce.cpufreq.CPUChanger.service
 
-org.xfce.cpufreq.CPUChanger.service: org.xfce.cpufreq.CPUChanger.service.in
+dbus_in_files = org.xfce.cpufreq.CPUChanger.service.in
+org.xfce.cpufreq.CPUChanger.service: $(dbus_in_files)
 	$(AM_V_GEN)$(SED)                 \
 		-e s!\@bindir\@!$(bindir)!    \
 		< $< > $@
@@ -68,6 +69,12 @@ desktop_in_files = cpufreq.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-EXTRA_DIST = $(desktop_in_files)
+EXTRA_DIST = \
+	$(desktop_in_files) \
+	$(dbus_in_files) \
+	$(dbusconf_DATA) \
+	$(dbusservice_DATA)
 
-DISTCLEANFILES = $(desktop_DATA) $(dbusservice_DATA)
+DISTCLEANFILES = \
+	$(desktop_DATA) \
+	$(dbusservice_DATA)
