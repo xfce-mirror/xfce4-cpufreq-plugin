@@ -26,7 +26,6 @@
 #include <string.h>
 #include <vector>
 
-#include <stdbool.h>
 #include <gio/gio.h>
 
 #include "xfce4-cpufreq-plugin.h"

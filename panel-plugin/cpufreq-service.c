@@ -1,16 +1,11 @@
-#include <stdbool.h>
-#include <string.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <dbus/dbus.h>
-#include <dbus/dbus-glib-lowlevel.h> /* for glib main loop */
+#include <stdbool.h>
+#include <gio/gio.h>
 
 GMainLoop *mainloop;
 
 void set_frequency(const char* frequency, int cpu, bool all);
 void set_governor(const char* governor, int cpu, bool all);
-DBusHandlerResult server_message_handler(DBusConnection *conn, DBusMessage *message, void *data);
 
 /*
  *
@@ -46,130 +41,78 @@ void set_governor(const char* governor, int cpu, bool all)
 	}
 }
 
-/*
- * The main logic of CPUFreq daemon. Should call appropriate function upon message.
- */
-DBusHandlerResult server_message_handler(DBusConnection *conn, DBusMessage *message, void *data)
+static void server_message_handler(GDBusConnection *conn,
+                               const gchar *sender,
+                               const gchar *object_path,
+                               const gchar *interface_name,
+                               const gchar *method_name,
+                               GVariant *parameters,
+                               GDBusMethodInvocation *invocation,
+                               gpointer user_data)
 {
-	DBusHandlerResult result;
-        DBusMessage *reply = NULL;
-	DBusError err;
-	bool quit = true;
-
-	dbus_error_init(&err);
-
-	if (dbus_message_is_method_call(message, "org.xfce.cpufreq.CPUInterface", "set_governor")) {
-		const char *governor;
-		dbus_int32_t cpu;
-		dbus_bool_t all;
-
-		if (!dbus_message_get_args(message, &err,
-					   DBUS_TYPE_STRING, &governor,
-					   DBUS_TYPE_INT32, &cpu,
-					   DBUS_TYPE_BOOLEAN, &all,
-					   DBUS_TYPE_INVALID))
-			goto fail;
-
+	if (!g_strcmp0(method_name, "set_governor")) {
+		gchar *governor;
+		gint cpu;
+		gboolean all;
+		g_variant_get(parameters, "(sib)", &governor, &cpu, &all);
 		set_governor(governor, cpu, all);
-
-		if (!(reply = dbus_message_new_method_return(message)))
-			goto fail;
-
-		dbus_message_append_args(reply,
-					 DBUS_TYPE_STRING, &governor,
-					 DBUS_TYPE_INVALID);
-
-	} else if (dbus_message_is_method_call(message, "org.xfce.cpufreq.CPUInterface", "set_frequency")) {
-		const char *frequency;
-		dbus_int32_t cpu;
-		dbus_bool_t all;
-
-		if (!dbus_message_get_args(message, &err,
-					   DBUS_TYPE_STRING, &frequency,
-					   DBUS_TYPE_INT32, &cpu,
-					   DBUS_TYPE_BOOLEAN, &all,
-					   DBUS_TYPE_INVALID))
-			goto fail;
-
+		g_dbus_method_invocation_return_value(invocation, g_variant_new("(s)", "Done"));
+		g_free(governor);
+	} else if (!g_strcmp0(method_name, "set_frequency")) {
+		gchar *frequency;
+		gint cpu;
+		gboolean all;
+		g_variant_get(parameters, "(sib)", &frequency, &cpu, &all);
 		set_frequency(frequency, cpu, all);
-
-		if (!(reply = dbus_message_new_method_return(message)))
-			goto fail;
-
-		dbus_message_append_args(reply,
-					 DBUS_TYPE_STRING, &frequency,
-					 DBUS_TYPE_INVALID);
-	} else
-		return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
-
-fail:
-	if (dbus_error_is_set(&err)) {
-		if (reply)
-			dbus_message_unref(reply);
-		reply = dbus_message_new_error(message, err.name, err.message);
-		dbus_error_free(&err);
+		g_dbus_method_invocation_return_value(invocation, g_variant_new("(s)", "Done"));
+		g_free(frequency);
 	}
-
-	/*
-	 * In any cases we should have allocated a reply otherwise it
-	 * means that we failed to allocate one.
-	 */
-	if (!reply)
-		return DBUS_HANDLER_RESULT_NEED_MEMORY;
-
-	/* Send the reply which might be an error one too. */
-	result = DBUS_HANDLER_RESULT_HANDLED;
-	if (!dbus_connection_send(conn, reply, NULL))
-		result = DBUS_HANDLER_RESULT_NEED_MEMORY;
-	dbus_message_unref(reply);
-
-	if (quit) {
-		g_main_loop_quit(mainloop);
-	}
-	return result;
+	g_main_loop_quit(mainloop);
 }
 
-
-const DBusObjectPathVTable server_vtable = {
-	.message_function = server_message_handler
+static const GDBusInterfaceVTable interface_vtable = {
+	&server_message_handler
 };
 
+static const gchar introspection_xml[] =
+	"<node>"
+	"  <interface name='org.xfce.cpufreq.CPUInterface'>"
+	"    <method name='set_governor'>"
+	"      <arg type='s' name='governor' direction='in'/>"
+	"      <arg type='i' name='cpu' direction='in'/>"
+	"      <arg type='b' name='all' direction='in'/>"
+	"      <arg type='s' name='response' direction='out'/>"
+	"    </method>"
+	"    <method name='set_frequency'>"
+	"      <arg type='s' name='frequency' direction='in'/>"
+	"      <arg type='i' name='cpu' direction='in'/>"
+	"      <arg type='b' name='all' direction='in'/>"
+	"      <arg type='s' name='response' direction='out'/>"
+	"    </method>"
+	"  </interface>"
+	"</node>";
 
 int main(void)
 {
-	DBusConnection *conn;
-	DBusError err;
-	int rv;
+	GError *err = NULL;
+	GDBusConnection *conn;
+	GDBusNodeInfo *introspection_data;
+	GDBusInterfaceInfo *interface_info;
 
-    dbus_error_init(&err);
-
-	/* connect to the daemon bus */
-	conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
-	if (!conn) {
-		fprintf(stderr, "Failed to get a system DBus connection: %s\n", err.message);
-		goto fail;
-	}
-
-	rv = dbus_bus_request_name(conn, "org.xfce.cpufreq.CPUChanger", DBUS_NAME_FLAG_REPLACE_EXISTING , &err);
-	if (rv != DBUS_REQUEST_NAME_REPLY_PRIMARY_OWNER) {
-		fprintf(stderr, "Failed to request name on bus: %s\n", err.message);
-		goto fail;
-	}
-
-	if (!dbus_connection_register_object_path(conn, "/org/xfce/cpufreq/CPUObject", &server_vtable, NULL)) {
-		fprintf(stderr, "Failed to register a object path for 'CPUObject'\n");
-		goto fail;
+	conn = g_bus_get_sync(G_BUS_TYPE_SYSTEM, NULL, &err);
+	if (err != NULL) {
+		fprintf(stderr, "Failed to get a system DBus connection: %s\n", err->message);
+		g_error_free(err);
+		return EXIT_FAILURE;
 	}
 
 	mainloop = g_main_loop_new(NULL, false);
-	/* Set up the DBus connection to work in a GLib event loop */
-	dbus_connection_setup_with_g_main(conn, NULL);
-	/* Start the glib event loop */
+	introspection_data = g_dbus_node_info_new_for_xml(introspection_xml, NULL);
+	interface_info = g_dbus_node_info_lookup_interface(introspection_data, "org.xfce.cpufreq.CPUInterface");
+	g_dbus_connection_register_object(conn, "/org/xfce/cpufreq/CPUObject", interface_info, &interface_vtable, NULL, NULL, NULL);
+	g_bus_own_name(G_BUS_TYPE_SYSTEM, "org.xfce.cpufreq.CPUChanger", G_BUS_NAME_OWNER_FLAGS_NONE, NULL, NULL, NULL, NULL, NULL);
 	g_main_loop_run(mainloop);
 
 	return EXIT_SUCCESS;
-fail:
-	dbus_error_free(&err);
-	return EXIT_FAILURE;
 }
 
