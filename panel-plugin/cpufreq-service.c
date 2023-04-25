@@ -18,7 +18,6 @@
  */
 
 #include <stdbool.h>
-#include <fcntl.h>
 #include <glib.h>
 #include <glib/gstdio.h>
 #include <gio/gio.h>
@@ -37,9 +36,9 @@ void
 set_frequency (const gchar *frequency, gint cpu, gboolean all)
 {
   FILE *fp;
+  gchar filename[100];
   for (gint n = all ? 0 : cpu; n <= cpu; n++)
   {
-    gchar filename[100];
     g_snprintf (filename, sizeof (filename),
       SYSFS_BASE "/cpu%d/cpufreq/scaling_min_freq", n);
     if ((fp = g_fopen (filename, "w")) != NULL)
@@ -58,9 +57,9 @@ void
 set_governor (const gchar *governor, gint cpu, gboolean all)
 {
   FILE *fp;
-  for (int n = all ? 0 : cpu; n <= cpu; n++)
+  gchar filename[100];
+  for (gint n = all ? 0 : cpu; n <= cpu; n++)
   {
-    gchar filename[100];
     g_snprintf (filename, sizeof(filename),
       SYSFS_BASE "/cpu%d/cpufreq/scaling_governor", n);
     if ((fp = g_fopen (filename, "w")) != NULL)
