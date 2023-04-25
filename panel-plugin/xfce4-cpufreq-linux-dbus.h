@@ -22,8 +22,10 @@
 
 #include <stdbool.h>
 
-void cpufreq_dbus_set_governor(const char* governor, int cpu, bool all);
+void
+cpufreq_dbus_set_governor (const char* governor, int cpu, bool all);
 
-void cpufreq_dbus_set_frequency(const char* frequency, int cpu, bool all);
+void
+cpufreq_dbus_set_frequency (const char* frequency, int cpu, bool all);
 
 #endif /* XFCE4_CPUFREQ_LINUX_DBUS_H */

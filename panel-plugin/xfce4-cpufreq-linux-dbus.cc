@@ -38,10 +38,10 @@ call_dbus_func (const char* func, const char* param, int cpu, bool all)
   GDBusConnection *conn;
   GError *error = NULL;
 
-  conn = g_bus_get_sync(G_BUS_TYPE_SYSTEM, NULL, &error);
-  g_assert_no_error(error);
+  conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  g_assert_no_error (error);
 
-  proxy = g_dbus_proxy_new_sync(conn,
+  proxy = g_dbus_proxy_new_sync (conn,
             G_DBUS_PROXY_FLAGS_NONE,
             NULL,       /* GDBusInterfaceInfo */
             "org.xfce.cpufreq.CPUChanger",    /* name */
@@ -49,30 +49,30 @@ call_dbus_func (const char* func, const char* param, int cpu, bool all)
             "org.xfce.cpufreq.CPUInterface",  /* interface */
             NULL,       /* GCancellable */
             &error);
-  g_assert_no_error(error);
+  g_assert_no_error (error);
 
-  g_dbus_proxy_call_sync(proxy,
+  g_dbus_proxy_call_sync (proxy,
           func,
           g_variant_new ("(sib)", param, cpu, all),
           G_DBUS_CALL_FLAGS_NONE,
           -1,
           NULL,
           &error);
-  g_assert_no_error(error);
+  g_assert_no_error (error);
 
-  g_object_unref(proxy);
-  g_object_unref(conn);
+  g_object_unref (proxy);
+  g_object_unref (conn);
 }
 
 void
-cpufreq_dbus_set_governor(const char* governor, int cpu, bool all)
+cpufreq_dbus_set_governor (const char* governor, int cpu, bool all)
 {
-  call_dbus_func("set_governor", governor, cpu, all);
+  call_dbus_func ("set_governor", governor, cpu, all);
 }
 
 void
-cpufreq_dbus_set_frequency(const char* frequency, int cpu, bool all)
+cpufreq_dbus_set_frequency (const char* frequency, int cpu, bool all)
 {
-  call_dbus_func("set_frequency", frequency, cpu, all);
+  call_dbus_func ("set_frequency", frequency, cpu, all);
 }
 
