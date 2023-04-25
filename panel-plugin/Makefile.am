@@ -50,7 +50,7 @@ libcpufreq_la_LDFLAGS = \
 
 bin_PROGRAMS = cpufreq-service
 cpufreq_service_SOURCES = cpufreq-service.c
-cpufreq_service_CFLAGS = $(shell pkg-config --cflags --libs gio-2.0)
+cpufreq_service_CFLAGS = $(GIO_CFLAGS)
 
 dbusconfdir = $(datadir)/dbus-1/system.d
 dbusconf_DATA = org.xfce.cpufreq.CPUChanger.conf
