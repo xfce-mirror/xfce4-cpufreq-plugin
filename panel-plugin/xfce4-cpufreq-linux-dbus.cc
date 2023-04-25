@@ -32,7 +32,7 @@
 #include "xfce4-cpufreq-linux-dbus.h"
 
 static void
-call_dbus_func (const char* func, const char* param, int cpu, bool all)
+call_dbus_func (const gchar* func, const gchar* param, gint cpu, gboolean all)
 {
   GDBusProxy *proxy;
   GDBusConnection *conn;
@@ -65,13 +65,13 @@ call_dbus_func (const char* func, const char* param, int cpu, bool all)
 }
 
 void
-cpufreq_dbus_set_governor (const char* governor, int cpu, bool all)
+cpufreq_dbus_set_governor (const gchar* governor, gint cpu, gboolean all)
 {
   call_dbus_func ("set_governor", governor, cpu, all);
 }
 
 void
-cpufreq_dbus_set_frequency (const char* frequency, int cpu, bool all)
+cpufreq_dbus_set_frequency (const gchar* frequency, gint cpu, gboolean all)
 {
   call_dbus_func ("set_frequency", frequency, cpu, all);
 }
