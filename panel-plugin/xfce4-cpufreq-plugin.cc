@@ -993,7 +993,6 @@ cpufreq_show_about(XfcePanelPlugin*)
     "Harald Judt <h.judt@gmx.at>",
     "Jan Ziak <0xe2.0x9a.0x9b@xfce.org>",
     "Thomas Schreck <shrek@xfce.org>",
-    "Elia Yehuda <z4ziggy@gmail.com>",
     NULL };
 
   GdkPixbuf *icon = xfce_panel_pixbuf_from_source ("xfce4-cpufreq-plugin", NULL, 48);
