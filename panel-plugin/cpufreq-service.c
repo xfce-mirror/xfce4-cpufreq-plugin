@@ -43,11 +43,11 @@ set_frequency (const char *frequency, int cpu, bool all)
     g_snprintf (filename, sizeof (filename),
       SYSFS_BASE "/cpu%d/cpufreq/scaling_min_freq", n);
     if ((fp = g_fopen (filename, "w")) != NULL)
-	  {
-	    g_fprintf (stderr, "Writing '%s' to %s\n", frequency, filename);
-	    g_fprintf (fp, "%s", frequency);
-	    fclose (fp);
-	  }
+    {
+      g_fprintf (stderr, "Writing '%s' to %s\n", frequency, filename);
+      g_fprintf (fp, "%s", frequency);
+      fclose (fp);
+    }
   }
 }
 
@@ -64,23 +64,23 @@ set_governor (const char *governor, int cpu, bool all)
     g_snprintf (filename, sizeof(filename),
       SYSFS_BASE "/cpu%d/cpufreq/scaling_governor", n);
     if ((fp = g_fopen (filename, "w")) != NULL)
-	  {
-	    g_fprintf (stderr, "Writing '%s' to %s\n", governor, filename);
-	    g_fprintf (fp, "%s", governor);
-	    fclose (fp);
-	  }
+    {
+      g_fprintf (stderr, "Writing '%s' to %s\n", governor, filename);
+      g_fprintf (fp, "%s", governor);
+      fclose (fp);
+    }
   }
 }
 
 static void
 server_message_handler (GDBusConnection *conn,
-			const gchar *sender,
-			const gchar *object_path,
-			const gchar *interface_name,
-			const gchar *method_name,
-			GVariant *parameters,
-			GDBusMethodInvocation *invocation,
-			gpointer user_data)
+      const gchar *sender,
+      const gchar *object_path,
+      const gchar *interface_name,
+      const gchar *method_name,
+      GVariant *parameters,
+      GDBusMethodInvocation *invocation,
+      gpointer user_data)
 {
   if (!g_strcmp0 (method_name, "set_governor"))
   {
@@ -139,7 +139,7 @@ main (void)
   if (err != NULL)
   {
     g_fprintf (stderr, "Failed to get a system DBus connection: %s\n",
-	     err->message);
+       err->message);
     g_error_free (err);
     return EXIT_FAILURE;
   }
@@ -147,12 +147,12 @@ main (void)
   mainloop = g_main_loop_new (NULL, false);
   introspection_data = g_dbus_node_info_new_for_xml (introspection_xml, NULL);
   interface_info = g_dbus_node_info_lookup_interface (introspection_data,
-				       "org.xfce.cpufreq.CPUInterface");
+               "org.xfce.cpufreq.CPUInterface");
   g_dbus_connection_register_object (conn, "/org/xfce/cpufreq/CPUObject",
-				     interface_info, &interface_vtable, NULL,
-				     NULL, NULL);
+             interface_info, &interface_vtable, NULL,
+             NULL, NULL);
   g_bus_own_name (G_BUS_TYPE_SYSTEM, "org.xfce.cpufreq.CPUChanger",
-		  G_BUS_NAME_OWNER_FLAGS_NONE, NULL, NULL, NULL, NULL, NULL);
+      G_BUS_NAME_OWNER_FLAGS_NONE, NULL, NULL, NULL, NULL, NULL);
   g_main_loop_run (mainloop);
 
   return EXIT_SUCCESS;
