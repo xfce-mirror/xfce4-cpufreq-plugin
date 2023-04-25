@@ -141,7 +141,8 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
     g_signal_connect (combo, "changed", G_CALLBACK (combo_frequency_changed), NULL);
 #endif
   }
-  else if (cpu_shared.cur_freq && cpu->min_freq && cpu->max_freq_nominal) /* Linux 2.4 with scaling support */
+  /* Linux 2.4 with scaling support or intel_pstate */
+  else if (cpu_shared.cur_freq && cpu->min_freq && cpu->max_freq_nominal)
   {
     GtkWidget *combo = gtk_combo_box_text_new ();
     gtk_size_group_add_widget (sg1, combo);
