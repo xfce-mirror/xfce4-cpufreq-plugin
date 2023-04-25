@@ -306,7 +306,7 @@ cpufreq_overview (GdkEventButton *ev)
     if (!cpuFreq->cpus[0]->scaling_driver.empty())
       text = "<b>" + cpuFreq->cpus[0]->scaling_driver + "</b>";
     else
-      text = xfce4::sprintf (_("No scaling driver available"));
+      text = xfce4::sprintf (_("No driver available"));
 
     label = gtk_label_new (text.c_str());
     gtk_size_group_add_widget (sg1, label);
