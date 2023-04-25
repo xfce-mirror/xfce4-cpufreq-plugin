@@ -20,7 +20,7 @@
 #ifndef XFCE4_CPUFREQ_LINUX_DBUS_H
 #define XFCE4_CPUFREQ_LINUX_DBUS_H
 
-#include <stdbool.h>
+#include <glib.h>
 
 void
 cpufreq_dbus_set_governor (const gchar *governor, gint cpu, gboolean all);
