@@ -45,7 +45,8 @@ combo_frequency_changed(GtkWidget *combo, gpointer p)
   int cpu = GPOINTER_TO_INT( g_object_get_data(G_OBJECT(combo), "cpu"));
   bool all = GPOINTER_TO_INT( g_object_get_data(G_OBJECT(combo), "all"));
   gchar *frequency = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo));
-  if (frequency != NULL) {
+  if (frequency != NULL)
+  {
     int mhz = std::stoi(frequency);
     if (g_strrstr(frequency, "GHz") != NULL)
       mhz = std::stod(frequency) * 1000 * 1000;
@@ -60,7 +61,8 @@ combo_governor_changed(GtkWidget *combo, gpointer p)
   int cpu = GPOINTER_TO_INT( g_object_get_data(G_OBJECT(combo), "cpu"));
   bool all = GPOINTER_TO_INT( g_object_get_data(G_OBJECT(combo), "all"));
   gchar *governor = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo));
-  if (governor != NULL) {
+  if (governor != NULL)
+  {
     cpufreq_dbus_set_governor(governor, cpu, all);
     g_free(governor);
   }
@@ -87,10 +89,13 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER);
   gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, true, true, 0);
 
-  if (all) {
+  if (all)
+  {
     label = gtk_label_new (_("<b>All CPUs</b>"));
     gtk_widget_set_margin_start (label, 20 + BORDER*2);
-  } else {
+  } 
+  else 
+  {
     GtkWidget *icon = gtk_image_new_from_icon_name ("xfce4-cpufreq-plugin", GTK_ICON_SIZE_BUTTON);
     gtk_widget_set_halign (icon, GTK_ALIGN_START);
     gtk_widget_set_valign (icon, GTK_ALIGN_CENTER);
@@ -236,7 +241,8 @@ cpufreq_overview (GdkEventButton *ev)
 
   auto window = (GtkWidget*) g_object_get_data (G_OBJECT (cpuFreq->plugin), "overview");
 
-  if (window) {
+  if (window)
+  {
     g_object_set_data (G_OBJECT (cpuFreq->plugin), "overview", NULL);
     gtk_widget_destroy (window);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cpuFreq->button), false);
@@ -324,7 +330,8 @@ cpufreq_overview (GdkEventButton *ev)
   lblbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER*2);
   gtk_box_pack_start (GTK_BOX (dialog_vbox), lblbox, false, false, 10);
 
-  for (size_t i = 0; i < step; i++) {
+  for (size_t i = 0; i < step; i++)
+  {
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER*2);
     gtk_box_pack_start (GTK_BOX (lblbox), hbox, true, true, 0);
 
@@ -343,15 +350,18 @@ cpufreq_overview (GdkEventButton *ev)
     gtk_box_pack_end (GTK_BOX (hbox), label, false, false, 0);
   }
 
-  for (size_t i = 0; i < cpuFreq->cpus.size(); i += step) {
+  for (size_t i = 0; i < cpuFreq->cpus.size(); i += step)
+  {
     GtkWidget *dialog_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER * 2);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), dialog_hbox, false, false, BORDER * 2);
     gtk_container_set_border_width (GTK_CONTAINER (dialog_hbox), BORDER * 2);
 
-    for (size_t j = i; j < cpuFreq->cpus.size() && j < i + step; j++) {
+    for (size_t j = i; j < cpuFreq->cpus.size() && j < i + step; j++)
+    {
       Ptr<const CpuInfo> cpu = cpuFreq->cpus[j];
       cpufreq_overview_add (cpu, j, dialog_hbox);
-      if (j + 1 < cpuFreq->cpus.size() && j + 1 < i + step) {
+      if (j + 1 < cpuFreq->cpus.size() && j + 1 < i + step)
+      {
         GtkWidget *separator = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
         gtk_box_pack_start (GTK_BOX (dialog_hbox), separator, false, false, 0);
       }
