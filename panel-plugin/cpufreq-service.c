@@ -40,7 +40,7 @@ set_frequency (const gchar *frequency, gint cpu, gboolean all)
   for (gint n = all ? 0 : cpu; n <= cpu; n++)
   {
     g_snprintf (filename, sizeof (filename),
-      SYSFS_BASE "/cpu%d/cpufreq/scaling_min_freq", n);
+      SYSFS_BASE "/cpu%d/cpufreq/scaling_max_freq", n);
     if ((fp = g_fopen (filename, "w")) != NULL)
     {
       g_printerr ("Writing '%s' to %s\n", frequency, filename);
