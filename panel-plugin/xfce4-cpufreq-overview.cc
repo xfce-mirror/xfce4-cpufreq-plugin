@@ -40,31 +40,31 @@
 
 #ifdef __linux__
 static void
-combo_frequency_changed(GtkWidget *combo, gpointer p)
+combo_frequency_changed (GtkWidget *combo, gpointer p)
 {
-  int cpu = GPOINTER_TO_INT( g_object_get_data(G_OBJECT(combo), "cpu"));
-  bool all = GPOINTER_TO_INT( g_object_get_data(G_OBJECT(combo), "all"));
-  gchar *frequency = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo));
+  int cpu = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (combo), "cpu"));
+  bool all = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (combo), "all"));
+  gchar *frequency = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (combo));
   if (frequency != NULL)
   {
-    int mhz = std::stoi(frequency);
-    if (g_strrstr(frequency, "GHz") != NULL)
-      mhz = std::stod(frequency) * 1000 * 1000;
-    cpufreq_dbus_set_frequency(std::to_string(mhz).c_str(), cpu, all);
-    g_free(frequency);
+    int mhz = std::stoi (frequency);
+    if (g_strrstr (frequency, "GHz") != NULL)
+      mhz = std::stod (frequency) * 1000 * 1000;
+    cpufreq_dbus_set_frequency (std::to_string (mhz).c_str(), cpu, all);
+    g_free (frequency);
   }
 }
 
 static void
-combo_governor_changed(GtkWidget *combo, gpointer p)
+combo_governor_changed (GtkWidget *combo, gpointer p)
 {
-  int cpu = GPOINTER_TO_INT( g_object_get_data(G_OBJECT(combo), "cpu"));
-  bool all = GPOINTER_TO_INT( g_object_get_data(G_OBJECT(combo), "all"));
-  gchar *governor = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo));
+  int cpu = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (combo), "cpu"));
+  bool all = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (combo), "all"));
+  gchar *governor = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (combo));
   if (governor != NULL)
   {
-    cpufreq_dbus_set_governor(governor, cpu, all);
-    g_free(governor);
+    cpufreq_dbus_set_governor (governor, cpu, all);
+    g_free (governor);
   }
 }
 #endif
@@ -109,7 +109,7 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
   gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
   gtk_label_set_xalign (GTK_LABEL (label), 0);
-  gtk_widget_set_margin_end(label, 20);
+  gtk_widget_set_margin_end (label, 20);
   gtk_box_pack_start (GTK_BOX (hbox), label, true, true, 0);
   gtk_label_set_use_markup (GTK_LABEL (label), true);
 
@@ -136,8 +136,8 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
     }
     gtk_combo_box_set_active (GTK_COMBO_BOX (combo), i);
 #ifdef __linux__
-    g_object_set_data(G_OBJECT(combo), "all", GINT_TO_POINTER(all));
-    g_object_set_data(G_OBJECT(combo), "cpu", GINT_TO_POINTER(cpu_number));
+    g_object_set_data (G_OBJECT (combo), "all", GINT_TO_POINTER (all));
+    g_object_set_data (G_OBJECT (combo), "cpu", GINT_TO_POINTER (cpu_number));
     g_signal_connect (combo, "changed", G_CALLBACK (combo_frequency_changed), NULL);
 #endif
   }
@@ -158,8 +158,8 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
 
     gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
 #ifdef __linux__
-    g_object_set_data(G_OBJECT(combo), "all", GINT_TO_POINTER(all));
-    g_object_set_data(G_OBJECT(combo), "cpu", GINT_TO_POINTER(cpu_number));
+    g_object_set_data (G_OBJECT (combo), "all", GINT_TO_POINTER (all));
+    g_object_set_data (G_OBJECT (combo), "cpu", GINT_TO_POINTER (cpu_number));
     g_signal_connect (combo, "changed", G_CALLBACK (combo_frequency_changed), NULL);
 #endif
   }
@@ -197,8 +197,8 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
     }
 
     gtk_combo_box_set_active (GTK_COMBO_BOX (combo), i);
-    g_object_set_data(G_OBJECT(combo), "all", GINT_TO_POINTER(all));
-    g_object_set_data(G_OBJECT(combo), "cpu", GINT_TO_POINTER(cpu_number));
+    g_object_set_data (G_OBJECT (combo), "all", GINT_TO_POINTER (all));
+    g_object_set_data (G_OBJECT (combo), "cpu", GINT_TO_POINTER (cpu_number));
     g_signal_connect (combo, "changed", G_CALLBACK (combo_governor_changed), NULL);
   }
   else if (!cpu_shared.cur_governor.empty()) /* Linux 2.4 and cpu scaling support */
@@ -298,7 +298,7 @@ cpufreq_overview (GdkEventButton *ev)
   gtk_size_group_add_widget (sg0, label);
   gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
   gtk_label_set_xalign (GTK_LABEL (label), 0);
-  gtk_widget_set_margin_start(label, 5);
+  gtk_widget_set_margin_start (label, 5);
   gtk_box_pack_start (GTK_BOX (hbox), label, false, false, 0);
 
   {
@@ -314,7 +314,7 @@ cpufreq_overview (GdkEventButton *ev)
     gtk_label_set_xalign (GTK_LABEL (label), 0);
     gtk_box_pack_start (GTK_BOX (hbox), label, false, false, 0);
     gtk_label_set_use_markup (GTK_LABEL (label), true);
-    gtk_widget_set_margin_end(label, 20);
+    gtk_widget_set_margin_end (label, 20);
   }
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER * 2);
