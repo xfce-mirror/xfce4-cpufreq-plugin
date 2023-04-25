@@ -32,7 +32,7 @@
 #include "xfce4-cpufreq-linux-dbus.h"
 
 static void
-call_dbus_func(const char* func, const char* param, int cpu, bool all)
+call_dbus_func (const char* func, const char* param, int cpu, bool all)
 {
   GDBusProxy *proxy;
   GDBusConnection *conn;
