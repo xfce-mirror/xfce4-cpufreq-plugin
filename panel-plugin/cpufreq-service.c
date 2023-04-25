@@ -25,8 +25,8 @@
 
 GMainLoop *mainloop;
 
-void set_frequency (const char *frequency, int cpu, bool all);
-void set_governor (const char *governor, int cpu, bool all);
+void set_frequency (const gchar *frequency, gint cpu, gboolean all);
+void set_governor (const gchar *governor, gint cpu, gboolean all);
 
 #define SYSFS_BASE  "/sys/devices/system/cpu"
 
@@ -34,17 +34,17 @@ void set_governor (const char *governor, int cpu, bool all);
  *
  */
 void
-set_frequency (const char *frequency, int cpu, bool all)
+set_frequency (const gchar *frequency, gint cpu, gboolean all)
 {
   FILE *fp;
-  for (int n = all ? 0 : cpu; n <= cpu; n++)
+  for (gint n = all ? 0 : cpu; n <= cpu; n++)
   {
     gchar filename[100];
     g_snprintf (filename, sizeof (filename),
       SYSFS_BASE "/cpu%d/cpufreq/scaling_min_freq", n);
     if ((fp = g_fopen (filename, "w")) != NULL)
     {
-      g_fprintf (stderr, "Writing '%s' to %s\n", frequency, filename);
+      g_printerr ("Writing '%s' to %s\n", frequency, filename);
       g_fprintf (fp, "%s", frequency);
       fclose (fp);
     }
@@ -55,7 +55,7 @@ set_frequency (const char *frequency, int cpu, bool all)
  *
  */
 void
-set_governor (const char *governor, int cpu, bool all)
+set_governor (const gchar *governor, gint cpu, gboolean all)
 {
   FILE *fp;
   for (int n = all ? 0 : cpu; n <= cpu; n++)
@@ -65,7 +65,7 @@ set_governor (const char *governor, int cpu, bool all)
       SYSFS_BASE "/cpu%d/cpufreq/scaling_governor", n);
     if ((fp = g_fopen (filename, "w")) != NULL)
     {
-      g_fprintf (stderr, "Writing '%s' to %s\n", governor, filename);
+      g_printerr ("Writing '%s' to %s\n", governor, filename);
       g_fprintf (fp, "%s", governor);
       fclose (fp);
     }
