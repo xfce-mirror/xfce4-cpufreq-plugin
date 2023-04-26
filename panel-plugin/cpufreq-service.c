@@ -122,13 +122,11 @@ static const gchar introspection_xml[] =
   "      <arg type='s' name='governor' direction='in'/>"
   "      <arg type='i' name='cpu' direction='in'/>"
   "      <arg type='b' name='all' direction='in'/>"
-  "      <arg type='s' name='response' direction='out'/>"
   "    </method>"
   "    <method name='set_frequency'>"
   "      <arg type='s' name='frequency' direction='in'/>"
   "      <arg type='i' name='cpu' direction='in'/>"
   "      <arg type='b' name='all' direction='in'/>"
-  "      <arg type='s' name='response' direction='out'/>"
   "    </method>"
   "  </interface>"
   "</node>";
