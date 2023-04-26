@@ -24,6 +24,7 @@
 
 GMainLoop *mainloop;
 guint conn_id;
+guint bus_id;
 
 void set_frequency (const gchar *frequency, gint cpu, gboolean all);
 void set_governor (const gchar *governor, gint cpu, gboolean all);
@@ -102,6 +103,7 @@ server_message_handler (GDBusConnection *conn,
     g_dbus_method_invocation_return_value (invocation, g_variant_new ("(s)", "Done"));
     g_free (frequency);
   }
+  g_bus_unown_name (bus_id);
   g_dbus_connection_unregister_object (conn, conn_id);
   g_main_loop_quit (mainloop);
 }
@@ -150,9 +152,8 @@ main (void)
   interface_info = g_dbus_node_info_lookup_interface (introspection_data,
                "org.xfce.cpufreq.CPUInterface");
   conn_id = g_dbus_connection_register_object (conn, "/org/xfce/cpufreq/CPUObject",
-             interface_info, &interface_vtable, NULL,
-             NULL, NULL);
-  g_bus_own_name (G_BUS_TYPE_SYSTEM, "org.xfce.cpufreq.CPUChanger",
+             interface_info, &interface_vtable, NULL, NULL, NULL);
+  bus_id = g_bus_own_name (G_BUS_TYPE_SYSTEM, "org.xfce.cpufreq.CPUChanger",
       G_BUS_NAME_OWNER_FLAGS_NONE, NULL, NULL, NULL, NULL, NULL);
   g_main_loop_run (mainloop);
 
