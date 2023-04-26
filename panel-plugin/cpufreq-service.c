@@ -35,17 +35,19 @@ void set_governor (const gchar *governor, gint cpu, gboolean all);
 void
 set_frequency (const gchar *frequency, gint cpu, gboolean all)
 {
-  FILE *fp;
   gchar filename[100];
+  GError *error = NULL;
+
   for (gint n = all ? 0 : cpu; n <= cpu; n++)
   {
     g_snprintf (filename, sizeof (filename),
       SYSFS_BASE "/cpu%d/cpufreq/scaling_max_freq", n);
-    if ((fp = g_fopen (filename, "w")) != NULL)
+
+    if (!g_file_set_contents_full (filename, frequency,
+      -1, G_FILE_SET_CONTENTS_NONE, 0666, &error))
     {
-      g_printerr ("Writing '%s' to %s\n", frequency, filename);
-      g_fprintf (fp, "%s", frequency);
-      fclose (fp);
+      g_warning ("Failed to write to %s: %s", filename, error->message);
+      g_clear_error (&error);
     }
   }
 }
@@ -56,17 +58,19 @@ set_frequency (const gchar *frequency, gint cpu, gboolean all)
 void
 set_governor (const gchar *governor, gint cpu, gboolean all)
 {
-  FILE *fp;
   gchar filename[100];
+  GError *error = NULL;
+
   for (gint n = all ? 0 : cpu; n <= cpu; n++)
   {
     g_snprintf (filename, sizeof(filename),
       SYSFS_BASE "/cpu%d/cpufreq/scaling_governor", n);
-    if ((fp = g_fopen (filename, "w")) != NULL)
+
+    if (!g_file_set_contents_full (filename, governor,
+      -1, G_FILE_SET_CONTENTS_NONE, 0666, &error))
     {
-      g_printerr ("Writing '%s' to %s\n", governor, filename);
-      g_fprintf (fp, "%s", governor);
-      fclose (fp);
+      g_warning ("Failed to write to %s: %s", filename, error->message);
+      g_clear_error (&error);
     }
   }
 }
@@ -137,8 +141,8 @@ main (void)
   conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &err);
   if (err != NULL)
   {
-    g_printerr ("Failed to get a system DBus connection: %s\n", err->message);
-    g_error_free (err);
+    g_critical ("Failed to get a system DBus connection: %s\n", err->message);
+    g_clear_error (err);
     return EXIT_FAILURE;
   }
 
