@@ -34,33 +34,27 @@
 static void
 call_dbus_func (const gchar* func, const gchar* param, gint cpu, gboolean all)
 {
-  GDBusProxy *proxy;
   GDBusConnection *conn;
+  GVariant *call;
   GError *error = NULL;
 
   conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   g_assert_no_error (error);
 
-  proxy = g_dbus_proxy_new_sync (conn,
-            G_DBUS_PROXY_FLAGS_NONE,
-            NULL,       /* GDBusInterfaceInfo */
+  call = g_dbus_connection_call_sync (conn,
             "org.xfce.cpufreq.CPUChanger",    /* name */
             "/org/xfce/cpufreq/CPUObject",  /* object path */
             "org.xfce.cpufreq.CPUInterface",  /* interface */
-            NULL,       /* GCancellable */
-            &error);
-  g_assert_no_error (error);
+            func,
+            g_variant_new ("(sib)", param, cpu, all),
+            NULL,
+            G_DBUS_CALL_FLAGS_NONE,
+            -1,
+            NULL,
+            NULL);
 
-  g_dbus_proxy_call_sync (proxy,
-          func,
-          g_variant_new ("(sib)", param, cpu, all),
-          G_DBUS_CALL_FLAGS_NONE,
-          -1,
-          NULL,
-          &error);
-  g_assert_no_error (error);
-
-  g_object_unref (proxy);
+  if (call != NULL)
+    g_variant_unref (call);
   g_object_unref (conn);
 }
 
