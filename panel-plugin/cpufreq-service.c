@@ -142,7 +142,7 @@ main (void)
   if (err != NULL)
   {
     g_critical ("Failed to get a system DBus connection: %s\n", err->message);
-    g_clear_error (err);
+    g_clear_error (&err);
     return EXIT_FAILURE;
   }
 
