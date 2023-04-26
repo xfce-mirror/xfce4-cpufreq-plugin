@@ -23,6 +23,8 @@
 #include <gio/gio.h>
 
 GMainLoop *mainloop;
+guint conn_id;
+guint bus_id;
 
 void set_frequency (const gchar *frequency, gint cpu, gboolean all);
 void set_governor (const gchar *governor, gint cpu, gboolean all);
@@ -103,6 +105,9 @@ server_message_handler (GDBusConnection *conn,
     set_frequency (frequency, cpu, all);
     g_free (frequency);
   }
+  g_bus_unown_name (bus_id);
+  g_dbus_connection_unregister_object (conn, conn_id);
+  g_dbus_connection_close (conn, NULL, NULL, NULL);
   g_main_loop_quit (mainloop);
 }
 
@@ -135,8 +140,6 @@ main (void)
   GDBusConnection *conn;
   GDBusNodeInfo *introspection_data;
   GDBusInterfaceInfo *interface_info;
-  guint conn_id;
-  guint bus_id;
 
   conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &err);
   if (err != NULL)
@@ -156,9 +159,6 @@ main (void)
       G_BUS_NAME_OWNER_FLAGS_NONE, NULL, NULL, NULL, NULL, NULL);
   g_main_loop_run (mainloop);
 
-  g_bus_unown_name (bus_id);
-  g_dbus_connection_unregister_object (conn, conn_id);
-  g_dbus_connection_close (conn, NULL, NULL, NULL);
   g_object_unref (conn);
   g_main_loop_unref (mainloop);
 
