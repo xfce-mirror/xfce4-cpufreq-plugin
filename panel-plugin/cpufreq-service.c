@@ -105,6 +105,7 @@ server_message_handler (GDBusConnection *conn,
     set_frequency (frequency, cpu, all);
     g_free (frequency);
   }
+  g_dbus_method_invocation_return_value (invocation, NULL);
   g_bus_unown_name (bus_id);
   g_dbus_connection_unregister_object (conn, conn_id);
   g_dbus_connection_close (conn, NULL, NULL, NULL);
