@@ -287,7 +287,7 @@ cpufreq_overview (GdkEventButton *ev)
   GtkSizeGroup *sg1 = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   /* display driver */
-  dbox = gtk_box_new ((step>1)?GTK_ORIENTATION_HORIZONTAL:GTK_ORIENTATION_VERTICAL, BORDER);
+  dbox = gtk_box_new ((step > 1) ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL, BORDER);
   gtk_box_pack_start (GTK_BOX (dialog_vbox), dbox, false, false, 0);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER * 2);
