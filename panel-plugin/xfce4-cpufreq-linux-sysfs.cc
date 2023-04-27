@@ -223,11 +223,11 @@ parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
   cpufreq_sysfs_read_string (file, cur_governor);
 
   /* read max cpu freq */
-  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_max_freq", cpu_number);
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/cpuinfo_max_freq", cpu_number);
   cpufreq_sysfs_read_uint (file, &cpu->max_freq_nominal);
 
   /* read min cpu freq */
-  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_min_freq", cpu_number);
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/cpuinfo_min_freq", cpu_number);
   cpufreq_sysfs_read_uint (file, &cpu->min_freq);
 
   {
