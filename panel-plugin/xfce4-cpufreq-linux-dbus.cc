@@ -31,15 +31,14 @@
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-linux-dbus.h"
 
-static void
-call_dbus_func (const gchar* func, const gchar* param, gint cpu, gboolean all)
+static gboolean
+call_dbus_func (const gchar* func, const gchar* param, gint cpu, gboolean all, GError **error)
 {
   GDBusConnection *conn;
   GVariant *call;
-  GError *error = NULL;
 
-  conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-  g_assert_no_error (error);
+  conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, error);
+  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   call = g_dbus_connection_call_sync (conn,
             "org.xfce.cpufreq.CPUChanger",    /* name */
@@ -51,22 +50,24 @@ call_dbus_func (const gchar* func, const gchar* param, gint cpu, gboolean all)
             G_DBUS_CALL_FLAGS_NONE,
             -1,
             NULL,
-            NULL);
+            error);
 
   if (call != NULL)
     g_variant_unref (call);
   g_object_unref (conn);
+
+  return ( (error == NULL) || (*error ==NULL));
 }
 
-void
-cpufreq_dbus_set_governor (const gchar* governor, gint cpu, gboolean all)
+gboolean
+cpufreq_dbus_set_governor (const gchar* governor, gint cpu, gboolean all, GError **error)
 {
-  call_dbus_func ("set_governor", governor, cpu, all);
+  return call_dbus_func ("set_governor", governor, cpu, all, error);
 }
 
-void
-cpufreq_dbus_set_frequency (const gchar* frequency, gint cpu, gboolean all)
+gboolean
+cpufreq_dbus_set_frequency (const gchar* frequency, gint cpu, gboolean all, GError **error)
 {
-  call_dbus_func ("set_frequency", frequency, cpu, all);
+  return call_dbus_func ("set_frequency", frequency, cpu, all, error);
 }
 

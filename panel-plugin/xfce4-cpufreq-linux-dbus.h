@@ -22,10 +22,10 @@
 
 #include <glib.h>
 
-void
-cpufreq_dbus_set_governor (const gchar *governor, gint cpu, gboolean all);
+gboolean
+cpufreq_dbus_set_governor (const gchar *governor, gint cpu, gboolean all, GError **error);
 
-void
-cpufreq_dbus_set_frequency (const gchar *frequency, gint cpu, gboolean all);
+gboolean
+cpufreq_dbus_set_frequency (const gchar *frequency, gint cpu, gboolean all, GError **error);
 
 #endif /* XFCE4_CPUFREQ_LINUX_DBUS_H */

@@ -40,6 +40,16 @@
 
 #ifdef __linux__
 static void
+show_error (GError *err, GtkWindow *parent)
+{
+  GtkWidget *dialog = gtk_message_dialog_new (parent, GTK_DIALOG_DESTROY_WITH_PARENT,
+    GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, "Error: %s", err->message);
+  gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (GTK_WIDGET (dialog));
+}
+
+static void
 combo_frequency_changed (GtkWidget *combo, gpointer p)
 {
   int cpu = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (combo), "cpu"));
@@ -47,10 +57,16 @@ combo_frequency_changed (GtkWidget *combo, gpointer p)
   gchar *frequency = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (combo));
   if (frequency != NULL)
   {
+    GError *err = NULL;
     int mhz = std::stoi (frequency);
     if (g_strrstr (frequency, "GHz") != NULL)
       mhz = std::stod (frequency) * 1000 * 1000;
-    cpufreq_dbus_set_frequency (std::to_string (mhz).c_str(), cpu, all);
+    cpufreq_dbus_set_frequency (std::to_string (mhz).c_str(), cpu, all, &err);
+    if (err != NULL)
+    {
+      show_error (err, GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (cpuFreq->plugin))));
+      g_clear_error (&err);
+    }
     g_free (frequency);
   }
 }
@@ -63,7 +79,13 @@ combo_governor_changed (GtkWidget *combo, gpointer p)
   gchar *governor = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (combo));
   if (governor != NULL)
   {
-    cpufreq_dbus_set_governor (governor, cpu, all);
+    GError *err = NULL;
+    cpufreq_dbus_set_governor (governor, cpu, all, &err);
+    if (err != NULL)
+    {
+      show_error (err, GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (cpuFreq->plugin))));
+      g_clear_error (&err);
+    }
     g_free (governor);
   }
 }
