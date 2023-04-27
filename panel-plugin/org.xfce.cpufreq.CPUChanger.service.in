@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=org.xfce.cpufreq.CPUChanger
+User=root
+Exec=@bindir@/cpufreq-service
