@@ -56,7 +56,7 @@ call_dbus_func (const gchar* func, const gchar* param, gint cpu, gboolean all, G
     g_variant_unref (call);
   g_object_unref (conn);
 
-  return ( (error == NULL) || (*error ==NULL));
+  return call != NULL;
 }
 
 gboolean
