@@ -38,7 +38,8 @@ call_dbus_func (const gchar* func, const gchar* param, gint cpu, gboolean all, G
   GVariant *call;
 
   conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, error);
-  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+  if (conn == NULL)
+    return FALSE;
 
   call = g_dbus_connection_call_sync (conn,
             "org.xfce.cpufreq.CPUChanger",    /* name */
