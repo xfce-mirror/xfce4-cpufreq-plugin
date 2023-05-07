@@ -26,16 +26,64 @@ GMainLoop *mainloop;
 guint conn_id;
 guint bus_id;
 
-void set_frequency (const gchar *frequency, gint cpu, gboolean all);
+void write_sysfs_pstate_property (const gchar *property, const gchar *value);
+void write_sysfs_cpu_property (const gchar *property, const gchar *value, gint cpu, gboolean all);
+
+void set_hwp_dynamic_boost (const gchar *boost);
+void set_max_perf_pct (const gchar *pct);
+void set_min_perf_pct (const gchar *pct);
+void set_no_turbo (const gchar *turbo);
+
+void set_max_freq (const gchar *frequency, gint cpu, gboolean all);
+void set_min_freq (const gchar *frequency, gint cpu, gboolean all);
 void set_governor (const gchar *governor, gint cpu, gboolean all);
+void set_preference (const gchar *preference, gint cpu, gboolean all);
 
 #define SYSFS_BASE  "/sys/devices/system/cpu"
 
-/*
- *
- */
 void
-set_frequency (const gchar *frequency, gint cpu, gboolean all)
+write_sysfs_pstate_property (const gchar *property, const gchar *value)
+{
+  gchar filename[100];
+  GError *error = NULL;
+
+  g_snprintf (filename, sizeof (filename),
+    SYSFS_BASE "/intel_pstate/%s", property);
+
+  if (!g_file_set_contents_full (filename, value,
+    -1, G_FILE_SET_CONTENTS_NONE, 0666, &error))
+  {
+    g_warning ("Failed to write to %s: %s", filename, error->message);
+    g_clear_error (&error);
+  }
+}
+
+void
+set_hwp_dynamic_boost (const gchar *boost)
+{
+  write_sysfs_pstate_property ("hwp_dynamic_boost", boost);
+}
+
+void
+set_max_perf_pct (const gchar *pct)
+{
+  write_sysfs_pstate_property ("max_perf_pct", pct);
+}
+
+void
+set_min_perf_pct (const gchar *pct)
+{
+  write_sysfs_pstate_property ("min_perf_pct", pct);
+}
+
+void
+set_no_turbo (const gchar *turbo)
+{
+  write_sysfs_pstate_property ("no_turbo", turbo);
+}
+
+void
+write_sysfs_cpu_property (const gchar *property, const gchar *value, gint cpu, gboolean all)
 {
   gchar filename[100];
   GError *error = NULL;
@@ -43,9 +91,9 @@ set_frequency (const gchar *frequency, gint cpu, gboolean all)
   for (gint n = all ? 0 : cpu; n <= cpu; n++)
   {
     g_snprintf (filename, sizeof (filename),
-      SYSFS_BASE "/cpu%d/cpufreq/scaling_max_freq", n);
+      SYSFS_BASE "/cpu%d/cpufreq/%s", n, property);
 
-    if (!g_file_set_contents_full (filename, frequency,
+    if (!g_file_set_contents_full (filename, value,
       -1, G_FILE_SET_CONTENTS_NONE, 0666, &error))
     {
       g_warning ("Failed to write to %s: %s", filename, error->message);
@@ -54,27 +102,28 @@ set_frequency (const gchar *frequency, gint cpu, gboolean all)
   }
 }
 
-/*
- *
- */
+void
+set_max_freq (const gchar *frequency, gint cpu, gboolean all)
+{
+  write_sysfs_cpu_property ("scaling_max_freq", frequency, cpu, all);
+}
+
+void
+set_min_freq (const gchar *frequency, gint cpu, gboolean all)
+{
+  write_sysfs_cpu_property ("scaling_min_freq", frequency, cpu, all);
+}
+
+void
+set_preference (const gchar *preference, gint cpu, gboolean all)
+{
+  write_sysfs_cpu_property ("energy_performance_preference", preference, cpu, all);
+}
+
 void
 set_governor (const gchar *governor, gint cpu, gboolean all)
 {
-  gchar filename[100];
-  GError *error = NULL;
-
-  for (gint n = all ? 0 : cpu; n <= cpu; n++)
-  {
-    g_snprintf (filename, sizeof(filename),
-      SYSFS_BASE "/cpu%d/cpufreq/scaling_governor", n);
-
-    if (!g_file_set_contents_full (filename, governor,
-      -1, G_FILE_SET_CONTENTS_NONE, 0666, &error))
-    {
-      g_warning ("Failed to write to %s: %s", filename, error->message);
-      g_clear_error (&error);
-    }
-  }
+  write_sysfs_cpu_property ("scaling_governor", governor, cpu, all);
 }
 
 static void
@@ -87,23 +136,57 @@ server_message_handler (GDBusConnection *conn,
       GDBusMethodInvocation *invocation,
       gpointer user_data)
 {
+  gchar *value;
+  gint cpu;
+  gboolean all;
+
   if (!g_strcmp0 (method_name, "set_governor"))
   {
-    gchar *governor;
-    gint cpu;
-    gboolean all;
-    g_variant_get (parameters, "(sib)", &governor, &cpu, &all);
-    set_governor (governor, cpu, all);
-    g_free (governor);
+    g_variant_get (parameters, "(sib)", &value, &cpu, &all);
+    set_governor (value, cpu, all);
+    g_free (value);
   }
-  else if (!g_strcmp0 (method_name, "set_frequency"))
+  else if (!g_strcmp0 (method_name, "set_preference"))
   {
-    gchar *frequency;
-    gint cpu;
-    gboolean all;
-    g_variant_get (parameters, "(sib)", &frequency, &cpu, &all);
-    set_frequency (frequency, cpu, all);
-    g_free (frequency);
+    g_variant_get (parameters, "(sib)", &value, &cpu, &all);
+    set_preference (value, cpu, all);
+    g_free (value);
+  }
+  else if (!g_strcmp0 (method_name, "set_max_freq"))
+  {
+    g_variant_get (parameters, "(sib)", &value, &cpu, &all);
+    set_max_freq (value, cpu, all);
+    g_free (value);
+  }
+  else if (!g_strcmp0 (method_name, "set_min_freq"))
+  {
+    g_variant_get (parameters, "(sib)", &value, &cpu, &all);
+    set_min_freq (value, cpu, all);
+    g_free (value);
+  }
+  else if (!g_strcmp0 (method_name, "set_hwp_dynamic_boost"))
+  {
+    g_variant_get (parameters, "(s)", &value);
+    set_hwp_dynamic_boost (value);
+    g_free (value);
+  }
+  else if (!g_strcmp0 (method_name, "set_max_perf_pct"))
+  {
+    g_variant_get (parameters, "(s)", &value);
+    set_max_perf_pct (value);
+    g_free (value);
+  }
+  else if (!g_strcmp0 (method_name, "set_min_perf_pct"))
+  {
+    g_variant_get (parameters, "(s)", &value);
+    set_min_perf_pct (value);
+    g_free (value);
+  }
+  else if (!g_strcmp0 (method_name, "set_no_turbo"))
+  {
+    g_variant_get (parameters, "(s)", &value);
+    set_no_turbo (value);
+    g_free (value);
   }
   g_dbus_method_invocation_return_value (invocation, NULL);
   g_bus_unown_name (bus_id);
@@ -124,10 +207,32 @@ static const gchar introspection_xml[] =
   "      <arg type='i' name='cpu' direction='in'/>"
   "      <arg type='b' name='all' direction='in'/>"
   "    </method>"
-  "    <method name='set_frequency'>"
+  "    <method name='set_preference'>"
+  "      <arg type='s' name='preference' direction='in'/>"
+  "      <arg type='i' name='cpu' direction='in'/>"
+  "      <arg type='b' name='all' direction='in'/>"
+  "    </method>"
+  "    <method name='set_max_freq'>"
   "      <arg type='s' name='frequency' direction='in'/>"
   "      <arg type='i' name='cpu' direction='in'/>"
   "      <arg type='b' name='all' direction='in'/>"
+  "    </method>"
+  "    <method name='set_min_freq'>"
+  "      <arg type='s' name='frequency' direction='in'/>"
+  "      <arg type='i' name='cpu' direction='in'/>"
+  "      <arg type='b' name='all' direction='in'/>"
+  "    </method>"
+  "    <method name='set_hwp_dynamic_boost'>"
+  "      <arg type='s' name='boost' direction='in'/>"
+  "    </method>"
+  "    <method name='set_max_perf_pct'>"
+  "      <arg type='s' name='pct' direction='in'/>"
+  "    </method>"
+  "    <method name='set_min_perf_pct'>"
+  "      <arg type='s' name='pct' direction='in'/>"
+  "    </method>"
+  "    <method name='set_no_turbo'>"
+  "      <arg type='s' name='turbo' direction='in'/>"
   "    </method>"
   "  </interface>"
   "</node>";

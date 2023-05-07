@@ -32,7 +32,7 @@
 #include "xfce4-cpufreq-linux-dbus.h"
 
 static gboolean
-call_dbus_func (const gchar* func, const gchar* param, gint cpu, gboolean all, GError **error)
+call_dbus_func (const gchar* func, GVariant *params, GError **error)
 {
   GDBusConnection *conn;
   GVariant *call;
@@ -46,7 +46,7 @@ call_dbus_func (const gchar* func, const gchar* param, gint cpu, gboolean all, G
             "/org/xfce/cpufreq/CPUObject",  /* object path */
             "org.xfce.cpufreq.CPUInterface",  /* interface */
             func,
-            g_variant_new ("(sib)", param, cpu, all),
+            params,
             NULL,
             G_DBUS_CALL_FLAGS_NONE,
             -1,
@@ -63,12 +63,48 @@ call_dbus_func (const gchar* func, const gchar* param, gint cpu, gboolean all, G
 gboolean
 cpufreq_dbus_set_governor (const gchar* governor, gint cpu, gboolean all, GError **error)
 {
-  return call_dbus_func ("set_governor", governor, cpu, all, error);
+  return call_dbus_func ("set_governor", g_variant_new ("(sib)", governor, cpu, all), error);
 }
 
 gboolean
-cpufreq_dbus_set_frequency (const gchar* frequency, gint cpu, gboolean all, GError **error)
+cpufreq_dbus_set_preference (const gchar* preference, gint cpu, gboolean all, GError **error)
 {
-  return call_dbus_func ("set_frequency", frequency, cpu, all, error);
+  return call_dbus_func ("set_preference", g_variant_new ("(sib)", preference, cpu, all), error);
+}
+
+gboolean
+cpufreq_dbus_set_max_freq (const gchar* frequency, gint cpu, gboolean all, GError **error)
+{
+  return call_dbus_func ("set_max_freq", g_variant_new ("(sib)", frequency, cpu, all), error);
+}
+
+gboolean
+cpufreq_dbus_set_min_freq (const gchar* frequency, gint cpu, gboolean all, GError **error)
+{
+  return call_dbus_func ("set_min_freq", g_variant_new ("(sib)", frequency, cpu, all), error);
+}
+
+gboolean
+cpufreq_dbus_set_hwp_dynamic_boost (const gchar *boost, GError **error)
+{
+  return call_dbus_func ("set_hwp_dynamic_boost", g_variant_new ("(s)", boost), error);
+}
+
+gboolean
+cpufreq_dbus_set_max_perf_pct (const gchar *pct, GError **error)
+{
+  return call_dbus_func ("set_max_perf_pct", g_variant_new ("(s)", pct), error);
+}
+
+gboolean
+cpufreq_dbus_set_min_perf_pct (const gchar *pct, GError **error)
+{
+  return call_dbus_func ("set_min_perf_pct", g_variant_new ("(s)", pct), error);
+}
+
+gboolean
+cpufreq_dbus_set_no_turbo (const gchar *turbo, GError **error)
+{
+  return call_dbus_func ("set_no_turbo", g_variant_new ("(s)", turbo), error);
 }
 
