@@ -378,7 +378,6 @@ cpufreq_overview (GdkEventButton *ev)
   gtk_switch_set_active (GTK_SWITCH (switcher), true);
   gtk_box_pack_end (GTK_BOX (hbox), switcher, false, false, 0);
   g_object_set_data (G_OBJECT (cpuFreq->plugin), "all-cpu-switcher", switcher);
-  g_object_bind_property (switcher, "active", G_OBJECT (cpuFreq->plugin), "all-cpu", G_BINDING_DEFAULT);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox, true, true, 20);
@@ -391,8 +390,6 @@ cpufreq_overview (GdkEventButton *ev)
   gtk_size_group_add_widget (sgv, icon);
 
   expander = gtk_expander_new (NULL);
-  gtk_expander_set_expanded (GTK_EXPANDER (expander), true);
-  // gtk_widget_set_vexpand (expander, TRUE);
   gtk_box_pack_start (GTK_BOX (hbox), expander, true, true, 0);
   gtk_widget_set_valign (expander, GTK_ALIGN_CENTER);
 
