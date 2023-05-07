@@ -41,9 +41,6 @@
 bool
 cpufreq_linux_init ()
 {
-  if (cpufreq_sysfs_is_available ())
-    return cpufreq_sysfs_read ();
-
   if (cpufreq_pstate_is_available ())
   {
     bool ret = cpufreq_pstate_read ();
@@ -63,6 +60,9 @@ cpufreq_linux_init ()
 
     return ret;
   }
+
+  if (cpufreq_sysfs_is_available ())
+    return cpufreq_sysfs_read ();
 
   if (cpufreq_procfs_is_available ())
     return cpufreq_procfs_read ();
@@ -85,7 +85,11 @@ cpufreq_update_cpus ()
   if (G_UNLIKELY (cpuFreq == nullptr))
     return;
 
-  if (cpufreq_sysfs_is_available ())
+  if (cpufreq_pstate_is_available ())
+  {
+    cpufreq_pstate_read_current ();
+  }
+  else if (cpufreq_sysfs_is_available ())
   {
     cpufreq_sysfs_read_current ();
   }
