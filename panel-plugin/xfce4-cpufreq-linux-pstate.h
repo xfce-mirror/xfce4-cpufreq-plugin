@@ -24,4 +24,6 @@ bool cpufreq_pstate_is_available ();
 
 bool cpufreq_pstate_read ();
 
+void cpufreq_pstate_read_current ();
+
 #endif /* XFCE4_CPUFREQ_LINUX_PSTATE_H */

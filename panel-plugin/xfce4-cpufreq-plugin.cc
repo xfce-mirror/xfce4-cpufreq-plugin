@@ -77,10 +77,39 @@ cpufreq_governors ()
 }
 
 
+/*
+ * Returns a single string describing performance preferences of all CPUs, or an empty string.
+ */
+static std::string
+cpufreq_preferences ()
+{
+  /* Preferences (in alphabetical ASCII order) */
+  std::set<std::string> set;
+
+  for (const Ptr<CpuInfo> &cpu : cpuFreq->cpus)
+  {
+    std::lock_guard<std::mutex> guard(cpu->mutex);
+    if (cpu->shared.online && !cpu->shared.cur_preference.empty())
+      set.insert(cpu->shared.cur_preference);
+  }
+
+  switch (set.size())
+  {
+  case 0:
+    return std::string();
+  case 1:
+    return *set.begin();
+  default:
+    return xfce4::join(std::vector<std::string>(set.cbegin(), set.cend()), ",");
+  }
+}
+
+
 
 static Ptr<CpuInfo>
 cpufreq_cpus_calc_min ()
 {
+  const std::string preferences = cpufreq_preferences ();
   const std::string governors = cpufreq_governors ();
   const std::string old_governor = cpuFreq->cpu_min ? cpuFreq->cpu_min->get_cur_governor() : std::string();
   guint freq = G_MAXUINT, max_freq_measured = G_MAXUINT, max_freq_nominal = G_MAXUINT, min_freq = G_MAXUINT;
@@ -109,6 +138,7 @@ cpufreq_cpus_calc_min ()
 
     cpu->shared.cur_freq = freq;
     cpu->shared.cur_governor = !governors.empty() ? governors : _("current min");
+    cpu->shared.cur_preference = !preferences.empty() ? preferences : _("current min");
     cpu->max_freq_measured = max_freq_measured;
     cpu->max_freq_nominal = max_freq_nominal;
     cpu->min_freq = min_freq;
@@ -129,6 +159,7 @@ cpufreq_cpus_calc_min ()
 static Ptr<CpuInfo>
 cpufreq_cpus_calc_avg ()
 {
+  const std::string preferences = cpufreq_preferences ();
   const std::string governors = cpufreq_governors ();
   const std::string old_governor = cpuFreq->cpu_avg ? cpuFreq->cpu_avg->get_cur_governor() : std::string();
   guint freq = 0, max_freq_measured = 0, max_freq_nominal = 0, min_freq = 0;
@@ -162,6 +193,7 @@ cpufreq_cpus_calc_avg ()
 
     cpu->shared.cur_freq = freq;
     cpu->shared.cur_governor = !governors.empty() ? governors : _("current avg");
+    cpu->shared.cur_preference = !preferences.empty() ? preferences : _("current avg");
     cpu->max_freq_measured = max_freq_measured;
     cpu->max_freq_nominal = max_freq_nominal;
     cpu->min_freq = min_freq;
@@ -182,6 +214,7 @@ cpufreq_cpus_calc_avg ()
 static Ptr<CpuInfo>
 cpufreq_cpus_calc_max ()
 {
+  const std::string preferences = cpufreq_preferences ();
   const std::string governors = cpufreq_governors ();
   const std::string old_governor = cpuFreq->cpu_max ? cpuFreq->cpu_max->get_cur_governor() : std::string();
   guint freq = 0, max_freq_measured = 0, max_freq_nominal = 0, min_freq = 0;
@@ -205,6 +238,7 @@ cpufreq_cpus_calc_max ()
 
     cpu->shared.cur_freq = freq;
     cpu->shared.cur_governor = !governors.empty() ? governors : _("current max");
+    cpu->shared.cur_preference = !preferences.empty() ? preferences : _("current max");
     cpu->max_freq_measured = max_freq_measured;
     cpu->max_freq_nominal = max_freq_nominal;
     cpu->min_freq = min_freq;
@@ -899,17 +933,18 @@ cpufreq_read_config ()
   {
     const CpuFreqPluginOptions defaults;
 
-    options->timeout             = rc->read_float_entry("timeout", defaults.timeout);
-    options->show_cpu            = rc->read_int_entry  ("show_cpu", defaults.show_cpu);
-    options->show_icon           = rc->read_bool_entry ("show_icon", defaults.show_icon);
-    options->show_label_freq     = rc->read_bool_entry ("show_label_freq", defaults.show_label_freq);
-    options->show_label_governor = rc->read_bool_entry ("show_label_governor", defaults.show_label_governor);
-    options->show_warning        = rc->read_bool_entry ("show_warning", defaults.show_warning);
-    options->keep_compact        = rc->read_bool_entry ("keep_compact", defaults.keep_compact);
-    options->one_line            = rc->read_bool_entry ("one_line", defaults.one_line);
-    options->icon_color_freq     = rc->read_bool_entry ("icon_color_freq", defaults.icon_color_freq);
-    options->fontcolor           = rc->read_entry      ("fontcolor", defaults.fontcolor);
-    options->unit                = (CpuFreqUnit) rc->read_int_entry ("freq_unit", defaults.unit);
+    options->timeout               = rc->read_float_entry("timeout", defaults.timeout);
+    options->show_cpu              = rc->read_int_entry  ("show_cpu", defaults.show_cpu);
+    options->show_icon             = rc->read_bool_entry ("show_icon", defaults.show_icon);
+    options->show_label_freq       = rc->read_bool_entry ("show_label_freq", defaults.show_label_freq);
+    options->show_label_governor   = rc->read_bool_entry ("show_label_governor", defaults.show_label_governor);
+    options->show_label_preference = rc->read_bool_entry ("show_label_preference", defaults.show_label_preference);
+    options->show_warning          = rc->read_bool_entry ("show_warning", defaults.show_warning);
+    options->keep_compact          = rc->read_bool_entry ("keep_compact", defaults.keep_compact);
+    options->one_line              = rc->read_bool_entry ("one_line", defaults.one_line);
+    options->icon_color_freq       = rc->read_bool_entry ("icon_color_freq", defaults.icon_color_freq);
+    options->fontcolor             = rc->read_entry      ("fontcolor", defaults.fontcolor);
+    options->unit                  = (CpuFreqUnit) rc->read_int_entry ("freq_unit", defaults.unit);
 
     auto fontname = rc->read_entry ("fontname", defaults.fontname);
     cpuFreq->set_font (fontname);
@@ -938,18 +973,19 @@ cpufreq_write_config (XfcePanelPlugin *plugin)
   {
     const CpuFreqPluginOptions defaults;
 
-    rc->write_default_float_entry("timeout",             options->timeout, defaults.timeout, 0.001);
-    rc->write_default_int_entry  ("show_cpu",            options->show_cpu, defaults.show_cpu);
-    rc->write_default_bool_entry ("show_icon",           options->show_icon, defaults.show_icon);
-    rc->write_default_bool_entry ("show_label_freq",     options->show_label_freq, defaults.show_label_freq);
-    rc->write_default_bool_entry ("show_label_governor", options->show_label_governor, defaults.show_label_governor);
-    rc->write_default_bool_entry ("show_warning",        options->show_warning, defaults.show_warning);
-    rc->write_default_bool_entry ("keep_compact",        options->keep_compact, defaults.keep_compact);
-    rc->write_default_bool_entry ("one_line",            options->one_line, defaults.one_line);
-    rc->write_default_bool_entry ("icon_color_freq",     options->icon_color_freq, defaults.icon_color_freq);
-    rc->write_default_int_entry  ("freq_unit",           options->unit, defaults.unit);
-    rc->write_default_entry      ("fontname",            options->fontname, defaults.fontname);
-    rc->write_default_entry      ("fontcolor",           options->fontcolor, defaults.fontcolor);
+    rc->write_default_float_entry("timeout",               options->timeout, defaults.timeout, 0.001);
+    rc->write_default_int_entry  ("show_cpu",              options->show_cpu, defaults.show_cpu);
+    rc->write_default_bool_entry ("show_icon",             options->show_icon, defaults.show_icon);
+    rc->write_default_bool_entry ("show_label_freq",       options->show_label_freq, defaults.show_label_freq);
+    rc->write_default_bool_entry ("show_label_governor",   options->show_label_governor, defaults.show_label_governor);
+    rc->write_default_bool_entry ("show_label_preference", options->show_label_preference, defaults.show_label_preference);
+    rc->write_default_bool_entry ("show_warning",          options->show_warning, defaults.show_warning);
+    rc->write_default_bool_entry ("keep_compact",          options->keep_compact, defaults.keep_compact);
+    rc->write_default_bool_entry ("one_line",              options->one_line, defaults.one_line);
+    rc->write_default_bool_entry ("icon_color_freq",       options->icon_color_freq, defaults.icon_color_freq);
+    rc->write_default_int_entry  ("freq_unit",             options->unit, defaults.unit);
+    rc->write_default_entry      ("fontname",              options->fontname, defaults.fontname);
+    rc->write_default_entry      ("fontcolor",             options->fontcolor, defaults.fontcolor);
 
     rc->close ();
   }
@@ -1052,13 +1088,20 @@ cpufreq_plugin_construct (XfcePanelPlugin *plugin)
 
 
 
-std::string CpuInfo::get_cur_governor() const
+const std::string
+CpuInfo::get_cur_governor ()
 {
     std::lock_guard<std::mutex> guard(mutex);
     return shared.cur_governor;
 }
 
 
+const std::string
+CpuInfo::get_cur_preference ()
+{
+    std::lock_guard<std::mutex> guard(mutex);
+    return shared.cur_preference;
+}
 
 CpuFreqPlugin::CpuFreqPlugin(XfcePanelPlugin *_plugin) : plugin(_plugin)
 {

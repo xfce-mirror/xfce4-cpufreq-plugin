@@ -26,6 +26,24 @@ gboolean
 cpufreq_dbus_set_governor (const gchar *governor, gint cpu, gboolean all, GError **error);
 
 gboolean
-cpufreq_dbus_set_frequency (const gchar *frequency, gint cpu, gboolean all, GError **error);
+cpufreq_dbus_set_preference (const gchar *preference, gint cpu, gboolean all, GError **error);
+
+gboolean
+cpufreq_dbus_set_max_freq (const gchar *frequency, gint cpu, gboolean all, GError **error);
+
+gboolean
+cpufreq_dbus_set_min_freq (const gchar *frequency, gint cpu, gboolean all, GError **error);
+
+gboolean
+cpufreq_dbus_set_hwp_dynamic_boost (const gchar *boost, GError **error);
+
+gboolean
+cpufreq_dbus_set_max_perf_pct (const gchar *pct, GError **error);
+
+gboolean
+cpufreq_dbus_set_min_perf_pct (const gchar *pct, GError **error);
+
+gboolean
+cpufreq_dbus_set_no_turbo (const gchar *turbo, GError **error);
 
 #endif /* XFCE4_CPUFREQ_LINUX_DBUS_H */

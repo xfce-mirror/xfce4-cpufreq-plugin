@@ -85,6 +85,11 @@ cpufreq_sysfs_read_current ()
         file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/scaling_governor", i);
         cpufreq_sysfs_read_string (file, cpu_governor);
 
+        /* read current cpu preference */
+        std::string cpu_preference;
+        file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/energy_performance_preference", i);
+        cpufreq_sysfs_read_string (file, cpu_preference);
+
         /* read whether the cpu is online, skip first */
         guint online = 1;
         if (i != 0)
@@ -97,6 +102,7 @@ cpufreq_sysfs_read_current ()
             std::lock_guard<std::mutex> guard(cpu->mutex);
             cpu->shared.cur_freq = cur_freq;
             cpu->shared.cur_governor = cpu_governor;
+            cpu->shared.cur_preference = cpu_preference;
             cpu->shared.online = (online != 0);
         }
       }
@@ -208,6 +214,10 @@ parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_available_governors", cpu_number);
   cpufreq_sysfs_read_list (file, cpu->available_governors);
 
+  /* read available cpu preferences */
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/energy_performance_available_preferences", cpu_number);
+  cpufreq_sysfs_read_list (file, cpu->available_preferences);
+
   /* read cpu driver */
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_driver", cpu_number);
   cpufreq_sysfs_read_string (file, cpu->scaling_driver);
@@ -222,6 +232,11 @@ parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_governor", cpu_number);
   cpufreq_sysfs_read_string (file, cur_governor);
 
+  /* read current cpu preference */
+  std::string cur_preference;
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/energy_performance_preference", cpu_number);
+  cpufreq_sysfs_read_string (file, cur_preference);
+
   /* read max cpu freq */
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/cpuinfo_max_freq", cpu_number);
   cpufreq_sysfs_read_uint (file, &cpu->max_freq_nominal);
@@ -235,6 +250,7 @@ parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
     cpu->shared.online = true;
     cpu->shared.cur_freq = 0;
     cpu->shared.cur_governor = cur_governor;
+    cpu->shared.cur_preference = cur_preference;
   }
 
   if (add_cpu)
