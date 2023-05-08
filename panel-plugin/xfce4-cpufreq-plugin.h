@@ -63,6 +63,7 @@ struct CpuInfo
   struct Shared {
     guint cur_freq = 0;  /* frequency in kHz */
     std::string cur_governor;
+    std::string cur_preference;
     bool online = false;
   } shared;
 
@@ -74,15 +75,19 @@ struct CpuInfo
 
   std::vector<guint> available_freqs;
   std::vector<std::string> available_governors;
+  std::vector<std::string> available_preferences;
 
-  std::string get_cur_governor() const;
+  const std::string get_cur_governor ();
+  const std::string get_cur_preference ();
 };
 
 struct IntelPState
 {
+  guint hwp_dynamic_boost = 0;
   guint min_perf_pct = 0;
   guint max_perf_pct = 0;
   guint no_turbo = 0;
+  std::string status;
 };
 
 struct CpuFreqPluginOptions
@@ -92,6 +97,7 @@ struct CpuFreqPluginOptions
   bool        show_icon = true;
   bool        show_label_freq = true;
   bool        show_label_governor = true;
+  bool        show_label_preference = false;
   bool        show_warning = true;
   bool        keep_compact = false;
   bool        one_line = false;

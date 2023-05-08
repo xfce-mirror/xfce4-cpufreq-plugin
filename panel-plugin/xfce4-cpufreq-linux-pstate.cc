@@ -35,9 +35,11 @@ read_params ()
   {
     auto ips = xfce4::make<IntelPState>();
 
+    cpufreq_sysfs_read_uint (PSTATE_BASE "/hwp_dynamic_boost", &ips->hwp_dynamic_boost);
     cpufreq_sysfs_read_uint (PSTATE_BASE "/min_perf_pct", &ips->min_perf_pct);
     cpufreq_sysfs_read_uint (PSTATE_BASE "/max_perf_pct", &ips->max_perf_pct);
     cpufreq_sysfs_read_uint (PSTATE_BASE "/no_turbo", &ips->no_turbo);
+    cpufreq_sysfs_read_string (PSTATE_BASE "/status", ips->status);
 
     cpuFreq->intel_pstate = ips;
     return true;
@@ -72,4 +74,17 @@ cpufreq_pstate_read ()
     return false;
 
   return true;
+}
+
+
+
+void
+cpufreq_pstate_read_current ()
+{
+  /* gather intel pstate parameters */
+  read_params ();
+
+  /* now read remaining cpufreq info
+     for each of them from sysfs */
+  cpufreq_sysfs_read_current ();
 }
