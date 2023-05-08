@@ -34,8 +34,6 @@
 
 static void cpufreq_sysfs_read_list (const std::string &file, std::vector<guint> &list);
 
-static void cpufreq_sysfs_read_string (const std::string &file, std::string &string);
-
 static void cpufreq_sysfs_read_list (const std::string &file, std::vector<std::string> &list);
 
 static void parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu);
@@ -163,7 +161,7 @@ cpufreq_sysfs_read_list (const std::string &file, std::vector<guint> &list)
 }
 
 
-static void
+void
 cpufreq_sysfs_read_string (const std::string &file, std::string &string)
 {
   gchar *contents = read_file_contents (file);

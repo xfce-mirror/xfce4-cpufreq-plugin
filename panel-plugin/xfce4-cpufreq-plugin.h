@@ -87,6 +87,7 @@ struct IntelPState
   guint min_perf_pct = 0;
   guint max_perf_pct = 0;
   guint no_turbo = 0;
+  std::string status;
 };
 
 struct CpuFreqPluginOptions
