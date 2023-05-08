@@ -39,6 +39,7 @@ read_params ()
     cpufreq_sysfs_read_uint (PSTATE_BASE "/min_perf_pct", &ips->min_perf_pct);
     cpufreq_sysfs_read_uint (PSTATE_BASE "/max_perf_pct", &ips->max_perf_pct);
     cpufreq_sysfs_read_uint (PSTATE_BASE "/no_turbo", &ips->no_turbo);
+    cpufreq_sysfs_read_string (PSTATE_BASE "/status", ips->status);
 
     cpuFreq->intel_pstate = ips;
     return true;

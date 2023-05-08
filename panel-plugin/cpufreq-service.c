@@ -29,15 +29,16 @@ guint bus_id;
 void write_sysfs_pstate_property (const gchar *property, const gchar *value);
 void write_sysfs_cpu_property (const gchar *property, const gchar *value, gint cpu, gboolean all);
 
-void set_hwp_dynamic_boost (const gchar *boost);
-void set_max_perf_pct (const gchar *pct);
-void set_min_perf_pct (const gchar *pct);
-void set_no_turbo (const gchar *turbo);
+void set_pstate_hwp_dynamic_boost (const gchar *boost);
+void set_pstate_max_perf_pct (const gchar *pct);
+void set_pstate_min_perf_pct (const gchar *pct);
+void set_pstate_no_turbo (const gchar *turbo);
+void set_pstate_status (const gchar *status);
 
-void set_max_freq (const gchar *frequency, gint cpu, gboolean all);
-void set_min_freq (const gchar *frequency, gint cpu, gboolean all);
-void set_governor (const gchar *governor, gint cpu, gboolean all);
-void set_preference (const gchar *preference, gint cpu, gboolean all);
+void set_cpu_max_freq (const gchar *frequency, gint cpu, gboolean all);
+void set_cpu_min_freq (const gchar *frequency, gint cpu, gboolean all);
+void set_cpu_governor (const gchar *governor, gint cpu, gboolean all);
+void set_cpu_preference (const gchar *preference, gint cpu, gboolean all);
 
 #define SYSFS_BASE  "/sys/devices/system/cpu"
 
@@ -59,27 +60,33 @@ write_sysfs_pstate_property (const gchar *property, const gchar *value)
 }
 
 void
-set_hwp_dynamic_boost (const gchar *boost)
+set_pstate_hwp_dynamic_boost (const gchar *boost)
 {
   write_sysfs_pstate_property ("hwp_dynamic_boost", boost);
 }
 
 void
-set_max_perf_pct (const gchar *pct)
+set_pstate_max_perf_pct (const gchar *pct)
 {
   write_sysfs_pstate_property ("max_perf_pct", pct);
 }
 
 void
-set_min_perf_pct (const gchar *pct)
+set_pstate_min_perf_pct (const gchar *pct)
 {
   write_sysfs_pstate_property ("min_perf_pct", pct);
 }
 
 void
-set_no_turbo (const gchar *turbo)
+set_pstate_no_turbo (const gchar *turbo)
 {
   write_sysfs_pstate_property ("no_turbo", turbo);
+}
+
+void
+set_pstate_status (const gchar *status)
+{
+  write_sysfs_pstate_property ("status", status);
 }
 
 void
@@ -103,25 +110,25 @@ write_sysfs_cpu_property (const gchar *property, const gchar *value, gint cpu, g
 }
 
 void
-set_max_freq (const gchar *frequency, gint cpu, gboolean all)
+set_cpu_max_freq (const gchar *frequency, gint cpu, gboolean all)
 {
   write_sysfs_cpu_property ("scaling_max_freq", frequency, cpu, all);
 }
 
 void
-set_min_freq (const gchar *frequency, gint cpu, gboolean all)
+set_cpu_min_freq (const gchar *frequency, gint cpu, gboolean all)
 {
   write_sysfs_cpu_property ("scaling_min_freq", frequency, cpu, all);
 }
 
 void
-set_preference (const gchar *preference, gint cpu, gboolean all)
+set_cpu_preference (const gchar *preference, gint cpu, gboolean all)
 {
   write_sysfs_cpu_property ("energy_performance_preference", preference, cpu, all);
 }
 
 void
-set_governor (const gchar *governor, gint cpu, gboolean all)
+set_cpu_governor (const gchar *governor, gint cpu, gboolean all)
 {
   write_sysfs_cpu_property ("scaling_governor", governor, cpu, all);
 }
@@ -143,49 +150,55 @@ server_message_handler (GDBusConnection *conn,
   if (!g_strcmp0 (method_name, "set_governor"))
   {
     g_variant_get (parameters, "(sib)", &value, &cpu, &all);
-    set_governor (value, cpu, all);
+    set_cpu_governor (value, cpu, all);
     g_free (value);
   }
   else if (!g_strcmp0 (method_name, "set_preference"))
   {
     g_variant_get (parameters, "(sib)", &value, &cpu, &all);
-    set_preference (value, cpu, all);
+    set_cpu_preference (value, cpu, all);
     g_free (value);
   }
   else if (!g_strcmp0 (method_name, "set_max_freq"))
   {
     g_variant_get (parameters, "(sib)", &value, &cpu, &all);
-    set_max_freq (value, cpu, all);
+    set_cpu_max_freq (value, cpu, all);
     g_free (value);
   }
   else if (!g_strcmp0 (method_name, "set_min_freq"))
   {
     g_variant_get (parameters, "(sib)", &value, &cpu, &all);
-    set_min_freq (value, cpu, all);
+    set_cpu_min_freq (value, cpu, all);
     g_free (value);
   }
   else if (!g_strcmp0 (method_name, "set_hwp_dynamic_boost"))
   {
     g_variant_get (parameters, "(s)", &value);
-    set_hwp_dynamic_boost (value);
+    set_pstate_hwp_dynamic_boost (value);
     g_free (value);
   }
   else if (!g_strcmp0 (method_name, "set_max_perf_pct"))
   {
     g_variant_get (parameters, "(s)", &value);
-    set_max_perf_pct (value);
+    set_pstate_max_perf_pct (value);
     g_free (value);
   }
   else if (!g_strcmp0 (method_name, "set_min_perf_pct"))
   {
     g_variant_get (parameters, "(s)", &value);
-    set_min_perf_pct (value);
+    set_pstate_min_perf_pct (value);
     g_free (value);
   }
   else if (!g_strcmp0 (method_name, "set_no_turbo"))
   {
     g_variant_get (parameters, "(s)", &value);
-    set_no_turbo (value);
+    set_pstate_no_turbo (value);
+    g_free (value);
+  }
+  else if (!g_strcmp0 (method_name, "set_status"))
+  {
+    g_variant_get (parameters, "(s)", &value);
+    set_pstate_status (value);
     g_free (value);
   }
   g_dbus_method_invocation_return_value (invocation, NULL);
@@ -233,6 +246,9 @@ static const gchar introspection_xml[] =
   "    </method>"
   "    <method name='set_no_turbo'>"
   "      <arg type='s' name='turbo' direction='in'/>"
+  "    </method>"
+  "    <method name='set_status'>"
+  "      <arg type='s' name='status' direction='in'/>"
   "    </method>"
   "  </interface>"
   "</node>";
