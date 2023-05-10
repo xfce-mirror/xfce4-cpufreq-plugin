@@ -46,4 +46,7 @@ cpufreq_dbus_set_min_perf_pct (const gchar *pct, GError **error);
 gboolean
 cpufreq_dbus_set_no_turbo (const gchar *turbo, GError **error);
 
+gboolean
+cpufreq_dbus_set_status (const gchar *status, GError **error);
+
 #endif /* XFCE4_CPUFREQ_LINUX_DBUS_H */

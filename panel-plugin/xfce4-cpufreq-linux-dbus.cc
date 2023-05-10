@@ -108,3 +108,9 @@ cpufreq_dbus_set_no_turbo (const gchar *turbo, GError **error)
   return call_dbus_func ("set_no_turbo", g_variant_new ("(s)", turbo), error);
 }
 
+gboolean
+cpufreq_dbus_set_status (const gchar *status, GError **error)
+{
+  return call_dbus_func ("set_status", g_variant_new ("(s)", status), error);
+}
+
