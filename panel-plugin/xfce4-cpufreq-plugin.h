@@ -62,6 +62,8 @@ struct CpuInfo
    */
   struct Shared {
     guint cur_freq = 0;  /* frequency in kHz */
+    guint cur_min_freq = 0;
+    guint cur_max_freq = 0;
     std::string cur_governor;
     std::string cur_preference;
     bool online = false;

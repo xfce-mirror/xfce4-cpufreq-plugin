@@ -38,36 +38,25 @@
 #endif /* __linux__ */
 
 
+
+/* format string "Min/Max nn %" */
 static gchar*
-scale_format_min_perf_pct (GtkScale *scale, gdouble value)
+scale_format_perf_pct (GtkScale *scale, gdouble value, gpointer data)
 {
-  return g_strdup_printf ("Min %.0f %%", value);
+  return g_strdup_printf ("%s %.0f %%", (gchar*)data, value);
 }
 
 
+
+/* format string "Min/Max nn MHz" or "Min/Max 0.nn GHz" */
 static gchar*
-scale_format_max_perf_pct (GtkScale *scale, gdouble value)
+scale_format_frequency (GtkScale *scale, gdouble value, gpointer data)
 {
-  return g_strdup_printf ("Max %.0f %%", value);
+  return value >= 1000000 ?
+    g_strdup_printf ("%s %.2f GHz", (gchar*)data, value / 1000000) :
+    g_strdup_printf ("%s %.0f MHz", (gchar*)data, value / 1000);
 }
 
-
-static gchar*
-scale_format_min_frequency (GtkScale *scale, gdouble value)
-{
-  return value >= 1000 ?
-    g_strdup_printf ("Min %.2f GHz", value / 1000) :
-    g_strdup_printf ("Min %.0f MHz", value);
-}
-
-
-static gchar*
-scale_format_max_frequency (GtkScale *scale, gdouble value)
-{
-  return value >= 1000 ?
-    g_strdup_printf ("Max %.2f GHz", value / 1000) :
-    g_strdup_printf ("Max %.0f MHz", value);
-}
 
 
 static gboolean
@@ -87,6 +76,7 @@ change_min_perf (gpointer data)
 }
 
 
+
 static gboolean
 change_max_perf (gpointer data)
 {
@@ -104,32 +94,88 @@ change_max_perf (gpointer data)
 }
 
 
-static void
-scale_max_perf_changed (GtkWidget* scale, gpointer data)
+static gboolean
+change_min_freq (gpointer data)
 {
-  /* to avoid continous calling to dbus function,
-   * we wait 1 second to make sure the user finished
-   * selecting a new value
-   */
-  g_timeout_add_seconds (1, change_max_perf, scale);
+  GError *err = NULL;
+  gint cpu = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data), "cpu"));
+  gdouble value = gtk_range_get_value (GTK_RANGE (data));
+  auto switcher = (GtkWidget*) g_object_get_data (G_OBJECT (cpuFreq->plugin), "all-cpu-switcher");
+  gboolean all = gtk_switch_get_active (GTK_SWITCH (switcher));
+
+  if (all)
+    cpu = cpuFreq->cpus.size();
+
+  cpufreq_dbus_set_min_freq (xfce4::sprintf ("%.0f", value).c_str(), cpu, all, &err);
+  if (err != NULL)
+  {
+    xfce_dialog_show_error (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (cpuFreq->plugin))),
+      err, "Error while setting min frequency");
+    g_clear_error (&err);
+  }
+  return false;
 }
 
 
-static void
-scale_min_perf_changed (GtkWidget* scale, gpointer data)
+
+static gboolean
+change_max_freq (gpointer data)
 {
-  /* to avoid continous calling to dbus function,
-   * we wait 1 second to make sure the user finished
-   * selecting a new value
-   */
+  GError *err = NULL;
+  gint cpu = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data), "cpu"));
+  gdouble value = gtk_range_get_value (GTK_RANGE (data));
+  auto switcher = (GtkWidget*) g_object_get_data (G_OBJECT (cpuFreq->plugin), "all-cpu-switcher");
+  gboolean all = gtk_switch_get_active (GTK_SWITCH (switcher));
+
+  if (all)
+    cpu = cpuFreq->cpus.size();
+
+  cpufreq_dbus_set_max_freq (xfce4::sprintf ("%.0f", value).c_str(), cpu, all, &err);
+  if (err != NULL)
+  {
+    xfce_dialog_show_error (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (cpuFreq->plugin))),
+      err, "Error while setting max frequency");
+    g_clear_error (&err);
+  }
+  return false;
+}
+
+
+
+/* to avoid continous calling to dbus functions,
+ * we wait 1 second to make sure the user finished
+ * selecting a new value on the slider (scale).
+ */
+static void
+scale_max_freq_changed (GtkWidget *scale, gpointer data)
+{
+  g_timeout_add_seconds (1, change_max_freq, scale);
+}
+
+static void
+scale_min_freq_changed (GtkWidget *scale, gpointer data)
+{
+  g_timeout_add_seconds (1, change_min_freq, scale);
+}
+
+static void
+scale_max_perf_changed (GtkWidget *scale, gpointer data)
+{
+  g_timeout_add_seconds (1, change_max_perf, scale);
+}
+
+static void
+scale_min_perf_changed (GtkWidget *scale, gpointer data)
+{
   g_timeout_add_seconds (1, change_min_perf, scale);
 }
 
 
+
 static void
-combo_governor_changed (GtkWidget *combo, gpointer p)
+combo_governor_changed (GtkWidget *combo, gpointer data)
 {
-  int cpu = GPOINTER_TO_INT (p);
+  int cpu = GPOINTER_TO_INT (data);
   auto switcher = (GtkWidget*) g_object_get_data (G_OBJECT (cpuFreq->plugin), "all-cpu-switcher");
   bool all = gtk_switch_get_active (GTK_SWITCH (switcher));
 
@@ -154,9 +200,9 @@ combo_governor_changed (GtkWidget *combo, gpointer p)
 
 
 static void
-combo_preference_changed (GtkWidget *combo, gpointer p)
+combo_preference_changed (GtkWidget *combo, gpointer data)
 {
-  int cpu = GPOINTER_TO_INT (p);
+  int cpu = GPOINTER_TO_INT (data);
   auto switcher = (GtkWidget*) g_object_get_data (G_OBJECT (cpuFreq->plugin), "all-cpu-switcher");
   bool all = gtk_switch_get_active (GTK_SWITCH (switcher));
 
@@ -181,7 +227,7 @@ combo_preference_changed (GtkWidget *combo, gpointer p)
 
 
 static void
-combo_status_changed (GtkWidget *combo, gpointer p)
+combo_status_changed (GtkWidget *combo, gpointer data)
 {
   gchar *status = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (combo));
   if (status != NULL)
@@ -201,7 +247,7 @@ combo_status_changed (GtkWidget *combo, gpointer p)
 
 
 static void
-switch_no_turbo_changed (GtkSwitch *swtch, gboolean state, gpointer p)
+switch_no_turbo_changed (GtkSwitch *swtch, gboolean state, gpointer data)
 {
   GError *err = NULL;
   cpufreq_dbus_set_no_turbo (state ? "1" : "0", &err);
@@ -216,7 +262,7 @@ switch_no_turbo_changed (GtkSwitch *swtch, gboolean state, gpointer p)
 
 
 static void
-switch_hwp_dynamic_boost_changed (GtkSwitch *swtch, gboolean state, gpointer p)
+switch_hwp_dynamic_boost_changed (GtkSwitch *swtch, gboolean state, gpointer data)
 {
   GError *err = NULL;
   cpufreq_dbus_set_hwp_dynamic_boost (state ? "1" : "0", &err);
@@ -230,10 +276,33 @@ switch_hwp_dynamic_boost_changed (GtkSwitch *swtch, gboolean state, gpointer p)
 
 
 
+/* 
+ * since gtk_expander_set_label_fill() is deprecated, due to a bug in
+ * gtk3 clickable items on the expander label must be attached only after
+ * gtk_widget_show_all() is called, or use this method to re-attach them.
+ */
+static void
+expander_fix_clickable_label (GtkWidget *expander, gpointer data)
+{
+  GtkWidget *hbox;
+  hbox = gtk_expander_get_label_widget (GTK_EXPANDER (expander));
+
+  g_object_ref (G_OBJECT (expander));
+  g_object_ref (G_OBJECT (hbox));
+
+  gtk_expander_set_label_widget (GTK_EXPANDER (expander), NULL);
+  gtk_expander_set_label_widget (GTK_EXPANDER (expander), hbox);
+
+  g_object_unref (G_OBJECT (hbox));
+  g_object_unref (G_OBJECT (expander));
+}
+
+
+
 static void
 cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget *dialog_hbox)
 {
-  GtkWidget *hbox, *label;
+  GtkWidget *hbox, *label, *expander;
   const CpuFreqUnit unit = cpuFreq->options->unit;
 
   /* Copy shared fields to a local variable. The local variable can then be accessed without a mutex. */
@@ -242,8 +311,6 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
       std::lock_guard<std::mutex> guard(cpu->mutex);
       cpu_shared = cpu->shared;
   }
-
-  // GtkSizeGroup *sg0 = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   GtkWidget *dialog_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_set_halign (dialog_vbox, GTK_ALIGN_START);
@@ -258,28 +325,30 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
   gtk_widget_set_margin_end (icon, 5);
   gtk_box_pack_start (GTK_BOX (hbox), icon, false, false, 0);
 
-  GtkWidget *expander = gtk_expander_new (NULL);
+  expander = gtk_expander_new (NULL);
   gtk_box_pack_start (GTK_BOX (hbox), expander, true, true, 0);
   gtk_widget_set_valign (expander, GTK_ALIGN_CENTER);
+  g_signal_connect (expander, "map", G_CALLBACK (expander_fix_clickable_label), NULL);
 
-  GtkWidget *titlebox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_expander_set_label_widget (GTK_EXPANDER (expander), titlebox);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_expander_set_label_widget (GTK_EXPANDER (expander), hbox);
 
   label = gtk_label_new (xfce4::sprintf ("<b>CPU %u</b>", cpu_number).c_str());
-  // gtk_size_group_add_widget (sg0, label);
   gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
   gtk_widget_set_margin_end (label, 50);
   gtk_label_set_xalign (GTK_LABEL (label), 0);
   gtk_label_set_use_markup (GTK_LABEL (label), true);
-  gtk_box_pack_start (GTK_BOX (titlebox), label, true, true, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), label, true, true, 0);
 
-  std::string current_freq = cpufreq_get_human_readable_freq (cpu_shared.cur_freq, unit);
-  label = gtk_label_new (xfce4::sprintf ("<b>%s</b>", current_freq.c_str()).c_str());
-  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
-  gtk_widget_set_margin_end (label, 10);
-  gtk_label_set_xalign (GTK_LABEL (label), 0);
-  gtk_label_set_use_markup (GTK_LABEL (label), true);
-  gtk_box_pack_start (GTK_BOX (titlebox), label, true, true, 0);
+  {
+    std::string current_freq = cpufreq_get_human_readable_freq (cpu_shared.cur_freq, unit);
+    label = gtk_label_new (xfce4::sprintf ("<b>%s</b>", current_freq.c_str()).c_str());
+    gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+    gtk_widget_set_margin_end (label, 10);
+    gtk_label_set_xalign (GTK_LABEL (label), 0);
+    gtk_label_set_use_markup (GTK_LABEL (label), true);
+    gtk_box_pack_start (GTK_BOX (hbox), label, true, true, 0);
+  }
 
 #ifdef __linux__
   /* display list of available governors */
@@ -287,10 +356,9 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
   {
     GtkWidget *combo = gtk_combo_box_text_new ();
     gtk_box_pack_start (GTK_BOX (hbox), combo, true, true, 10);
-    // gtk_size_group_add_widget (sg0, combo);
 
     gint i = 0;
-    for(size_t j = 0; j < cpu->available_governors.size(); j++)
+    for (size_t j = 0; j < cpu->available_governors.size(); j++)
     {
       const std::string &available_governor = cpu->available_governors[j];
       gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), available_governor.c_str());
@@ -306,7 +374,6 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
   {
     std::string cur_governor = "<b>" + cpu_shared.cur_governor + "</b>";
     label = gtk_label_new (cur_governor.c_str());
-    // gtk_size_group_add_widget (sg0, label);
     gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
     gtk_label_set_xalign (GTK_LABEL (label), 0);
     gtk_box_pack_start (GTK_BOX (hbox), label, true, true, 0);
@@ -344,6 +411,31 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
   }
 #endif /* __linux__ */
 
+  GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  gtk_container_add (GTK_CONTAINER (expander), vbox);
+
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), hbox, true, true, 20);
+
+  label = gtk_label_new (_("Frequency"));
+  gtk_widget_set_margin_end (label, 20);
+  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+  gtk_label_set_xalign (GTK_LABEL (label), 0);
+  gtk_box_pack_start (GTK_BOX (hbox), label, false, false, 0);
+
+  GtkWidget *scale = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, cpu->min_freq, cpu->max_freq_nominal, 100);
+  gtk_scale_set_value_pos (GTK_SCALE (scale), GTK_POS_LEFT);
+  gtk_range_set_value (GTK_RANGE (scale), cpu_shared.cur_min_freq);
+  gtk_box_pack_start (GTK_BOX (hbox), scale, true, true, 0);
+  g_signal_connect (scale, "format-value", G_CALLBACK (scale_format_frequency), (gpointer) "Min");
+  g_signal_connect (scale, "value-changed", G_CALLBACK (scale_min_freq_changed), NULL);
+
+  scale = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, cpu->min_freq, cpu->max_freq_nominal, 100);
+  gtk_scale_set_value_pos (GTK_SCALE (scale), GTK_POS_LEFT);
+  gtk_range_set_value (GTK_RANGE (scale), cpu_shared.cur_max_freq);
+  gtk_box_pack_start (GTK_BOX (hbox), scale, true, true, 0);
+  g_signal_connect (scale, "format-value", G_CALLBACK (scale_format_frequency), (gpointer) "Max");
+  g_signal_connect (scale, "value-changed", G_CALLBACK (scale_max_freq_changed), NULL);
 }
 
 
@@ -404,7 +496,7 @@ cpufreq_overview (GdkEventButton *ev)
   else if (cpuFreq->cpus.size() < 17)
     step = 2;
   else if (cpuFreq->cpus.size() % 3 != 0)
-    step = 4;
+    step = 2;
   else
     step = 3;
 
@@ -412,7 +504,6 @@ cpufreq_overview (GdkEventButton *ev)
   GtkSizeGroup *sgv = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
   GtkSizeGroup *sgh = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
   GtkSizeGroup *sg0 = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-  // GtkSizeGroup *sgb = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   /* display driver */
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -459,13 +550,11 @@ cpufreq_overview (GdkEventButton *ev)
 
   if (cpuFreq->intel_pstate != nullptr)
   {
-    GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_widget_set_margin_top (box, 10);
-    gtk_widget_set_margin_end (box, 10);
-    gtk_container_add (GTK_CONTAINER (expander), box);
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_container_add (GTK_CONTAINER (expander), hbox);
 
     vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER*2);
-    gtk_box_pack_start (GTK_BOX (box), vbox, true, true, BORDER*2);
+    gtk_box_pack_start (GTK_BOX (hbox), vbox, true, true, BORDER*8);
 
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, true, true, 0);
@@ -525,7 +614,7 @@ cpufreq_overview (GdkEventButton *ev)
       gtk_box_pack_start (GTK_BOX (vbox), hbox, false, false, BORDER*2);
 
       label = gtk_label_new (_("Performance"));
-      gtk_widget_set_margin_end (label, 80);
+      gtk_widget_set_margin_end (label, 50);
       gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
       gtk_label_set_xalign (GTK_LABEL (label), 0);
       gtk_box_pack_start (GTK_BOX (hbox), label, false, false, 0);
@@ -535,14 +624,14 @@ cpufreq_overview (GdkEventButton *ev)
       gtk_scale_set_value_pos (GTK_SCALE (scale), GTK_POS_LEFT);
       gtk_range_set_value (GTK_RANGE (scale), cpuFreq->intel_pstate->min_perf_pct);
       gtk_box_pack_start (GTK_BOX (hbox), scale, true, true, 0);
-      g_signal_connect (scale, "format-value", G_CALLBACK (scale_format_min_perf_pct), NULL);
+      g_signal_connect (scale, "format-value", G_CALLBACK (scale_format_perf_pct), (gpointer) "Min");
       g_signal_connect (scale, "value-changed", G_CALLBACK (scale_min_perf_changed), NULL);
 
       scale = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, 0, 100, 1);
       gtk_scale_set_value_pos (GTK_SCALE (scale), GTK_POS_LEFT);
       gtk_range_set_value (GTK_RANGE (scale), cpuFreq->intel_pstate->max_perf_pct);
       gtk_box_pack_start (GTK_BOX (hbox), scale, true, true, 0);
-      g_signal_connect (scale, "format-value", G_CALLBACK (scale_format_max_perf_pct), NULL);
+      g_signal_connect (scale, "format-value", G_CALLBACK (scale_format_perf_pct), (gpointer) "Max");
       g_signal_connect (scale, "value-changed", G_CALLBACK (scale_max_perf_changed), NULL);
     }
   }
@@ -624,7 +713,6 @@ cpufreq_overview (GdkEventButton *ev)
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_box_pack_start (GTK_BOX (vbox), hbox, true, true, 10);
-  gtk_widget_set_margin_end (hbox, BORDER*2);
 
   label = gtk_label_new (_("Changes applies to ALL CPUs"));
   gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
@@ -633,7 +721,7 @@ cpufreq_overview (GdkEventButton *ev)
 
   switcher = gtk_switch_new ();
   gtk_switch_set_active (GTK_SWITCH (switcher), true);
-  gtk_box_pack_end (GTK_BOX (hbox), switcher, false, false, 10);
+  gtk_box_pack_end (GTK_BOX (hbox), switcher, false, false, BORDER*8);
   g_object_set_data (G_OBJECT (cpuFreq->plugin), "all-cpu-switcher", switcher);
 
   xfce4::connect_response (GTK_DIALOG (dialog), cpufreq_overview_response);
