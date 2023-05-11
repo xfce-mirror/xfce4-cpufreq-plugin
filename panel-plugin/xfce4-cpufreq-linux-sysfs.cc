@@ -34,8 +34,6 @@
 
 static void cpufreq_sysfs_read_list (const std::string &file, std::vector<guint> &list);
 
-static void cpufreq_sysfs_read_string (const std::string &file, std::string &string);
-
 static void cpufreq_sysfs_read_list (const std::string &file, std::vector<std::string> &list);
 
 static void parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu);
@@ -80,10 +78,25 @@ cpufreq_sysfs_read_current ()
         file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/scaling_cur_freq", i);
         cpufreq_sysfs_read_uint (file, &cur_freq);
 
+        /* read scaling max cpu freq */
+        guint cur_max_freq;
+        file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/scaling_max_freq", i);
+        cpufreq_sysfs_read_uint (file, &cur_max_freq);
+
+        /* read scaling min cpu freq */
+        guint cur_min_freq;
+        file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/scaling_min_freq", i);
+        cpufreq_sysfs_read_uint (file, &cur_min_freq);
+
         /* read current cpu governor */
         std::string cpu_governor;
         file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/scaling_governor", i);
         cpufreq_sysfs_read_string (file, cpu_governor);
+
+        /* read current cpu preference */
+        std::string cpu_preference;
+        file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/energy_performance_preference", i);
+        cpufreq_sysfs_read_string (file, cpu_preference);
 
         /* read whether the cpu is online, skip first */
         guint online = 1;
@@ -96,7 +109,10 @@ cpufreq_sysfs_read_current ()
         {
             std::lock_guard<std::mutex> guard(cpu->mutex);
             cpu->shared.cur_freq = cur_freq;
+            cpu->shared.cur_min_freq = cur_min_freq;
+            cpu->shared.cur_max_freq = cur_max_freq;
             cpu->shared.cur_governor = cpu_governor;
+            cpu->shared.cur_preference = cpu_preference;
             cpu->shared.online = (online != 0);
         }
       }
@@ -157,7 +173,7 @@ cpufreq_sysfs_read_list (const std::string &file, std::vector<guint> &list)
 }
 
 
-static void
+void
 cpufreq_sysfs_read_string (const std::string &file, std::string &string)
 {
   gchar *contents = read_file_contents (file);
@@ -208,6 +224,10 @@ parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_available_governors", cpu_number);
   cpufreq_sysfs_read_list (file, cpu->available_governors);
 
+  /* read available cpu preferences */
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/energy_performance_available_preferences", cpu_number);
+  cpufreq_sysfs_read_list (file, cpu->available_preferences);
+
   /* read cpu driver */
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_driver", cpu_number);
   cpufreq_sysfs_read_string (file, cpu->scaling_driver);
@@ -222,12 +242,17 @@ parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
   file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_governor", cpu_number);
   cpufreq_sysfs_read_string (file, cur_governor);
 
+  /* read current cpu preference */
+  std::string cur_preference;
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/energy_performance_preference", cpu_number);
+  cpufreq_sysfs_read_string (file, cur_preference);
+
   /* read max cpu freq */
-  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_max_freq", cpu_number);
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/cpuinfo_max_freq", cpu_number);
   cpufreq_sysfs_read_uint (file, &cpu->max_freq_nominal);
 
   /* read min cpu freq */
-  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/scaling_min_freq", cpu_number);
+  file = xfce4::sprintf (SYSFS_BASE "/cpu%i/cpufreq/cpuinfo_min_freq", cpu_number);
   cpufreq_sysfs_read_uint (file, &cpu->min_freq);
 
   {
@@ -235,6 +260,7 @@ parse_sysfs_init (gint cpu_number, Ptr0<CpuInfo> cpu)
     cpu->shared.online = true;
     cpu->shared.cur_freq = 0;
     cpu->shared.cur_governor = cur_governor;
+    cpu->shared.cur_preference = cur_preference;
   }
 
   if (add_cpu)
