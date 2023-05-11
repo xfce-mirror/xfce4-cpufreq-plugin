@@ -78,6 +78,16 @@ cpufreq_sysfs_read_current ()
         file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/scaling_cur_freq", i);
         cpufreq_sysfs_read_uint (file, &cur_freq);
 
+        /* read scaling max cpu freq */
+        guint cur_max_freq;
+        file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/scaling_max_freq", i);
+        cpufreq_sysfs_read_uint (file, &cur_max_freq);
+
+        /* read scaling min cpu freq */
+        guint cur_min_freq;
+        file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/scaling_min_freq", i);
+        cpufreq_sysfs_read_uint (file, &cur_min_freq);
+
         /* read current cpu governor */
         std::string cpu_governor;
         file = xfce4::sprintf (SYSFS_BASE "/cpu%zu/cpufreq/scaling_governor", i);
@@ -99,6 +109,8 @@ cpufreq_sysfs_read_current ()
         {
             std::lock_guard<std::mutex> guard(cpu->mutex);
             cpu->shared.cur_freq = cur_freq;
+            cpu->shared.cur_min_freq = cur_min_freq;
+            cpu->shared.cur_max_freq = cur_max_freq;
             cpu->shared.cur_governor = cpu_governor;
             cpu->shared.cur_preference = cpu_preference;
             cpu->shared.online = (online != 0);
