@@ -31,4 +31,6 @@ void cpufreq_sysfs_read_current ();
 
 void cpufreq_sysfs_read_uint (const std::string &file, guint *intval);
 
+void cpufreq_sysfs_read_string (const std::string &file, std::string &string);
+
 #endif /* XFCE4_CPUFREQ_LINUX_SYSFS_H */
