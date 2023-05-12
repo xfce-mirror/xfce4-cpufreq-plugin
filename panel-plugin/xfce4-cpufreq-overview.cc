@@ -587,6 +587,7 @@ cpufreq_overview (GdkEventButton *ev)
     gtk_box_pack_start (GTK_BOX (vbox), hbox, false, false, 0);
 
     label = gtk_label_new (_("HWP Dynamic Boost"));
+    gtk_widget_set_tooltip_text (label, _("If set, causes the minimum P-state limit to be increased dynamically for a short time whenever a task previously waiting on I/O is selected to run on a given logical CPU (the purpose of this mechanism is to improve performance)"));
     gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
     gtk_label_set_xalign (GTK_LABEL (label), 0);
     gtk_box_pack_start (GTK_BOX (hbox), label, false, false, 0);
@@ -600,6 +601,7 @@ cpufreq_overview (GdkEventButton *ev)
     gtk_box_pack_start (GTK_BOX (vbox), hbox, false, false, BORDER*2);
 
     label = gtk_label_new (_("No Turbo"));
+    gtk_widget_set_tooltip_text (label, _("If set, the driver is not allowed to set any turbo P-states (see Turbo P-states Support). If unset (which is the default), turbo P-states can be set by the driver"));
     gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
     gtk_label_set_xalign (GTK_LABEL (label), 0);
     gtk_box_pack_start (GTK_BOX (hbox), label, false, false, 0);
@@ -616,6 +618,7 @@ cpufreq_overview (GdkEventButton *ev)
       gtk_box_pack_start (GTK_BOX (vbox), hbox, false, false, BORDER*2);
 
       label = gtk_label_new (_("Performance"));
+      gtk_widget_set_tooltip_text (label, _("Set limits the driver is allowed to set (in percent) of the minimum/maximum supported performance level"));
       gtk_widget_set_margin_end (label, 50);
       gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
       gtk_label_set_xalign (GTK_LABEL (label), 0);
