@@ -424,6 +424,7 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
   gtk_box_pack_start (GTK_BOX (hbox), label, false, false, 0);
 
   GtkWidget *scale = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, cpu->min_freq, cpu->max_freq_nominal, 100);
+  g_object_set_data (G_OBJECT (scale), "cpu", GINT_TO_POINTER (cpu_number));
   gtk_scale_set_value_pos (GTK_SCALE (scale), GTK_POS_LEFT);
   gtk_range_set_value (GTK_RANGE (scale), cpu_shared.cur_min_freq);
   gtk_box_pack_start (GTK_BOX (hbox), scale, true, true, 0);
@@ -431,6 +432,7 @@ cpufreq_overview_add (const Ptr<const CpuInfo> &cpu, guint cpu_number, GtkWidget
   g_signal_connect (scale, "value-changed", G_CALLBACK (scale_min_freq_changed), NULL);
 
   scale = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, cpu->min_freq, cpu->max_freq_nominal, 100);
+  g_object_set_data (G_OBJECT (scale), "cpu", GINT_TO_POINTER (cpu_number));
   gtk_scale_set_value_pos (GTK_SCALE (scale), GTK_POS_LEFT);
   gtk_range_set_value (GTK_RANGE (scale), cpu_shared.cur_max_freq);
   gtk_box_pack_start (GTK_BOX (hbox), scale, true, true, 0);
