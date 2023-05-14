@@ -49,3 +49,6 @@ panel-plugin/cpufreq.desktop
 po/.intltool-merge-cache
 po/POTFILES
 stamp-*
+panel-plugin/org.xfce.cpufreq.CPUChanger.service
+po/.intltool-merge-cache.lock
+panel-plugin/cpufreq-service
