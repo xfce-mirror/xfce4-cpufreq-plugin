@@ -526,7 +526,7 @@ cpufreq_overview (GdkEventButton *ev)
   gtk_size_group_add_widget (sgh, hbox);
   gtk_expander_set_label_widget (GTK_EXPANDER (expander), hbox);
 
-  label = gtk_label_new (_("<b>Scaling driver:</b>"));
+  label = gtk_label_new (_("<b>Scaling driver</b>"));
   gtk_widget_set_margin_start (label, 5);
   gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
   gtk_label_set_xalign (GTK_LABEL (label), 0);
@@ -656,7 +656,7 @@ cpufreq_overview (GdkEventButton *ev)
   gtk_expander_set_expanded (GTK_EXPANDER (expander), true);
   gtk_box_pack_start (GTK_BOX (hbox), expander, true, true, 0);
 
-  label = gtk_label_new (_("<b>CPU Settings:</b>"));
+  label = gtk_label_new (_("<b>CPU Settings</b>"));
   gtk_widget_set_margin_start (label, 5);
   gtk_widget_set_margin_end (label, 20);
   gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
