@@ -104,7 +104,7 @@ change_min_freq (gpointer data)
   gboolean all = gtk_switch_get_active (GTK_SWITCH (switcher));
 
   if (all)
-    cpu = cpuFreq->cpus.size();
+    cpu = cpuFreq->cpus.size() - 1;
 
   cpufreq_dbus_set_min_freq (xfce4::sprintf ("%.0f", value).c_str(), cpu, all, &err);
   if (err != NULL)
