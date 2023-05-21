@@ -26,23 +26,9 @@ GMainLoop *mainloop;
 guint conn_id;
 guint bus_id;
 
-void write_sysfs_pstate_property (const gchar *property, const gchar *value);
-void write_sysfs_cpu_property (const gchar *property, const gchar *value, gint cpu, gboolean all);
-
-void set_pstate_hwp_dynamic_boost (const gchar *boost);
-void set_pstate_max_perf_pct (const gchar *pct);
-void set_pstate_min_perf_pct (const gchar *pct);
-void set_pstate_no_turbo (const gchar *turbo);
-void set_pstate_status (const gchar *status);
-
-void set_cpu_max_freq (const gchar *frequency, gint cpu, gboolean all);
-void set_cpu_min_freq (const gchar *frequency, gint cpu, gboolean all);
-void set_cpu_governor (const gchar *governor, gint cpu, gboolean all);
-void set_cpu_preference (const gchar *preference, gint cpu, gboolean all);
-
 #define SYSFS_BASE  "/sys/devices/system/cpu"
 
-void
+static void
 write_sysfs_pstate_property (const gchar *property, const gchar *value)
 {
   gchar filename[100];
@@ -59,37 +45,37 @@ write_sysfs_pstate_property (const gchar *property, const gchar *value)
   }
 }
 
-void
+static void
 set_pstate_hwp_dynamic_boost (const gchar *boost)
 {
   write_sysfs_pstate_property ("hwp_dynamic_boost", boost);
 }
 
-void
+static void
 set_pstate_max_perf_pct (const gchar *pct)
 {
   write_sysfs_pstate_property ("max_perf_pct", pct);
 }
 
-void
+static void
 set_pstate_min_perf_pct (const gchar *pct)
 {
   write_sysfs_pstate_property ("min_perf_pct", pct);
 }
 
-void
+static void
 set_pstate_no_turbo (const gchar *turbo)
 {
   write_sysfs_pstate_property ("no_turbo", turbo);
 }
 
-void
+static void
 set_pstate_status (const gchar *status)
 {
   write_sysfs_pstate_property ("status", status);
 }
 
-void
+static void
 write_sysfs_cpu_property (const gchar *property, const gchar *value, gint cpu, gboolean all)
 {
   gchar filename[100];
@@ -109,25 +95,25 @@ write_sysfs_cpu_property (const gchar *property, const gchar *value, gint cpu, g
   }
 }
 
-void
+static void
 set_cpu_max_freq (const gchar *frequency, gint cpu, gboolean all)
 {
   write_sysfs_cpu_property ("scaling_max_freq", frequency, cpu, all);
 }
 
-void
+static void
 set_cpu_min_freq (const gchar *frequency, gint cpu, gboolean all)
 {
   write_sysfs_cpu_property ("scaling_min_freq", frequency, cpu, all);
 }
 
-void
+static void
 set_cpu_preference (const gchar *preference, gint cpu, gboolean all)
 {
   write_sysfs_cpu_property ("energy_performance_preference", preference, cpu, all);
 }
 
-void
+static void
 set_cpu_governor (const gchar *governor, gint cpu, gboolean all)
 {
   write_sysfs_cpu_property ("scaling_governor", governor, cpu, all);
