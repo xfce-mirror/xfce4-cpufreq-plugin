@@ -262,6 +262,14 @@ switch_no_turbo_changed (GtkSwitch *swtch, gboolean state, gpointer data)
 
 
 static void
+switch_all_cpus_changed (GtkSwitch *swtch, gboolean state, gpointer data)
+{
+  cpuFreq->options->change_all_cpus = state;
+  gtk_switch_set_active (swtch, state);   // without this some themes not fully animates their switch
+}
+
+
+static void
 switch_hwp_dynamic_boost_changed (GtkSwitch *swtch, gboolean state, gpointer data)
 {
   GError *err = NULL;
@@ -725,9 +733,10 @@ cpufreq_overview (GdkEventButton *ev)
   gtk_box_pack_start (GTK_BOX (hbox), label, true, true, 0);
 
   switcher = gtk_switch_new ();
-  gtk_switch_set_active (GTK_SWITCH (switcher), true);
+  gtk_switch_set_active (GTK_SWITCH (switcher), cpuFreq->options->change_all_cpus);
   gtk_box_pack_end (GTK_BOX (hbox), switcher, false, false, BORDER*8);
   g_object_set_data (G_OBJECT (cpuFreq->plugin), "all-cpu-switcher", switcher);
+  g_signal_connect (switcher, "state-set", G_CALLBACK (switch_all_cpus_changed), NULL);
 
   xfce4::connect_response (GTK_DIALOG (dialog), cpufreq_overview_response);
 

@@ -104,6 +104,7 @@ struct CpuFreqPluginOptions
   bool        keep_compact = false;
   bool        one_line = false;
   bool        icon_color_freq = false;
+  bool        change_all_cpus = true;
   std::string fontname;
   std::string fontcolor;
   CpuFreqUnit unit = UNIT_DEFAULT;
