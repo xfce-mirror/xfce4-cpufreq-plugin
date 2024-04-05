@@ -46,10 +46,14 @@ libcpufreq_la_LDFLAGS = \
 	-export-symbols-regex '^xfce_panel_module_(preinit|init|construct)' \
 	$(PLATFORM_LDFLAGS)
 
+SUFFIXES = .desktop .desktop.in
+
 desktopdir = $(datadir)/xfce4/panel/plugins
 desktop_in_files = cpufreq.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-@INTLTOOL_DESKTOP_RULE@
+
+.desktop.in.desktop:
+	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
 
 EXTRA_DIST = $(desktop_in_files)
 
