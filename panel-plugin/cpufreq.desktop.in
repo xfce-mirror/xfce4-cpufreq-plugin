@@ -1,7 +1,7 @@
 [Xfce Panel]
 Type=X-XFCE-PanelPlugin
-_Name=CPU Frequency Monitor
-_Comment=Show CPU frequencies and governor
+Name=CPU Frequency Monitor
+Comment=Show CPU frequencies and governor
 Icon=xfce4-cpufreq-plugin
 X-XFCE-Internal=FALSE
 X-XFCE-Module=cpufreq
