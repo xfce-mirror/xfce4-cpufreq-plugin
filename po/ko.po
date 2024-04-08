@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-19 01:16+0200\n"
+"POT-Creation-Date: 2024-04-08 12:51+0200\n"
 "PO-Revision-Date: 2013-07-03 18:53+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2013,2018-2019,2021-2022\n"
 "Language-Team: Korean (http://app.transifex.com/xfce/xfce-panel-plugins/language/ko/)\n"
@@ -196,7 +196,6 @@ msgid "Governor: "
 msgstr "정책:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:1006
-#: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "CPU 주파수와 정책을 보여줍니다"
 
@@ -214,7 +213,3 @@ msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
 msgstr "XFCE CPU 주파수 플러그인에 나타나는 CPU를 기본값으로 초기화했습니다"
-
-#: ../panel-plugin/cpufreq.desktop.in.h:1
-msgid "CPU Frequency Monitor"
-msgstr "CPU 주파수 감시기"
