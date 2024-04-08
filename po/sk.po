@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-19 01:16+0200\n"
+"POT-Creation-Date: 2024-04-08 12:51+0200\n"
 "PO-Revision-Date: 2013-07-03 18:53+0000\n"
 "Last-Translator: 785411ef824cced88d3e197f5af1b61a_da6a977 <e5fae5b35c0c625157d991b31e113de3_956341>, 2021-2022\n"
 "Language-Team: Slovak (http://app.transifex.com/xfce/xfce-panel-plugins/language/sk/)\n"
@@ -200,7 +200,6 @@ msgid "Governor: "
 msgstr "Správca:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:1006
-#: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "Zobraziť frekvenciu a správcu CPU"
 
@@ -218,7 +217,3 @@ msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
 msgstr "Procesor zobrazený v zásuvnom module cpufreq prostredia XFCE bol obnovený na predvolenú hodnotu"
-
-#: ../panel-plugin/cpufreq.desktop.in.h:1
-msgid "CPU Frequency Monitor"
-msgstr "Sledovanie frekvencie procesora"
