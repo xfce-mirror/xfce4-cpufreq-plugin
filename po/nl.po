@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-19 01:16+0200\n"
+"POT-Creation-Date: 2024-04-08 12:51+0200\n"
 "PO-Revision-Date: 2013-07-03 18:53+0000\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>, 2013,2017-2022\n"
 "Language-Team: Dutch (http://app.transifex.com/xfce/xfce-panel-plugins/language/nl/)\n"
@@ -194,7 +194,6 @@ msgid "Governor: "
 msgstr "Beheerder:"
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:1006
-#: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "Toon CPU-frequenties en beheerder"
 
@@ -212,7 +211,3 @@ msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
 msgstr "De CPU die wordt getoond door het invoegsel van XFCE cpufreq is teruggezet op een standaardwaarde"
-
-#: ../panel-plugin/cpufreq.desktop.in.h:1
-msgid "CPU Frequency Monitor"
-msgstr "Monitor voor processorfrequentie"
