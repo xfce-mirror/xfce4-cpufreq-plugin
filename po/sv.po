@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Daniel Nylander <po@danielnylander.se>, 2008
-# Luna Jernberg <bittin@cafe8bitar.se>, 2020-2022
+# Luna Jernberg <droidbittin@gmail.com>, 2020-2022
 # Påvel Nicklasson<pavel@frimix.se>, 2015
 # peterdenk <peter.denk@gmail.com>, 2014
 # peterdenk <peter.denk@gmail.com>, 2014
@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-19 01:16+0200\n"
+"POT-Creation-Date: 2024-04-08 12:51+0200\n"
 "PO-Revision-Date: 2013-07-03 18:53+0000\n"
-"Last-Translator: Luna Jernberg <bittin@cafe8bitar.se>, 2020-2022\n"
+"Last-Translator: Luna Jernberg <droidbittin@gmail.com>, 2020-2022\n"
 "Language-Team: Swedish (http://app.transifex.com/xfce/xfce-panel-plugins/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -198,7 +198,6 @@ msgid "Governor: "
 msgstr "Reglerare: "
 
 #: ../panel-plugin/xfce4-cpufreq-plugin.cc:1006
-#: ../panel-plugin/cpufreq.desktop.in.h:2
 msgid "Show CPU frequencies and governor"
 msgstr "Visa CPU-frekvenser och regulator"
 
@@ -216,7 +215,3 @@ msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
 msgstr "Processorn som visas av XFCE cpufreq-plugin har återställts till ett standardvärde"
-
-#: ../panel-plugin/cpufreq.desktop.in.h:1
-msgid "CPU Frequency Monitor"
-msgstr "CPU-Frekvensövervakning"
