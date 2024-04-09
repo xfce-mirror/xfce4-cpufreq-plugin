@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-cpufreq-plugin package.
 # 
 # Translators:
 # Chipong Luo <chipong_l at yahoo.com>, 2011
@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-08 12:51+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2024-04-09 00:52+0200\n"
 "PO-Revision-Date: 2013-07-03 18:53+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2013,2017-2022\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/xfce/xfce-panel-plugins/language/zh_CN/)\n"
@@ -24,195 +24,199 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:119
+#: panel-plugin/xfce4-cpufreq-configure.cc:119
 msgid "Select font..."
 msgstr "选择字体..."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:120
+#: panel-plugin/xfce4-cpufreq-configure.cc:120
 msgid "Select font family and size to use for the labels."
 msgstr "选择标签使用的字体和大小。"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:125
+#: panel-plugin/xfce4-cpufreq-configure.cc:125
 msgid "Right-click to revert to the default font."
 msgstr "点击右键恢复默认字体。"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:137
+#: panel-plugin/xfce4-cpufreq-configure.cc:137
 msgid "Select font"
 msgstr "选择字体"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:194
+#: panel-plugin/xfce4-cpufreq-configure.cc:194
 msgid "Right-click to revert to the default color"
 msgstr "右键单击以恢复为默认颜色 "
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:308
+#: panel-plugin/xfce4-cpufreq-configure.cc:308
 msgid "Configure CPU Frequency Monitor"
 msgstr "配置 CPU 频率监视器"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:311
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:246
+#: panel-plugin/xfce4-cpufreq-configure.cc:311
+#: panel-plugin/xfce4-cpufreq-overview.cc:246
 msgid "_Close"
 msgstr "关闭(_C)"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:332
+#: panel-plugin/xfce4-cpufreq-configure.cc:332
 msgid "<b>Monitor</b>"
 msgstr "<b>监视器</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:349
+#: panel-plugin/xfce4-cpufreq-configure.cc:349
 msgid "_Update interval:"
 msgstr "更新间隔(_U)："
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:368
+#: panel-plugin/xfce4-cpufreq-configure.cc:368
 msgid "<b>Panel</b>"
 msgstr "<b>面板</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:389
+#: panel-plugin/xfce4-cpufreq-configure.cc:389
 msgid "_Font:"
 msgstr "字体(_F):"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:410
+#: panel-plugin/xfce4-cpufreq-configure.cc:410
 msgid "_Font color:"
 msgstr "字体颜色(_F)："
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:420
+#: panel-plugin/xfce4-cpufreq-configure.cc:420
 msgid "Select font color"
 msgstr "选择字体颜色"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:434
+#: panel-plugin/xfce4-cpufreq-configure.cc:434
 msgid "_Display CPU:"
 msgstr "显示 CPU (_D)："
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:450
+#: panel-plugin/xfce4-cpufreq-configure.cc:450
 msgid "min"
 msgstr "最小值"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:451
+#: panel-plugin/xfce4-cpufreq-configure.cc:451
 msgid "avg"
 msgstr "平均值"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:452
+#: panel-plugin/xfce4-cpufreq-configure.cc:452
 msgid "max"
 msgstr "最大值"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:486
+#: panel-plugin/xfce4-cpufreq-configure.cc:486
 msgid "Unit:"
 msgstr "单位:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:496
+#: panel-plugin/xfce4-cpufreq-configure.cc:496
 msgid "Auto"
 msgstr "自动"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:497
+#: panel-plugin/xfce4-cpufreq-configure.cc:497
 msgid "GHz"
 msgstr "GHz"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:498
+#: panel-plugin/xfce4-cpufreq-configure.cc:498
 msgid "MHz"
 msgstr "MHz"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:523
+#: panel-plugin/xfce4-cpufreq-configure.cc:523
 msgid "_Keep compact"
 msgstr "保持紧凑(_K)"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:530
+#: panel-plugin/xfce4-cpufreq-configure.cc:530
 msgid "Show text in a single _line"
 msgstr "显示单行文字(_L)"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:537
+#: panel-plugin/xfce4-cpufreq-configure.cc:537
 msgid "Show CPU _icon"
 msgstr "显示 CPU 图标(_I)"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:544
+#: panel-plugin/xfce4-cpufreq-configure.cc:544
 msgid "Adjust CPU icon color according to frequency"
 msgstr "根据频率调整 CPU 图标颜色"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:551
+#: panel-plugin/xfce4-cpufreq-configure.cc:551
 msgid "Show CPU fre_quency"
 msgstr "显示 CPU 频率(_Q)"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.cc:558
+#: panel-plugin/xfce4-cpufreq-configure.cc:558
 msgid "Show CPU _governor"
 msgstr "显示 CPU 调度器(_G)"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.cc:73
+#: panel-plugin/xfce4-cpufreq-linux.cc:73
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
 msgstr "您的系统不支持 cpufreq。\n该插件仅显示当前的 cpu 频率"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:83
+#: panel-plugin/xfce4-cpufreq-overview.cc:83
 msgid "Scaling driver:"
 msgstr "调频驱动："
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:94
+#: panel-plugin/xfce4-cpufreq-overview.cc:94
 msgid "No scaling driver available"
 msgstr "无可用的调频驱动"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:108
+#: panel-plugin/xfce4-cpufreq-overview.cc:108
 msgid "Available frequencies:"
 msgstr "可用频率:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:166
+#: panel-plugin/xfce4-cpufreq-overview.cc:166
 msgid "Available governors:"
 msgstr "可用调频器："
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:193
+#: panel-plugin/xfce4-cpufreq-overview.cc:193
 msgid "Current governor:"
 msgstr "当前调频器："
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:243
+#: panel-plugin/xfce4-cpufreq-overview.cc:243
 msgid "CPU Information"
 msgstr "CPU 信息"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.cc:250
+#: panel-plugin/xfce4-cpufreq-overview.cc:250
 msgid "An overview of all the CPUs in the system"
 msgstr "系统中所有 CPU 概览"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:111
+#: panel-plugin/xfce4-cpufreq-plugin.cc:111
 msgid "current min"
 msgstr "当前最小值"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:164
+#: panel-plugin/xfce4-cpufreq-plugin.cc:164
 msgid "current avg"
 msgstr "当前平均值"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:207
+#: panel-plugin/xfce4-cpufreq-plugin.cc:207
 msgid "current max"
 msgstr "当前最大值"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:572
+#: panel-plugin/xfce4-cpufreq-plugin.cc:572
 msgid "No CPU information available."
 msgstr "无可用的CPU信息。"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:580
+#: panel-plugin/xfce4-cpufreq-plugin.cc:580
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
 msgstr[0] "%zu 个 cpu 可用 "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:588
+#: panel-plugin/xfce4-cpufreq-plugin.cc:588
 msgid "Frequency: "
 msgstr "频率："
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:595
+#: panel-plugin/xfce4-cpufreq-plugin.cc:595
 msgid "Governor: "
 msgstr "调频器："
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1006
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
 msgid "Show CPU frequencies and governor"
 msgstr "显示 CPU 主频及调频器"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1030
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1030
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "您的系统尚未正确配置以支持 CPU 频率调节！"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1036
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1036
 msgid "Your system is not supported yet!"
 msgstr "暂不支持您的系统！"
 
-#: ../panel-plugin/xfce4-cpufreq-utils.cc:84
+#: panel-plugin/xfce4-cpufreq-utils.cc:84
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
 msgstr "XFCE cpufreq 插件显示的 CPU 已重置为默认值"
+
+#: panel-plugin/cpufreq.desktop.in:4
+msgid "CPU Frequency Monitor"
+msgstr "CPU 频率监视器"
