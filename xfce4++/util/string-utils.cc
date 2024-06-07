@@ -167,6 +167,8 @@ std::string sprintf(const char *fmt, ...) {
                 std::string s(heap_buf, n1);
                 g_free(heap_buf);
                 return s;
+            } else {
+                g_free(heap_buf);
             }
         }
     }
