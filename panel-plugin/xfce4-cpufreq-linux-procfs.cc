@@ -115,7 +115,7 @@ cpufreq_procfs_read ()
       {
         auto cpu = xfce4::make<CpuInfo>();
 
-        char gov[20];
+        char gov[21];
         sscanf (line,
                 "CPU %*d %d kHz (%*d %%) - %d kHz (%*d %%) - %20s",
                 &cpu->min_freq,
