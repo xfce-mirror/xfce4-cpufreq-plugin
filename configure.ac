@@ -4,12 +4,7 @@ dnl
 
 dnl Version information
 AC_CONFIG_MACRO_DIRS([m4])
-m4_define([cpufreq_version_major], [1])
-m4_define([cpufreq_version_minor], [2])
-m4_define([cpufreq_version_micro], [8])
-m4_define([cpufreq_version_build], [@REVISION@])
-m4_define([cpufreq_version_tag], [git])
-m4_define([cpufreq_version], [cpufreq_version_major().cpufreq_version_minor().cpufreq_version_micro()ifelse(cpufreq_version_tag(), [git], [cpufreq_version_tag()-cpufreq_version_build()], [cpufreq_version_tag()])])
+XDT_VERSION_INIT([1.2.8], [git])
 
 dnl Initialize autoconf
 AC_COPYRIGHT([Copyright (c) 2006 Thomas Schreck <shrek@xfce.org>
@@ -17,8 +12,9 @@ AC_COPYRIGHT([Copyright (c) 2006 Thomas Schreck <shrek@xfce.org>
               Copyright (c) 2013-2015 Harald Judt <h.judt@gmx.at>
               Copyright (c) 2016-2020 Andre Miranda <andreldm@xfce.org>
               Copyright (c) 2021-2023 The Xfce development team. All rights reserved.])
-AC_INIT([xfce4-cpufreq-plugin],[cpufreq_version],[https://gitlab.xfce.org/panel-plugins/xfce4-cpufreq-plugin],[xfce4-cpufreq-plugin])
-AC_PREREQ([2.60])
+AC_INIT([xfce4-cpufreq-plugin],[xdt_version],[https://gitlab.xfce.org/panel-plugins/xfce4-cpufreq-plugin],[xfce4-cpufreq-plugin])
+AC_REVISION([xdt_version_build])
+AC_PREREQ([2.69])
 
 dnl Initialize automake
 AM_INIT_AUTOMAKE([1.11 dist-bzip2 tar-ustar no-dist-gzip foreign])
@@ -51,7 +47,7 @@ AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.19.8])
 
 dnl Check for debugging support
-XDT_FEATURE_DEBUG()
+XDT_FEATURE_DEBUG([xdt_debug_default])
 
 AC_CONFIG_FILES([
 Makefile
