@@ -1,3 +1,4 @@
+*~
 *.o
 *.o.*
 *.a
@@ -35,7 +36,6 @@ autom4te.cache
 compile
 config.*
 configure
-configure.ac
 depcomp
 docs/*
 install-sh
