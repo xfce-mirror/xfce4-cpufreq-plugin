@@ -7,8 +7,8 @@
 # Andre Miranda <andre@andreldm.com>, 2017
 # C. E., 2020
 # Fábio Nogueira <deb-user-ba@ubuntu.com>, 2007
-# Michael Martins <michaelfm21@gmail.com>, 2017
-# Michael Martins <michaelfm21@gmail.com>, 2018
+# Michael Martins, 2017
+# Michael Martins, 2018
 # Rafael Fontenelle <rffontenelle@gmail.com>, 2013
 # The Cat, 2020-2021
 msgid ""
