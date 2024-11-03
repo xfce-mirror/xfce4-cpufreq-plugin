@@ -4,14 +4,14 @@
 # 
 # Translators:
 # Alois Nešpor <info@aloisnespor.info>, 2013
-# Michal Várady <miko.vaji@gmail.com>, 2013,2017-2021
+# Michal Várady <miko.vaji@gmail.com>, 2013,2017-2021,2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2024-04-09 00:52+0200\n"
 "PO-Revision-Date: 2013-07-03 18:53+0000\n"
-"Last-Translator: Michal Várady <miko.vaji@gmail.com>, 2013,2017-2021\n"
+"Last-Translator: Michal Várady <miko.vaji@gmail.com>, 2013,2017-2021,2024\n"
 "Language-Team: Czech (http://app.transifex.com/xfce/xfce-panel-plugins/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:119
 msgid "Select font..."
-msgstr "Vybrat font..."
+msgstr "Vybrat písmo..."
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:120
 msgid "Select font family and size to use for the labels."
@@ -111,7 +111,7 @@ msgstr "_Nechat kompaktní"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:530
 msgid "Show text in a single _line"
-msgstr "Zobrazovat text v jednom _řádku"
+msgstr "Zobrazit text v jednom _řádku"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:537
 msgid "Show CPU _icon"
@@ -183,10 +183,10 @@ msgstr "Informace o procesoru nedostupné."
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "K dispozici je %zu procesor"
+msgstr[1] "K dispozici jsou %zu procesory"
+msgstr[2] "K dispozici je %zu procesorů"
+msgstr[3] "K dispozici je %zu procesorů"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:588
 msgid "Frequency: "
@@ -198,7 +198,7 @@ msgstr "Regulátor:"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
 msgid "Show CPU frequencies and governor"
-msgstr "Zobrazit frekvenci procesoru a regulátor"
+msgstr "Zobrazujte frekvenci procesoru a správce výkonu"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:1030
 msgid ""
