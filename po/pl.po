@@ -30,7 +30,7 @@ msgstr "Wybór czcionki..."
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:120
 msgid "Select font family and size to use for the labels."
-msgstr "Ustala krój i rozmiar czcionki etykiet"
+msgstr "Ustala krój i rozmiar czcionki etykiet"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:125
 msgid "Right-click to revert to the default font."
@@ -116,7 +116,7 @@ msgstr "_Układ zwarty"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:530
 msgid "Show text in a single _line"
-msgstr "Wyświetlanie tekstu w pojedynczym _wierszu"
+msgstr "Wyświetlanie tekstu w pojedynczym _wierszu"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:537
 msgid "Show CPU _icon"
@@ -124,7 +124,7 @@ msgstr "_Ikona CPU"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:544
 msgid "Adjust CPU icon color according to frequency"
-msgstr "Dostosowywanie koloru ikony CPU zgodnie z częstotliwością"
+msgstr "Dostosowywanie koloru ikony CPU zgodnie z częstotliwością"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:551
 msgid "Show CPU fre_quency"
@@ -138,7 +138,7 @@ msgstr "_Zarządca CPU"
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
-msgstr "Twój system nie obsługuje cpufreq.\nWtyczka pokazuje tylko bieżącą częstotliwość procesora"
+msgstr "Ten system nie obsługuje cpufreq.\nWtyczka pokazuje tylko bieżącą częstotliwość procesora"
 
 #: panel-plugin/xfce4-cpufreq-overview.cc:83
 msgid "Scaling driver:"
@@ -182,7 +182,7 @@ msgstr "obecna maks."
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:572
 msgid "No CPU information available."
-msgstr "Brak dostępnych informacji o CPU."
+msgstr "Brak dostępnych informacji o CPU."
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:580
 #, c-format
@@ -203,22 +203,22 @@ msgstr "Zarządca:"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
 msgid "Show CPU frequencies and governor"
-msgstr "Wyświetlanie częstotliwości CPU i zarządcy"
+msgstr "Wyświetlanie częstotliwości CPU i zarządcy"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:1030
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr "System nie jest prawidłowo skonfigurowany, aby obsługiwać skalowanie częstotliwości CPU."
+msgstr "Ten system nie jest prawidłowo skonfigurowany, aby obsługiwać skalowanie częstotliwości CPU!"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:1036
 msgid "Your system is not supported yet!"
-msgstr "Twój system nie jest jeszcze obsługiwany!"
+msgstr "Ten system nie jest jeszcze obsługiwany!"
 
 #: panel-plugin/xfce4-cpufreq-utils.cc:84
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
-msgstr "Procesor wyświetlany przez wtyczkę Xfce cpufreq został zresetowany do wartości domyślnej"
+msgstr "CPU wyświetlany przez wtyczkę Xfce cpufreq został zresetowany do wartości domyślnej"
 
 #: panel-plugin/cpufreq.desktop.in:4
 msgid "CPU Frequency Monitor"
