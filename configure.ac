@@ -4,7 +4,7 @@ dnl
 
 dnl Version information
 AC_CONFIG_MACRO_DIRS([m4])
-XDT_VERSION_INIT([1.2.8], [git])
+XDT_VERSION_INIT([1.2.9])
 
 dnl Initialize autoconf
 AC_COPYRIGHT([Copyright (c) 2006 Thomas Schreck <shrek@xfce.org>
