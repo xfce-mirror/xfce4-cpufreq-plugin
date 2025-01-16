@@ -267,9 +267,17 @@ cpufreq_overview (GdkEventButton *ev)
   else
     step = 3;
 
+  GtkWidget *scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                  GTK_POLICY_NEVER,
+                                  GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (scrolled_window), 300);
+
+  GtkWidget *cpu_info_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+
   for (size_t i = 0; i < cpuFreq->cpus.size(); i += step) {
     GtkWidget *dialog_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, BORDER * 2);
-    gtk_box_pack_start (GTK_BOX (dialog_vbox), dialog_hbox, false, false, BORDER * 2);
+    gtk_box_pack_start (GTK_BOX (cpu_info_box), dialog_hbox, false, false, BORDER * 2);
     gtk_container_set_border_width (GTK_CONTAINER (dialog_hbox), BORDER * 2);
 
     for (size_t j = i; j < cpuFreq->cpus.size() && j < i + step; j++) {
@@ -278,7 +286,7 @@ cpufreq_overview (GdkEventButton *ev)
 
       if (j + 1 < cpuFreq->cpus.size() && j + 1 == i + step) {
         GtkWidget *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-        gtk_box_pack_start (GTK_BOX (dialog_vbox), separator, false, false, 0);
+        gtk_box_pack_start (GTK_BOX (cpu_info_box), separator, false, false, 0);
       }
 
       if (j + 1 < cpuFreq->cpus.size() && j + 1 < i + step) {
@@ -287,6 +295,9 @@ cpufreq_overview (GdkEventButton *ev)
       }
     }
   }
+
+  gtk_container_add (GTK_CONTAINER (scrolled_window), cpu_info_box);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox), scrolled_window, true, true, 0);
 
   xfce4::connect_response (GTK_DIALOG (dialog), cpufreq_overview_response);
 
