@@ -16,12 +16,6 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-AM_CPPFLAGS = -I${top_srcdir}
-
-noinst_LTLIBRARIES = libxfce4_pp.la
-
-libxfce4_pp_la_CXXFLAGS = \
-	@LIBXFCE4UTIL_CFLAGS@
-
-libxfce4_pp_la_SOURCES = \
-	util.h
+EXTRA_DIST = \
+	util.h \
+	$(NULL)
