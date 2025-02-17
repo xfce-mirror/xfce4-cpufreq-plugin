@@ -26,4 +26,7 @@ ChangeLog: Makefile
 dist-hook: ChangeLog
 
 EXTRA_DIST = \
+	meson.build \
+	po/meson.build \
+	xfce-revision.h.in \
 	README.md
