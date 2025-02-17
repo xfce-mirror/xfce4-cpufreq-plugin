@@ -18,4 +18,5 @@
 
 EXTRA_DIST = \
 	util.h \
+	meson.build \
 	$(NULL)
