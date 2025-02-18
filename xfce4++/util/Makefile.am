@@ -40,3 +40,7 @@ libxfce4util_pp_la_SOURCES = \
 	rc.cc \
 	string-utils.h \
 	string-utils.cc
+
+EXTRA_DIST = \
+	meson.build \
+	$(NULL)

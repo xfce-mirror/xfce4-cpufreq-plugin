@@ -15,6 +15,7 @@ AC_COPYRIGHT([Copyright (c) 2006 Thomas Schreck <shrek@xfce.org>
 AC_INIT([xfce4-cpufreq-plugin],[xdt_version],[https://gitlab.xfce.org/panel-plugins/xfce4-cpufreq-plugin],[xfce4-cpufreq-plugin])
 AC_REVISION([xdt_version_build])
 AC_PREREQ([2.69])
+AC_DEFINE([VERSION_FULL], [PACKAGE_VERSION], [Alias for VERSION and PACKAGE_VERSION for meson compatibility])
 
 dnl Initialize automake
 AM_INIT_AUTOMAKE([1.11 dist-bzip2 tar-ustar no-dist-gzip foreign])
@@ -33,7 +34,6 @@ LT_INIT([disable-static])
 
 dnl configure the panel plugin
 XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.50.0])
-XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.50.0])
 XDT_CHECK_PACKAGE([GTK], [gtk+-3.0], [3.22.0])
 XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-2.0], [4.16.0])
 XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-2], [4.16.0])
