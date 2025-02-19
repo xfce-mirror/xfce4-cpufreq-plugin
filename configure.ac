@@ -33,6 +33,7 @@ LT_PREREQ([2.2.6])
 LT_INIT([disable-static])
 
 dnl configure the panel plugin
+AC_CHECK_FUNCS_ONCE([malloc_trim])
 XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.50.0])
 XDT_CHECK_PACKAGE([GTK], [gtk+-3.0], [3.22.0])
 XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-2.0], [4.16.0])

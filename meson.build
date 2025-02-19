@@ -34,6 +34,11 @@ libxfce4panel = dependency('libxfce4panel-2.0', version: dependency_versions['xf
 libxfce4ui = dependency('libxfce4ui-2', version: dependency_versions['xfce4'])
 libxfce4util = dependency('libxfce4util-1.0', version: dependency_versions['libxfce4util'])
 
+feature_cflags = []
+if cc.has_function('malloc_trim', prefix: '#include <malloc.h>')
+  feature_cflags += '-DHAVE_MALLOC_TRIM=1'
+endif
+
 extra_cflags = []
 extra_cxxflags_check = [
   '-Wmissing-declarations',
@@ -118,6 +123,7 @@ extra_cflags += [
 add_project_arguments(cc.get_supported_arguments(extra_cflags_check), language: 'c')
 add_project_arguments(cxx.get_supported_arguments(extra_cxxflags_check), language: 'cpp')
 add_project_arguments(extra_cflags, language: ['c', 'cpp'])
+add_project_arguments(feature_cflags, language: ['c', 'cpp'])
 
 xfce_revision_h = vcs_tag(
   command: ['git', 'rev-parse', '--short', 'HEAD'],
