@@ -3,8 +3,10 @@
 # This file is distributed under the same license as the xfce-panel-plugins.xfce4-cpufreq-plugin package.
 # 
 # Translators:
+# Ápo. <apostolos.papadimitriu@gmail.com>, 2016-2017
 # Ápo. <apostolos.papadimitriu@gmail.com>, 2016
 # Ápo. <apostolos.papadimitriu@gmail.com>, 2017
+# ebal <ebalaskas@ebalaskas.gr>, 2008
 # Efstathios Iosifidis <iefstathios@gmail.com>, 2015
 # ebal <ebalaskas@ebalaskas.gr>, 2008
 # Panagiotis Mantzios <pmantzios@hotmail.com>, 2018
@@ -30,11 +32,11 @@ msgstr "Επιλογή γραμματοσειράς..."
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:120
 msgid "Select font family and size to use for the labels."
-msgstr "Επιλογή γραμματοσειράς και του μεγέθους της για χρήση στις ετικέτες."
+msgstr "Επιλογή γραμματοσειράς για τις ετικέτες."
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:125
 msgid "Right-click to revert to the default font."
-msgstr "Δεξί κλικ για επαναφορά στην προεπιλεγμένη γραμματοσειρά."
+msgstr "Δεξί κλικ για επαναφορά της προεπιλεγμένης γραμματοσειράς."
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:137
 msgid "Select font"
@@ -42,11 +44,11 @@ msgstr "Επιλογή γραμματοσειράς"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:194
 msgid "Right-click to revert to the default color"
-msgstr "Δεξί κλικ για επαναφορά στο προεπιλεγμένο χρώμα"
+msgstr "Δεξί κλικ για επαναφορά του προεπιλεγμένου χρώματος"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:308
 msgid "Configure CPU Frequency Monitor"
-msgstr "Ρύθμιση επόπτη συχνότητας CPU"
+msgstr "Ρύθμιση απεικόνισης της συχνότητας CPU"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:311
 #: panel-plugin/xfce4-cpufreq-overview.cc:246
@@ -55,7 +57,7 @@ msgstr "_Κλείσιμο"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:332
 msgid "<b>Monitor</b>"
-msgstr "<b>Επόπτης</b>"
+msgstr "<b>Παρακολούθηση</b>"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:349
 msgid "_Update interval:"
@@ -79,11 +81,11 @@ msgstr "Επιλογή χρώματος γραμματοσειράς"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:434
 msgid "_Display CPU:"
-msgstr "_Εμφάνιση CPU:"
+msgstr "_Απεικόνιση CPU:"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:450
 msgid "min"
-msgstr "ελάχιστο"
+msgstr "ελάχιστη"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:451
 msgid "avg"
@@ -91,11 +93,11 @@ msgstr "μέσος όρος"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:452
 msgid "max"
-msgstr "μέγιστο"
+msgstr "μέγιστη"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:486
 msgid "Unit:"
-msgstr "Μονάδα:"
+msgstr "Μονάδα συχνότητας:"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:496
 msgid "Auto"
@@ -116,29 +118,29 @@ msgstr "_Πάντα συμπαγές"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:530
 msgid "Show text in a single _line"
-msgstr "Εμφάνιση κειμένου σε μονή _γραμμή"
+msgstr "Εμφάνιση κειμένου σε _μία γραμμή"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:537
 msgid "Show CPU _icon"
-msgstr "Εμφάνιση _εικονιδίου CPU"
+msgstr "Εμφάνιση ει_κονιδίου CPU"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:544
 msgid "Adjust CPU icon color according to frequency"
-msgstr "Προσαρμογή του χρώματος της εικόνας του CPU σύμφωνα με τη συχνότητα"
+msgstr "Προσαρμογή χρώματος στο εικονίδιο CPU, ανάλογα με τη συχνότητα"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:551
 msgid "Show CPU fre_quency"
-msgstr "Εμφάνιση της _συχνότητας του επεξεργαστή"
+msgstr "Εμφάνιση _συχνότητας CPU"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:558
 msgid "Show CPU _governor"
-msgstr "Εμφάνιση του _κυβερνήτη του επεξεργαστή"
+msgstr "Εμφάνιση _ρυθμιστή CPU"
 
 #: panel-plugin/xfce4-cpufreq-linux.cc:73
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
-msgstr "Το σύστημά σας δεν υποστηρίζει το cpufreq.\nΤο πρόσθετο εμφανίζει μόνο την τρέχουσα συχνότητα cpu"
+msgstr "Το σύστημά σας δεν υποστηρίζει cpufreq.\nΤο πρόσθετο εμφανίζει μόνο την τρέχουσα συχνότητα cpu"
 
 #: panel-plugin/xfce4-cpufreq-overview.cc:83
 msgid "Scaling driver:"
@@ -158,7 +160,7 @@ msgstr "Διαθέσιμοι ρυθμιστές:"
 
 #: panel-plugin/xfce4-cpufreq-overview.cc:193
 msgid "Current governor:"
-msgstr "Τρέχον ρυθμιστής"
+msgstr "Τρέχων ρυθμιστής:"
 
 #: panel-plugin/xfce4-cpufreq-overview.cc:243
 msgid "CPU Information"
@@ -166,30 +168,30 @@ msgstr "Πληροφορίες CPU"
 
 #: panel-plugin/xfce4-cpufreq-overview.cc:250
 msgid "An overview of all the CPUs in the system"
-msgstr "Μια επισκόπηση όλων των CPU στο σύστημα"
+msgstr "Επισκόπηση όλων των CPUs του συστήματος"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:111
 msgid "current min"
-msgstr "τρέχων ελάχιστο"
+msgstr "τρέχον ελάχιστο"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:164
 msgid "current avg"
-msgstr "τρέχων μέσο"
+msgstr "τρέχον μέσος όρος"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:207
 msgid "current max"
-msgstr "τρέχων μέγιστο"
+msgstr "τρέχον μέγιστο"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:572
 msgid "No CPU information available."
-msgstr "Δεν υπάρχουν διαθέσιμες πληροφορίες για τον επεξεργαστή."
+msgstr "Δεν υπάρχουν διαθέσιμες πληροφορίες για CPU."
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:580
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%zu διαθέσιμη cpu"
+msgstr[1] "%zu διαθέσιμες cpu"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:588
 msgid "Frequency: "
@@ -201,12 +203,12 @@ msgstr "Ρυθμιστής: "
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
 msgid "Show CPU frequencies and governor"
-msgstr "Εμφάνιση συχνοτήτων επεξεργαστή και το προφίλ του επεξεργαστή"
+msgstr "Εμφάνιση συχνοτήτων CPU και ρυθμιστή"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:1030
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr "Το σύστημά σας δεν έχει ρυθμιστεί καταλλήλως ώστε να υποστηρίζει την ρύθμιση συχνότητας του επεξεργαστή!"
+msgstr "Το σύστημά σας δεν έχει ρυθμιστεί καταλλήλως για να υποστηρίξει κλιμάκωση της συχνότητας CPU!"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:1036
 msgid "Your system is not supported yet!"
@@ -216,8 +218,8 @@ msgstr "Το σύστημά σας δεν υποστηρίζεται ακόμα!
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
-msgstr "Ο CPU που εμφανίζεται από το πρόσθετο XFCE cpufreq έχει επιστρέψει σε μια προεπιλεγμένη τιμή"
+msgstr "Η CPU που εμφανίζεται από το πρόσθετο cpufreq του XFCE έχει επανέλθει σε μια προεπιλεγμένη τιμή"
 
 #: panel-plugin/cpufreq.desktop.in:4
 msgid "CPU Frequency Monitor"
-msgstr "Παρακολούθηση συχνότητας cpu"
+msgstr "Παρακολούθηση συχνότητας CPU"
