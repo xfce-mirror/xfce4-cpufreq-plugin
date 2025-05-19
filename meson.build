@@ -1,15 +1,11 @@
 project(
   'xfce4-cpufreq-plugin',
-  'c', 'cpp',
-  version: '1.2.9-dev',
-  license: 'GPL-2.0-or-later',
-  meson_version: '>= 0.54.0',
-  default_options: [
-    'c_std=gnu11',
-    'cpp_std=gnu++14',
-    'buildtype=debugoptimized',
-    'warning_level=2',
-  ]
+  'c',
+  'cpp',
+version : '1.3.0',
+  license : 'GPL-2.0-or-later',
+  meson_version : '>= 0.54.0',
+  default_options : ['c_std=gnu11', 'cpp_std=gnu++14', 'buildtype=debugoptimized', 'warning_level=2']
 )
 
 project_namespace = 'panel-plugins'
