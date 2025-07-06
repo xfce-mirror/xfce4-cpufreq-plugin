@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-cpufreq-plugin package.
+# 
+# Translators:
+# Steve Harris <steve@jbs.ca>, 2025
+msgid ""
+msgstr ""
+"Project-Id-Version: Xfce Panel Plugins\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2024-04-09 00:52+0200\n"
+"PO-Revision-Date: 2013-07-03 18:53+0000\n"
+"Last-Translator: Steve Harris <steve@jbs.ca>, 2025\n"
+"Language-Team: English (Canada) (http://app.transifex.com/xfce/xfce-panel-plugins/language/en_CA/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_CA\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:119
+msgid "Select font..."
+msgstr "Select font..."
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:120
+msgid "Select font family and size to use for the labels."
+msgstr "Select font family and size to use for the labels."
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:125
+msgid "Right-click to revert to the default font."
+msgstr "Right-click to revert to the default font."
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:137
+msgid "Select font"
+msgstr "Select font"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:194
+msgid "Right-click to revert to the default color"
+msgstr "Right-click to revert to the default colour"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:308
+msgid "Configure CPU Frequency Monitor"
+msgstr "Configure CPU Frequency Monitor"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:311
+#: panel-plugin/xfce4-cpufreq-overview.cc:246
+msgid "_Close"
+msgstr "_Close"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:332
+msgid "<b>Monitor</b>"
+msgstr "<b>Monitor</b>"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:349
+msgid "_Update interval:"
+msgstr "_Update interval:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:368
+msgid "<b>Panel</b>"
+msgstr "<b>Panel</b>"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:389
+msgid "_Font:"
+msgstr "_Font:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:410
+msgid "_Font color:"
+msgstr "_Font colour:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:420
+msgid "Select font color"
+msgstr "Select font colour"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:434
+msgid "_Display CPU:"
+msgstr "_Display CPU:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:450
+msgid "min"
+msgstr "min"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:451
+msgid "avg"
+msgstr "avg"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:452
+msgid "max"
+msgstr "max"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:486
+msgid "Unit:"
+msgstr "Unit:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:496
+msgid "Auto"
+msgstr "Auto"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:497
+msgid "GHz"
+msgstr "GHz"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:498
+msgid "MHz"
+msgstr "MHz"
+
+#. check buttons for display widgets in panel
+#: panel-plugin/xfce4-cpufreq-configure.cc:523
+msgid "_Keep compact"
+msgstr "_Keep compact"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:530
+msgid "Show text in a single _line"
+msgstr "Show text in a single _line"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:537
+msgid "Show CPU _icon"
+msgstr "Show CPU _icon"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:544
+msgid "Adjust CPU icon color according to frequency"
+msgstr "Adjust CPU icon colour according to frequency"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:551
+msgid "Show CPU fre_quency"
+msgstr "Show CPU fre_quency"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:558
+msgid "Show CPU _governor"
+msgstr "Show CPU _governor"
+
+#: panel-plugin/xfce4-cpufreq-linux.cc:73
+msgid ""
+"Your system does not support cpufreq.\n"
+"The plugin only shows the current cpu frequency"
+msgstr "Your system does not support cpufreq.\nThe plugin only shows the current cpu frequency"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:83
+msgid "Scaling driver:"
+msgstr "Scaling driver:"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:94
+msgid "No scaling driver available"
+msgstr "No scaling driver available"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:108
+msgid "Available frequencies:"
+msgstr "Available frequencies:"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:166
+msgid "Available governors:"
+msgstr "Available governors:"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:193
+msgid "Current governor:"
+msgstr "Current governor:"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:243
+msgid "CPU Information"
+msgstr "CPU Information"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:250
+msgid "An overview of all the CPUs in the system"
+msgstr "An overview of all the CPUs in the system"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:111
+msgid "current min"
+msgstr "current min"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:164
+msgid "current avg"
+msgstr "current avg"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:207
+msgid "current max"
+msgstr "current max"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:572
+msgid "No CPU information available."
+msgstr "No CPU information available."
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:580
+#, c-format
+msgid "%zu cpu available"
+msgid_plural "%zu cpus available"
+msgstr[0] "%zu cpu available"
+msgstr[1] "%zu cpus available"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:588
+msgid "Frequency: "
+msgstr "Frequency: "
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:595
+msgid "Governor: "
+msgstr "Governor: "
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
+msgid "Show CPU frequencies and governor"
+msgstr "Show CPU frequencies and governor"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1030
+msgid ""
+"Your system is not configured correctly to support CPU frequency scaling!"
+msgstr "Your system is not configured correctly to support CPU frequency scaling!"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1036
+msgid "Your system is not supported yet!"
+msgstr "Your system is not supported yet!"
+
+#: panel-plugin/xfce4-cpufreq-utils.cc:84
+msgid ""
+"The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
+"value"
+msgstr "The CPU displayed by the XFCE cpufreq plugin has been reset to a default value"
+
+#: panel-plugin/cpufreq.desktop.in:4
+msgid "CPU Frequency Monitor"
+msgstr "CPU Frequency Monitor"
