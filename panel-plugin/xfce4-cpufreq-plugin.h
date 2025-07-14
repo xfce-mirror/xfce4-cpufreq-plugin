@@ -144,6 +144,7 @@ struct CpuFreqPlugin
    *  resolution: range / FREQ_HIST_BINS = 62.5 MHz */
   guint16 freq_hist[FREQ_HIST_BINS] = {};
 
+  GtkWidget *settings_dialog = nullptr;
   const Ptr<CpuFreqPluginOptions> options = xfce4::make<CpuFreqPluginOptions>();
 
   gint timeoutHandle = 0;
