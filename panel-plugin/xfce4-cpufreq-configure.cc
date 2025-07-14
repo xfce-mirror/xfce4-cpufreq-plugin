@@ -285,7 +285,6 @@ static void
 cpufreq_configure_response (GtkDialog *dialog)
 {
   g_object_set_data (G_OBJECT (cpuFreq->plugin), "configure", NULL);
-  xfce_panel_plugin_unblock_menu (cpuFreq->plugin);
   gtk_widget_destroy (GTK_WIDGET (dialog));
 
   cpufreq_write_config (cpuFreq->plugin);
@@ -301,21 +300,24 @@ cpufreq_configure (XfcePanelPlugin *plugin)
   GtkWidget *spinner, *button;
   GdkRGBA color = {};
 
-  auto configure = xfce4::make<CpuFreqPluginConfigure>();
+  if (cpuFreq->settings_dialog != NULL)
+  {
+    gtk_window_present(GTK_WINDOW(cpuFreq->settings_dialog));
+    return;
+  }
 
-  xfce_panel_plugin_block_menu (cpuFreq->plugin);
+  auto configure = xfce4::make<CpuFreqPluginConfigure>();
 
   GtkWidget *dialog = xfce_titled_dialog_new_with_mixed_buttons (_("Configure CPU Frequency Monitor"),
     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
     GTK_DIALOG_DESTROY_WITH_PARENT,
     "window-close-symbolic", _("_Close"), GTK_RESPONSE_OK,
     NULL);
+  cpuFreq->settings_dialog = dialog;
+  g_object_add_weak_pointer(G_OBJECT(dialog), (gpointer *)&cpuFreq->settings_dialog);
 
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-cpufreq-plugin");
-  gtk_window_set_keep_above (GTK_WINDOW (dialog), true);
-  gtk_window_stick (GTK_WINDOW (dialog));
-
   g_object_set_data (G_OBJECT (cpuFreq->plugin), "configure", dialog);
 
   GtkWidget *dialog_vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
