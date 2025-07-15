@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce-panel-plugins.xfce4-cpufreq-plugin package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
 # Butterfly <gokhanlnx@gmail.com>, 2021
@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
-"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-09 00:52+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-15 00:50+0200\n"
 "PO-Revision-Date: 2013-07-03 18:53+0000\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>, 2020-2022\n"
 "Language-Team: Turkish (http://app.transifex.com/xfce/xfce-panel-plugins/language/tr/)\n"
@@ -25,200 +25,196 @@ msgstr ""
 "Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:119
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:119
 msgid "Select font..."
 msgstr "Yazı tipi seç..."
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:120
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:120
 msgid "Select font family and size to use for the labels."
 msgstr "Etiketler için kullanılacak yazı tipi ailesi ve boyutu seç."
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:125
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:125
 msgid "Right-click to revert to the default font."
 msgstr "Öntanımlı yazı tipine geri dönmek için sağ tıklat."
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:137
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:137
 msgid "Select font"
 msgstr "Yazı tipi seç"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:194
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:194
 msgid "Right-click to revert to the default color"
 msgstr "Öntamılı rengi geri almak için sağ tıkla"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:308
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:311
 msgid "Configure CPU Frequency Monitor"
 msgstr "İşlemci Frekans Gözlemcisini Yapılandır"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:311
-#: panel-plugin/xfce4-cpufreq-overview.cc:246
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:314
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:246
 msgid "_Close"
 msgstr "_Kapat"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:332
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:334
 msgid "<b>Monitor</b>"
 msgstr "<b>Ekran</b>"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:349
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:351
 msgid "_Update interval:"
 msgstr "_Güncelleme aralığı:"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:368
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:370
 msgid "<b>Panel</b>"
 msgstr "<b>Panel</b>"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:389
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:391
 msgid "_Font:"
 msgstr "Yazı _tipi:"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:410
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:412
 msgid "_Font color:"
 msgstr "_Yazı tipi rengi:"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:420
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:422
 msgid "Select font color"
 msgstr "Yazı tipi rengini seç"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:434
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:436
 msgid "_Display CPU:"
 msgstr "İşlemci _Ekranı:"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:450
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:452
 msgid "min"
 msgstr "min"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:451
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:453
 msgid "avg"
 msgstr "ort"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:452
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:454
 msgid "max"
 msgstr "mak"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:486
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:488
 msgid "Unit:"
 msgstr "Birim:"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:496
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:498
 msgid "Auto"
 msgstr "Kendiliğinden"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:497
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:499
 msgid "GHz"
 msgstr "GHz"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:498
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:500
 msgid "MHz"
 msgstr "MHz"
 
 #. check buttons for display widgets in panel
-#: panel-plugin/xfce4-cpufreq-configure.cc:523
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:525
 msgid "_Keep compact"
 msgstr "_Kısa tut"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:530
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:532
 msgid "Show text in a single _line"
 msgstr "Metni tek _satırda göster"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:537
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:539
 msgid "Show CPU _icon"
 msgstr "İşlemci _simgesini göster"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:544
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:546
 msgid "Adjust CPU icon color according to frequency"
 msgstr "CPU simgesinin rengini frekansa göre ayarla"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:551
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:553
 msgid "Show CPU fre_quency"
 msgstr "İşlemci _frekansını göster"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:558
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:560
 msgid "Show CPU _governor"
 msgstr "İşlemci _yöneticisini göster"
 
-#: panel-plugin/xfce4-cpufreq-linux.cc:73
+#: ../panel-plugin/xfce4-cpufreq-linux.cc:73
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
 msgstr "Sisteminiz cpufreq'i desteklemiyor.\nEklenti yalnızca şimdiki işlemci frekansını gösterir"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:83
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:83
 msgid "Scaling driver:"
 msgstr "Ölçekleme sürücüsü:"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:94
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:94
 msgid "No scaling driver available"
 msgstr "Kullanılabilir ölçekleme sürücüsü yok"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:108
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:108
 msgid "Available frequencies:"
 msgstr "Kullanılabilir frekanslar:"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:166
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:166
 msgid "Available governors:"
 msgstr "Kullanılabilir yöneticiler:"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:193
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:193
 msgid "Current governor:"
 msgstr "Şu anki yönetici:"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:243
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:243
 msgid "CPU Information"
 msgstr "İşlemci Bilgileri"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:250
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:250
 msgid "An overview of all the CPUs in the system"
 msgstr "Sistemdeki tüm işlemcilerin genel görünümü"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:111
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:114
 msgid "current min"
 msgstr "güncel min"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:164
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:167
 msgid "current avg"
 msgstr "güncel ort"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:207
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:210
 msgid "current max"
 msgstr "güncel mak"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:572
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:575
 msgid "No CPU information available."
 msgstr "İşlemci bilgisi bulunmamaktadır."
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:580
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:583
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
 msgstr[0] "%zu kullanılabilir işlemci"
 msgstr[1] "%zu kullanılabilir işlemci"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:588
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:591
 msgid "Frequency: "
 msgstr "Frekans:"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:595
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:598
 msgid "Governor: "
 msgstr "Yönetici:"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1009
 msgid "Show CPU frequencies and governor"
 msgstr "İşlemci frekansını ve işlemci yöneticisini göster"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:1030
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1033
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Sisteminiz işlemci frekans ölçekleme desteği doğru yapılandırılmamış!"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:1036
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1039
 msgid "Your system is not supported yet!"
 msgstr "Sisteminiz henüz desteklenmiyor!"
 
-#: panel-plugin/xfce4-cpufreq-utils.cc:84
+#: ../panel-plugin/xfce4-cpufreq-utils.cc:84
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
 msgstr "XFCE cpufreq eklentisince gösterilen MİB, öntanımlı değere sıfırlandı"
-
-#: panel-plugin/cpufreq.desktop.in:4
-msgid "CPU Frequency Monitor"
-msgstr "İşlemci Frekans Gözlemcisi"
