@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce-panel-plugins.xfce4-cpufreq-plugin package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
 # Besnik Bleta <besnik@programeshqip.org>, 2007,2019-2020
@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
-"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-09 00:52+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-15 00:50+0200\n"
 "PO-Revision-Date: 2013-07-03 18:53+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2007,2020-2022,2024\n"
 "Language-Team: Albanian (http://app.transifex.com/xfce/xfce-panel-plugins/language/sq/)\n"
@@ -20,200 +20,196 @@ msgstr ""
 "Language: sq\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:119
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:119
 msgid "Select font..."
 msgstr "Përzgjidhni shkronja…"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:120
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:120
 msgid "Select font family and size to use for the labels."
 msgstr "Përzgjidhni familje dhe madhësi shkronjash për t’u përdorur për etiketat."
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:125
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:125
 msgid "Right-click to revert to the default font."
 msgstr "Djathtasklikoni për t’i kthyer te shkronjat parazgjedhje."
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:137
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:137
 msgid "Select font"
 msgstr "Përzgjidhni shkronja"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:194
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:194
 msgid "Right-click to revert to the default color"
 msgstr "Djathtasklikojeni për ta kthyer te ngjyra parazgjedhje"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:308
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:311
 msgid "Configure CPU Frequency Monitor"
 msgstr "Formësoni Mbikëqyrësin e Frekuencës së CPU-së"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:311
-#: panel-plugin/xfce4-cpufreq-overview.cc:246
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:314
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:246
 msgid "_Close"
 msgstr "_Mbylle"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:332
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:334
 msgid "<b>Monitor</b>"
 msgstr "<b>Mbikëqyre</b>"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:349
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:351
 msgid "_Update interval:"
 msgstr "Interval për_ditësimi:"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:368
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:370
 msgid "<b>Panel</b>"
 msgstr "<b>Panel</b>"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:389
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:391
 msgid "_Font:"
 msgstr "_Shkronja:"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:410
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:412
 msgid "_Font color:"
 msgstr "Ngjyrë shkr_onjash:"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:420
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:422
 msgid "Select font color"
 msgstr "Përzgjidhni ngjyrë shkronjash"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:434
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:436
 msgid "_Display CPU:"
 msgstr "_Shfaq CPU:"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:450
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:452
 msgid "min"
 msgstr "min"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:451
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:453
 msgid "avg"
 msgstr "mst"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:452
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:454
 msgid "max"
 msgstr "maks"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:486
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:488
 msgid "Unit:"
 msgstr "Njësi:"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:496
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:498
 msgid "Auto"
 msgstr "Auto"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:497
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:499
 msgid "GHz"
 msgstr "GHz"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:498
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:500
 msgid "MHz"
 msgstr "MHz"
 
 #. check buttons for display widgets in panel
-#: panel-plugin/xfce4-cpufreq-configure.cc:523
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:525
 msgid "_Keep compact"
 msgstr "_Mbaji kompakte"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:530
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:532
 msgid "Show text in a single _line"
 msgstr "Shfaq tekst në një _rresht të vetëm"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:537
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:539
 msgid "Show CPU _icon"
 msgstr "Shfaq _ikonë CPU-je"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:544
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:546
 msgid "Adjust CPU icon color according to frequency"
 msgstr "Përimto ngjyrë ikone CPU sipas frekuencës"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:551
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:553
 msgid "Show CPU fre_quency"
 msgstr "Shfaq _frekuencë CPU-je"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:558
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:560
 msgid "Show CPU _governor"
 msgstr "Shfaq _kontrollor CPU-je"
 
-#: panel-plugin/xfce4-cpufreq-linux.cc:73
+#: ../panel-plugin/xfce4-cpufreq-linux.cc:73
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
 msgstr "Sistemi juaj nuk e mbulon cpufreq.\nShtojca shfaq vetëm frekuencën e tanishme të CPU-së"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:83
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:83
 msgid "Scaling driver:"
 msgstr "Përudhës përshtatjesh:"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:94
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:94
 msgid "No scaling driver available"
 msgstr "S’ka përudhës përshtatjesh"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:108
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:108
 msgid "Available frequencies:"
 msgstr "Frekuenca të passhme:"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:166
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:166
 msgid "Available governors:"
 msgstr "Kontrollorë të gatshëm"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:193
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:193
 msgid "Current governor:"
 msgstr "Kontrollor i tanishëm:"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:243
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:243
 msgid "CPU Information"
 msgstr "Hollësi CPU-je"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:250
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:250
 msgid "An overview of all the CPUs in the system"
 msgstr "Një përmbledhje e krejt CPU-ve në sistem"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:111
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:114
 msgid "current min"
 msgstr "min. i tanishëm"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:164
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:167
 msgid "current avg"
 msgstr "mes. e tanishme"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:207
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:210
 msgid "current max"
 msgstr "maks. i tanishëm"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:572
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:575
 msgid "No CPU information available."
 msgstr "S’ka të dhëna CPU-je të gatshme."
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:580
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:583
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
 msgstr[0] "%zu procesor që mund të përdoret"
 msgstr[1] "%zu procesorë që mund të përdoren"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:588
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:591
 msgid "Frequency: "
 msgstr "Frekuencë: "
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:595
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:598
 msgid "Governor: "
 msgstr "Kontrollor:"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1009
 msgid "Show CPU frequencies and governor"
 msgstr "Shfaq frekuenca dhe kontrollor CPU-je"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:1030
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1033
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Sistemi juaj s’është formësuar saktë për të mbuluar përshtatje të frekuencës së CPU-së!"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:1036
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1039
 msgid "Your system is not supported yet!"
 msgstr "Sistemi juaj nuk mbulohet ende!"
 
-#: panel-plugin/xfce4-cpufreq-utils.cc:84
+#: ../panel-plugin/xfce4-cpufreq-utils.cc:84
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
 msgstr "CPU-ja e shfaqur nga shtojca XFCE cpufreq është kthyer te një vlerë parazgjedhje"
-
-#: panel-plugin/cpufreq.desktop.in:4
-msgid "CPU Frequency Monitor"
-msgstr "Mbikëqyrës Frekuence CPU-je"
