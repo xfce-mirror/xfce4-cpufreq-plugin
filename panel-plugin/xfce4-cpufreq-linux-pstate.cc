@@ -18,10 +18,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "xfce4-cpufreq-plugin.h"
 #include "xfce4-cpufreq-linux-pstate.h"
 #include "xfce4-cpufreq-linux-sysfs.h"

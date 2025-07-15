@@ -22,10 +22,6 @@
 
 #define BORDER 1
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <libxfce4ui/libxfce4ui.h>
 
 #include "xfce4-cpufreq-plugin.h"

@@ -23,9 +23,6 @@
 #define SPACING           2  /* Space between the widgets */
 #define BORDER            1  /* Space between the frame and the widgets */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
 #ifdef HAVE_XFCE_REVISION_H
 #include "xfce-revision.h"
 #endif
