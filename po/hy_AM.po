@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce-panel-plugins.xfce4-cpufreq-plugin package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
 # Arman Harutyunyan <arman.harut468@gmail.com>, 2020
@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
-"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-09 00:52+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-15 00:50+0200\n"
 "PO-Revision-Date: 2013-07-03 18:53+0000\n"
 "Last-Translator: Arman Harutyunyan <arman.harut468@gmail.com>, 2020\n"
 "Language-Team: Armenian (Armenia) (http://app.transifex.com/xfce/xfce-panel-plugins/language/hy_AM/)\n"
@@ -19,200 +19,196 @@ msgstr ""
 "Language: hy_AM\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:119
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:119
 msgid "Select font..."
 msgstr "Ընտրել տառատեսակ․․․"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:120
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:120
 msgid "Select font family and size to use for the labels."
 msgstr "Ընտրել տառատեսակի ընտանիք եւ չափս պիտակների համար։"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:125
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:125
 msgid "Right-click to revert to the default font."
 msgstr "Աջ սեղմում լռելեայն տառատեսակին վերադառնալու համար։"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:137
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:137
 msgid "Select font"
 msgstr "Ընտրել տառատեսակ"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:194
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:194
 msgid "Right-click to revert to the default color"
 msgstr ""
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:308
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:311
 msgid "Configure CPU Frequency Monitor"
 msgstr "Կազմաձեւել ԿՄՍ յաճախականութեան ցուցադրիչը"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:311
-#: panel-plugin/xfce4-cpufreq-overview.cc:246
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:314
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:246
 msgid "_Close"
 msgstr "_Փակել"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:332
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:334
 msgid "<b>Monitor</b>"
 msgstr "<b>Ցուցադրիչ</b>"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:349
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:351
 msgid "_Update interval:"
 msgstr "_Արդիացնել ընդմիջումը․"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:368
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:370
 msgid "<b>Panel</b>"
 msgstr "<b>Վահանակ</b>"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:389
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:391
 msgid "_Font:"
 msgstr "_Տառատեսակ․"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:410
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:412
 msgid "_Font color:"
 msgstr "_Տառատեսակի գոյն․"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:420
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:422
 msgid "Select font color"
 msgstr "Ընտրել տառատեսակի գոյն"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:434
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:436
 msgid "_Display CPU:"
 msgstr "_Ցուցադրել ԿՄՍ․"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:450
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:452
 msgid "min"
 msgstr "փոքրագ․"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:451
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:453
 msgid "avg"
 msgstr "միջ․"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:452
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:454
 msgid "max"
 msgstr "գերագ․"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:486
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:488
 msgid "Unit:"
 msgstr ""
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:496
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:498
 msgid "Auto"
 msgstr ""
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:497
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:499
 msgid "GHz"
 msgstr ""
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:498
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:500
 msgid "MHz"
 msgstr ""
 
 #. check buttons for display widgets in panel
-#: panel-plugin/xfce4-cpufreq-configure.cc:523
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:525
 msgid "_Keep compact"
 msgstr "_Պահել սեղմ"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:530
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:532
 msgid "Show text in a single _line"
 msgstr "Ցուցադրել գրոյթ մեկ _գծում"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:537
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:539
 msgid "Show CPU _icon"
 msgstr "Ցուցադրել ԿՄՍ _պատկերակ"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:544
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:546
 msgid "Adjust CPU icon color according to frequency"
 msgstr ""
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:551
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:553
 msgid "Show CPU fre_quency"
 msgstr "Ցուցադրել ԿՄՍ յաճ_ախականութիւն"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:558
+#: ../panel-plugin/xfce4-cpufreq-configure.cc:560
 msgid "Show CPU _governor"
 msgstr "Ցուցադել ԿՄՍ _պետը"
 
-#: panel-plugin/xfce4-cpufreq-linux.cc:73
+#: ../panel-plugin/xfce4-cpufreq-linux.cc:73
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
 msgstr "Ձեր համակարգը չի ապահովում cpufreq։\nՆերդրաւնը ցոյց է տալիս ընթացիկ cpu հաճախականութիւնը "
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:83
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:83
 msgid "Scaling driver:"
 msgstr "Սանդղաւորման սարքավար․"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:94
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:94
 msgid "No scaling driver available"
 msgstr "Սանդղաւորման սարքավար հասանելի չէ"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:108
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:108
 msgid "Available frequencies:"
 msgstr "Հասանելի յաճախականութիւններ․"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:166
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:166
 msgid "Available governors:"
 msgstr "Հասանելի կառավարիչ․"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:193
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:193
 msgid "Current governor:"
 msgstr "Ընթացիկ կառավարիչ․"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:243
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:243
 msgid "CPU Information"
 msgstr "ԿՄՍ տեղեկութիւն"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:250
+#: ../panel-plugin/xfce4-cpufreq-overview.cc:250
 msgid "An overview of all the CPUs in the system"
 msgstr "Համակարգում բոլոր ԿՄՍ֊ների վերադիտում"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:111
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:114
 msgid "current min"
 msgstr "ընթացիկ փոքր․"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:164
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:167
 msgid "current avg"
 msgstr "ընթացիկ միջ․"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:207
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:210
 msgid "current max"
 msgstr "ընթացիկ գերագ․"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:572
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:575
 msgid "No CPU information available."
 msgstr "ԿՄՍ տեղեկութիւնը անհասանելի է։"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:580
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:583
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
 msgstr[0] ""
 msgstr[1] ""
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:588
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:591
 msgid "Frequency: "
 msgstr "Հաճախականութիւն․"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:595
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:598
 msgid "Governor: "
 msgstr "Կառավարիչ․"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1009
 msgid "Show CPU frequencies and governor"
 msgstr "Ցուցադրել ԿՄՍ յաճախականութիւններ եւ կառավարչին"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:1030
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1033
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
 msgstr "Ձեր համակարգը ճիշտ կազմաձեւուած չէ ԿՄՍ֊ի յաճախականութիւնը սանդղելու համար։"
 
-#: panel-plugin/xfce4-cpufreq-plugin.cc:1036
+#: ../panel-plugin/xfce4-cpufreq-plugin.cc:1039
 msgid "Your system is not supported yet!"
 msgstr "Ձեր համակարգը ապահովուած չէ։"
 
-#: panel-plugin/xfce4-cpufreq-utils.cc:84
+#: ../panel-plugin/xfce4-cpufreq-utils.cc:84
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
 msgstr ""
-
-#: panel-plugin/cpufreq.desktop.in:4
-msgid "CPU Frequency Monitor"
-msgstr "ԿՄՍ յախաճականութեան ցուցադրիչ"
