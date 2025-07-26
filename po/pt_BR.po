@@ -9,6 +9,7 @@
 # Fábio Nogueira <deb-user-ba@ubuntu.com>, 2007
 # Michael Martins, 2017
 # Michael Martins, 2018
+# Michael Martins, 2025
 # Rafael Fontenelle <rffontenelle@gmail.com>, 2013
 # The Cat, 2020-2021
 msgid ""
@@ -17,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2025-07-18 11:06+0200\n"
 "PO-Revision-Date: 2013-07-03 18:53+0000\n"
-"Last-Translator: Andre Miranda <andre@andreldm.com>, 2019,2022\n"
+"Last-Translator: Michael Martins, 2025\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/xfce/xfce-panel-plugins/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -222,4 +223,4 @@ msgstr "A CPU exibida pelo plug-in XFCE cpufreq foi redefinida para um valor pad
 
 #: panel-plugin/cpufreq.desktop.in:4
 msgid "CPU Frequency Monitor"
-msgstr "Monitor de Frequência da CPU"
+msgstr "Monitor de frequência da CPU"
