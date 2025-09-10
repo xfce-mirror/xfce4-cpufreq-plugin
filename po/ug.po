@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-09 00:52+0200\n"
+"POT-Creation-Date: 2025-07-18 11:06+0200\n"
 "PO-Revision-Date: 2013-07-03 18:53+0000\n"
 "Last-Translator: Gheyret Kenji <gheyret@yahoo.com>, 2014\n"
 "Language-Team: Uyghur (http://app.transifex.com/xfce/xfce-panel-plugins/language/ug/)\n"
@@ -18,172 +18,172 @@ msgstr ""
 "Language: ug\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:119
+#: panel-plugin/xfce4-cpufreq-configure.cc:115
 msgid "Select font..."
-msgstr "...خەت نۇسخا تاللاش"
+msgstr "خەت نۇسخا تاللىنىدۇ…"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:120
+#: panel-plugin/xfce4-cpufreq-configure.cc:116
 msgid "Select font family and size to use for the labels."
-msgstr ""
+msgstr "ئەنگە ئىشلىتىلىدىغان خەت نۇسخا ۋە چوڭلۇقى تاللىنىدۇ."
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:125
+#: panel-plugin/xfce4-cpufreq-configure.cc:121
 msgid "Right-click to revert to the default font."
-msgstr ""
+msgstr "ئوڭ توپچە چېكىلسە كۆڭۈلدىكى خەت نۇسخىسىغا قايتۇرۇلىدۇ."
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:137
+#: panel-plugin/xfce4-cpufreq-configure.cc:133
 msgid "Select font"
-msgstr "خەت نۇسخا تاللاش"
+msgstr "خەت نۇسخا تاللىنىدۇ"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:194
+#: panel-plugin/xfce4-cpufreq-configure.cc:190
 msgid "Right-click to revert to the default color"
-msgstr ""
+msgstr "ئوڭ توپچە چېكىلسە كۆڭۈلدىكى رەڭگە قايتۇرۇلىدۇ"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:308
+#: panel-plugin/xfce4-cpufreq-configure.cc:307
 msgid "Configure CPU Frequency Monitor"
-msgstr "«س پ ئۇ (CPU) نىڭ چاستوتا كۆزەتچىسى» نى سەپلەش"
+msgstr "‫CPU نىڭ چاستوتا كۆزەتكۈچىسىنى سەپلەيدۇ"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:311
-#: panel-plugin/xfce4-cpufreq-overview.cc:246
+#: panel-plugin/xfce4-cpufreq-configure.cc:310
+#: panel-plugin/xfce4-cpufreq-overview.cc:242
 msgid "_Close"
-msgstr ""
+msgstr "ياپ(_C)"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:332
+#: panel-plugin/xfce4-cpufreq-configure.cc:330
 msgid "<b>Monitor</b>"
-msgstr "<b>كۆزەتكۈ</b>"
+msgstr "<b>كۆزەتكۈچ</b>"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:349
+#: panel-plugin/xfce4-cpufreq-configure.cc:347
 msgid "_Update interval:"
-msgstr "يېڭىلاش ئىنتېرۋالى(_U):"
+msgstr "يېڭىلاش ئارىلىقى(_U):"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:368
+#: panel-plugin/xfce4-cpufreq-configure.cc:366
 msgid "<b>Panel</b>"
-msgstr "<b>كۆزنەك(Panel)</b>"
+msgstr "<b>كۆزنەكچە</b>"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:389
+#: panel-plugin/xfce4-cpufreq-configure.cc:387
 msgid "_Font:"
-msgstr ""
+msgstr "خەت نۇسخا(_F):"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:410
+#: panel-plugin/xfce4-cpufreq-configure.cc:408
 msgid "_Font color:"
-msgstr ""
+msgstr "خەت نۇسخا رەڭگى(_F):"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:420
+#: panel-plugin/xfce4-cpufreq-configure.cc:418
 msgid "Select font color"
-msgstr ""
+msgstr "خەت نۇسخا رەڭگى تاللىنىدۇ"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:434
+#: panel-plugin/xfce4-cpufreq-configure.cc:432
 msgid "_Display CPU:"
-msgstr "كۆرسىتىدىغان س پ ئۇ (CPU)(_D):"
+msgstr "كۆرسىتىدىغان CPU(_D):"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:450
+#: panel-plugin/xfce4-cpufreq-configure.cc:448
 msgid "min"
 msgstr "ئەڭ كىچىك قىممەت"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:451
+#: panel-plugin/xfce4-cpufreq-configure.cc:449
 msgid "avg"
-msgstr ""
+msgstr "ئوتتۇرىچە قىممەت"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:452
+#: panel-plugin/xfce4-cpufreq-configure.cc:450
 msgid "max"
 msgstr "ئەڭ چوڭ قىممەت"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:486
+#: panel-plugin/xfce4-cpufreq-configure.cc:484
 msgid "Unit:"
-msgstr ""
+msgstr "بىرلىكى:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:494
+msgid "Auto"
+msgstr "ئاپتوماتىك"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:495
+msgid "GHz"
+msgstr "GHz"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:496
-msgid "Auto"
-msgstr ""
-
-#: panel-plugin/xfce4-cpufreq-configure.cc:497
-msgid "GHz"
-msgstr ""
-
-#: panel-plugin/xfce4-cpufreq-configure.cc:498
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. check buttons for display widgets in panel
-#: panel-plugin/xfce4-cpufreq-configure.cc:523
+#: panel-plugin/xfce4-cpufreq-configure.cc:521
 msgid "_Keep compact"
-msgstr ""
+msgstr "ئىخچاملىقنى ساقلاپ قال(_K)"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:530
+#: panel-plugin/xfce4-cpufreq-configure.cc:528
 msgid "Show text in a single _line"
-msgstr ""
+msgstr "تېكىستنى بىر قۇردا كۆرسەت(_L)"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:537
+#: panel-plugin/xfce4-cpufreq-configure.cc:535
 msgid "Show CPU _icon"
-msgstr ""
+msgstr "CPU سىنبەلگىسىنى كۆرسەت(_I)"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:544
+#: panel-plugin/xfce4-cpufreq-configure.cc:542
 msgid "Adjust CPU icon color according to frequency"
-msgstr ""
+msgstr "چاستوتىسىغا ئاساسەن CPU سىنبەلگە رەڭگىنى تەڭشەيدۇ"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:551
+#: panel-plugin/xfce4-cpufreq-configure.cc:549
 msgid "Show CPU fre_quency"
-msgstr "س پ ئۇ (CPU) چاستوتىسىنى كۆرسەت(_Q)"
+msgstr "‫CPU چاستوتىسىنى كۆرسەت(_Q)"
 
-#: panel-plugin/xfce4-cpufreq-configure.cc:558
+#: panel-plugin/xfce4-cpufreq-configure.cc:556
 msgid "Show CPU _governor"
-msgstr ""
+msgstr "CPU ئورۇنلاشتۇرۇشنى كۆرسەت(_G)"
 
-#: panel-plugin/xfce4-cpufreq-linux.cc:73
+#: panel-plugin/xfce4-cpufreq-linux.cc:69
 msgid ""
 "Your system does not support cpufreq.\n"
 "The plugin only shows the current cpu frequency"
-msgstr ""
+msgstr "سىستېمىڭىز cpufreq نى قوللىمايدۇ.\nقىستۇرما پەقەت نۆۋەتتىكى cpufreq چاستوتىسىنىلا كۆرسىتىدۇ"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:83
+#: panel-plugin/xfce4-cpufreq-overview.cc:79
 msgid "Scaling driver:"
 msgstr "تەڭشىگۈچى قوزغاتقۇ:"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:94
+#: panel-plugin/xfce4-cpufreq-overview.cc:90
 msgid "No scaling driver available"
 msgstr "تەڭشىگۈچى قوزغاتقۇ يوق"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:108
+#: panel-plugin/xfce4-cpufreq-overview.cc:104
 msgid "Available frequencies:"
-msgstr "ئىشلەتكىلى بولىدىغان چاستوتىلار:"
+msgstr "ئىشلەتكىلى بولىدىغان چاستوتا:"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:166
+#: panel-plugin/xfce4-cpufreq-overview.cc:162
 msgid "Available governors:"
-msgstr "ئىشلەتكىلى بولىدىغان governor لار:"
+msgstr "ئىشلەتكىلى بولىدىغان ئورۇنلاشتۇرغۇچ:"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:193
+#: panel-plugin/xfce4-cpufreq-overview.cc:189
 msgid "Current governor:"
-msgstr "نۆۋەتتىكى governor:"
+msgstr "نۆۋەتتىكى ئورۇنلاشتۇرغۇچ:"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:243
+#: panel-plugin/xfce4-cpufreq-overview.cc:239
 msgid "CPU Information"
-msgstr "س پ ئۇ (CPU) ئۇچۇرى"
+msgstr "‫CPU ئۇچۇرى"
 
-#: panel-plugin/xfce4-cpufreq-overview.cc:250
+#: panel-plugin/xfce4-cpufreq-overview.cc:246
 msgid "An overview of all the CPUs in the system"
-msgstr "مەزكۇر سىستېمىدىكى بارلىق س پ ئۇ (CPU) لارنىڭ ئومۇمىي ئەھۋالى"
+msgstr "مەزكۇر سىستېمىدىكى بارلىق CPU نىڭ ئومۇمىي ئەھۋالى"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:111
 msgid "current min"
-msgstr ""
+msgstr "نۆۋەتتىكى ئەڭ كىچىك قىممەت"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:164
 msgid "current avg"
-msgstr ""
+msgstr "نۆۋەتتىكى ئوتتۇرىچە قىممەت"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:207
 msgid "current max"
-msgstr ""
+msgstr "نۆۋەتتىكى ئەڭ چوڭ قىممەت"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:572
 msgid "No CPU information available."
-msgstr ""
+msgstr "ئىشلەتكىلى بولىدىغان CPU ئۇچۇرى يوق."
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:580
 #, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%zu cpu نى ئىشلەتكىلى بولىدۇ"
+msgstr[1] "%zu cpu نى ئىشلەتكىلى بولىدۇ"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:588
 msgid "Frequency: "
@@ -191,26 +191,26 @@ msgstr "چاستوتا: "
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:595
 msgid "Governor: "
-msgstr "Governor: "
+msgstr "ئورۇنلاشتۇرغۇچ: "
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
 msgid "Show CPU frequencies and governor"
-msgstr ""
+msgstr "‫CPU چاستوتىسى ۋە ئورۇنلاشتۇرغۇچنى كۆرسىتىدۇ"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:1030
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr ""
+msgstr "سىستېمىڭىزدا CPU چاستوتىسىنى تەڭشەش توغرا سەپلەنمىگەن!"
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:1036
 msgid "Your system is not supported yet!"
 msgstr "سىستېمىڭىزدا تېخى ئىشلەتكىلى بولمايدۇ!"
 
-#: panel-plugin/xfce4-cpufreq-utils.cc:84
+#: panel-plugin/xfce4-cpufreq-utils.cc:80
 msgid ""
 "The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
 "value"
-msgstr ""
+msgstr "بۇ XFCE cpufreq قىستۇرما كۆرسەتكەن CPU كۆڭۈلدىكى قىممىتىگە ئەسلىگە قايتۇرۇلدى"
 
 #: panel-plugin/cpufreq.desktop.in:4
 msgid "CPU Frequency Monitor"
