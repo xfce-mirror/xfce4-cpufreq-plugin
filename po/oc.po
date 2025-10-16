@@ -4,6 +4,8 @@
 # 
 # Translators:
 # Cédric Valmary <cvalmary@yahoo.fr>, 2013
+# Cédric Valmary <cvalmary@yahoo.fr>, 2013
+# Quentin PAGÈS, 2022,2024
 # Quentin PAGÈS, 2022,2024
 msgid ""
 msgstr ""
@@ -21,19 +23,19 @@ msgstr ""
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:115
 msgid "Select font..."
-msgstr "Seleccionar la poliça ..."
+msgstr "Seleccionar la polissa..."
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:116
 msgid "Select font family and size to use for the labels."
-msgstr "Seleccionar la familha de poliça e la talha d'utilizar per las etiquetas."
+msgstr "Seleccionar la familha de polissa e la talha d'utilizar per las etiquetas."
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:121
 msgid "Right-click to revert to the default font."
-msgstr "Clic drech per tornar a la poliça per defaut."
+msgstr "Clic drech per tornar a la polissa per defaut."
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:133
 msgid "Select font"
-msgstr "Seleccionar la poliça"
+msgstr "Seleccionar la polissa"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:190
 msgid "Right-click to revert to the default color"
@@ -62,11 +64,11 @@ msgstr "<b>Tablèu de bòrd</b>"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:387
 msgid "_Font:"
-msgstr "Poliça :"
+msgstr "Polissa :"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:408
 msgid "_Font color:"
-msgstr "_Color poliça :"
+msgstr "_Color polissa :"
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:418
 msgid "Select font color"
