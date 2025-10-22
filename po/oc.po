@@ -31,7 +31,7 @@ msgstr "Seleccionar la familha de polissa e la talha d'utilizar per las etiqueta
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:121
 msgid "Right-click to revert to the default font."
-msgstr "Clic drech per tornar a la polissa per defaut."
+msgstr "Clic dreit per tornar a la polissa per defaut."
 
 #: panel-plugin/xfce4-cpufreq-configure.cc:133
 msgid "Select font"
@@ -190,11 +190,11 @@ msgstr[1] ""
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:588
 msgid "Frequency: "
-msgstr "Frequéncia :"
+msgstr "Frequéncia : "
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:595
 msgid "Governor: "
-msgstr "Perfil :"
+msgstr "Perfil : "
 
 #: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
 msgid "Show CPU frequencies and governor"
