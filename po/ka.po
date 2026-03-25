@@ -1,0 +1,216 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-cpufreq-plugin package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Xfce Panel Plugins\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2025-07-18 11:06+0200\n"
+"PO-Revision-Date: 2013-07-03 18:53+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Georgian (http://app.transifex.com/xfce/xfce-panel-plugins/language/ka/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ka\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:115
+msgid "Select font..."
+msgstr "ფონტის არჩევა..."
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:116
+msgid "Select font family and size to use for the labels."
+msgstr "აირჩიეთ ფონტის ოჯახი და ზომი ჭდეებისთვის."
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:121
+msgid "Right-click to revert to the default font."
+msgstr "მარჯვენა წკაპი ნაგულისხმევ ფონტზე დასაბრუნებლად."
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:133
+msgid "Select font"
+msgstr "შრიფტის არჩევა"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:190
+msgid "Right-click to revert to the default color"
+msgstr "მარჯვენა წკაპი ნაგულისხმევ ფერზე დასაბრუნებლად"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:307
+msgid "Configure CPU Frequency Monitor"
+msgstr "CPU-ის სიხშირის მონიტორის მორგება"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:310
+#: panel-plugin/xfce4-cpufreq-overview.cc:242
+msgid "_Close"
+msgstr "და_ხურვა"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:330
+msgid "<b>Monitor</b>"
+msgstr "<b>მონიტორი</b>"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:347
+msgid "_Update interval:"
+msgstr "განა_ხლების ინტერვალი:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:366
+msgid "<b>Panel</b>"
+msgstr "<b>პანელი</b>"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:387
+msgid "_Font:"
+msgstr "_ფონტი:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:408
+msgid "_Font color:"
+msgstr "_ფონტის ფერი:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:418
+msgid "Select font color"
+msgstr "აირჩიეთ ფონტის ფერი"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:432
+msgid "_Display CPU:"
+msgstr "CPU-ის _ჩვენება:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:448
+msgid "min"
+msgstr "წთ"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:449
+msgid "avg"
+msgstr "საშუალო"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:450
+msgid "max"
+msgstr "მაქს"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:484
+msgid "Unit:"
+msgstr "ერთეული:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:494
+msgid "Auto"
+msgstr "ავტო"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:495
+msgid "GHz"
+msgstr "გჰც"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:496
+msgid "MHz"
+msgstr "მჰც"
+
+#. check buttons for display widgets in panel
+#: panel-plugin/xfce4-cpufreq-configure.cc:521
+msgid "_Keep compact"
+msgstr "_კომპაქტურად შენარჩუნება"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:528
+msgid "Show text in a single _line"
+msgstr "ტექსტის ჩვენება ერთ _ხაზზე"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:535
+msgid "Show CPU _icon"
+msgstr "CPU-_ის ხატულას ჩვენება"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:542
+msgid "Adjust CPU icon color according to frequency"
+msgstr "CPU-ის ხატულას ფერის მორგება სიხშირეზე"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:549
+msgid "Show CPU fre_quency"
+msgstr "CPU-ის სი_ხშირის ჩვენება"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:556
+msgid "Show CPU _governor"
+msgstr "CPU-ის მმართველის ჩ_ვენება"
+
+#: panel-plugin/xfce4-cpufreq-linux.cc:69
+msgid ""
+"Your system does not support cpufreq.\n"
+"The plugin only shows the current cpu frequency"
+msgstr "თქვენს სისტემას cpufreq-ის მხარდაჭერა არ აქვს.\nდამატება, მხოლოდ, cpu-ის მიმდინარე სიხშირეს აჩვენებს"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:79
+msgid "Scaling driver:"
+msgstr "მასშტაბის დრაივერი:"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:90
+msgid "No scaling driver available"
+msgstr "მასშტაბის დრაივერი ხელმისაწვდომი არაა"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:104
+msgid "Available frequencies:"
+msgstr "ხელმისაწვდომი სიხშირეები:"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:162
+msgid "Available governors:"
+msgstr "ხელმისაწვდომი მმართველები:"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:189
+msgid "Current governor:"
+msgstr "ამჟამინდელი მმართველი:"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:239
+msgid "CPU Information"
+msgstr "ინფორმაცია CPU-ის შესახებ"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:246
+msgid "An overview of all the CPUs in the system"
+msgstr "სისტემაში არსებული ყველა CPU-ის მიმოხილვა"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:111
+msgid "current min"
+msgstr "მიმდინარე მინ"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:164
+msgid "current avg"
+msgstr "მიმდინარე საშ"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:207
+msgid "current max"
+msgstr "მიმდინარე მაქს"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:572
+msgid "No CPU information available."
+msgstr "CPU-ის შესახებ ინფორმაცია ხელმისაწვდომი არაა."
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:580
+#, c-format
+msgid "%zu cpu available"
+msgid_plural "%zu cpus available"
+msgstr[0] "ხელმისაწვდომია %zu CPU"
+msgstr[1] "ხელმისაწვდომია %zu CPU"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:588
+msgid "Frequency: "
+msgstr "სიხშირე: "
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:595
+msgid "Governor: "
+msgstr "მმართველი: "
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
+msgid "Show CPU frequencies and governor"
+msgstr "CPU-ის სიხშირეებისა და მმართველის ჩვენება"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1030
+msgid ""
+"Your system is not configured correctly to support CPU frequency scaling!"
+msgstr "თქვენი სისტემა CPU-ის სიხშირის მასშტაბირებისთვის სწორად მორგებული არაა!"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1036
+msgid "Your system is not supported yet!"
+msgstr "თქვენი სისტემა ჯერ მხარდაჭერილი არაა!"
+
+#: panel-plugin/xfce4-cpufreq-utils.cc:80
+msgid ""
+"The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
+"value"
+msgstr "XFCE-ის cpufreq დამატების მიერ ნაჩვენები CPU ჩამოყრილია ნაგულისხმევ მნიშვნელობაზე"
+
+#: panel-plugin/cpufreq.desktop.in:4
+msgid "CPU Frequency Monitor"
+msgstr "CPU-ის სიხშირის მონიტორი"
