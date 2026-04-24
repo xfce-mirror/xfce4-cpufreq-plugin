@@ -1,0 +1,215 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-cpufreq-plugin package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Xfce Panel Plugins\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2025-07-18 11:06+0200\n"
+"PO-Revision-Date: 2013-07-03 18:53+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Lao (http://app.transifex.com/xfce/xfce-panel-plugins/language/lo/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lo\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:115
+msgid "Select font..."
+msgstr "ເລືອກຟອນ..."
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:116
+msgid "Select font family and size to use for the labels."
+msgstr "ເລືອກຕະກຸນຟອນ ແລະ ຂະໜາດທີ່ຈະໃຊ້ສຳລັບປ້າຍຊື່."
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:121
+msgid "Right-click to revert to the default font."
+msgstr "ຄລິກຂວາເພື່ອຄືນຄ່າເປັນຟອນເລີ່ມຕົ້ນ."
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:133
+msgid "Select font"
+msgstr "ເລືອກຟອນ"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:190
+msgid "Right-click to revert to the default color"
+msgstr "ຄລິກຂວາເພື່ອຄືນຄ່າເປັນສີເລີ່ມຕົ້ນ"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:307
+msgid "Configure CPU Frequency Monitor"
+msgstr "ຕັ້ງຄ່າເຄື່ອງກວດສອບຄວາມຖີ່ CPU"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:310
+#: panel-plugin/xfce4-cpufreq-overview.cc:242
+msgid "_Close"
+msgstr "_ປິດ"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:330
+msgid "<b>Monitor</b>"
+msgstr "<b>ການຕິດຕາມ</b>"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:347
+msgid "_Update interval:"
+msgstr "_ໄລຍະຫ່າງການອັບເດດ:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:366
+msgid "<b>Panel</b>"
+msgstr "<b>ແຜງ</b>"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:387
+msgid "_Font:"
+msgstr "_ຟອນ:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:408
+msgid "_Font color:"
+msgstr "_ສີຟອນ:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:418
+msgid "Select font color"
+msgstr "ເລືອກສີຟອນ"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:432
+msgid "_Display CPU:"
+msgstr "_ສະແດງ CPU:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:448
+msgid "min"
+msgstr "ຕ່ຳສຸດ"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:449
+msgid "avg"
+msgstr "ສະເລ່ຍ"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:450
+msgid "max"
+msgstr "ສູງສຸດ"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:484
+msgid "Unit:"
+msgstr "ຫົວໜ່ວຍ:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:494
+msgid "Auto"
+msgstr "ອັດຕະໂນມັດ"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:495
+msgid "GHz"
+msgstr "GHz"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:496
+msgid "MHz"
+msgstr "MHz"
+
+#. check buttons for display widgets in panel
+#: panel-plugin/xfce4-cpufreq-configure.cc:521
+msgid "_Keep compact"
+msgstr "_ຮັກສາຄວາມກະທັດຮັດ"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:528
+msgid "Show text in a single _line"
+msgstr "ສະແດງຂໍ້ຄວາມໃນແຖວ_ດຽວ"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:535
+msgid "Show CPU _icon"
+msgstr "ສະແດງ_ໄອຄອນ CPU"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:542
+msgid "Adjust CPU icon color according to frequency"
+msgstr "ປັບສີໄອຄອນ CPU ຕາມຄວາມຖີ່"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:549
+msgid "Show CPU fre_quency"
+msgstr "ສະແດງຄວາມ_ຖີ່ CPU"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:556
+msgid "Show CPU _governor"
+msgstr "ສະແດງ_ຕົວຄວບຄຸມ CPU"
+
+#: panel-plugin/xfce4-cpufreq-linux.cc:69
+msgid ""
+"Your system does not support cpufreq.\n"
+"The plugin only shows the current cpu frequency"
+msgstr "ລະບົບຂອງທ່ານບໍ່ຮອງຮັບ cpufreq.\nປລັກອິນຈະສະແດງພຽງແຕ່ຄວາມຖີ່ CPU ປັດຈຸບັນເທົ່ານັ້ນ"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:79
+msgid "Scaling driver:"
+msgstr "ໄດຣເວີປັບລະດັບ:"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:90
+msgid "No scaling driver available"
+msgstr "ບໍ່ມີໄດຣເວີປັບລະດັບໃຫ້ໃຊ້ງານ"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:104
+msgid "Available frequencies:"
+msgstr "ຄວາມຖີ່ທີ່ມີໃຫ້ໃຊ້:"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:162
+msgid "Available governors:"
+msgstr "ຕົວຄວບຄຸມທີ່ມີໃຫ້ໃຊ້:"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:189
+msgid "Current governor:"
+msgstr "ຕົວຄວບຄຸມປັດຈຸບັນ:"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:239
+msgid "CPU Information"
+msgstr "ຂໍ້ມູນ CPU"
+
+#: panel-plugin/xfce4-cpufreq-overview.cc:246
+msgid "An overview of all the CPUs in the system"
+msgstr "ພາບລວມຂອງ CPU ທັງໝົດໃນລະບົບ"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:111
+msgid "current min"
+msgstr "ຕ່ຳສຸດປັດຈຸບັນ"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:164
+msgid "current avg"
+msgstr "ສະເລ່ຍປັດຈຸບັນ"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:207
+msgid "current max"
+msgstr "ສູງສຸດປັດຈຸບັນ"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:572
+msgid "No CPU information available."
+msgstr "ບໍ່ມີຂໍ້ມູນ CPU."
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:580
+#, c-format
+msgid "%zu cpu available"
+msgid_plural "%zu cpus available"
+msgstr[0] "ມີ %zu CPU ໃຫ້ໃຊ້ງານ"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:588
+msgid "Frequency: "
+msgstr "ຄວາມຖີ່: "
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:595
+msgid "Governor: "
+msgstr "ຕົວຄວບຄຸມ: "
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
+msgid "Show CPU frequencies and governor"
+msgstr "ສະແດງຄວາມຖີ່ ແລະ ຕົວຄວບຄຸມ CPU"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1030
+msgid ""
+"Your system is not configured correctly to support CPU frequency scaling!"
+msgstr "ລະບົບຂອງທ່ານບໍ່ໄດ້ຖືກຕັ້ງຄ່າຢ່າງຖືກຕ້ອງເພື່ອຮອງຮັບການປັບລະດັບຄວາມຖີ່ CPU!"
+
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1036
+msgid "Your system is not supported yet!"
+msgstr "ລະບົບຂອງທ່ານຍັງບໍ່ຖືກຮອງຮັບເທື່ອ!"
+
+#: panel-plugin/xfce4-cpufreq-utils.cc:80
+msgid ""
+"The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
+"value"
+msgstr "CPU ທີ່ສະແດງໂດຍປລັກອິນ XFCE cpufreq ໄດ້ຖືກຕັ້ງຄ່າຄືນໃໝ່ເປັນຄ່າເລີ່ມຕົ້ນແລ້ວ"
+
+#: panel-plugin/cpufreq.desktop.in:4
+msgid "CPU Frequency Monitor"
+msgstr "ເຄື່ອງກວດສອບຄວາມຖີ່ CPU"
