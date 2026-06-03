@@ -63,22 +63,22 @@ void connect(GtkToggleButton *widget, const char *signal, const std::function<vo
 
 struct PluginSize {
     bool rectangle; /* Whether the panel plugin size is forced to be a square. Otherwise, the plugin can be a rectangle. */
-    PluginSize() = delete;
+    constexpr explicit PluginSize(bool r) : rectangle(r) {}
 };
 
 struct Propagation {
     bool stop; /* Whether to prevent the event from propagating to other handlers */
-    Propagation() = delete;
+    constexpr explicit Propagation(bool s) : stop(s) {}
 };
 
 struct TimeoutResponse {
     bool again; /* Invoke the timeout handler again, otherwise stop the timer */
-    TimeoutResponse() = delete;
+    constexpr explicit TimeoutResponse(bool a) : again(a) {}
 };
 
 struct TooltipTime {
     bool now; /* Whether to show the tooltip now or later */
-    TooltipTime() = delete;
+    constexpr explicit TooltipTime(bool n) : now(n) {}
 };
 
 extern const PluginSize      RECTANGLE, SQUARE;
