@@ -202,7 +202,11 @@ button_fontcolor_clicked (GtkColorButton *button)
   GdkRGBA color;
   gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (button), &color);
   if (color.alpha != 0)
-    cpuFreq->options->fontcolor = gdk_rgba_to_string (&color);
+  {
+    gchar *font_color = gdk_rgba_to_string (&color);
+    cpuFreq->options->fontcolor = font_color;
+    g_free (font_color);
+  }
   else
     cpuFreq->options->fontcolor.clear();
   button_fontcolor_update (GTK_WIDGET (button), true);
