@@ -995,14 +995,12 @@ cpufreq_show_about(XfcePanelPlugin*)
     "Thomas Schreck <shrek@xfce.org>",
     NULL };
 
-  GdkPixbuf *icon = xfce_panel_pixbuf_from_source ("xfce4-cpufreq-plugin", NULL, 48);
-
 #if LIBXFCE4PANEL_CHECK_VERSION(4, 21, 4)
   xfce_panel_gtk_show_about_dialog (
 #else
   gtk_show_about_dialog (NULL,
 #endif
-     "logo", icon,
+     "logo-icon-name", "xfce4-cpufreq-plugin",
      "license", xfce_get_license_text (XFCE_LICENSE_TEXT_GPL),
      "version", VERSION_FULL,
      "program-name", PACKAGE_NAME,
@@ -1011,9 +1009,6 @@ cpufreq_show_about(XfcePanelPlugin*)
      "copyright", "Copyright \302\251 2006-" COPYRIGHT_YEAR " The Xfce development team",
      "authors", auth,
      NULL);
-
-  if (icon)
-    g_object_unref(G_OBJECT(icon));
 }
 
 void
