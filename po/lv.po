@@ -1,196 +1,220 @@
-# Latvian translation of xfce4-cpufreq-plugin package.
-# Copyright (C) 2007 THE xfce4-cpufreq-plugin'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the xfce4-cpufreq-plugin package.
-#
-# Rihards Prieditis <rprieditis@inbox.lv>, 2007.
-# Rihards Prieditis <rprieditis@gmail.com>, 2009.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-cpufreq-plugin package.
+# 
+# Translators:
+# Rihards Priedītis <rprieditis@gmail.com>, 2009
+# Rihards Priedītis <rprieditis@gmail.com>, 2007,2009,2026
+# Rihards Prieditis <rprieditis@inbox.lv>, 2007
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-cpufreq-plugin 0.2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-18 09:44+0200\n"
-"PO-Revision-Date: 2009-09-18 21:51+0100\n"
-"Last-Translator: Rihards Prieditis <rprieditis@gmail.com>\n"
-"Language-Team: Latvian <translation-team-lv@lists.sourceforge.net>\n"
-"Language: lv\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2025-07-18 11:06+0200\n"
+"PO-Revision-Date: 2013-07-03 18:53+0000\n"
+"Last-Translator: Rihards Priedītis <rprieditis@gmail.com>, 2007,2009,2026\n"
+"Language-Team: Latvian (http://app.transifex.com/xfce/xfce-panel-plugins/language/lv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
-"2);\n"
+"Language: lv\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:78
+#: panel-plugin/xfce4-cpufreq-configure.cc:115
 msgid "Select font..."
-msgstr ""
+msgstr "Izvēlēties fontu..."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:80
+#: panel-plugin/xfce4-cpufreq-configure.cc:116
 msgid "Select font family and size to use for the labels."
-msgstr ""
+msgstr "Izvēlieties etiķetēm izmantojamo fonta saimi un lielumu."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:84
+#: panel-plugin/xfce4-cpufreq-configure.cc:121
 msgid "Right-click to revert to the default font."
-msgstr ""
+msgstr "Noklikšķiniet ar labo pogu, lai atjaunotu noklusējuma fontu."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:102
+#: panel-plugin/xfce4-cpufreq-configure.cc:133
 msgid "Select font"
-msgstr ""
+msgstr "Izvēlieties fontu"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:188
-#, fuzzy
+#: panel-plugin/xfce4-cpufreq-configure.cc:190
+msgid "Right-click to revert to the default color"
+msgstr "Noklikšķiniet ar labo pogu, lai atjaunotu noklusējuma krāsu"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:307
 msgid "Configure CPU Frequency Monitor"
-msgstr "CPU frekvences uzraugs"
+msgstr "Konfigurēt CPU frekvences pārraugu"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:190
-msgid "Configure the CPU frequency plugin"
-msgstr ""
+#: panel-plugin/xfce4-cpufreq-configure.cc:310
+#: panel-plugin/xfce4-cpufreq-overview.cc:242
+msgid "_Close"
+msgstr "_Aizvērt"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:208
+#: panel-plugin/xfce4-cpufreq-configure.cc:330
 msgid "<b>Monitor</b>"
-msgstr ""
+msgstr "<b>Pārraugs</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:223
+#: panel-plugin/xfce4-cpufreq-configure.cc:347
 msgid "_Update interval:"
-msgstr ""
+msgstr "Atjaunināšanas i_ntervāls:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:241
+#: panel-plugin/xfce4-cpufreq-configure.cc:366
 msgid "<b>Panel</b>"
-msgstr ""
+msgstr "<b>Panelis</b>"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:257
+#: panel-plugin/xfce4-cpufreq-configure.cc:387
 msgid "_Font:"
-msgstr ""
+msgstr "_Fonts:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:275
+#: panel-plugin/xfce4-cpufreq-configure.cc:408
+msgid "_Font color:"
+msgstr "Fonta _krāsa:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:418
+msgid "Select font color"
+msgstr "Izvēlieties fonta krāsu"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:432
 msgid "_Display CPU:"
-msgstr ""
+msgstr "_Rādāmais CPU:"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:290
+#: panel-plugin/xfce4-cpufreq-configure.cc:448
 msgid "min"
-msgstr ""
+msgstr "min"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:291
+#: panel-plugin/xfce4-cpufreq-configure.cc:449
 msgid "avg"
-msgstr ""
+msgstr "vid."
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:292
+#: panel-plugin/xfce4-cpufreq-configure.cc:450
 msgid "max"
-msgstr ""
+msgstr "maks."
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:484
+msgid "Unit:"
+msgstr "Mērvienība:"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:494
+msgid "Auto"
+msgstr "Automātiski"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:495
+msgid "GHz"
+msgstr "GHz"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:496
+msgid "MHz"
+msgstr "MHz"
 
 #. check buttons for display widgets in panel
-#: ../panel-plugin/xfce4-cpufreq-configure.c:298
+#: panel-plugin/xfce4-cpufreq-configure.cc:521
 msgid "_Keep compact"
-msgstr ""
+msgstr "Ko_mpakts izkārtojums"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:303
+#: panel-plugin/xfce4-cpufreq-configure.cc:528
 msgid "Show text in a single _line"
-msgstr ""
+msgstr "Rādīt tekstu _vienā rindā"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:308
+#: panel-plugin/xfce4-cpufreq-configure.cc:535
 msgid "Show CPU _icon"
-msgstr ""
+msgstr "Rādīt CPU _ikonu"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:313
-#, fuzzy
+#: panel-plugin/xfce4-cpufreq-configure.cc:542
+msgid "Adjust CPU icon color according to frequency"
+msgstr "Pielāgot CPU ikonas krāsu atbilstoši frekvencei"
+
+#: panel-plugin/xfce4-cpufreq-configure.cc:549
 msgid "Show CPU fre_quency"
-msgstr "CPU frekvences uzraugs"
+msgstr "Rādīt CPU fr_ekvenci"
 
-#: ../panel-plugin/xfce4-cpufreq-configure.c:318
+#: panel-plugin/xfce4-cpufreq-configure.cc:556
 msgid "Show CPU _governor"
-msgstr ""
+msgstr "Rādīt CPU re_gulatoru"
 
-#: ../panel-plugin/xfce4-cpufreq-linux.c:465
+#: panel-plugin/xfce4-cpufreq-linux.cc:69
 msgid ""
 "Your system does not support cpufreq.\n"
-"The applet only shows the current cpu frequency"
-msgstr ""
+"The plugin only shows the current cpu frequency"
+msgstr "Jūsu sistēma neatbalsta cpufreq.\nSpraudnis rāda tikai pašreizējo CPU frekvenci"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:73
+#: panel-plugin/xfce4-cpufreq-overview.cc:79
 msgid "Scaling driver:"
-msgstr ""
+msgstr "Mērogošanas draiveris:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:81
-#, c-format
+#: panel-plugin/xfce4-cpufreq-overview.cc:90
 msgid "No scaling driver available"
-msgstr ""
+msgstr "Nav pieejama mērogošanas draivera"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:94
+#: panel-plugin/xfce4-cpufreq-overview.cc:104
 msgid "Available frequencies:"
-msgstr ""
+msgstr "Pieejamās frekvences:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:155
+#: panel-plugin/xfce4-cpufreq-overview.cc:162
 msgid "Available governors:"
-msgstr ""
+msgstr "Pieejamie regulatori:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:181
+#: panel-plugin/xfce4-cpufreq-overview.cc:189
 msgid "Current governor:"
-msgstr ""
+msgstr "Pašreizējais regulators:"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:232
+#: panel-plugin/xfce4-cpufreq-overview.cc:239
 msgid "CPU Information"
-msgstr ""
+msgstr "CPU informācija"
 
-#: ../panel-plugin/xfce4-cpufreq-overview.c:239
+#: panel-plugin/xfce4-cpufreq-overview.cc:246
 msgid "An overview of all the CPUs in the system"
-msgstr ""
+msgstr "Visu sistēmas CPU pārskats"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:60
+#: panel-plugin/xfce4-cpufreq-plugin.cc:111
 msgid "current min"
-msgstr ""
+msgstr "pašreizējā min"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:79
+#: panel-plugin/xfce4-cpufreq-plugin.cc:164
 msgid "current avg"
-msgstr ""
+msgstr "pašreizējā vid."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:97
+#: panel-plugin/xfce4-cpufreq-plugin.cc:207
 msgid "current max"
-msgstr ""
+msgstr "pašreizējā maks."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:169
+#: panel-plugin/xfce4-cpufreq-plugin.cc:572
 msgid "No CPU information available."
-msgstr ""
+msgstr "Nav pieejama informācija par CPU."
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:173
-#, fuzzy, c-format
+#: panel-plugin/xfce4-cpufreq-plugin.cc:580
+#, c-format
 msgid "%zu cpu available"
 msgid_plural "%zu cpus available"
-msgstr[0] "%zu cpu pieejams(-i)"
-msgstr[1] "%zu cpu pieejams(-i)"
-msgstr[2] "%zu cpu pieejams(-i)"
+msgstr[0] "Pieejams %zu CPU"
+msgstr[1] "Pieejami %zu CPU"
+msgstr[2] "Pieejami %zu CPU"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:176
+#: panel-plugin/xfce4-cpufreq-plugin.cc:588
 msgid "Frequency: "
 msgstr "Frekvence: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:184
+#: panel-plugin/xfce4-cpufreq-plugin.cc:595
 msgid "Governor: "
-msgstr "Pārvaldītājs: "
+msgstr "Regulators: "
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:559
-#: ../panel-plugin/cpufreq.desktop.in.h:2
-#, fuzzy
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1006 panel-plugin/cpufreq.desktop.in:5
 msgid "Show CPU frequencies and governor"
-msgstr "Rāda cpu frekvenci un pārvaldītājus"
+msgstr "Rādīt CPU frekvences un regulatoru"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:561
-msgid "Copyright (c) 2003-2013\n"
-msgstr ""
-
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:584
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1030
 msgid ""
 "Your system is not configured correctly to support CPU frequency scaling!"
-msgstr ""
+msgstr "Jūsu sistēma nav pareizi konfigurēta, lai atbalstītu CPU frekvences mērogošanu!"
 
-#: ../panel-plugin/xfce4-cpufreq-plugin.c:594
+#: panel-plugin/xfce4-cpufreq-plugin.cc:1036
 msgid "Your system is not supported yet!"
-msgstr ""
+msgstr "Jūsu sistēma vēl netiek atbalstīta!"
 
-#: ../panel-plugin/cpufreq.desktop.in.h:1
+#: panel-plugin/xfce4-cpufreq-utils.cc:80
+msgid ""
+"The CPU displayed by the XFCE cpufreq plugin has been reset to a default "
+"value"
+msgstr "XFCE cpufreq spraudņa rādītais CPU ir atiestatīts uz noklusējuma vērtību"
+
+#: panel-plugin/cpufreq.desktop.in:4
 msgid "CPU Frequency Monitor"
-msgstr "CPU frekvences uzraugs"
-
-#~ msgid "Could not create widgets !"
-#~ msgstr "Nevarēju izveidot logdaļu !"
-
-#~ msgid "Could not initialize linux backend !"
-#~ msgstr "Nevarēju inicializet linux aizmuguri !"
+msgstr "CPU frekvences pārraugs"
